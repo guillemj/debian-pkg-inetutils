@@ -24,17 +24,19 @@ DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 clean ::
 ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
 	cat debian/control.in \
-	| sed 's/@inetutils:Priority@/optional/g' \
-	| sed 's/@syslogd:Priority@/optional/g' \
-	| sed 's/@syslogd:Section@/net/g' \
-	| sed '/@tools:Provides@/d' \
+	| sed \
+	  -e 's/@inetutils:Priority@/optional/g' \
+	  -e 's/@syslogd:Priority@/optional/g' \
+	  -e 's/@syslogd:Section@/net/g' \
+	  -e '/@tools:Provides@/d' \
 	> debian/control
 else
 	cat debian/control.in \
-	| sed 's/@inetutils:Priority@/standard/g' \
-	| sed 's/@syslogd:Priority@/required/g' \
-	| sed 's/@syslogd:Section@/base/g' \
-	| sed 's/@tools:Provides@/Provides: net-tools/g' \
+	| sed \
+	  -e 's/@inetutils:Priority@/standard/g' \
+	  -e 's/@syslogd:Priority@/required/g' \
+	  -e 's/@syslogd:Section@/base/g' \
+	  -e 's/@tools:Provides@/Provides: net-tools/g' \
 	> debian/control
 endif
 

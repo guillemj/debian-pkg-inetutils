@@ -21,6 +21,7 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
     - debian/control.in: Delete the line instead of replacing with a token to
       be greped out later.
   * Exclude /bin/ping6 from dh_fixperms so it remains suid root.
+  * Only use one sed(1) per invokation.
 
  -- Robert Millan <rmh@debian.org>  Fri, 13 Aug 2004 16:30:28 +0200
 
