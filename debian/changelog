@@ -1,4 +1,4 @@
-inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
+inetutils (2:1.4.2+20040207-4) unstable; urgency=low
 
   [ Robert Millan ]
   * Unify priority as 'optional' for source package (since there's only one),
@@ -25,7 +25,7 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
   * Declare DEB_AUTO_UPDATE_ACLOCAL.
   * Make inetutils-telnet provide telnet-client instead of telnet.
 
- -- Robert Millan <rmh@debian.org>  Fri, 13 Aug 2004 16:30:28 +0200
+ -- Guillem Jover <guillem@debian.org>  Fri,  1 Oct 2004 14:15:35 +0200
 
 inetutils (2:1.4.2+20040207-3) unstable; urgency=low
 
