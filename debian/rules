@@ -23,13 +23,19 @@ DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 # Set proper Priority and Section
 clean ::
 ifeq ($(DEB_BUILD_GNU_SYSTEM),linux)
-	sed 's/@inetutils:Priority@/optional/; \
-	     s/@syslogd:Priority@/optional/; \
-	     s/@syslogd:Section@/net/;' < debian/control.in > debian/control
+	cat debian/control.in \
+	| sed 's/@inetutils:Priority@/optional/g' \
+	| sed 's/@syslogd:Priority@/optional/g' \
+	| sed 's/@syslogd:Section@/net/g' \
+	| sed 's/@tools:Provides@/inetutils-tools/g' \
+	> debian/control
 else
-	sed 's/@inetutils:Priority@/standard/; \
-	     s/@syslogd:Priority@/required/; \
-	     s/@syslogd:Section@/base/;' < debian/control.in > debian/control
+	cat debian/control.in \
+	| sed 's/@inetutils:Priority@/standard/g' \
+	| sed 's/@syslogd:Priority@/required/g' \
+	| sed 's/@syslogd:Section@/base/g' \
+	| sed 's/@tools:Provides@/net-tools/g' \
+	> debian/control
 endif
 
 # Move ping to /bin

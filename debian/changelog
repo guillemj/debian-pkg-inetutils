@@ -9,6 +9,9 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
     - rules
   * Fix for cross-compiling.
     - rules: s/DEB_HOST_GNU_SYSTEM/DEB_BUILD_GNU_SYSTEM/g
+  * Make inetutils-tools provide net-tools on non-Linux. (Closes: #262189)
+    - control.in
+    - rules
 
  -- Robert Millan <rmh@debian.org>  Fri, 13 Aug 2004 16:30:28 +0200
 
