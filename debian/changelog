@@ -16,8 +16,9 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
   * debian/control: Add dependencies to syslogd. (Closes: #255867)
   * Fix Section and Priority for Linux based systems.
     (Closes: #249440, #205487)
+  * Now using Standards-Version 3.6.1 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Tue, 18 May 2004 21:12:51 +0200
+ -- Guillem Jover <guillem@debian.org>  Thu, 12 Aug 2004 23:04:00 +0200
 
 inetutils (2:1.4.2+20040207-2) unstable; urgency=low
 
