@@ -1,13 +1,13 @@
 #!/usr/bin/make -f
 # This file is PUBLIC DOMAIN.
 
-DEB_TAR_SRCDIR := inetutils-1.4.2+20031022
+DEB_TAR_SRCDIR := inetutils-1.4.2+20040207
 DEB_BUILDDIR = $(DEB_SRCDIR)/build
 
 # ping is setuid
 DEB_FIXPERMS_EXCLUDE = bin/ping
 
-DEB_AUTO_UPDATE_AUTOMAKE=1.7
+DEB_AUTO_UPDATE_AUTOMAKE=1.8
 DEB_AUTO_UPDATE_AUTOCONF=2.50
 
 mandir = usr/share/man

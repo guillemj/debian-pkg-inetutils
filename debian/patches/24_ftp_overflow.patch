@@ -1,0 +1,49 @@
+#DPATCHLEVEL=1
+Status: not-applied
+
+diff -Naur old/ftp/ftp_var.h new/ftp/ftp_var.h
+--- old/ftp/ftp_var.h	2003-11-01 13:51:09.000000000 -0600
++++ new/ftp/ftp_var.h	2003-11-01 13:17:56.000000000 -0600
+@@ -41,6 +41,9 @@
+ #ifndef FTP_EXTERN
+ #define FTP_EXTERN extern
+ #endif
++
++#define MAXLINE 200
++
+ /*
+  * Options and other state info.
+  */
+@@ -95,11 +98,11 @@
+ #if HAVE_LIBREADLINE
+ FTP_EXTERN char *line;
+ #else
+-FTP_EXTERN char	line[200];	/* input line buffer */
++FTP_EXTERN char	line[MAXLINE];	/* input line buffer */
+ #endif
+ 
+ FTP_EXTERN char	*stringbase;	/* current scan point in line buffer */
+-FTP_EXTERN char	argbuf[200];	/* argument storage buffer */
++FTP_EXTERN char	argbuf[MAXLINE];	/* argument storage buffer */
+ FTP_EXTERN char	*argbase;	/* current storage point in arg buffer */
+ FTP_EXTERN int	margc;		/* count of arguments on input line */
+ FTP_EXTERN char	*margv[20];	/* args parsed from input line */
+diff -Naur old/ftp/main.c new/ftp/main.c
+--- old/ftp/main.c	2003-11-01 13:51:09.000000000 -0600
++++ new/ftp/main.c	2003-11-01 14:04:40.000000000 -0600
+@@ -317,9 +317,14 @@
+       line = readline (prompt);
+       if (!line)
+ 	quit (0, 0);
++      l = strlen (line);
++      if (l >= MAXLINE)
++	{
++	  printf("Line too long.\n");
++	  break;
++	}
+       if (line && *line)
+ 	add_history (line);
+-      l = strlen (line);
+       if (l == 0)
+ 	break;
+ #else

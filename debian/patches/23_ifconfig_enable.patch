@@ -1,3 +1,4 @@
+#DPATCHLEVEL=1
 diff -ur inetutils-1.4.2+20031022.old/configure.ac inetutils-1.4.2+20031022/configure.ac
 --- inetutils-1.4.2+20031022.old/configure.ac	2003-05-25 01:36:45.000000000 +0200
 +++ inetutils-1.4.2+20031022/configure.ac	2003-10-23 15:44:15.000000000 +0200

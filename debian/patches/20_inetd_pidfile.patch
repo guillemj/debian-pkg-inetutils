@@ -2,23 +2,24 @@
 diff -ur inetutils-20030703.old/inetd/inetd.c inetutils-20030703/inetd/inetd.c
 --- inetutils-20030703.old/inetd/inetd.c	2002-04-29 21:02:54.000000000 +0000
 +++ inetutils-20030703/inetd/inetd.c	2003-08-29 13:36:07.000000000 +0000
-@@ -359,6 +359,16 @@
+@@ -426,6 +426,17 @@
  
    openlog ("inetd", LOG_PID | LOG_NOWAIT, LOG_DAEMON);
  
-+  { FILE *fp = fopen (PATH_INETDPID, "w");
-+  if (fp != NULL)
-+    {
-+      fprintf (fp, "%d\n", getpid ());
-+      (void) fclose (fp);
-+    }
-+  else
-+    syslog (LOG_CRIT, "can't open %s: %s\n", PATH_INETDPID, strerror (errno));
++  {
++    FILE *fp = fopen (PATH_INETDPID, "w");
++    if (fp != NULL)
++      {
++        fprintf (fp, "%d\n", getpid ());
++        (void) fclose (fp);
++      }
++    else
++      syslog (LOG_CRIT, "can't open %s: %s\n", PATH_INETDPID, strerror (errno));
 +  }
 +
- #if defined(HAVE_SIGACTION)
-   {
-     struct sigaction sa;
+   signal_set_handler (SIGALRM, retry);
+   config (0);
+   signal_set_handler (SIGHUP, config);
 diff -ur inetutils-20030703.old/paths inetutils-20030703/paths
 --- inetutils-20030703.old/paths	2001-06-13 16:46:42.000000000 +0000
 +++ inetutils-20030703/paths	2003-08-29 13:30:05.000000000 +0000
