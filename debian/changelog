@@ -1,3 +1,13 @@
+inetutils (2:1.4.2+20030703-1) unstable; urgency=low
+
+  * Add myself to Uploaders.
+  * New upstream snapshot. (Closes: #194458)
+  * Bump package version to include the release number.
+  * Removed "inetutils-whois" package, already in debian.
+  * Architecture previously set as "any". (Closes: #194456)
+
+ -- Robert Millan <rmh@debian.org>  Thu,  3 Jul 2003 02:17:23 +0200
+
 inetutils (1:20030701-1) unstable; urgency=low
 
   * Convert to cdbs.
