@@ -26,7 +26,7 @@ set -e
 case `uname -s` in
   *FreeBSD)
     XCONSOLE=/var/run/xconsole
-    ln -sf /dev/xconsole $XCONSOLE
+    ln -sf $XCONSOLE /dev/xconsole
     ;;
   *)
     XCONSOLE=/dev/xconsole
