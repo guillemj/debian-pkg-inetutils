@@ -56,7 +56,7 @@ binary-install/inetutils-ping ::
 
 # Rename ifconfig to not break existing systems using net-tools
 install/inetutils-tools ::
-	mv debian/tmp/usr/bin/ifconfig debian/tmp/usr/bin/inetutils-ifconfig
+	mv debian/tmp/usr/bin/ifconfig debian/tmp/usr/bin/gifconfig
 
 # Rename inetd to be able to coexist with not purged netkit-inetd
 install/inetutils-inetd ::
