@@ -4,7 +4,12 @@ GNU inetutils were written by a lot of people.
 This package was put together by
 Marcus Brinkmann <Marcus.Brinkmann@ruhr-uni-bochum.de>
 from sources obtained from:
- ftp://ftp.gnu.org/pub/gnu/
+
+   <ftp://ftp.gnu.org/pub/gnu/>
+
+The debian packages are maintained through Subversion on:
+
+   <http://svn.debian.org/viewcvs/pkg-inetutils/>
 
 The source code is covered by the following copyrights:
 
