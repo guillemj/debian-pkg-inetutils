@@ -20,8 +20,16 @@ include debian/autotools.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 
+# Set proper Priority and Section
+clean ::
 ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
-  DEB_DH_GENCONTROL_ARGS = -- -DPriority=optional -DSection=net
+	sed 's/@inetutils:Priority@/optional/; \
+	     s/@syslogd:Priority@/optional/; \
+	     s/@syslogd:Section@/net/;' < debian/control.in > debian/control
+else
+	sed 's/@inetutils:Priority@/standard/; \
+	     s/@syslogd:Priority@/required/; \
+	     s/@syslogd:Section@/base/;' < debian/control.in > debian/control
 endif
 
 # Move ping to /bin
