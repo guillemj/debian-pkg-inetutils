@@ -10,6 +10,8 @@ DEB_FIXPERMS_EXCLUDE = bin/ping bin/ping6
 DEB_AUTO_UPDATE_AUTOMAKE=1.8
 DEB_AUTO_UPDATE_AUTOCONF=2.50
 
+DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
+
 mandir = usr/share/man
 man1dir = $(mandir)/man1
 man8dir = $(mandir)/man8
@@ -18,7 +20,6 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/tarball.mk
 include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
-DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 
 # Set proper Priority and Section
 clean ::
