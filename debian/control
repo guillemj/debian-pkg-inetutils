@@ -42,7 +42,7 @@ Package: inetutils-ping
 Section: net
 Priority: standard
 Architecture: any
-Provides: ping, netkit-ping
+Provides: ping
 Conflicts: ping, hurd (<= 20010718-1)
 Depends: ${shlibs:Depends}, netbase
 Description: ICMP ECHO tool
