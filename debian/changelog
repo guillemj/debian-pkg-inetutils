@@ -1,3 +1,9 @@
+inetutils (2:1.4.2+20040207-2) unstable; urgency=low
+
+  * control (Build-Depends): Add bison and zlib1g-dev. (Closes: #232051)
+
+ -- Robert Millan <rmh@debian.org>  Wed, 11 Feb 2004 00:32:56 +0100
+
 inetutils (2:1.4.2+20040207-1) unstable; urgency=low
 
   * New upstream snapshot.
