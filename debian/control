@@ -4,13 +4,14 @@ Priority: standard
 Maintainer: Jeff Bailey <jbailey@nisa.net>
 Uploaders: Jeff Bailey <jbailey@nisa.net>, Marcus Brinkmann <brinkmd@debian.org>, Robert Millan <rmh@debian.org>
 Standards-Version: 3.5.10
-Build-Depends: cdbs, debhelper (>= 4.0), libreadline4-dev, libpam0g-dev, libopie-dev
+Build-Depends: cdbs, debhelper (>= 4.1.0), libreadline4-dev, libpam0g-dev, libopie-dev
 
 Package: inetutils-syslogd
 Section: base
 Priority: required
 Architecture: any
-Provides: sysklogd
+Provides: system-log-daemon
+Conflicts: system-log-daemon
 Replaces: syslogd
 Depends: ${shlibs:Depends}, netbase
 Description: System logging daemon
@@ -24,6 +25,7 @@ Priority: standard
 Architecture: any
 Provides: telnet
 Replaces: telnet-hurd
+Conflicts: telnet
 Depends: ${shlibs:Depends}, netbase
 Description: The telnet client
  The telnet command is used for interactive communication with another host
@@ -33,7 +35,8 @@ Package: inetutils-telnetd
 Section: net
 Priority: standard
 Architecture: any
-Provides: telnetd
+Provides: telnet-server
+Conflicts: telnet-server
 Replaces: telnetd-hurd
 Depends: ${shlibs:Depends}, netbase
 Description: The telnet server
@@ -57,6 +60,7 @@ Priority: standard
 Architecture: any
 Provides: talkd
 Replaces: talkd-hurd
+Conflicts: talkd
 Depends: ${shlibs:Depends}, netbase
 Description: Remote user communication server
  Talkd is the server that notifies a user that someone else wants to initiate
@@ -67,7 +71,8 @@ Package: inetutils-ping
 Section: net
 Priority: standard
 Architecture: any
-Conflicts: hurd (<= 20010718-1)
+Provides: ping, netkit-ping
+Conflicts: ping, hurd (<= 20010718-1)
 Depends: ${shlibs:Depends}, netbase
 Description: ICMP ECHO tool
  Ping (The Packet InterNet Gropper) uses ICMP to send out echo requests,
@@ -78,6 +83,8 @@ Package: inetutils-inetd
 Section: net
 Priority: standard
 Architecture: any
+Provides: inetd, netkit-inetd
+Conflicts: inetd, netkit-inetd
 Depends: ${shlibs:Depends}, netbase
 Description: Internet Super Server
  Inetd is the daemon that listens on various tcp and udp ports and spawns
@@ -95,6 +102,8 @@ Package: inetutils-ftpd
 Section: net
 Priority: standard
 Architecture: any
+Provides: ftp-server
+Conflicts: ftp-server
 Depends: ${shlibs:Depends}, netbase
 Description: File Transfer Protocols Server
  Ftpd is the GNU Inetutils FTP server.

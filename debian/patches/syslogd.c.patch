@@ -1,0 +1,95 @@
+#DPATCHLEVEL=0
+--- syslogd/syslogd.c.orig	2003-08-23 22:34:40.000000000 +0100
++++ syslogd/syslogd.c	2003-08-24 00:39:27.000000000 +0100
+@@ -1613,13 +1613,13 @@
+ {
+   FILE *cf;
+   struct filed *f, *next, **nextp;
+-  char *p;
++  char *p, *q;
+ #ifndef LINE_MAX
+ #define LINE_MAX 2048
+ #endif
+   size_t line_max = LINE_MAX;
+   char *cbuf;
+-  char *cline;
++  char *cline, *clinestart;
+   struct servent *sp;
+ 
+   (void) signo;  /* Ignored.  */
+@@ -1679,11 +1679,13 @@
+   cbuf = malloc (line_max);
+   if (cbuf == NULL)
+     {
+-      /* There is no gracefull recovery here.  */
++      /* There is no graceful recovery here.  */
+       dbg_printf ("cannot allocate space for configuration\n");
+       return;
+     }
+-  cline = cbuf;
++  cline = clinestart = cbuf;
++  /* cline points to current end of cbuf,
++     clinestart to start of current line of config file */
+ 
+   /* Line parsing :
+      - skip comments,
+@@ -1699,6 +1701,8 @@
+       /* No newline ? then line is too big for the buffer readjust.  */
+       if (memchr (cline, '\n', len) == NULL)
+ 	{
++	  size_t offset = cline - cbuf;
++	  size_t offsetstart = clinestart - cbuf;
+ 	  char *tmp;
+ 	  tmp = realloc (cbuf, line_max * 2);
+ 	  if (tmp == NULL)
+@@ -1711,22 +1715,27 @@
+ 	  else
+ 	    cbuf = tmp;
+ 	  line_max *= 2;
+-	  strcpy (cbuf, cline);
+-	  cline += len;
++	  cline = cbuf + offset + len - 1;  /* reset cline for new cbuf */
++	  clinestart = cbuf + offsetstart;  /* ditto for clinestart */
+ 	  continue;
+ 	}
+       else
+ 	cline = cbuf;
+ 
+       /* Glob the leading spaces.  */
+-      for (p = cline; isspace (*p); ++p)
++      for (p = clinestart; isspace (*p); ++p)
+ 	;
+ 
+-      /* Skip comments and empty line.  */
+-      if (*p == '\0' || *p == '#')
++      /* Skip comments and empty line, unless this is a continuation line. */
++      if ((clinestart == cbuf) && (*p == '\0' || *p == '#'))
+ 	continue;
+ 
+-      strcpy (cline, p);
++      /* Can't technically use strcpy as these strings overlap, although
++         in practice, it should be OK */
++      /* strcpy (clinestart, p); */
++      q = clinestart;
++      while ((*q++ = *p++))
++	;
+ 
+       /* Cut the trailing spaces.  */
+       for (p = strchr (cline, '\0'); isspace (*--p);)
+@@ -1736,7 +1745,7 @@
+       if (*p == '\\')
+ 	{
+ 	  *p = '\0';
+-	  cline = p;
++	  cline = clinestart = p;
+ 	  continue;
+ 	}
+ 
+@@ -1747,6 +1756,7 @@
+       *nextp = f;
+       nextp = &f->f_next;
+       cfline (cbuf, f);
++      clinestart = cbuf;
+     }
+ 
+   /* Close the configuration file.  */

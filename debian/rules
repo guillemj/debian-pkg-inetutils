@@ -3,10 +3,17 @@
 
 DEB_TAR_SRCDIR := inetutils-20030703
 DEB_BUILDDIR = $(DEB_SRCDIR)/build
+
+# ping is setuid
+DEB_FIXPERMS_EXCLUDE = bin/ping
+
+# move ping to /bin
+install/inetutils-ping ::
+	mkdir debian/tmp/bin
+	mv debian/tmp/usr/bin/ping debian/tmp/bin/
+
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/tarball.mk
+include debian/simple-patchsys-modified.mk
 DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
-
-
-

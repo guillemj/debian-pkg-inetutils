@@ -1,0 +1,12 @@
+#! /bin/sh -e
+
+# Postinst for inetutils-syslogd
+
+# Clean up workaround for bug in 2:1.4.2+20030703-4
+
+if [ "$1" = "configure" -a "$2" = "2:1.4.2+20030703-4" ]
+then
+    rm -f /var/run/syslogd.pid
+fi
+
+#DEBHELPER#

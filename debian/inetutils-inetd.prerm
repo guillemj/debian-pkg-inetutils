@@ -1,0 +1,16 @@
+#! /bin/sh -e
+
+# Prerm for inetutils-inetd
+
+# Workaround for bug in 2:1.4.2+20030703-4 and -5
+
+if [ "$1" = "failed-upgrade" ] && ([ "$2" = "2:1.4.2+20030703-4" ] || [ "$2" = "2:1.4.2+20030703-5" ])
+then
+  if ! killall -15 /usr/sbin/inetd ; then
+    sleep 1
+    killall -9 /usr/sbin/inetd || true
+  fi
+  exit 0
+fi
+
+#DEBHELPER#
