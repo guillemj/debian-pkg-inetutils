@@ -47,9 +47,11 @@ endif
 install/inetutils-ping ::
 	mkdir debian/tmp/bin
 	mv debian/tmp/usr/bin/ping debian/tmp/bin/
+
+binary-install/inetutils-ping ::
 	if [ -x $(CURDIR)/debian/tmp/usr/bin/ping6 ]; then \
 	  mv $(CURDIR)/debian/tmp/usr/bin/ping6 \
-	     $(CURDIR)/debian/$(cdbs_curpkg)/bin/ \
+	     $(CURDIR)/debian/$(cdbs_curpkg)/bin/; \
 	fi
 
 # Rename ifconfig to not break existing systems using net-tools
