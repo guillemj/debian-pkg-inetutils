@@ -800,6 +800,33 @@ diff -Naur old/ping/ping.c new/ping/ping.c
  	  printf ("%s comes with ABSOLUTELY NO WARRANTY.\n", PACKAGE_NAME);
  	  printf ("You may redistribute copies of %s\n", PACKAGE_NAME);
  	  printf ("under the terms of the GNU General Public License.\n");
+@@ -169,7 +146,7 @@
+ 	  break;
+ 	  
+ 	case 'c':
+-	  ping_set_count (ping, ping_cvt_number (optarg, 0));
++	  ping_set_count (ping, ping_cvt_number (optarg, 0, 0));
+ 	  break;
+ 	  
+ 	case 'd':
+@@ -182,7 +159,7 @@
+ 	  
+ 	case 'i':
+ 	  options |= OPT_INTERVAL;
+-	  ping_set_interval (ping, ping_cvt_number (optarg, 0));
++	  ping_set_interval (ping, ping_cvt_number (optarg, 0, 0));
+ 	  break;
+ 	  
+ 	case 'p':
+@@ -191,7 +168,7 @@
+ 	  break;
+ 	  
+  	case 's':
+-	  data_length = ping_cvt_number (optarg, PING_MAX_DATALEN);
++	  data_length = ping_cvt_number (optarg, PING_MAX_DATALEN, 1);
+  	  break;
+ 	  
+ 	case 'n':
 @@ -247,10 +224,20 @@
  	  break;
  	  
