@@ -2,6 +2,8 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
 
   * Create /var/log/news for syslogd.
     - debian/inetutils-syslogd.dirs: New file.
+  * Create /dev/xconsole used by syslogd.
+    - debian/inetutils-syslogd.postinst: Likewise.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 18 May 2004 21:12:51 +0200
 

@@ -25,4 +25,13 @@ fi
 
 update-rc.d inetutils-syslogd defaults 10 90 >/dev/null
 
+# Create a xconsole pipe if it does not exist.
+# Don't create it if devfs is used.
+
+if [ ! -c /dev/.devfsd ] ; then
+  if [ ! -p /dev/xconsole ] ; then
+    mkfifo -m 0640 /dev/xconsole
+  fi
+fi
+
 #DEBHELPER#
