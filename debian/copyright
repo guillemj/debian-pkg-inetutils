@@ -1,4 +1,4 @@
-This is the Debian GNU prepackaged version of GNU inetutils.
+This is the Debian prepackaged version of GNU inetutils.
 GNU inetutils were written by a lot of people.
 
 This package was put together by
@@ -16,7 +16,7 @@ The source code is covered by the following copyrights:
 * Most source files are copyrighted by
   The Regents of the University of California under the BSD license.
 
-On Debian GNU systems, the complete text of the BSD license
+On Debian systems, the complete text of the BSD license
 can be found in `/usr/share/common-licenses/BSD'.
 
 * Some additional files (esp. Makefiles), are copyrigthed by the Free
@@ -35,6 +35,6 @@ can be found in `/usr/share/common-licenses/BSD'.
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-On Debian GNU/Linux systems, the complete text of the GNU General
+On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
 
