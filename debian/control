@@ -6,15 +6,6 @@ Uploaders: Jeff Bailey <jbailey@nisa.net>, Marcus Brinkmann <brinkmd@debian.org>
 Standards-Version: 3.5.10
 Build-Depends: cdbs, debhelper (>= 4.0), libreadline4-dev, libpam0g-dev, libopie-dev
 
-Package: inetutils-whois
-Section: net
-Priority: standard
-Architecture: any
-Conflicts: whois, hurd (<= 20010718-1)
-Depends: tcpd, ${shlibs:Depends}
-Description: GNU networking utilities
- The GNU network utilities
-
 Package: inetutils-syslogd
 Section: base
 Priority: required
