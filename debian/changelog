@@ -1,5 +1,6 @@
 inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
 
+  [ Robert Millan ]
   * Unify priority as 'optional' for source package (since there's only one),
     and override it in the binary packages.
     - control.in
@@ -10,6 +11,11 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
   * Make inetutils-tools provide net-tools on non-Linux. (Closes: #262189)
     - control.in
     - rules
+
+  [ Guillem Jover ]
+  * Do not install ping6 on the Hurd, was causing a FTFBS. Should be enabled
+    again once it haves IPv6 support.
+    - debian/inetutils-ping.install.hurd-i386: New file.
 
  -- Robert Millan <rmh@debian.org>  Fri, 13 Aug 2004 16:30:28 +0200
 
