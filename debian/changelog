@@ -4,26 +4,29 @@ inetutils (2:1.4.2+20040207-1) unstable; urgency=low
     - Upgraded to use autoconf 2.58. (Closes: #223706)
     - Fixes ping paquet size bug. (Closes: #216696)
     - Synced patches against latest upstream source.
-  * Fixes buffer overflow problem in ftp. [guillem]
-    - patches/024_ftp_overflow.patch: New file.
-      Thanks to John Hasler <john@dhh.gt.org> (Closes: #212612)
+  * Fixes buffer overflow problem in ftp. (Closes: #212612) [guillem]
+    - debian/patches/024_ftp_overflow.patch: New file.
+      Thanks to John Hasler <john@dhh.gt.org>
   * Now use current gcc: [rmh]
-    - control (Build-Depends): Nuked gcc-3.2.
-    - rules: Nuked CC=gcc-3.2 hack.
+    - debian/control (Build-Depends): Nuked gcc-3.2.
+    - debian/rules: Nuked CC=gcc-3.2 hack.
   * Fix lame FTBFS bug. (Closes: #219105) [rmh]
-    - control (Build-Depends): Add automake1.7 and autoconf.
-    - control (Build-Conflicts): Add autoconf2.13.
-  * control (inetutils-tools): Temporarily disable net-tools provides,
-    untill we have a working ifconfig/route.
-    (Closes: #219280, #219904, #222348)
-    [rmh]
+    - debian/control (Build-Depends): Add automake1.7 and autoconf.
+    - debian/control (Build-Conflicts): Add autoconf2.13.
+  * Fix the ifconfig mess: (Closes: #219280, #219904, #222348)
+    - debian/rules: Renamed the ifconfig binary to not collide with net-tool's
+      ifconfig. [guillem]
+    - debian/control (inetutils-tools): Temporarily disable net-tools Provides,
+      untill we have a working ifconfig/route. [rmh]
+      Change the package description to note that it is an experimental
+      package. [guillem]
   * debian/control (Uploaders): Put it on one line as some tools cannot cope
     with multi-line declarations. [guillem]
   * New upstream uses automake 1.8. [guillem]
-    - control (Build-Depends): Use automake1.8.
-    - rules (DEB_AUTO_UPDATE_AUTOMAKE): Likewise.
+    - debian/control (Build-Depends): Use automake1.8.
+    - debian/rules (DEB_AUTO_UPDATE_AUTOMAKE): Likewise.
 
- -- Guillem Jover <guillem@debian.org>  Sat,  7 Feb 2004 19:45:34 +0100
+ -- Guillem Jover <guillem@debian.org>  Mon,  9 Feb 2004 14:37:20 +0100
 
 inetutils (2:1.4.2+20031022-1) unstable; urgency=low
 

@@ -25,6 +25,10 @@ install/inetutils-ping ::
 	mkdir debian/tmp/bin
 	mv debian/tmp/usr/bin/ping debian/tmp/bin/
 
+# Rename ifconfig to not break existing systems using net-tools
+install/inetutils-tools ::
+	mv debian/tmp/usr/bin/ifconfig debian/tmp/usr/bin/inetutils-ifconfig
+
 # Rename inetd to be able to coexist with not purged netkit-inetd
 install/inetutils-inetd ::
 	mv debian/tmp/usr/sbin/inetd debian/tmp/usr/sbin/inetutils-inetd

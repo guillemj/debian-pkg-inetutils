@@ -116,5 +116,9 @@ Section: net
 Priority: standard
 Architecture: any
 Depends: ${shlibs:Depends}
-Description: Base networking utilities
+Description: Base networking utilities (experimental package)
  Base utilities for network administration (ifconfig, etc).
+ .
+ WARNING: The current ifconfig implementation provided is not fully
+ compatible with the net-tool's ifconfig version.
+
