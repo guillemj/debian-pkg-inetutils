@@ -7,6 +7,8 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
     - debian/control (Build-Depends): Merge lines.
   * Add IPv6 support. (Closes: #205695)
     Thanks to Jeroen Dekkers <jeroen@dekkers.cx>.
+  * Fix syslogd not forwarding to remote hosts. (Closes: #215922)
+    Thanks to Anthony Awtrey <tony@idealcorp.com>.
   * debian/control (inetutils-ping): Stop providing netkit-ping.
     (Closes: #255824)
 
