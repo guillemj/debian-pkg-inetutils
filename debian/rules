@@ -16,13 +16,13 @@ man8dir = $(mandir)/man8
 
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/tarball.mk
-include debian/autotools.mk
+include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 
 # Set proper Priority and Section
 clean ::
-ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
+ifeq ($(DEB_BUILD_GNU_SYSTEM),linux)
 	sed 's/@inetutils:Priority@/optional/; \
 	     s/@syslogd:Priority@/optional/; \
 	     s/@syslogd:Section@/net/;' < debian/control.in > debian/control

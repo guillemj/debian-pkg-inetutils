@@ -1,13 +1,14 @@
 Source: inetutils
 Section: net
-Priority: standard
+Priority: optional
 Maintainer: Jeff Bailey <jbailey@nisa.net>
 Uploaders: Marcus Brinkmann <brinkmd@debian.org>, Robert Millan <rmh@debian.org>, Guillem Jover <guillem@debian.org>
 Standards-Version: 3.6.1
-Build-Depends: cdbs (>= 0.4.13), debhelper (>= 4.1.0), libreadline4-dev, libpam0g-dev, libopie-dev, automake1.8, autoconf, bison, zlib1g-dev
+Build-Depends: cdbs (>= 0.4.15), debhelper (>= 4.1.0), libreadline4-dev, libpam0g-dev, libopie-dev, automake1.8, autoconf, bison, zlib1g-dev
 Build-Conflicts: autoconf2.13
 
 Package: inetutils-ftp
+Priority: standard
 Architecture: any
 Depends: ${shlibs:Depends}, netbase
 Description: File Transfer Protocol client
@@ -15,6 +16,7 @@ Description: File Transfer Protocol client
  FTP protocol.
 
 Package: inetutils-ftpd
+Priority: standard
 Architecture: any
 Provides: ftp-server
 Conflicts: ftp-server
@@ -24,6 +26,7 @@ Description: File Transfer Protocol server
  command to transfer files using the FTP protocol.
 
 Package: inetutils-inetd
+Priority: standard
 Architecture: any
 Provides: inetd, netkit-inetd
 Conflicts: inetd, netkit-inetd
@@ -33,6 +36,7 @@ Description: Internet super server
  programs that can't or won't do it for themselves.
 
 Package: inetutils-ping
+Priority: standard
 Architecture: any
 Provides: ping
 Conflicts: ping, hurd (<= 20010718-1)
@@ -56,6 +60,7 @@ Description: System logging daemon
  from remote hosts.
 
 Package: inetutils-talk
+Priority: standard
 Architecture: any
 Provides: talk
 Replaces: talk-hurd
@@ -65,6 +70,7 @@ Description: Talk to another user
  to that of another user.
 
 Package: inetutils-talkd
+Priority: standard
 Architecture: any
 Provides: talkd
 Conflicts: talkd
@@ -76,6 +82,7 @@ Description: Remote user communication server
  by clients wishing to rendezvous to hold a conversation.
 
 Package: inetutils-telnet
+Priority: standard
 Architecture: any
 Provides: telnet
 Replaces: telnet-hurd
@@ -85,6 +92,7 @@ Description: Telnet client
  using the TELNET protocol.
 
 Package: inetutils-telnetd
+Priority: standard
 Architecture: any
 Provides: telnet-server
 Conflicts: telnet-server
@@ -95,6 +103,7 @@ Description: Telnet server
  interactive communication protocol.
 
 Package: inetutils-tools
+Priority: standard
 Architecture: any
 Depends: ${shlibs:Depends}
 Description: Base networking utilities (experimental package)

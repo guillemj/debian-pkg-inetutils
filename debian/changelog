@@ -1,3 +1,17 @@
+inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
+
+  * Unify priority as 'optional' for source package (since there's only one),
+    and override it in the binary packages.
+    - control.in
+  * Use standard autotools.mk, since my patch was merged in cdbs.
+    - control.in (Build-Depends): Set cdbs (>= 0.4.15)
+    - autotools.mk: Nuked.
+    - rules
+  * Fix for cross-compiling.
+    - rules: s/DEB_HOST_GNU_SYSTEM/DEB_BUILD_GNU_SYSTEM/g
+
+ -- Robert Millan <rmh@debian.org>  Fri, 13 Aug 2004 16:30:28 +0200
+
 inetutils (2:1.4.2+20040207-3) unstable; urgency=low
 
   * Fix syslogd startup warnings.
