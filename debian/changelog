@@ -3,6 +3,8 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
   * Fix syslogd startup warnings.
     - debian/inetutils-syslogd.dirs: New file. Create /var/log/news.
     - debian/inetutils-syslogd.postinst: Create /dev/xconsole.
+  * Policy does not allow multiline Build-Depends:
+    - debian/control (Build-Depends): Merge lines.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 18 May 2004 21:12:51 +0200
 

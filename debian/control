@@ -4,8 +4,7 @@ Priority: standard
 Maintainer: Jeff Bailey <jbailey@nisa.net>
 Uploaders: Marcus Brinkmann <brinkmd@debian.org>, Robert Millan <rmh@debian.org>, Guillem Jover <guillem@debian.org>
 Standards-Version: 3.5.10
-Build-Depends: cdbs (>= 0.4.13), debhelper (>= 4.1.0), libreadline4-dev,
- libpam0g-dev, libopie-dev, automake1.8, autoconf, bison, zlib1g-dev
+Build-Depends: cdbs (>= 0.4.13), debhelper (>= 4.1.0), libreadline4-dev, libpam0g-dev, libopie-dev, automake1.8, autoconf, bison, zlib1g-dev
 Build-Conflicts: autoconf2.13
 
 Package: inetutils-ftp
