@@ -2,11 +2,11 @@
 --- old/syslogd/syslogd.c      2004-07-26 14:33:25.000000000 -0400
 +++ new/syslogd/syslogd.c   2004-07-26 14:49:24.000000000 -0400
 @@ -1300,7 +1300,7 @@
-      dbg_printf (" %s\n", f->f_un.f_forw.f_hname);
-      if (strcasecmp (from, LocalHostName) && NoHops)
-        dbg_printf ("Not forwarding remote message.\n");
+     dbg_printf (" %s\n", f->f_un.f_forw.f_hname);
+     if (strcasecmp (from, LocalHostName) && NoHops)
+       dbg_printf ("Not forwarding remote message.\n");
 -    else if (!NoForward)
 +    else if (NoForward)
-        dbg_printf ("Not forwarding because forwarding is disabled.\n");
-      else if (finet < 0)
-        dbg_printf ("Not forwarding because of invalid inet fd.\n");
+       dbg_printf ("Not forwarding because forwarding is disabled.\n");
+     else if (finet < 0)
+       dbg_printf ("Not forwarding because of invalid inet fd.\n");
