@@ -1,3 +1,33 @@
+inetutils (2:1.4.2+20031022-1) unstable; urgency=low
+
+  * New upstream snapshot.
+    - patches/21_syslogd.c.patch: Nuked (merged upstream).
+  * Merged simple-patchsys.mk into cdbs.
+    - simple-patchsys-modified.mk: Nuked.
+    - rules: Replace debian/simple-patchsys-modified.mk with
+      /usr/share/cdbs/1/rules/simple-patchsys.mk.
+    - control (Build-Depends): Set cdbs (>= 0.4.13).
+  * Using cdbs auto-update feature for autothings.
+    - patches/99_autothings_regen.patch: Nuked.
+    - rules: Declare DEB_AUTO_UPDATE_{AUTOMAKE,AUTOCONF}.
+    - autotools.mk: New. Incorporate feature from bug #217131 (untill merged).
+    - rules: Replace /usr/share/cdbs/1/class/autotools.mk with
+      debian/autotools.mk.
+  * New package, inetutils-tools.
+    - patches/23_ifconfig_enable.patch: New. Enable ifconfig in Makefile.am.
+    - inetutils-tools.install: New. Install ifconfig.
+    - control: Sort packages alphabeticaly (I'm picky sometimes).
+    - control: Add inetutils-tools.
+  * Workaround cpp-3.3 breakness in ifconfig/options.c.
+    - control (Build-Depends): Add gcc-3.2.
+    - rules: Set CC = gcc-3.2.
+  * Fix weird FTBFS. CDBS wanted to run the install/foo :: rules _before_
+    actualy running the generic install rule in $(DEB_SRCDIR)/Makefile.
+    - rules: Move all the install/foo :: rules to be placed after the CDBS
+    included headers.
+
+ -- Robert Millan <rmh@debian.org>  Thu, 23 Oct 2003 06:36:17 +0200
+
 inetutils (2:1.4.2+20030703-8) unstable; urgency=low
 
   * debian/patches/inetd_pidfile.patch: Renamed to ...

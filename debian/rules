@@ -1,17 +1,29 @@
 #!/usr/bin/make -f
 # This file is PUBLIC DOMAIN.
 
-DEB_TAR_SRCDIR := inetutils-20030703
+DEB_TAR_SRCDIR := inetutils-1.4.2+20031022
 DEB_BUILDDIR = $(DEB_SRCDIR)/build
 
 # ping is setuid
 DEB_FIXPERMS_EXCLUDE = bin/ping
 
+DEB_AUTO_UPDATE_AUTOMAKE=1.7
+DEB_AUTO_UPDATE_AUTOCONF=2.50
+
 mandir = usr/share/man
 man1dir = $(mandir)/man1
 man8dir = $(mandir)/man8
 
-# move ping to /bin
+# Workaround cpp-3.3 breakness
+CC = gcc-3.2
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/tarball.mk
+include debian/autotools.mk
+include /usr/share/cdbs/1/rules/simple-patchsys.mk
+DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
+
+# Move ping to /bin
 install/inetutils-ping ::
 	mkdir debian/tmp/bin
 	mv debian/tmp/usr/bin/ping debian/tmp/bin/
@@ -33,10 +45,4 @@ install/inetutils-ftp ::
 install/inetutils-talk ::
 	mv debian/tmp/usr/bin/talk debian/tmp/usr/bin/inetutils-talk
 	mv debian/tmp/$(man1dir)/talk.1 debian/tmp/$(man1dir)/inetutils-talk.1
-
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/rules/tarball.mk
-include /usr/share/cdbs/1/class/autotools.mk
-include debian/simple-patchsys-modified.mk
-DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 
