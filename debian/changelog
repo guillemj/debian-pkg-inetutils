@@ -13,6 +13,7 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
   * debian/control (inetutils-ping): Stop providing netkit-ping.
     (Closes: #255824)
   * debian/copyright: Added Subversion repo address. Cleaning.
+  * debian/control: Add dependencies to syslogd. (Closes: #255867)
 
  -- Guillem Jover <guillem@debian.org>  Tue, 18 May 2004 21:12:51 +0200
 
