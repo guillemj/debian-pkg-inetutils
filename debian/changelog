@@ -25,8 +25,9 @@ inetutils (2:1.4.2+20040207-1) unstable; urgency=low
       package. [guillem]
   * debian/control (Uploaders): Put it on one line as some tools cannot cope
     with multi-line declarations. [guillem]
+  * debian/control (Build-Depends): Added a missing coma. [guillem]
 
- -- Guillem Jover <guillem@debian.org>  Mon,  9 Feb 2004 14:37:20 +0100
+ -- Guillem Jover <guillem@debian.org>  Tue, 10 Feb 2004 03:32:03 +0100
 
 inetutils (2:1.4.2+20031022-1) unstable; urgency=low
 
