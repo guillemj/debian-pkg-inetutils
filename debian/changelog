@@ -5,6 +5,8 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
     - debian/inetutils-syslogd.postinst: Create /dev/xconsole.
   * Policy does not allow multiline Build-Depends:
     - debian/control (Build-Depends): Merge lines.
+  * Add IPv6 support. (Closes: #205695)
+    Thanks to Jeroen Dekkers <jeroen@dekkers.cx>.
   * debian/control (inetutils-ping): Stop providing netkit-ping.
     (Closes: #255824)
 
