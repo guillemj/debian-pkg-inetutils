@@ -20,6 +20,10 @@ include debian/autotools.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 
+ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
+  DEB_DH_GENCONTROL_ARGS = -- -DPriority=optional -DSection=net
+endif
+
 # Move ping to /bin
 install/inetutils-ping ::
 	mkdir debian/tmp/bin
