@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+# This file is PUBLIC DOMAIN. 
+
+DEB_TAR_SRCDIR := inetutils-20030701
+DEB_BUILDDIR = $(DEB_SRCDIR)/build
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/tarball.mk
+DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
+
+
+
