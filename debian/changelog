@@ -1,4 +1,4 @@
-inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
+inetutils (2:1.4.2+20040207-3) unstable; urgency=low
 
   * Fix syslogd startup warnings.
     - debian/inetutils-syslogd.dirs: New file. Create /var/log/news.
@@ -6,11 +6,13 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
   * Policy does not allow multiline Build-Depends:
     - debian/control (Build-Depends): Merge lines.
   * Add IPv6 support. (Closes: #205695)
+    - debian/patches/30_ipv6.patch: New file.
     - As a side effect allow port numbers on inetd.conf. (Closes: #236942)
     - And fix telnet resolving to 0.0.0.0 when trying to connect to a non
       existent hostname. (Closes: #234718)
     Thanks to Jeroen Dekkers <jeroen@dekkers.cx>.
   * Fix syslogd not forwarding to remote hosts. (Closes: #215922)
+    - debian/patches/25_fix_net_fwd.patch: New file.
     Thanks to Anthony Awtrey <tony@idealcorp.com>.
   * debian/control (inetutils-ping): Stop providing netkit-ping.
     (Closes: #255824)
@@ -20,7 +22,7 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
     (Closes: #249440, #205487)
   * Now using Standards-Version 3.6.1 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Thu, 12 Aug 2004 23:04:00 +0200
+ -- Guillem Jover <guillem@debian.org>  Fri, 13 Aug 2004 11:10:36 +0200
 
 inetutils (2:1.4.2+20040207-2) unstable; urgency=low
 
@@ -36,7 +38,7 @@ inetutils (2:1.4.2+20040207-1) unstable; urgency=low
     - Synced patches against latest upstream source.
   * Fixes buffer overflow problem in ftp. (Closes: #212612) [guillem]
     - debian/patches/024_ftp_overflow.patch: New file.
-      Thanks to John Hasler <john@dhh.gt.org>
+      Thanks to John Hasler <john@dhh.gt.org>.
   * Now use current gcc: [rmh]
     - debian/control (Build-Depends): Nuked gcc-3.2.
     - debian/rules: Nuked CC=gcc-3.2 hack.
