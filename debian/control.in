@@ -84,7 +84,7 @@ Description: Remote user communication server
 Package: inetutils-telnet
 Priority: @inetutils:Priority@
 Architecture: any
-Provides: telnet
+Provides: telnet-client
 Replaces: telnet-hurd
 Depends: ${shlibs:Depends}, netbase
 Description: Telnet client

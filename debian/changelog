@@ -23,6 +23,7 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
   * Only use one sed(1) per invokation.
   * Make references to Debian, system neutral.
   * Declare DEB_AUTO_UPDATE_ACLOCAL.
+  * Make inetutils-telnet provide telnet-client instead of telnet.
 
  -- Robert Millan <rmh@debian.org>  Fri, 13 Aug 2004 16:30:28 +0200
 
