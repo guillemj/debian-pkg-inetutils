@@ -1,4 +1,4 @@
-#DPATCHLEVEL=1
+#DPATCHLEVEL=0
 Index: acinclude.m4
 ===================================================================
 RCS file: /cvsroot/inetutils/inetutils/acinclude.m4,v
@@ -270,7 +270,7 @@ diff -u -p -r1.27 inetd.c
    sigvec (signo, &sv, NULL);
  #else /* !HAVE_SIGVEC */
    signal (signo, handler);
-@@ -708,6 +732,9 @@ config (int signo)
+@@ -719,6 +743,9 @@ config (int signo)
  void
  nextconfig (const char *file)
  {
@@ -280,7 +280,7 @@ diff -u -p -r1.27 inetd.c
    struct servtab *sep, *cp, **sepp;
    struct passwd *pwd;
    FILE * fconfig;
-@@ -737,8 +764,6 @@ nextconfig (const char *file)
+@@ -748,8 +775,6 @@ nextconfig (const char *file)
  	  break;
        if (sep != 0)
  	{
@@ -289,7 +289,7 @@ diff -u -p -r1.27 inetd.c
  	  signal_block (&sigstatus);
  	  /*
  	   * sep->se_wait may be holding the pid of a daemon
-@@ -776,6 +801,7 @@ nextconfig (const char *file)
+@@ -787,6 +812,7 @@ nextconfig (const char *file)
  	  sep->se_fd = -1;
  	  continue;
  	}
@@ -297,7 +297,7 @@ diff -u -p -r1.27 inetd.c
        sp = getservbyname (sep->se_service, sep->se_proto);
        if (sp == 0)
  	{
-@@ -791,6 +817,7 @@ nextconfig (const char *file)
+@@ -802,6 +828,7 @@ nextconfig (const char *file)
  	  if (sep->se_fd >= 0)
  	    close_sep (sep);
  	}
@@ -305,7 +305,7 @@ diff -u -p -r1.27 inetd.c
        if (sep->se_fd == -1)
  	setup (sep);
      }
-@@ -833,27 +860,132 @@ retry (int signo)
+@@ -844,27 +871,132 @@ retry (int signo)
  void
  setup (struct servtab *sep)
  {
@@ -450,7 +450,7 @@ diff -u -p -r1.27 inetd.c
        if (debug)
  	fprintf (stderr, "bind failed on %s/%s: %s\n",
  		 sep->se_service, sep->se_proto, strerror (errno));
-@@ -952,7 +1084,7 @@ endconfig (FILE *fconfig)
+@@ -963,7 +1095,7 @@ endconfig (FILE *fconfig)
  #define INETD_SERVER_PATH  5   /* server program path */ 
  #define INETD_SERVER_ARGS  6   /* server program arguments */
  
@@ -459,7 +459,7 @@ diff -u -p -r1.27 inetd.c
  
  struct servtab *
  getconfigent (FILE *fconfig, const char *file, size_t *line)
-@@ -960,7 +1092,7 @@ getconfigent (FILE *fconfig, const char 
+@@ -971,7 +1103,7 @@ getconfigent (FILE *fconfig, const char 
    struct servtab *sep = &serv;
    size_t argc = 0, i;
    char **argv = NULL;
@@ -468,7 +468,7 @@ diff -u -p -r1.27 inetd.c
    static char TCPMUX_TOKEN[] = "tcpmux/";
  #define MUX_LEN		(sizeof(TCPMUX_TOKEN)-1)
  
-@@ -1025,6 +1157,37 @@ getconfigent (FILE *fconfig, const char 
+@@ -1036,6 +1168,37 @@ getconfigent (FILE *fconfig, const char 
        
        sep->se_proto = newstr (argv[INETD_PROTOCOL]);
  
@@ -506,7 +506,7 @@ diff -u -p -r1.27 inetd.c
        if (strcmp (argv[INETD_WAIT], "wait") == 0)
  	sep->se_wait = 1;
        else if (strcmp (argv[INETD_WAIT], "nowait") == 0)
-@@ -1043,7 +1206,7 @@ getconfigent (FILE *fconfig, const char 
+@@ -1054,7 +1217,7 @@ getconfigent (FILE *fconfig, const char 
  	   */
  	  sep->se_wait = 0;
  	  
@@ -515,7 +515,7 @@ diff -u -p -r1.27 inetd.c
  	    {
  	      syslog (LOG_ERR, "%s:%lu: bad protocol for tcpmux service %s",
  		      file, (unsigned long) *line, sep->se_service);
-@@ -1103,8 +1266,6 @@ getconfigent (FILE *fconfig, const char 
+@@ -1114,8 +1277,6 @@ getconfigent (FILE *fconfig, const char 
  void
  freeconfig (struct servtab *cp)
  {
@@ -524,7 +524,7 @@ diff -u -p -r1.27 inetd.c
    if (cp->se_service)
      free (cp->se_service);
    if (cp->se_proto)
-@@ -1144,13 +1305,31 @@ set_proc_title (char *a, int s)
+@@ -1155,13 +1316,31 @@ set_proc_title (char *a, int s)
  {
    int size;
    char *cp;
@@ -560,7 +560,7 @@ diff -u -p -r1.27 inetd.c
    else
      snprintf (buf, sizeof buf, "-%s", a);
    strncpy (cp, buf, LastArg - cp);
-@@ -1186,13 +1365,18 @@ echo_dg (int s, struct servtab *sep)
+@@ -1197,13 +1376,18 @@ echo_dg (int s, struct servtab *sep)
  {
    char buffer[BUFSIZE];
    int i, size;
@@ -581,7 +581,7 @@ diff -u -p -r1.27 inetd.c
  }
  
  /* ARGSUSED */
-@@ -1281,7 +1465,11 @@ chargen_stream (int s, struct servtab *s
+@@ -1292,7 +1476,11 @@ chargen_stream (int s, struct servtab *s
  void
  chargen_dg (int s, struct servtab *sep)
  {
@@ -593,7 +593,7 @@ diff -u -p -r1.27 inetd.c
    static char *rs;
    int len, size;
    char text[LINESIZ+2];
-@@ -1294,7 +1482,7 @@ chargen_dg (int s, struct servtab *sep)
+@@ -1305,7 +1493,7 @@ chargen_dg (int s, struct servtab *sep)
      }
  
    size = sizeof sa;
@@ -602,7 +602,7 @@ diff -u -p -r1.27 inetd.c
      return;
  
    if ((len = endring - rs) >= LINESIZ)
-@@ -1308,7 +1496,7 @@ chargen_dg (int s, struct servtab *sep)
+@@ -1319,7 +1507,7 @@ chargen_dg (int s, struct servtab *sep)
      rs = ring;
    text[LINESIZ] = '\r';
    text[LINESIZ + 1] = '\n';
@@ -611,7 +611,7 @@ diff -u -p -r1.27 inetd.c
  }
  
  /*
-@@ -1351,15 +1539,21 @@ void
+@@ -1362,15 +1550,21 @@ void
  machtime_dg (int s, struct servtab *sep)
  {
    long result;
@@ -635,7 +635,7 @@ diff -u -p -r1.27 inetd.c
  }
  
  /* ARGSUSED */
-@@ -1384,17 +1578,21 @@ daytime_dg(int s, struct servtab *sep)
+@@ -1395,17 +1589,21 @@ daytime_dg(int s, struct servtab *sep)
  {
    char buffer[256];
    time_t lclock;
@@ -715,9 +715,9 @@ Index: ping/ping.c
 ===================================================================
 RCS file: /cvsroot/inetutils/inetutils/ping/ping.c,v
 retrieving revision 1.19
-diff -u -p -r1.19 ping.c
---- ping/ping.c	3 Mar 2004 10:21:03 -0000	1.19
-+++ ping/ping.c	6 Jul 2004 22:06:43 -0000
+diff -Naur old/ping/ping.c new/ping/ping.c
+--- ping/ping.c	2003-11-10 13:23:58.000000000 +0100
++++ ping/ping.c	2004-08-12 23:19:29.000000000 +0200
 @@ -1,4 +1,4 @@
 -/* Copyright (C) 1998,2001, 2002 Free Software Foundation, Inc.
 +/* Copyright (C) 1998, 2001, 2002, 2004 Free Software Foundation, Inc.
@@ -738,7 +738,7 @@ diff -u -p -r1.19 ping.c
  
  static char short_options[] = "VLhc:dfi:l:np:qRrs:t:v";
  static struct option long_options[] = 
-@@ -80,52 +81,23 @@ static struct option long_options[] = 
+@@ -80,47 +81,23 @@
    {NULL,      no_argument, NULL, 0}
  };
  
@@ -769,7 +769,7 @@ diff -u -p -r1.19 ping.c
  static int send_echo (PING *ping);
  
 -static size_t
--ping_cvt_number (const char *optarg, size_t maxval, int allow_zero)
+-ping_cvt_number (const char *optarg, size_t maxval)
 -{
 -  char *p;
 -  size_t n;
@@ -778,11 +778,6 @@ diff -u -p -r1.19 ping.c
 -  if (*p)
 -    {
 -      fprintf (stderr, "Invalid value (`%s' near `%s')\n", optarg, p);
--      exit (1);
--    }
--  if (n == 0 && !allow_zero)
--    {
--      fprintf (stderr, "Option value too small: %s\n", optarg);
 -      exit (1);
 -    }
 -  if (maxval && n > maxval)
@@ -796,7 +791,7 @@ diff -u -p -r1.19 ping.c
  int
  main (int argc, char **argv)
  {
-@@ -155,7 +127,7 @@ main (int argc, char **argv)
+@@ -150,7 +127,7 @@
  	{
  	case 'V':
  	  printf ("ping - %s %s\n", PACKAGE_NAME, PACKAGE_VERSION);
@@ -805,7 +800,7 @@ diff -u -p -r1.19 ping.c
  	  printf ("%s comes with ABSOLUTELY NO WARRANTY.\n", PACKAGE_NAME);
  	  printf ("You may redistribute copies of %s\n", PACKAGE_NAME);
  	  printf ("under the terms of the GNU General Public License.\n");
-@@ -252,10 +224,20 @@ main (int argc, char **argv)
+@@ -247,10 +224,20 @@
  	  break;
  	  
  	case ICMP_ADDRESS:
@@ -826,7 +821,7 @@ diff -u -p -r1.19 ping.c
  	  decode_type ("router");
  	  break;
  	  
-@@ -279,37 +261,6 @@ main (int argc, char **argv)
+@@ -274,37 +261,6 @@
  }
  
  void
@@ -864,7 +859,7 @@ diff -u -p -r1.19 ping.c
  decode_type (const char *optarg)
  {
    if (strcasecmp (optarg, "echo") == 0)
-@@ -329,23 +280,6 @@ decode_type (const char *optarg)
+@@ -324,23 +280,6 @@
      }
  }
  
@@ -888,7 +883,7 @@ diff -u -p -r1.19 ping.c
  int volatile stop = 0;
  
  RETSIGTYPE
-@@ -388,7 +322,7 @@ ping_run (PING *ping, int (*finish)())
+@@ -383,7 +322,7 @@
  
    while (!stop)
      {
@@ -897,7 +892,7 @@ diff -u -p -r1.19 ping.c
        
        FD_ZERO (&fdset);
        FD_SET (ping->ping_fd, &fdset);
-@@ -508,9 +442,9 @@ Informational options:\n\
+@@ -503,9 +442,9 @@
    -V, --version      output version information and exit\n\
  Options controlling ICMP request types:\n\
    --echo             Send ICMP_ECHO requests (default)\n\
@@ -909,7 +904,7 @@ diff -u -p -r1.19 ping.c
  Options valid for all request types:\n\
    -c, --count N      stop after sending N packets\n\
    -d, --debug        set the SO_DEBUG option\n\
-@@ -532,24 +466,3 @@ Options marked with an * are available o
+@@ -527,24 +466,3 @@
  report bugs to " PACKAGE_BUGREPORT ".\n\
  ");
  }
