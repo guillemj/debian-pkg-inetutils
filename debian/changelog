@@ -2,7 +2,7 @@ inetutils (2:1.4.2+20040207-3) UNRELEASED; urgency=low
 
   * Fix syslogd startup warnings.
     - debian/inetutils-syslogd.dirs: New file. Create /var/log/news.
-    - debian/inetutils-syslogd.postinst: Create /dev/xconsole.
+    - debian/inetutils-syslogd.init: Create /dev/xconsole.
   * Policy does not allow multiline Build-Depends:
     - debian/control (Build-Depends): Merge lines.
   * Add IPv6 support. (Closes: #205695)
