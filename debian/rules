@@ -27,8 +27,7 @@ ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
 	| sed 's/@inetutils:Priority@/optional/g' \
 	| sed 's/@syslogd:Priority@/optional/g' \
 	| sed 's/@syslogd:Section@/net/g' \
-	| sed 's/@tools:Provides@/KICK_ME_OUT/g' \
-	| grep -vx 'KICK_ME_OUT' \
+	| sed '/@tools:Provides@/d' \
 	> debian/control
 else
 	cat debian/control.in \
