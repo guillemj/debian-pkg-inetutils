@@ -14,7 +14,7 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
 
   [ Guillem Jover ]
   * Do not install ping6 on the Hurd, was causing a FTFBS. Should be enabled
-    again once it haves IPv6 support.
+    again once it haves IPv6 support. (Closes: #273962)
     - debian/inetutils-ping.install.hurd-i386: New file.
     - debian/rules: Conditionally move ping6 to /bin.
   * Clean the net-tools Provides generation.
