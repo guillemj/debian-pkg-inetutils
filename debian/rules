@@ -36,6 +36,7 @@ endif
 install/inetutils-ping ::
 	mkdir debian/tmp/bin
 	mv debian/tmp/usr/bin/ping debian/tmp/bin/
+	mv debian/tmp/usr/bin/ping6 debian/tmp/bin/
 
 # Rename ifconfig to not break existing systems using net-tools
 install/inetutils-tools ::
