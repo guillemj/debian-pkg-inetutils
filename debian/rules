@@ -1,15 +1,16 @@
 #!/usr/bin/make -f
 # This file is PUBLIC DOMAIN.
 
-DEB_TAR_SRCDIR := inetutils-1.4.2+20040207
-DEB_BUILDDIR = $(DEB_SRCDIR)/build
+DEB_TAR_SRCDIR			:= inetutils-1.4.2+20040207
+DEB_BUILDDIR			:= $(DEB_SRCDIR)/build
 
 # ping is setuid
 DEB_FIXPERMS_EXCLUDE = bin/ping bin/ping6
 
-DEB_AUTO_UPDATE_AUTOMAKE = 1.8
-DEB_AUTO_UPDATE_ACLOCAL = $(DEB_AUTO_UPDATE_AUTOMAKE)
-DEB_AUTO_UPDATE_AUTOCONF = 2.50
+DEB_AUTO_UPDATE_AUTOMAKE	:= 1.8
+DEB_AUTO_UPDATE_ACLOCAL		:= $(DEB_AUTO_UPDATE_AUTOMAKE)
+DEB_AUTO_UPDATE_AUTOCONF	:= 2.50
+DEB_AUTO_UPDATE_DEBIAN_CONTROL	:= yes
 
 mandir = usr/share/man
 man1dir = $(mandir)/man1
@@ -26,21 +27,19 @@ DEB_CONFIGURE_LIBEXECDIR = "\$${prefix}/sbin"
 # Set proper Priority and Section
 clean ::
 ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
-	cat debian/control.in \
-	| sed \
+	sed \
 	  -e 's/@inetutils:Priority@/optional/g' \
 	  -e 's/@syslogd:Priority@/optional/g' \
 	  -e 's/@syslogd:Section@/net/g' \
 	  -e '/@tools:Provides@/d' \
-	> debian/control
+	< debian/control.in.in > debian/control.in
 else
-	cat debian/control.in \
-	| sed \
+	sed \
 	  -e 's/@inetutils:Priority@/standard/g' \
 	  -e 's/@syslogd:Priority@/required/g' \
 	  -e 's/@syslogd:Section@/base/g' \
 	  -e 's/@tools:Provides@/Provides: net-tools/g' \
-	> debian/control
+	< debian/control.in.in > debian/control.in
 endif
 
 # Move ping to /bin
