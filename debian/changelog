@@ -7,8 +7,6 @@ inetutils (2:1.4.2+20040207-@unreleased@) unstable; urgency=low
     - control.in (Build-Depends): Set cdbs (>= 0.4.15)
     - autotools.mk: Nuked.
     - rules
-  * Fix for cross-compiling.
-    - rules: s/DEB_HOST_GNU_SYSTEM/DEB_BUILD_GNU_SYSTEM/g
   * Make inetutils-tools provide net-tools on non-Linux. (Closes: #262189)
     - control.in
     - rules

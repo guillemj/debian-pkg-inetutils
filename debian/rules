@@ -22,7 +22,7 @@ DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
 
 # Set proper Priority and Section
 clean ::
-ifeq ($(DEB_BUILD_GNU_SYSTEM),linux)
+ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
 	cat debian/control.in \
 	| sed 's/@inetutils:Priority@/optional/g' \
 	| sed 's/@syslogd:Priority@/optional/g' \
