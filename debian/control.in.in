@@ -8,7 +8,8 @@ Build-Depends: @cdbs@, libreadline4-dev, libpam0g-dev, libopie-dev, automake1.8,
 
 Package: inetutils-ftp
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Depends: ${shlibs:Depends}, netbase
 Description: File Transfer Protocol client
  The ftp command is used to transfer files between hosts using the
@@ -16,7 +17,8 @@ Description: File Transfer Protocol client
 
 Package: inetutils-ftpd
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: ftp-server
 Conflicts: ftp-server
 Depends: ${shlibs:Depends}, netbase, inetutils-syslogd | system-log-daemon
@@ -26,7 +28,8 @@ Description: File Transfer Protocol server
 
 Package: inetutils-inetd
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: inetd, netkit-inetd
 Conflicts: inetd, netkit-inetd
 Depends: ${shlibs:Depends}, netbase, inetutils-syslogd | system-log-daemon
@@ -36,7 +39,8 @@ Description: Internet super server
 
 Package: inetutils-ping
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: ping
 Conflicts: ping, hurd (<= 20010718-1)
 Depends: ${shlibs:Depends}, netbase
@@ -48,7 +52,8 @@ Description: ICMP ECHO tool
 Package: inetutils-syslogd
 Section: @syslogd:Section@
 Priority: @syslogd:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: system-log-daemon
 Conflicts: system-log-daemon
 Replaces: syslogd
@@ -60,7 +65,8 @@ Description: System logging daemon
 
 Package: inetutils-talk
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: talk
 Replaces: talk-hurd
 Depends: ${shlibs:Depends}, netbase
@@ -70,7 +76,8 @@ Description: Talk to another user
 
 Package: inetutils-talkd
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: talkd
 Conflicts: talkd
 Replaces: talkd-hurd
@@ -82,7 +89,8 @@ Description: Remote user communication server
 
 Package: inetutils-telnet
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: telnet-client
 Replaces: telnet-hurd
 Depends: ${shlibs:Depends}, netbase
@@ -92,7 +100,8 @@ Description: Telnet client
 
 Package: inetutils-telnetd
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 Provides: telnet-server
 Conflicts: telnet-server
 Replaces: telnetd-hurd
@@ -103,7 +112,8 @@ Description: Telnet server
 
 Package: inetutils-tools
 Priority: @inetutils:Priority@
-Architecture: any
+Cpu: any
+System: any
 @tools:Provides@
 Depends: ${shlibs:Depends}
 Description: Base networking utilities (experimental package)
