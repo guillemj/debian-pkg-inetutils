@@ -10,9 +10,12 @@ inetutils (2:1.4.2+20040207-1) unstable; urgency=low
   * Now use current gcc: [rmh]
     - debian/control (Build-Depends): Nuked gcc-3.2.
     - debian/rules: Nuked CC=gcc-3.2 hack.
-  * Fix lame FTBFS bug. (Closes: #219105) [rmh]
-    - debian/control (Build-Depends): Add automake1.7 and autoconf.
-    - debian/control (Build-Conflicts): Add autoconf2.13.
+  * Fix lame FTBFS bug. (Closes: #219105, #219365, #221048, #221682)
+    - debian/control (Build-Depends): Add automake1.8. New upstream required
+      automake 1.8.
+    - debian/rules (DEB_AUTO_UPDATE_AUTOMAKE): Likewise. [guillem]
+    - debian/control (Build-Depends): Add autoconf.
+    - debian/control (Build-Conflicts): Add autoconf2.13. [rmh]
   * Fix the ifconfig mess: (Closes: #219280, #219904, #222348)
     - debian/rules: Renamed the ifconfig binary to not collide with net-tool's
       ifconfig. [guillem]
@@ -22,9 +25,6 @@ inetutils (2:1.4.2+20040207-1) unstable; urgency=low
       package. [guillem]
   * debian/control (Uploaders): Put it on one line as some tools cannot cope
     with multi-line declarations. [guillem]
-  * New upstream uses automake 1.8. [guillem]
-    - debian/control (Build-Depends): Use automake1.8.
-    - debian/rules (DEB_AUTO_UPDATE_AUTOMAKE): Likewise.
 
  -- Guillem Jover <guillem@debian.org>  Mon,  9 Feb 2004 14:37:20 +0100
 
