@@ -27,14 +27,15 @@ ifeq ($(DEB_BUILD_GNU_SYSTEM),linux)
 	| sed 's/@inetutils:Priority@/optional/g' \
 	| sed 's/@syslogd:Priority@/optional/g' \
 	| sed 's/@syslogd:Section@/net/g' \
-	| sed 's/@tools:Provides@/inetutils-tools/g' \
+	| sed 's/@tools:Provides@/KICK_ME_OUT/g' \
+	| grep -vx 'KICK_ME_OUT' \
 	> debian/control
 else
 	cat debian/control.in \
 	| sed 's/@inetutils:Priority@/standard/g' \
 	| sed 's/@syslogd:Priority@/required/g' \
 	| sed 's/@syslogd:Section@/base/g' \
-	| sed 's/@tools:Provides@/net-tools/g' \
+	| sed 's/@tools:Provides@/Provides: net-tools/g' \
 	> debian/control
 endif
 

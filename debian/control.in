@@ -105,7 +105,7 @@ Description: Telnet server
 Package: inetutils-tools
 Priority: @inetutils:Priority@
 Architecture: any
-Provides: @tools:Provides@
+@tools:Provides@
 Depends: ${shlibs:Depends}
 Description: Base networking utilities (experimental package)
  Base utilities for network administration (ifconfig, etc).
