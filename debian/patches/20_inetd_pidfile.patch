@@ -1,3 +1,4 @@
+#DPATCHLEVEL=1
 diff -ur inetutils-20030703.old/inetd/inetd.c inetutils-20030703/inetd/inetd.c
 --- inetutils-20030703.old/inetd/inetd.c	2002-04-29 21:02:54.000000000 +0000
 +++ inetutils-20030703/inetd/inetd.c	2003-08-29 13:36:07.000000000 +0000
@@ -5,14 +6,14 @@ diff -ur inetutils-20030703.old/inetd/inetd.c inetutils-20030703/inetd/inetd.c
  
    openlog ("inetd", LOG_PID | LOG_NOWAIT, LOG_DAEMON);
  
-+  { FILE *fp = fopen ("PATH_INETDPID", "w");
++  { FILE *fp = fopen (PATH_INETDPID, "w");
 +  if (fp != NULL)
 +    {
 +      fprintf (fp, "%d\n", getpid ());
 +      (void) fclose (fp);
 +    }
 +  else
-+    syslog (LOG_CRIT, "can't open PATH_INETDPID: %s\n", strerror (errno));
++    syslog (LOG_CRIT, "can't open %s: %s\n", PATH_INETDPID, strerror (errno));
 +  }
 +
  #if defined(HAVE_SIGACTION)
@@ -29,3 +30,16 @@ diff -ur inetutils-20030703.old/paths inetutils-20030703/paths
  PATH_UTMP	<utmp.h> <utmp.h>:UTMP_FILE $(localstatedir)/run/utmp search:utmp:/var/run:/var/adm:/etc
  PATH_UTMPX	<utmpx.h> <utmpx.h>:UTMPX_FILE $(localstatedir)/run/utmpx search:utmpx:/var/run:/var/adm:/etc
  PATH_WTMP	<utmp.h> <utmp.h>:WTMP_FILE $(localstatedir)/log/wtmp search:wtmp:/var/log:/var/adm:/etc
+diff -ur inetutils-20030703.old/inetd/Makefile.am inetutils-20030703/inetd/Makefile.am
+--- inetutils-20030703.old/inetd/Makefile.am	2002-04-28 12:09:04.000000000 -0500
++++ inetutils-20030703/inetd/Makefile.am	2003-09-19 18:06:16.000000000 -0500
+@@ -12,7 +12,8 @@
+ 
+ @PATHDEFS_MAKE@
+ 
+-INCLUDES = $(PATHDEF_INETDCONF) $(PATHDEF_INETDDIR) -I$(top_builddir)/include
++INCLUDES = $(PATHDEF_INETDCONF) $(PATHDEF_INETDDIR) \
++	$(PATHDEF_INETDPID) -I$(top_builddir)/include
+ 
+ LDADD = -L../libinetutils -linetutils
+ 

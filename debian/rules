@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-# This file is PUBLIC DOMAIN. 
+# This file is PUBLIC DOMAIN.
 
 DEB_TAR_SRCDIR := inetutils-20030703
 DEB_BUILDDIR = $(DEB_SRCDIR)/build
@@ -7,13 +7,36 @@ DEB_BUILDDIR = $(DEB_SRCDIR)/build
 # ping is setuid
 DEB_FIXPERMS_EXCLUDE = bin/ping
 
+mandir = usr/share/man
+man1dir = $(mandir)/man1
+man8dir = $(mandir)/man8
+
 # move ping to /bin
 install/inetutils-ping ::
 	mkdir debian/tmp/bin
 	mv debian/tmp/usr/bin/ping debian/tmp/bin/
 
+# Rename inetd to be able to coexist with not purged netkit-inetd
+install/inetutils-inetd ::
+	mv debian/tmp/usr/sbin/inetd debian/tmp/usr/sbin/inetutils-inetd
+	mv debian/tmp/$(man8dir)/inetd.8 debian/tmp/$(man8dir)/inetutils-inetd.8
+
+# Needed to enable alternatives
+install/inetutils-telnet ::
+	mv debian/tmp/usr/bin/telnet debian/tmp/usr/bin/inetutils-telnet
+	mv debian/tmp/$(man1dir)/telnet.1 debian/tmp/$(man1dir)/inetutils-telnet.1
+
+install/inetutils-ftp ::
+	mv debian/tmp/usr/bin/ftp debian/tmp/usr/bin/inetutils-ftp
+	mv debian/tmp/$(man1dir)/ftp.1 debian/tmp/$(man1dir)/inetutils-ftp.1
+
+install/inetutils-talk ::
+	mv debian/tmp/usr/bin/talk debian/tmp/usr/bin/inetutils-talk
+	mv debian/tmp/$(man1dir)/talk.1 debian/tmp/$(man1dir)/inetutils-talk.1
+
 include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/tarball.mk
+include /usr/share/cdbs/1/class/autotools.mk
 include debian/simple-patchsys-modified.mk
 DEB_CONFIGURE_LIBEXECDIR ="\$${prefix}/sbin"
+

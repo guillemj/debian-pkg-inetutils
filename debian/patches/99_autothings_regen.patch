@@ -1,0 +1,2792 @@
+#DPATCHLEVEL=1
+diff -Naur inetutils-20030703/aclocal.m4 inetutils-20030703-auto/aclocal.m4
+--- inetutils-20030703/aclocal.m4	2003-07-03 02:25:20.000000000 +0200
++++ inetutils-20030703-auto/aclocal.m4	2003-10-02 07:56:02.000000000 +0200
+@@ -1,4 +1,4 @@
+-# generated automatically by aclocal 1.7.5 -*- Autoconf -*-
++# generated automatically by aclocal 1.7.7 -*- Autoconf -*-
+ 
+ # Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002
+ # Free Software Foundation, Inc.
+@@ -859,7 +859,7 @@
+ # Call AM_AUTOMAKE_VERSION so it can be traced.
+ # This function is AC_REQUIREd by AC_INIT_AUTOMAKE.
+ AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION],
+-	 [AM_AUTOMAKE_VERSION([1.7.5])])
++	 [AM_AUTOMAKE_VERSION([1.7.7])])
+ 
+ # Helper functions for option handling.                    -*- Autoconf -*-
+ 
+@@ -1241,18 +1241,32 @@
+   # using a relative directory.
+   cp "$am_depcomp" conftest.dir
+   cd conftest.dir
++  # We will build objects and dependencies in a subdirectory because
++  # it helps to detect inapplicable dependency modes.  For instance
++  # both Tru64's cc and ICC support -MD to output dependencies as a
++  # side effect of compilation, but ICC will put the dependencies in
++  # the current directory while Tru64 will put them in the object
++  # directory.
++  mkdir sub
+ 
+   am_cv_$1_dependencies_compiler_type=none
+   if test "$am_compiler_list" = ""; then
+      am_compiler_list=`sed -n ['s/^#*\([a-zA-Z0-9]*\))$/\1/p'] < ./depcomp`
+   fi
+   for depmode in $am_compiler_list; do
++    # Setup a source with many dependencies, because some compilers
++    # like to wrap large dependency lists on column 80 (with \), and
++    # we should not choose a depcomp mode which is confused by this.
++    #
+     # We need to recreate these files for each test, as the compiler may
+     # overwrite some of them when testing with obscure command lines.
+     # This happens at least with the AIX C compiler.
+-    echo '#include "conftest.h"' > conftest.c
+-    echo 'int i;' > conftest.h
+-    echo "${am__include} ${am__quote}conftest.Po${am__quote}" > confmf
++    : > sub/conftest.c
++    for i in 1 2 3 4 5 6; do
++      echo '#include "conftst'$i'.h"' >> sub/conftest.c
++      : > sub/conftst$i.h
++    done
++    echo "${am__include} ${am__quote}sub/conftest.Po${am__quote}" > confmf
+ 
+     case $depmode in
+     nosideeffect)
+@@ -1270,11 +1284,12 @@
+     # mode.  It turns out that the SunPro C++ compiler does not properly
+     # handle `-M -o', and we need to detect this.
+     if depmode=$depmode \
+-       source=conftest.c object=conftest.o \
+-       depfile=conftest.Po tmpdepfile=conftest.TPo \
+-       $SHELL ./depcomp $depcc -c -o conftest.o conftest.c \
++       source=sub/conftest.c object=sub/conftest.${OBJEXT-o} \
++       depfile=sub/conftest.Po tmpdepfile=sub/conftest.TPo \
++       $SHELL ./depcomp $depcc -c -o sub/conftest.${OBJEXT-o} sub/conftest.c \
+          >/dev/null 2>conftest.err &&
+-       grep conftest.h conftest.Po > /dev/null 2>&1 &&
++       grep sub/conftst6.h sub/conftest.Po > /dev/null 2>&1 &&
++       grep sub/conftest.${OBJEXT-o} sub/conftest.Po > /dev/null 2>&1 &&
+        ${MAKE-make} -s -f confmf > /dev/null 2>&1; then
+       # icc doesn't choke on unknown options, it will just issue warnings
+       # (even with -Werror).  So we grep stderr for any message
+diff -Naur inetutils-20030703/configure inetutils-20030703-auto/configure
+--- inetutils-20030703/configure	2003-07-03 02:25:30.000000000 +0200
++++ inetutils-20030703-auto/configure	2003-10-02 07:57:56.000000000 +0200
+@@ -973,7 +973,7 @@
+     else
+       echo "$as_me: WARNING: no configuration information is in $ac_dir" >&2
+     fi
+-    cd $ac_popdir
++    cd "$ac_popdir"
+   done
+ fi
+ 
+@@ -1172,7 +1172,7 @@
+       echo "$as_me: caught signal $ac_signal"
+     echo "$as_me: exit $exit_status"
+   } >&5
+-  rm -f core core.* *.core &&
++  rm -f core *.core &&
+   rm -rf conftest* confdefs* conf$$* $ac_clean_files &&
+     exit $exit_status
+      ' 0
+@@ -3027,13 +3027,12 @@
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }; }; then
+   for ac_declaration in \
+-   ''\
++   '' \
+    'extern "C" void std::exit (int) throw (); using std::exit;' \
+    'extern "C" void std::exit (int); using std::exit;' \
+    'extern "C" void exit (int) throw ();' \
+    'extern "C" void exit (int);' \
+-   'void exit (int);' \
+-   '#include <stdlib.h>'
++   'void exit (int);'
+ do
+   cat >conftest.$ac_ext <<_ACEOF
+ #line $LINENO "configure"
+@@ -3042,8 +3041,8 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <stdlib.h>
+ $ac_declaration
++#include <stdlib.h>
+ int
+ main ()
+ {
+@@ -3145,18 +3144,32 @@
+   # using a relative directory.
+   cp "$am_depcomp" conftest.dir
+   cd conftest.dir
++  # We will build objects and dependencies in a subdirectory because
++  # it helps to detect inapplicable dependency modes.  For instance
++  # both Tru64's cc and ICC support -MD to output dependencies as a
++  # side effect of compilation, but ICC will put the dependencies in
++  # the current directory while Tru64 will put them in the object
++  # directory.
++  mkdir sub
+ 
+   am_cv_CC_dependencies_compiler_type=none
+   if test "$am_compiler_list" = ""; then
+      am_compiler_list=`sed -n 's/^#*\([a-zA-Z0-9]*\))$/\1/p' < ./depcomp`
+   fi
+   for depmode in $am_compiler_list; do
++    # Setup a source with many dependencies, because some compilers
++    # like to wrap large dependency lists on column 80 (with \), and
++    # we should not choose a depcomp mode which is confused by this.
++    #
+     # We need to recreate these files for each test, as the compiler may
+     # overwrite some of them when testing with obscure command lines.
+     # This happens at least with the AIX C compiler.
+-    echo '#include "conftest.h"' > conftest.c
+-    echo 'int i;' > conftest.h
+-    echo "${am__include} ${am__quote}conftest.Po${am__quote}" > confmf
++    : > sub/conftest.c
++    for i in 1 2 3 4 5 6; do
++      echo '#include "conftst'$i'.h"' >> sub/conftest.c
++      : > sub/conftst$i.h
++    done
++    echo "${am__include} ${am__quote}sub/conftest.Po${am__quote}" > confmf
+ 
+     case $depmode in
+     nosideeffect)
+@@ -3174,11 +3187,12 @@
+     # mode.  It turns out that the SunPro C++ compiler does not properly
+     # handle `-M -o', and we need to detect this.
+     if depmode=$depmode \
+-       source=conftest.c object=conftest.o \
+-       depfile=conftest.Po tmpdepfile=conftest.TPo \
+-       $SHELL ./depcomp $depcc -c -o conftest.o conftest.c \
++       source=sub/conftest.c object=sub/conftest.${OBJEXT-o} \
++       depfile=sub/conftest.Po tmpdepfile=sub/conftest.TPo \
++       $SHELL ./depcomp $depcc -c -o sub/conftest.${OBJEXT-o} sub/conftest.c \
+          >/dev/null 2>conftest.err &&
+-       grep conftest.h conftest.Po > /dev/null 2>&1 &&
++       grep sub/conftst6.h sub/conftest.Po > /dev/null 2>&1 &&
++       grep sub/conftest.${OBJEXT-o} sub/conftest.Po > /dev/null 2>&1 &&
+        ${MAKE-make} -s -f confmf > /dev/null 2>&1; then
+       # icc doesn't choke on unknown options, it will just issue warnings
+       # (even with -Werror).  So we grep stderr for any message
+@@ -3781,7 +3795,7 @@
+ ( exit $ac_status )
+ ac_cv_header_stdc=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ fi
+@@ -4617,13 +4631,12 @@
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }; }; then
+   for ac_declaration in \
+-   ''\
++   '' \
+    'extern "C" void std::exit (int) throw (); using std::exit;' \
+    'extern "C" void std::exit (int); using std::exit;' \
+    'extern "C" void exit (int) throw ();' \
+    'extern "C" void exit (int);' \
+-   'void exit (int);' \
+-   '#include <stdlib.h>'
++   'void exit (int);'
+ do
+   cat >conftest.$ac_ext <<_ACEOF
+ #line $LINENO "configure"
+@@ -4632,8 +4645,8 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <stdlib.h>
+ $ac_declaration
++#include <stdlib.h>
+ int
+ main ()
+ {
+@@ -4735,18 +4748,32 @@
+   # using a relative directory.
+   cp "$am_depcomp" conftest.dir
+   cd conftest.dir
++  # We will build objects and dependencies in a subdirectory because
++  # it helps to detect inapplicable dependency modes.  For instance
++  # both Tru64's cc and ICC support -MD to output dependencies as a
++  # side effect of compilation, but ICC will put the dependencies in
++  # the current directory while Tru64 will put them in the object
++  # directory.
++  mkdir sub
+ 
+   am_cv_CC_dependencies_compiler_type=none
+   if test "$am_compiler_list" = ""; then
+      am_compiler_list=`sed -n 's/^#*\([a-zA-Z0-9]*\))$/\1/p' < ./depcomp`
+   fi
+   for depmode in $am_compiler_list; do
++    # Setup a source with many dependencies, because some compilers
++    # like to wrap large dependency lists on column 80 (with \), and
++    # we should not choose a depcomp mode which is confused by this.
++    #
+     # We need to recreate these files for each test, as the compiler may
+     # overwrite some of them when testing with obscure command lines.
+     # This happens at least with the AIX C compiler.
+-    echo '#include "conftest.h"' > conftest.c
+-    echo 'int i;' > conftest.h
+-    echo "${am__include} ${am__quote}conftest.Po${am__quote}" > confmf
++    : > sub/conftest.c
++    for i in 1 2 3 4 5 6; do
++      echo '#include "conftst'$i'.h"' >> sub/conftest.c
++      : > sub/conftst$i.h
++    done
++    echo "${am__include} ${am__quote}sub/conftest.Po${am__quote}" > confmf
+ 
+     case $depmode in
+     nosideeffect)
+@@ -4764,11 +4791,12 @@
+     # mode.  It turns out that the SunPro C++ compiler does not properly
+     # handle `-M -o', and we need to detect this.
+     if depmode=$depmode \
+-       source=conftest.c object=conftest.o \
+-       depfile=conftest.Po tmpdepfile=conftest.TPo \
+-       $SHELL ./depcomp $depcc -c -o conftest.o conftest.c \
++       source=sub/conftest.c object=sub/conftest.${OBJEXT-o} \
++       depfile=sub/conftest.Po tmpdepfile=sub/conftest.TPo \
++       $SHELL ./depcomp $depcc -c -o sub/conftest.${OBJEXT-o} sub/conftest.c \
+          >/dev/null 2>conftest.err &&
+-       grep conftest.h conftest.Po > /dev/null 2>&1 &&
++       grep sub/conftst6.h sub/conftest.Po > /dev/null 2>&1 &&
++       grep sub/conftest.${OBJEXT-o} sub/conftest.Po > /dev/null 2>&1 &&
+        ${MAKE-make} -s -f confmf > /dev/null 2>&1; then
+       # icc doesn't choke on unknown options, it will just issue warnings
+       # (even with -Werror).  So we grep stderr for any message
+@@ -7418,7 +7446,7 @@
+ ( exit $ac_status )
+ ac_cv_header_stdc=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ fi
+@@ -9962,7 +9990,7 @@
+ ( exit $ac_status )
+ ac_cv_header_stdc=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ fi
+@@ -10443,7 +10471,7 @@
+ ( exit $ac_status )
+ ac_cv_func_closedir_void=yes
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_closedir_void" >&5
+@@ -10766,7 +10794,7 @@
+ ( exit $ac_status )
+ ac_cv_c_stack_direction=-1
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_c_stack_direction" >&5
+@@ -10914,9 +10942,9 @@
+ sed 's/^/| /' conftest.$ac_ext >&5
+ 
+ ( exit $ac_status )
+-rm -f core core.* *.core
++rm -f core core.*
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ 	ac_cv_func_setvbuf_reversed=yes
+ else
+@@ -11270,7 +11298,7 @@
+ ( exit $ac_status )
+ ac_cv_func_fork_works=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_fork_works" >&5
+@@ -11425,7 +11453,7 @@
+ ( exit $ac_status )
+ ac_cv_func_vfork_works=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_vfork_works" >&5
+@@ -11505,7 +11533,7 @@
+ ( exit $ac_status )
+ ac_cv_func_strcoll_works=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_strcoll_works" >&5
+@@ -11907,7 +11935,7 @@
+ ( exit $ac_status )
+ ac_cv_func_mmap_fixed_mapped=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_mmap_fixed_mapped" >&5
+@@ -12112,7 +12140,7 @@
+ ( exit $ac_status )
+ ac_cv_func_malloc_0_nonnull=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_malloc_0_nonnull" >&5
+@@ -12329,7 +12357,7 @@
+ ( exit $ac_status )
+ ac_cv_func_realloc_0_nonnull=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $ac_cv_func_realloc_0_nonnull" >&5
+@@ -12957,7 +12985,7 @@
+ ( exit $ac_status )
+ jm_cv_func_working_re_compile_pattern=no
+ fi
+-rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
++rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ fi
+ echo "$as_me:$LINENO: result: $jm_cv_func_working_re_compile_pattern" >&5
+diff -Naur inetutils-20030703/doc/Makefile.in inetutils-20030703-auto/doc/Makefile.in
+--- inetutils-20030703/doc/Makefile.in	2003-07-03 02:25:35.000000000 +0200
++++ inetutils-20030703-auto/doc/Makefile.in	2003-10-02 07:57:03.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -190,8 +190,8 @@
+ 	all-recursive install-data-recursive install-exec-recursive \
+ 	installdirs-recursive install-recursive uninstall-recursive \
+ 	check-recursive installcheck-recursive
+-DIST_COMMON = $(inetutils_TEXINFOS) ChangeLog Makefile.am Makefile.in \
+-	mdate-sh stamp-vti texinfo.tex version.texi
++DIST_COMMON = $(inetutils_TEXINFOS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am mdate-sh stamp-vti texinfo.tex version.texi
+ DIST_SUBDIRS = $(SUBDIRS)
+ all: all-recursive
+ 
+@@ -489,7 +489,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -499,7 +499,7 @@
+ clean-am: clean-generic mostlyclean-am
+ 
+ distclean: distclean-recursive
+-
++	-rm -f Makefile
+ distclean-am: clean-am distclean-generic distclean-tags
+ 
+ dvi: dvi-recursive
+@@ -547,7 +547,7 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-recursive
+-
++	-rm -f Makefile
+ maintainer-clean-am: distclean-am maintainer-clean-aminfo \
+ 	maintainer-clean-generic maintainer-clean-vti
+ 
+diff -Naur inetutils-20030703/doc/rfc/Makefile.in inetutils-20030703-auto/doc/rfc/Makefile.in
+--- inetutils-20030703/doc/rfc/Makefile.in	2003-07-03 02:25:35.000000000 +0200
++++ inetutils-20030703-auto/doc/rfc/Makefile.in	2003-10-02 07:57:03.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -177,7 +177,7 @@
+ CONFIG_HEADER = $(top_builddir)/config.h
+ CONFIG_CLEAN_FILES =
+ DIST_SOURCES =
+-DIST_COMMON = Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in Makefile.am
+ all: all-am
+ 
+ .SUFFIXES:
+@@ -249,7 +249,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -259,6 +259,7 @@
+ clean-am: clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -f Makefile
+ 
+ distclean-am: clean-am distclean-generic
+ 
+@@ -281,6 +282,7 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+diff -Naur inetutils-20030703/ftp/Makefile.in inetutils-20030703-auto/ftp/Makefile.in
+--- inetutils-20030703/ftp/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/ftp/Makefile.in	2003-10-02 07:57:05.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -214,7 +214,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(ftp_SOURCES)
+ 
+ all: all-am
+@@ -274,9 +275,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ruserpass$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -471,7 +469,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -481,9 +479,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -504,6 +504,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -525,16 +527,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/ftpd/Makefile.in inetutils-20030703-auto/ftpd/Makefile.in
+--- inetutils-20030703/ftpd/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/ftpd/Makefile.in	2003-10-02 07:57:06.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -223,8 +223,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in \
+-	ftpcmd.c
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am ftpcmd.c
+ SOURCES = $(ftpd_SOURCES)
+ 
+ all: all-am
+@@ -286,9 +286,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/popen$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server_mode$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -508,7 +505,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -519,9 +516,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -542,6 +541,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -564,16 +565,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/glob/Makefile.in inetutils-20030703-auto/glob/Makefile.in
+--- inetutils-20030703/glob/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/glob/Makefile.in	2003-10-02 07:57:07.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -196,7 +196,7 @@
+ CCLD = $(CC)
+ LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+ DIST_SOURCES = $(libglob_a_SOURCES)
+-DIST_COMMON = COPYING.LIB ChangeLog Makefile.am Makefile.in \
++DIST_COMMON = $(srcdir)/Makefile.in COPYING.LIB ChangeLog Makefile.am \
+ 	configure.in
+ SOURCES = $(libglob_a_SOURCES)
+ 
+@@ -233,9 +233,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fnmatch$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glob$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -373,7 +370,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -383,9 +380,11 @@
+ clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -406,6 +405,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -425,14 +426,14 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-noinstLIBRARIES ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am install-info \
+-	install-info-am install-man install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-info-am
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-info install-info-am \
++	install-man install-strip installcheck installcheck-am \
++	installdirs maintainer-clean maintainer-clean-generic \
++	mostlyclean mostlyclean-compile mostlyclean-generic \
++	mostlyclean-kr pdf pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-info-am
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/gwhois/Makefile.in inetutils-20030703-auto/gwhois/Makefile.in
+--- inetutils-20030703/gwhois/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/gwhois/Makefile.in	2003-10-02 07:57:08.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -209,8 +209,8 @@
+ DIST_SOURCES = $(whois_SOURCES)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = README $(noinst_HEADERS) ChangeLog Makefile.am \
+-	Makefile.in TODO
++DIST_COMMON = README $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am TODO
+ SOURCES = $(whois_SOURCES)
+ 
+ all: $(BUILT_SOURCES)
+@@ -266,9 +266,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/whois$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -407,7 +404,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -418,9 +415,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -441,6 +440,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -460,11 +461,11 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-strip \
+-	installcheck installcheck-am installdirs maintainer-clean \
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-strip installcheck \
++	installcheck-am installdirs maintainer-clean \
+ 	maintainer-clean-generic mostlyclean mostlyclean-compile \
+ 	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+ 	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am
+diff -Naur inetutils-20030703/headers/Makefile.in inetutils-20030703-auto/headers/Makefile.in
+--- inetutils-20030703/headers/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/headers/Makefile.in	2003-10-02 07:57:08.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -173,7 +173,7 @@
+ CONFIG_HEADER = $(top_builddir)/config.h
+ CONFIG_CLEAN_FILES =
+ DIST_SOURCES =
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ all: all-am
+ 
+ .SUFFIXES:
+@@ -248,7 +248,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -258,6 +258,7 @@
+ clean-am: clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -f Makefile
+ 
+ distclean-am: clean-am distclean-generic
+ 
+@@ -280,6 +281,7 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+diff -Naur inetutils-20030703/inetd/Makefile.in inetutils-20030703-auto/inetd/Makefile.in
+--- inetutils-20030703/inetd/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/inetd/Makefile.in	2003-10-02 07:57:09.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -175,7 +175,9 @@
+ 
+ man_MANS = inetd.8
+ 
+-INCLUDES = $(PATHDEF_INETDCONF) $(PATHDEF_INETDDIR) -I$(top_builddir)/include
++INCLUDES = $(PATHDEF_INETDCONF) $(PATHDEF_INETDDIR) \
++	$(PATHDEF_INETDPID) -I$(top_builddir)/include
++
+ 
+ LDADD = -L../libinetutils -linetutils
+ 
+@@ -207,7 +209,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(inetd_SOURCES)
+ 
+ all: all-am
+@@ -262,9 +264,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inetd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -448,7 +447,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -458,9 +457,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -481,6 +482,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -503,16 +506,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/libicmp/Makefile.in inetutils-20030703-auto/libicmp/Makefile.in
+--- inetutils-20030703/libicmp/Makefile.in	2003-07-03 02:25:36.000000000 +0200
++++ inetutils-20030703-auto/libicmp/Makefile.in	2003-10-02 07:57:10.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -207,7 +207,8 @@
+ DIST_SOURCES = $(libicmp_a_SOURCES)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in TODO
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am TODO
+ SOURCES = $(libicmp_a_SOURCES)
+ 
+ all: all-am
+@@ -246,9 +247,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/icmp_timestamp$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libping$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -393,7 +391,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -403,9 +401,11 @@
+ clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -426,6 +426,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -445,14 +447,14 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-noinstLIBRARIES ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am install-info \
+-	install-info-am install-man install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-info-am
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-info install-info-am \
++	install-man install-strip installcheck installcheck-am \
++	installdirs maintainer-clean maintainer-clean-generic \
++	mostlyclean mostlyclean-compile mostlyclean-generic \
++	mostlyclean-kr pdf pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-info-am
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/libinetutils/Makefile.in inetutils-20030703-auto/libinetutils/Makefile.in
+--- inetutils-20030703/libinetutils/Makefile.in	2003-07-03 02:25:37.000000000 +0200
++++ inetutils-20030703-auto/libinetutils/Makefile.in	2003-10-02 07:57:11.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -238,13 +238,14 @@
+ DIST_SOURCES = $(libinetutils_a_SOURCES)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in \
+-	__progname.c err.c forkpty.c getopt.c getopt1.c getpass.c \
+-	getusershell.c herror.c hstrerror.c iruserok.c login.c \
+-	login_tty.c logout.c logwtmp.c malloc.c memcmp.c memcpy.c \
+-	memmove.c memset.c obstack.c openpty.c poll.c realloc.c regex.c \
+-	revoke.c ruserok.c setenv.c snprintf.c strcasecmp.c strdup.c \
+-	strerror.c strsignal.c stub_tgetent.c waitpid.c
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am __progname.c err.c forkpty.c getopt.c getopt1.c \
++	getpass.c getusershell.c herror.c hstrerror.c iruserok.c \
++	login.c login_tty.c logout.c logwtmp.c malloc.c memcmp.c \
++	memcpy.c memmove.c memset.c obstack.c openpty.c poll.c \
++	realloc.c regex.c revoke.c ruserok.c setenv.c snprintf.c \
++	strcasecmp.c strdup.c strerror.c strsignal.c stub_tgetent.c \
++	waitpid.c
+ SOURCES = $(libinetutils_a_SOURCES)
+ 
+ all: all-am
+@@ -328,9 +329,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmalloc$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xstrdup$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf $(DEPDIR) ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -579,7 +577,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -589,9 +587,11 @@
+ clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf $(DEPDIR) ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -612,6 +612,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf $(DEPDIR) ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -631,14 +633,14 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-noinstLIBRARIES ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am install-info \
+-	install-info-am install-man install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-info-am
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-info install-info-am \
++	install-man install-strip installcheck installcheck-am \
++	installdirs maintainer-clean maintainer-clean-generic \
++	mostlyclean mostlyclean-compile mostlyclean-generic \
++	mostlyclean-kr pdf pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-info-am
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/libls/Makefile.in inetutils-20030703-auto/libls/Makefile.in
+--- inetutils-20030703/libls/Makefile.in	2003-07-03 02:25:37.000000000 +0200
++++ inetutils-20030703-auto/libls/Makefile.in	2003-10-02 07:57:12.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -205,7 +205,8 @@
+ DIST_SOURCES = $(libls_a_SOURCES)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(libls_a_SOURCES)
+ 
+ all: all-am
+@@ -246,9 +247,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stat_flags$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -397,7 +395,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -407,9 +405,11 @@
+ clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -430,6 +430,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -449,14 +451,14 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-noinstLIBRARIES ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am install-info \
+-	install-info-am install-man install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-info-am
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-info install-info-am \
++	install-man install-strip installcheck installcheck-am \
++	installdirs maintainer-clean maintainer-clean-generic \
++	mostlyclean mostlyclean-compile mostlyclean-generic \
++	mostlyclean-kr pdf pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-info-am
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/libtelnet/Makefile.in inetutils-20030703-auto/libtelnet/Makefile.in
+--- inetutils-20030703/libtelnet/Makefile.in	2003-07-03 02:25:37.000000000 +0200
++++ inetutils-20030703-auto/libtelnet/Makefile.in	2003-10-02 07:57:13.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -204,7 +204,8 @@
+ DIST_SOURCES = $(libtelnet_a_SOURCES)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(libtelnet_a_SOURCES)
+ 
+ all: all-am
+@@ -248,9 +249,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/misc$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/read_passwd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -407,7 +405,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -417,9 +415,11 @@
+ clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -440,6 +440,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -459,14 +461,14 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-noinstLIBRARIES ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am install-info \
+-	install-info-am install-man install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-info-am
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-info install-info-am \
++	install-man install-strip installcheck installcheck-am \
++	installdirs maintainer-clean maintainer-clean-generic \
++	mostlyclean mostlyclean-compile mostlyclean-generic \
++	mostlyclean-kr pdf pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-info-am
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/logger/Makefile.in inetutils-20030703-auto/logger/Makefile.in
+--- inetutils-20030703/logger/Makefile.in	2003-07-03 02:25:37.000000000 +0200
++++ inetutils-20030703-auto/logger/Makefile.in	2003-10-02 07:57:14.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -206,7 +206,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(logger_SOURCES)
+ 
+ all: all-am
+@@ -261,9 +261,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logger$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -447,7 +444,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -457,9 +454,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -480,6 +479,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -501,16 +502,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/Makefile.in inetutils-20030703-auto/Makefile.in
+--- inetutils-20030703/Makefile.in	2003-07-03 02:25:35.000000000 +0200
++++ inetutils-20030703-auto/Makefile.in	2003-10-02 07:57:02.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -189,10 +189,10 @@
+ 	all-recursive install-data-recursive install-exec-recursive \
+ 	installdirs-recursive install-recursive uninstall-recursive \
+ 	check-recursive installcheck-recursive
+-DIST_COMMON = README AUTHORS COPYING ChangeLog INSTALL Makefile.am \
+-	Makefile.in NEWS THANKS TODO acinclude.m4 aclocal.m4 \
+-	config.guess config.hin config.sub configure configure.ac \
+-	depcomp install-sh missing mkinstalldirs
++DIST_COMMON = README $(srcdir)/Makefile.in $(srcdir)/configure AUTHORS \
++	COPYING ChangeLog INSTALL Makefile.am NEWS THANKS TODO \
++	acinclude.m4 aclocal.m4 config.guess config.hin config.sub \
++	configure configure.ac depcomp install-sh missing mkinstalldirs
+ DIST_SUBDIRS = $(SUBDIRS)
+ all: config.h
+ 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
+@@ -509,7 +509,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
+ 
+ maintainer-clean-generic:
+@@ -521,6 +521,8 @@
+ 
+ distclean: distclean-recursive
+ 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
++
++	-rm -f Makefile
+ distclean-am: clean-am distclean-generic distclean-hdr distclean-tags
+ 
+ dvi: dvi-recursive
+@@ -543,7 +545,9 @@
+ 
+ maintainer-clean: maintainer-clean-recursive
+ 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+-	-rm -rf autom4te.cache
++	-rm -rf $(top_srcdir)/autom4te.cache
++
++	-rm -f Makefile
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+ mostlyclean: mostlyclean-recursive
+diff -Naur inetutils-20030703/ping/Makefile.in inetutils-20030703-auto/ping/Makefile.in
+--- inetutils-20030703/ping/Makefile.in	2003-07-03 02:25:37.000000000 +0200
++++ inetutils-20030703-auto/ping/Makefile.in	2003-10-02 07:57:15.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -218,7 +218,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in TODO
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am TODO
+ SOURCES = $(ping_SOURCES)
+ 
+ all: all-am
+@@ -277,9 +277,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ping_router$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ping_timestamp$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -472,7 +469,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -482,9 +479,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -507,6 +506,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -528,16 +529,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man8 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man8 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man8
+ 
+ 
+ install-exec-hook:
+diff -Naur inetutils-20030703/rcp/Makefile.in inetutils-20030703-auto/rcp/Makefile.in
+--- inetutils-20030703/rcp/Makefile.in	2003-07-03 02:25:37.000000000 +0200
++++ inetutils-20030703-auto/rcp/Makefile.in	2003-10-02 07:57:16.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -212,7 +212,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(rcp_SOURCES)
+ 
+ all: all-am
+@@ -268,9 +269,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rcp$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -456,7 +454,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -466,9 +464,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -491,6 +491,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -512,16 +514,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/rexecd/Makefile.in inetutils-20030703-auto/rexecd/Makefile.in
+--- inetutils-20030703/rexecd/Makefile.in	2003-07-03 02:25:38.000000000 +0200
++++ inetutils-20030703-auto/rexecd/Makefile.in	2003-10-02 07:57:17.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -208,7 +208,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(rexecd_SOURCES)
+ 
+ all: all-am
+@@ -263,9 +263,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rexecd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -449,7 +446,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -459,9 +456,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -482,6 +481,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -504,16 +505,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/rlogin/Makefile.in inetutils-20030703-auto/rlogin/Makefile.in
+--- inetutils-20030703/rlogin/Makefile.in	2003-07-03 02:25:38.000000000 +0200
++++ inetutils-20030703-auto/rlogin/Makefile.in	2003-10-02 07:57:18.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -208,7 +208,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(rlogin_SOURCES)
+ 
+ all: all-am
+@@ -263,9 +263,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rlogin$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -449,7 +446,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -459,9 +456,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -484,6 +483,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -505,16 +506,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ 
+ install-exec-hook:
+diff -Naur inetutils-20030703/rlogind/Makefile.in inetutils-20030703-auto/rlogind/Makefile.in
+--- inetutils-20030703/rlogind/Makefile.in	2003-07-03 02:25:38.000000000 +0200
++++ inetutils-20030703-auto/rlogind/Makefile.in	2003-10-02 07:57:19.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -208,7 +208,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(rlogind_SOURCES)
+ 
+ all: all-am
+@@ -263,9 +263,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rlogind$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -449,7 +446,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -459,9 +456,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -482,6 +481,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -504,16 +505,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/rsh/Makefile.in inetutils-20030703-auto/rsh/Makefile.in
+--- inetutils-20030703/rsh/Makefile.in	2003-07-03 02:25:38.000000000 +0200
++++ inetutils-20030703-auto/rsh/Makefile.in	2003-10-02 07:57:20.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -208,7 +208,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(rsh_SOURCES)
+ 
+ all: all-am
+@@ -263,9 +263,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rsh$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -449,7 +446,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -459,9 +456,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -484,6 +483,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -505,16 +506,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/rshd/Makefile.in inetutils-20030703-auto/rshd/Makefile.in
+--- inetutils-20030703/rshd/Makefile.in	2003-07-03 02:25:38.000000000 +0200
++++ inetutils-20030703-auto/rshd/Makefile.in	2003-10-02 07:57:21.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -207,7 +207,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(rshd_SOURCES)
+ 
+ all: all-am
+@@ -262,9 +262,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rshd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -448,7 +445,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -458,9 +455,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -481,6 +480,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -503,16 +504,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/syslogd/Makefile.in inetutils-20030703-auto/syslogd/Makefile.in
+--- inetutils-20030703/syslogd/Makefile.in	2003-07-03 02:25:38.000000000 +0200
++++ inetutils-20030703-auto/syslogd/Makefile.in	2003-10-02 07:57:22.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -173,6 +173,8 @@
+ 
+ syslogd_SOURCES = syslogd.c
+ 
++dist_sysconf_DATA = syslog.conf
++
+ man_MANS = syslog.conf.5 syslogd.8
+ 
+ INCLUDES = $(PATHDEF_LOG) $(PATHDEF_LOGCONF) $(PATHDEF_LOGPID) \
+@@ -209,7 +211,10 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DATA = $(dist_sysconf_DATA)
++
++DIST_COMMON = $(dist_sysconf_DATA) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(syslogd_SOURCES)
+ 
+ all: all-am
+@@ -264,9 +269,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/syslogd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -386,6 +388,24 @@
+ 	  echo " rm -f $(DESTDIR)$(man8dir)/$$inst"; \
+ 	  rm -f $(DESTDIR)$(man8dir)/$$inst; \
+ 	done
++dist_sysconfDATA_INSTALL = $(INSTALL_DATA)
++install-dist_sysconfDATA: $(dist_sysconf_DATA)
++	@$(NORMAL_INSTALL)
++	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)
++	@list='$(dist_sysconf_DATA)'; for p in $$list; do \
++	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
++	  f="`echo $$p | sed -e 's|^.*/||'`"; \
++	  echo " $(dist_sysconfDATA_INSTALL) $$d$$p $(DESTDIR)$(sysconfdir)/$$f"; \
++	  $(dist_sysconfDATA_INSTALL) $$d$$p $(DESTDIR)$(sysconfdir)/$$f; \
++	done
++
++uninstall-dist_sysconfDATA:
++	@$(NORMAL_UNINSTALL)
++	@list='$(dist_sysconf_DATA)'; for p in $$list; do \
++	  f="`echo $$p | sed -e 's|^.*/||'`"; \
++	  echo " rm -f $(DESTDIR)$(sysconfdir)/$$f"; \
++	  rm -f $(DESTDIR)$(sysconfdir)/$$f; \
++	done
+ 
+ ETAGS = etags
+ ETAGSFLAGS =
+@@ -474,10 +494,10 @@
+ 	done
+ check-am: all-am
+ check: check-am
+-all-am: Makefile $(PROGRAMS) $(MANS)
++all-am: Makefile $(PROGRAMS) $(MANS) $(DATA)
+ 
+ installdirs:
+-	$(mkinstalldirs) $(DESTDIR)$(inetdaemondir) $(DESTDIR)$(man5dir) $(DESTDIR)$(man8dir)
++	$(mkinstalldirs) $(DESTDIR)$(inetdaemondir) $(DESTDIR)$(man5dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(sysconfdir)
+ install: install-am
+ install-exec: install-exec-am
+ install-data: install-data-am
+@@ -497,7 +517,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -507,9 +527,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -521,7 +543,7 @@
+ 
+ install-data-am: install-inetdaemonPROGRAMS install-man
+ 
+-install-exec-am:
++install-exec-am: install-dist_sysconfDATA
+ 
+ install-info: install-info-am
+ 
+@@ -530,6 +552,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -545,23 +569,24 @@
+ 
+ ps-am:
+ 
+-uninstall-am: uninstall-inetdaemonPROGRAMS uninstall-info-am \
+-	uninstall-man
++uninstall-am: uninstall-dist_sysconfDATA uninstall-inetdaemonPROGRAMS \
++	uninstall-info-am uninstall-man
+ 
+ uninstall-man: uninstall-man5 uninstall-man8
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-dist_sysconfDATA install-exec install-exec-am \
+ 	install-inetdaemonPROGRAMS install-info install-info-am \
+ 	install-man install-man5 install-man8 install-strip \
+ 	installcheck installcheck-am installdirs maintainer-clean \
+ 	maintainer-clean-generic mostlyclean mostlyclean-compile \
+ 	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man5 uninstall-man8
++	uninstall uninstall-am uninstall-dist_sysconfDATA \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man5 uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/talk/Makefile.in inetutils-20030703-auto/talk/Makefile.in
+--- inetutils-20030703/talk/Makefile.in	2003-07-03 02:25:39.000000000 +0200
++++ inetutils-20030703-auto/talk/Makefile.in	2003-10-02 07:57:23.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -219,7 +219,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(talk_SOURCES)
+ 
+ all: all-am
+@@ -284,9 +285,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/msgs$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/talk$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -493,7 +491,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -503,9 +501,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -526,6 +526,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -547,16 +549,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/talkd/Makefile.in inetutils-20030703-auto/talkd/Makefile.in
+--- inetutils-20030703/talkd/Makefile.in	2003-07-03 02:25:39.000000000 +0200
++++ inetutils-20030703-auto/talkd/Makefile.in	2003-10-02 07:57:24.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -219,7 +219,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(talkd_SOURCES)
+ 
+ all: all-am
+@@ -279,9 +279,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/table$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/talkd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -476,7 +473,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -486,9 +483,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -509,6 +508,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -531,16 +532,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/telnet/Makefile.in inetutils-20030703-auto/telnet/Makefile.in
+--- inetutils-20030703/telnet/Makefile.in	2003-07-03 02:25:39.000000000 +0200
++++ inetutils-20030703-auto/telnet/Makefile.in	2003-10-02 07:57:25.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -223,7 +223,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(telnet_SOURCES)
+ 
+ all: all-am
+@@ -287,9 +288,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tn3270$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utilities$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -494,7 +492,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -504,9 +502,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -527,6 +527,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -548,16 +550,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/telnetd/Makefile.in inetutils-20030703-auto/telnetd/Makefile.in
+--- inetutils-20030703/telnetd/Makefile.in	2003-07-03 02:25:39.000000000 +0200
++++ inetutils-20030703-auto/telnetd/Makefile.in	2003-10-02 07:57:26.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -222,7 +222,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(telnetd_SOURCES)
+ 
+ all: all-am
+@@ -283,9 +284,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/termstat$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utility$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -482,7 +480,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -492,9 +490,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -515,6 +515,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -537,16 +539,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ 
+ @PATHDEFS_MAKE@
+diff -Naur inetutils-20030703/tftp/Makefile.in inetutils-20030703-auto/tftp/Makefile.in
+--- inetutils-20030703/tftp/Makefile.in	2003-07-03 02:25:39.000000000 +0200
++++ inetutils-20030703-auto/tftp/Makefile.in	2003-10-02 07:57:28.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -210,7 +210,8 @@
+ MANS = $(man_MANS)
+ HEADERS = $(noinst_HEADERS)
+ 
+-DIST_COMMON = $(noinst_HEADERS) ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.in ChangeLog \
++	Makefile.am
+ SOURCES = $(tftp_SOURCES)
+ 
+ all: all-am
+@@ -266,9 +267,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main$U.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tftp$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -454,7 +452,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -464,9 +462,11 @@
+ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -487,6 +487,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -508,16 +510,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+ 	clean-generic ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-exec install-exec-am \
+-	install-info install-info-am install-man install-man1 \
+-	install-strip installcheck installcheck-am installdirs \
+-	maintainer-clean maintainer-clean-generic mostlyclean \
+-	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
+-	pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-binPROGRAMS uninstall-info-am uninstall-man \
+-	uninstall-man1
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-binPROGRAMS install-data \
++	install-data-am install-exec install-exec-am install-info \
++	install-info-am install-man install-man1 install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-binPROGRAMS uninstall-info-am \
++	uninstall-man uninstall-man1
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/tftpd/Makefile.in inetutils-20030703-auto/tftpd/Makefile.in
+--- inetutils-20030703/tftpd/Makefile.in	2003-07-03 02:25:40.000000000 +0200
++++ inetutils-20030703-auto/tftpd/Makefile.in	2003-10-02 07:57:28.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -207,7 +207,7 @@
+ 
+ NROFF = nroff
+ MANS = $(man_MANS)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(tftpd_SOURCES)
+ 
+ all: all-am
+@@ -262,9 +262,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tftpd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -448,7 +445,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -458,9 +455,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -481,6 +480,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -503,16 +504,16 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-man8 install-strip installcheck \
+-	installcheck-am installdirs maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
+-	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
+-	uninstall-info-am uninstall-man uninstall-man8
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-man8 \
++	install-strip installcheck installcheck-am installdirs \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-kr pdf \
++	pdf-am ps ps-am tags uninstall uninstall-am \
++	uninstall-inetdaemonPROGRAMS uninstall-info-am uninstall-man \
++	uninstall-man8
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -Naur inetutils-20030703/uucpd/Makefile.in inetutils-20030703-auto/uucpd/Makefile.in
+--- inetutils-20030703/uucpd/Makefile.in	2003-07-03 02:25:40.000000000 +0200
++++ inetutils-20030703-auto/uucpd/Makefile.in	2003-10-02 07:57:29.000000000 +0200
+@@ -1,4 +1,4 @@
+-# Makefile.in generated by automake 1.7.5 from Makefile.am.
++# Makefile.in generated by automake 1.7.7 from Makefile.am.
+ # @configure_input@
+ 
+ # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003
+@@ -201,7 +201,7 @@
+ CCLD = $(CC)
+ LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+ DIST_SOURCES = $(uucpd_SOURCES)
+-DIST_COMMON = ChangeLog Makefile.am Makefile.in
++DIST_COMMON = $(srcdir)/Makefile.in ChangeLog Makefile.am
+ SOURCES = $(uucpd_SOURCES)
+ 
+ all: all-am
+@@ -256,9 +256,6 @@
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/uucpd$U.Po@am__quote@
+ 
+-distclean-depend:
+-	-rm -rf ./$(DEPDIR)
+-
+ .c.o:
+ @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
+ @am__fastdepCC_TRUE@	  -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<; \
+@@ -395,7 +392,7 @@
+ clean-generic:
+ 
+ distclean-generic:
+-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
++	-rm -f $(CONFIG_CLEAN_FILES)
+ 
+ maintainer-clean-generic:
+ 	@echo "This command is intended for maintainers to use"
+@@ -405,9 +402,11 @@
+ clean-am: clean-generic clean-inetdaemonPROGRAMS mostlyclean-am
+ 
+ distclean: distclean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+-distclean-am: clean-am distclean-compile distclean-depend \
+-	distclean-generic distclean-tags
++distclean-am: clean-am distclean-compile distclean-generic \
++	distclean-tags
+ 
+ dvi: dvi-am
+ 
+@@ -428,6 +427,8 @@
+ installcheck-am:
+ 
+ maintainer-clean: maintainer-clean-am
++	-rm -rf ./$(DEPDIR)
++	-rm -f Makefile
+ 
+ maintainer-clean-am: distclean-am maintainer-clean-generic
+ 
+@@ -447,15 +448,15 @@
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+ 	clean-inetdaemonPROGRAMS ctags distclean distclean-compile \
+-	distclean-depend distclean-generic distclean-tags distdir dvi \
+-	dvi-am info info-am install install-am install-data \
+-	install-data-am install-exec install-exec-am \
+-	install-inetdaemonPROGRAMS install-info install-info-am \
+-	install-man install-strip installcheck installcheck-am \
+-	installdirs maintainer-clean maintainer-clean-generic \
+-	mostlyclean mostlyclean-compile mostlyclean-generic \
+-	mostlyclean-kr pdf pdf-am ps ps-am tags uninstall uninstall-am \
+-	uninstall-inetdaemonPROGRAMS uninstall-info-am
++	distclean-generic distclean-tags distdir dvi dvi-am info \
++	info-am install install-am install-data install-data-am \
++	install-exec install-exec-am install-inetdaemonPROGRAMS \
++	install-info install-info-am install-man install-strip \
++	installcheck installcheck-am installdirs maintainer-clean \
++	maintainer-clean-generic mostlyclean mostlyclean-compile \
++	mostlyclean-generic mostlyclean-kr pdf pdf-am ps ps-am tags \
++	uninstall uninstall-am uninstall-inetdaemonPROGRAMS \
++	uninstall-info-am
+ 
+ 
+ @PATHDEFS_MAKE@

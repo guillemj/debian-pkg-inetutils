@@ -2,11 +2,27 @@
 
 # Postinst for inetutils-syslogd
 
-# Clean up workaround for bug in 2:1.4.2+20030703-4
+# XXX: Workaround for bug in 2:1.4.2+20030703-4
 
 if [ "$1" = "configure" -a "$2" = "2:1.4.2+20030703-4" ]
 then
     rm -f /var/run/syslogd.pid
 fi
+
+# XXX: Workaround for bug in -4 to -6
+
+if [ "$1" = configure -a \
+  \( \
+     "$2" = "2:1.4.2+20030703-4" -o \
+     "$2" = "2:1.4.2+20030703-5" -o \
+     "$2" = "2:1.4.2+20030703-6" \
+  \) ]
+then
+    update-rc.d -f inetutils-syslogd remove >/dev/null
+fi
+
+# XXX: Workaround until CDBS can set rc.d priorities by package
+
+update-rc.d inetutils-syslogd defaults 10 90 >/dev/null
 
 #DEBHELPER#

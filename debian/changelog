@@ -1,3 +1,53 @@
+inetutils (2:1.4.2+20030703-8) unstable; urgency=low
+
+  * debian/patches/inetd_pidfile.patch: Renamed to ...
+  * debian/patches/20_inetd_pidfile.patch: ... this. (Closes: #208595)
+    - The PATH_INETDPID macro was not correctly expanded.
+    - Append PATHDEF_INETDPID to INCLUDES so the code can see it.
+      Thanks Chris McRaven <cpmcraven@ou.edu>.
+  * debian/patches/syslogd.c.patch: Renamed to ...
+  * debian/patches/21_syslogd.c.patch: ... this.
+  * debian/patches/22_syslogd_conf.patch: Added a configuration file.
+    (Closes: #208336)
+  * debian/inetutils-syslogd.install: Added conffile.
+  * debian/patches/99_authothings_regen.patch: Regenerate all autothings
+    because patches 20 and 22 modify some Makefile.am.
+
+  * debian/control:
+    - Added myself to Uploaders.
+    - Removed Jeff Bailey redundant entry in Uploaders.
+    - Beautification of some descriptions.
+  * debian/rules:
+    - Move tarball.mk to the beginning so config.status is not rebuilt for
+      no reason (Closes: #207751). Thanks Julian Gilbey <jdg@debian.org>.
+    - Renamed inetd binary to inetutils-inetd to cope with removed but not
+      purged netkit-inetd init.d script.
+      (Closes: #210258, #207561, #210266)
+  * debian/inetutils-inetd.install: Renamed inetd binary.
+  * debian/inetutils-{inetd,syslogd}.init:
+    - Adapted comments remaining from skeleton scripts (Closes: #212166).
+    - Added reload support (Closes: #212167).
+    - Added --oknodo options to start, stop and restart (Closes: #212163).
+  * debian/inetutils-inetd.prerm:
+    - Stop inetd using the misplaced pid file from buggy revisions -4 to -7.
+    - Conditionally remove /PATH_INETDPID pid file.
+  * debian/inetutils-syslogd.postinst: Fix wrong priority for init script.
+    (Closes: #207105). Thanks Julian Gilbey <jdg@debian.org>.
+  * debian/inetutils-syslogd.logrotate: Added log rotation facilities,
+    stolen from syslog-ng (Closes: #206573, #212237).
+
+  * Added ftp, telnet and talk alternatives:
+    (Closes: #205493, #205495, #210683)
+    - debian/control: Removed Conflicts on inetutils-telnet.
+    - debian/rules: Renamed the binaries and manpages inserting inetutils-
+      to the file names.
+    - debian/inetutils-{ftp,telnet,talk}.manpages: Likewise.
+    - debian/inetutils-{ftp,telnet,talk}.install: Likewise.
+    - debian/inetutils-{ftp,telnet,talk}.{postinst,prerm}: Added call
+      to update-alternatives.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 19 Oct 2003 21:02:39 +0200
+
 inetutils (2:1.4.2+20030703-7) unstable; urgency=low
 
   * debian/patches/inetd_pidfile.patch: Misc fixes.

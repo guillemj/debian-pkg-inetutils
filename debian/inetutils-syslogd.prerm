@@ -2,7 +2,7 @@
 
 # Prerm for inetutils-syslogd
 
-# Workaround for bug in 2:1.4.2+20030703-4
+# XXX: Workaround for bug in 2:1.4.2+20030703-4
 
 if [ "$1" = "failed-upgrade" -a "$2" = "2:1.4.2+20030703-4" ]
 then
@@ -10,3 +10,4 @@ then
 fi
 
 #DEBHELPER#
+

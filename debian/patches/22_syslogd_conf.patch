@@ -1,0 +1,87 @@
+#DPATCHLEVEL=1
+diff -Naur inetutils-20030703-old/syslogd/syslog.conf inetutils-20030703/syslogd/syslog.conf
+--- inetutils-20030703-old/syslogd/syslog.conf	1970-01-01 01:00:00.000000000 +0100
++++ inetutils-20030703/syslogd/syslog.conf	2003-10-01 04:18:52.000000000 +0200
+@@ -0,0 +1,70 @@
++#  /etc/syslog.conf	Configuration file for inetutils-syslogd.
++#
++#			For more information see syslog.conf(5) manpage.
++
++#
++# First some standard logfiles.  Log by facility.
++#
++
++auth,authpriv.*			/var/log/auth.log
++*.*;auth,authpriv.none		-/var/log/syslog
++#cron.*				/var/log/cron.log
++daemon.*			-/var/log/daemon.log
++kern.*				-/var/log/kern.log
++lpr.*				-/var/log/lpr.log
++mail.*				-/var/log/mail.log
++user.*				-/var/log/user.log
++uucp.*				/var/log/uucp.log
++
++#
++# Logging for the mail system.  Split it up so that
++# it is easy to write scripts to parse these files.
++#
++mail.info			-/var/log/mail.info
++mail.warn			-/var/log/mail.warn
++mail.err			/var/log/mail.err
++
++# Logging for INN news system
++#
++news.crit			/var/log/news/news.crit
++news.err			/var/log/news/news.err
++news.notice			-/var/log/news/news.notice
++
++#
++# Some `catch-all' logfiles.
++#
++*.=debug;\
++	auth,authpriv.none;\
++	news.none;mail.none	-/var/log/debug
++*.=info;*.=notice;*.=warn;\
++	auth,authpriv.none;\
++	cron,daemon.none;\
++	mail,news.none		-/var/log/messages
++
++#
++# Emergencies are sent to everybody logged in.
++#
++*.emerg				*
++
++#
++# I like to have messages displayed on the console, but only on a virtual
++# console I usually leave idle.
++#
++#daemon,mail.*;\
++#	news.=crit;news.=err;news.=notice;\
++#	*.=debug;*.=info;\
++#	*.=notice;*.=warn	/dev/tty8
++
++# The named pipe /dev/xconsole is for the `xconsole' utility.  To use it,
++# you must invoke `xconsole' with the `-file' option:
++#
++#    $ xconsole -file /dev/xconsole [...]
++#
++# NOTE: adjust the list below, or you'll go crazy if you have a reasonably
++#      busy site..
++#
++daemon.*;mail.*;\
++	news.crit;news.err;news.notice;\
++	*.=debug;*.=info;\
++	*.=notice;*.=warn	|/dev/xconsole
++
+diff -Naur inetutils-20030703/syslogd/Makefile.am inetutils-20030703-patched/syslogd/Makefile.am
+--- inetutils-20030703/syslogd/Makefile.am	2002-04-28 19:24:36.000000000 +0200
++++ inetutils-20030703-patched/syslogd/Makefile.am	2003-10-02 07:53:16.000000000 +0200
+@@ -8,6 +8,8 @@
+ 
+ syslogd_SOURCES = syslogd.c
+ 
++dist_sysconf_DATA = syslog.conf
++
+ man_MANS = syslog.conf.5 syslogd.8
+ 
+ @PATHDEFS_MAKE@
