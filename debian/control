@@ -116,7 +116,6 @@ Package: inetutils-tools
 Section: net
 Priority: standard
 Architecture: any
-Provides: net-tools
 Depends: ${shlibs:Depends}
 Description: Base networking utilities
  Base utilities for network administration (ifconfig, etc).

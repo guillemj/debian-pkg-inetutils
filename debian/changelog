@@ -9,6 +9,8 @@ inetutils (2:1.4.2+#DATE#-1) unstable; urgency=low
   * Fix lame FTBFS bug. (Closes: #219105) [rmh]
     - control (Build-Depends): Add automake1.7 and autoconf.
     - control (Build-Conflicts): Add autoconf2.13.
+  * control (inetutils-tools): Temporarily disable net-tools provides,
+    untill we have a working ifconfig/route. (Closes: #219280) [rmh]
 
  -- Robert Millan <rmh@debian.org>  #DATE#
 
