@@ -42,7 +42,10 @@ endif
 install/inetutils-ping ::
 	mkdir debian/tmp/bin
 	mv debian/tmp/usr/bin/ping debian/tmp/bin/
+# XXX: This should be removed once the Hurd has IPv6 support
+ifneq ($(DEB_HOST_GNU_SYSTEM),gnu)
 	mv debian/tmp/usr/bin/ping6 debian/tmp/bin/
+endif
 
 # Rename ifconfig to not break existing systems using net-tools
 install/inetutils-tools ::
