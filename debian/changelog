@@ -11,6 +11,8 @@ inetutils (2:1.4.2+#DATE#-1) unstable; urgency=low
     - control (Build-Conflicts): Add autoconf2.13.
   * control (inetutils-tools): Temporarily disable net-tools provides,
     untill we have a working ifconfig/route. (Closes: #219280) [rmh]
+  * debian/control (Uploaders): Put it on one line as some tools cannot cope
+    with multi-line declarations. [guillem]
 
  -- Robert Millan <rmh@debian.org>  #DATE#
 
