@@ -1,3 +1,17 @@
+inetutils (2:1.4.2+#DATE#-1) unstable; urgency=low
+
+  * New upstream snapshot. [rmh]
+    - Fixes ping paquet size bug. (Closes: #216696)
+    - Fixes buffer overflow problem in ftp. (Closes: #212612)
+	[!!] submitted, but not merged upstream yet
+    - control (Build-Depends): Nuked gcc-3.2.
+    - rules: Nuked CC=gcc-3.2 hack.
+  * Fix lame FTBFS bug. (Closes: #219105) [rmh]
+    - control (Build-Depends): Add automake1.7 and autoconf.
+    - control (Build-Conflicts): Add autoconf2.13.
+
+ -- Robert Millan <rmh@debian.org>  #DATE#
+
 inetutils (2:1.4.2+20031022-1) unstable; urgency=low
 
   * New upstream snapshot.

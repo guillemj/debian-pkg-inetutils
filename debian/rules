@@ -14,9 +14,6 @@ mandir = usr/share/man
 man1dir = $(mandir)/man1
 man8dir = $(mandir)/man8
 
-# Workaround cpp-3.3 breakness
-CC = gcc-3.2
-
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/tarball.mk
 include debian/autotools.mk
