@@ -1,18 +1,3 @@
-inetutils (2:1.4.2+20040207-5) UNRELEASED; urgency=low
-
-  * Rename ifconfig to gifconfig instead of inetutils-ifconfig.
-    - rules
-  * Set Maintainer to pkg-inetutils, and move Jeff to Uploaders.
-    control.in
-  * control.in (Build-Conflicts):  Nuke autoconf2.13 (cdbs is smart enough).
-  * Use cdbs debian/control autogeneration.
-    - rules:  Set DEB_AUTO_UPDATE_DEBIAN_CONTROL = yes.
-    - control.in:  Moved to..
-    - control.in.in: ..this.  Add a @cdbs@ tag and replace Architecture with
-    Cpu/System.
-
- -- Robert Millan <rmh@debian.org>  Mon, 31 Jan 2005 15:06:36 +0100
-
 inetutils (2:1.4.2+20040207-4) unstable; urgency=low
 
   [ Robert Millan ]
