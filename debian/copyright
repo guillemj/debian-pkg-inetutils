@@ -9,7 +9,7 @@ from sources obtained from:
 
 The debian packages are maintained through Subversion on:
 
-   <http://svn.debian.org/viewcvs/pkg-inetutils/>
+   <svn://svn.debian.org/pkg-inetutils/>
 
 The source code is covered by the following copyrights:
 
