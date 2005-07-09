@@ -3,6 +3,7 @@ inetutils (2:1.4.2+20040207-5) UNRELEASED; urgency=low
   * Fix the Subversion repository URL.
   * Set Maintainer to pkg-inetutils, move Jeff Bailey to Uploaders
     and remove Robert Millan now that he has retired.
+  * Add a watch file.
 
  -- Guillem Jover <guillem@debian.org>  Sat,  9 Jul 2005 04:59:11 +0300
 
