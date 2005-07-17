@@ -4,6 +4,7 @@ inetutils (2:1.4.2+20040207-5) UNRELEASED; urgency=low
   * Set Maintainer to pkg-inetutils, move Jeff Bailey to Uploaders
     and remove Robert Millan now that he has retired.
   * Add a watch file.
+  * Now using Standards-Version 3.6.2 (no changes needed).
   * Use new DEB_HOST_ARCH_OS variable.
   * Fix FTBFS with gcc-4.0. (Closes: #300080)
     - debian/patches/40_gcc-4.0.patch: New file.

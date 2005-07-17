@@ -3,7 +3,7 @@ Section: net
 Priority: extra
 Maintainer: Debian inetutils Maintainers <pkg-inetutils-maint@lists.alioth.debian.org>
 Uploaders: Jeff Bailey <jbailey@nisa.net>, Marcus Brinkmann <brinkmd@debian.org>, Guillem Jover <guillem@debian.org>
-Standards-Version: 3.6.1
+Standards-Version: 3.6.2
 Build-Depends: cdbs (>= 0.4.15), debhelper (>= 4.1.0), libreadline4-dev, libpam0g-dev, libopie-dev, automake1.8, autoconf, bison, zlib1g-dev
 Build-Conflicts: autoconf2.13
 
