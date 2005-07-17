@@ -4,6 +4,7 @@ inetutils (2:1.4.2+20040207-5) UNRELEASED; urgency=low
   * Set Maintainer to pkg-inetutils, move Jeff Bailey to Uploaders
     and remove Robert Millan now that he has retired.
   * Add a watch file.
+  * Use new DEB_HOST_ARCH_OS variable.
 
  -- Guillem Jover <guillem@debian.org>  Sat,  9 Jul 2005 04:59:11 +0300
 
