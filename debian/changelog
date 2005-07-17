@@ -5,6 +5,9 @@ inetutils (2:1.4.2+20040207-5) UNRELEASED; urgency=low
     and remove Robert Millan now that he has retired.
   * Add a watch file.
   * Use new DEB_HOST_ARCH_OS variable.
+  * Fix FTBFS with gcc-4.0. (Closes: #300080)
+    - debian/patches/40_gcc-4.0.patch: New file.
+    Thanks to Andreas Jochens <aj@andaco.de>.
 
  -- Guillem Jover <guillem@debian.org>  Sat,  9 Jul 2005 04:59:11 +0300
 

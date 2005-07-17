@@ -1,0 +1,27 @@
+#DPATCHLEVEL=0
+Status: not-applied
+
+diff -urN ftp/cmdtab.c ftp/cmdtab.c
+--- ftp/cmdtab.c	2000-07-06 06:21:07.000000000 +0200
++++ ftp/cmdtab.c	2005-03-17 15:39:12.894479127 +0100
+@@ -109,7 +109,7 @@
+ char	userhelp[] =	"send new user information";
+ char	verbosehelp[] =	"toggle verbose mode";
+ 
+-struct cmd cmdtab[] = {
++struct cmd *cmdtab = {
+ 	{ "!",		shellhelp,	0,	0,	0,	shell },
+ 	{ "$",		domachelp,	1,	0,	0,	domacro },
+ 	{ "account",	accounthelp,	0,	1,	1,	account},
+diff -urN ftp/extern.h ftp/extern.h
+--- ftp/extern.h	2000-08-09 07:44:23.000000000 +0200
++++ ftp/extern.h	2005-03-17 15:38:36.861279348 +0100
+@@ -137,7 +137,7 @@
+ 
+ extern jmp_buf	abortprox;
+ extern int	abrtflag;
+-extern struct	cmd cmdtab[];
++extern struct	cmd *cmdtab;
+ extern FILE	*cout;
+ extern int	data;
+ extern char    *home;
