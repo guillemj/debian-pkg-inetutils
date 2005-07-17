@@ -28,8 +28,8 @@ clean ::
 ifeq ($(DEB_HOST_ARCH_OS),linux)
 	cat debian/control.in \
 	| sed \
-	  -e 's/@inetutils:Priority@/optional/g' \
-	  -e 's/@syslogd:Priority@/optional/g' \
+	  -e 's/@inetutils:Priority@/extra/g' \
+	  -e 's/@syslogd:Priority@/extra/g' \
 	  -e 's/@syslogd:Section@/net/g' \
 	  -e '/@tools:Provides@/d' \
 	> debian/control
