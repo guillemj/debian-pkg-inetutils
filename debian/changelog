@@ -1,3 +1,10 @@
+inetutils (2:1.4.2+20040207-6) UNRELEASED; urgency=low
+
+  * Change Build-Depends to 'libreadline5-dev | libreadline-dev' from
+    'libreadline4-dev'.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 10 Sep 2005 04:52:01 +0300
+
 inetutils (2:1.4.2+20040207-5) unstable; urgency=low
 
   * Fix the Subversion repository URL.
