@@ -4,7 +4,7 @@
 
 # XXX: Workaround for bug in 2:1.4.2+20030703-4
 
-if [ "$1" = "failed-upgrade" -a "$2" = "2:1.4.2+20030703-4" ]
+if [ "$1" = "failed-upgrade" ] && [ "$2" = "2:1.4.2+20030703-4" ]
 then
     ln -s /var/run/syslog.pid /var/run/syslogd.pid
 fi

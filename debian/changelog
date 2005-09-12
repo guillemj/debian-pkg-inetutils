@@ -1,11 +1,15 @@
 inetutils (2:1.4.2+20040207-6) UNRELEASED; urgency=low
 
   * Change Build-Depends to 'libreadline5-dev | libreadline-dev' from
-    'libreadline4-dev'.
+    'libreadline4-dev'. (Closes: #326343)
   * Fix FSF address in debian/copyright.
   * Fix invalid pointer to int cast. That will cause problems on 64-bit
     architectures. (Closes: #318752)
     Thanks to Dann Frazier <dannf@hp.com>.
+  * Fix bashisms.
+    - inetutils-syslogd.prerm: Fix improper use of -a in test.
+    - inetutils-inetd.prerm: Likewise.
+    - inetutils-syslogd.postinst: Likewise.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 10 Sep 2005 04:52:01 +0300
 
