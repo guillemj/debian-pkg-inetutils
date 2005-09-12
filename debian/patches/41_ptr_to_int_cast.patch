@@ -1,0 +1,140 @@
+#DPATCHLEVEL=0
+Status: not-applied
+Author: Dann Frazier <dannf@hp.com>
+
+diff -urN ftp/main.c ftp/main.c
+--- ftp/main.c	2002-04-29 14:40:30.000000000 -0600
++++ ftp/main.c	2005-07-17 04:21:01.282833004 -0600
+@@ -55,6 +55,10 @@
+ #include <unistd.h>
+ #include <getopt.h>
+ 
++#if HAVE_LIBREADLINE
++#include <readline/readline.h>
++#endif
++
+ /* Define macro to nothing so declarations in ftp_var.h become definitions. */
+ #define FTP_EXTERN
+ #include "ftp_var.h"
+diff -urN headers/utmp_init.h headers/utmp_init.h
+--- headers/utmp_init.h	1969-12-31 17:00:00.000000000 -0700
++++ headers/utmp_init.h	2005-07-17 04:04:55.086555778 -0600
+@@ -0,0 +1,45 @@
++/* utmp_init.h -- 
++   Copyright (C) 2005 Free Software Foundation, Inc.
++
++   This program is free software; you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation; either version 2, or (at your option)
++   any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program; if not, write to the Free Software Foundation,
++   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
++
++#ifndef UTMP_INIT_H_
++# define UTMP_INIT_H_
++
++# ifndef PARAMS
++#  if defined PROTOTYPES || (defined __STDC__ && __STDC__)
++#   define PARAMS(Args) Args
++#  else
++#   define PARAMS(Args) ()
++#  endif
++# endif
++
++# ifndef __attribute__
++#  if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 8) || __STRICT_ANSI__
++#   define __attribute__(x)
++#  endif
++# endif
++
++# ifndef ATTRIBUTE_NORETURN
++#  define ATTRIBUTE_NORETURN __attribute__ ((__noreturn__))
++# endif
++
++/* utmp_init - update utmp and wtmp before login */
++void utmp_init(char *line, char *user, char *id);
++
++/* utmp_ptsid - generate utmp id for pseudo terminal */
++char *utmp_ptsid(char *line, char *tag);
++
++#endif /* !UTMP_INIT_H_ */
+diff -urN rlogind/rlogind.c rlogind/rlogind.c
+--- rlogind/rlogind.c	2003-04-05 10:03:39.000000000 -0700
++++ rlogind/rlogind.c	2005-07-17 04:07:25.644171121 -0600
+@@ -73,6 +73,8 @@
+ #include <sys/ioctl.h>
+ #include <sys/stat.h> /* Needed for chmod() */
+ 
++#include "utmp_init.h"
++
+ /*
+   The TIOCPKT_* macros may not be implemented in the pty driver.
+   Defining them here allows the program to be compiled.  */
+@@ -129,6 +131,7 @@
+ #endif
+ 
+ extern int __check_rhosts_file;
++extern char *localhost __P ((void));
+ 
+ struct auth_data
+ {
+@@ -603,9 +606,6 @@
+ }
+ 
+ #ifdef UTMPX
+-char *utmp_ptsid (); /*FIXME*/
+-void utmp_init ();
+-
+ void
+ setup_utmp (char *line)
+ {
+--- headers/Makefile.am~	2004-01-30 06:16:17.000000000 -0700
++++ headers/Makefile.am	2005-07-17 06:29:09.444848199 -0600
+@@ -1,5 +1,5 @@
+ EXTRA_DIST = crypt.h err.h getopt.h obstack.h osockaddr.h paths.h poll.h \
+-        syslog-int.h tftpsubs.h confpaths.h.in stamp-h.in
++        syslog-int.h tftpsubs.h confpaths.h.in stamp-h.in utmp_init.h
+ 
+ header_dirs = arpa protocols
+ 
+--- headers/Makefile.in~	2005-07-17 06:23:45.277859983 -0600
++++ headers/Makefile.in	2005-07-17 06:34:12.498555424 -0600
+@@ -40,7 +40,8 @@
+ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+ 	$(srcdir)/crypt.h $(srcdir)/err.h $(srcdir)/getopt.h \
+ 	$(srcdir)/obstack.h $(srcdir)/osockaddr.h $(srcdir)/poll.h \
+-	$(srcdir)/syslog-int.h $(srcdir)/tftpsubs.h ChangeLog
++	$(srcdir)/syslog-int.h $(srcdir)/tftpsubs.h $(srcdir)/utmp_init.h \
++	ChangeLog
+ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
+ am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
+ 	$(top_srcdir)/configure.ac
+--- configure.ac~	2005-07-17 06:34:56.595234572 -0600
++++ configure.ac	2005-07-17 06:42:00.937026248 -0600
+@@ -33,7 +33,7 @@
+ # Include files that we link into our own include directory from headers.
+ # Initialize it with the things we always want to use.
+ IU_CONFIG_LINKS([crypt.h, arpa/telnet.h, arpa/ftp.h, arpa/tftp.h,
+-                 protocols/talkd.h, tftpsubs.h])
++                 protocols/talkd.h, tftpsubs.h, utmp_init.h])
+ 
+ dnl For now, we always use libexecdir; later we may want to vary where the
+ dnl daemons go.
+--- telnetd/pty.c~	2002-04-07 08:31:37.000000000 -0600
++++ telnetd/pty.c	2005-07-17 06:51:11.121589821 -0600
+@@ -18,6 +18,7 @@
+    Boston, MA 02111-1307, USA. */
+ 
+ #include "telnetd.h"
++#include "utmp_init.h"
+ #include <sys/wait.h>
+ 
+ #ifdef AUTHENTICATION
+
