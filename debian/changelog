@@ -7,6 +7,7 @@ inetutils (2:1.4.2+20040207-7) UNRELEASED; urgency=low
     - inetutils-inetd.prerm: Remove.
     - inetutils-syslogd.prerm: Likewise.
     - inetutils-syslogd.postinst: Likewise.
+  * Upgrade to debhelper compat version 5.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 11 Dec 2005 20:05:09 +0200
 
