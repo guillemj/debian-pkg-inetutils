@@ -3,6 +3,10 @@ inetutils (2:1.4.2+20040207-7) UNRELEASED; urgency=low
   * Switch back to plain debhelper.
     - Remove cdbs workaround for not being able to set per package specific
       rc.d priority.
+  * Remove workarounds for old packaging bugs.
+    - inetutils-inetd.prerm: Remove.
+    - inetutils-syslogd.prerm: Likewise.
+    - inetutils-syslogd.postinst: Likewise.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 11 Dec 2005 20:05:09 +0200
 
