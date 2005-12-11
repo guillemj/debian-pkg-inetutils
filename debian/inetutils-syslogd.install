@@ -1,2 +1,2 @@
-debian/tmp/etc/syslog.conf
-debian/tmp/usr/sbin/syslogd
+etc/syslog.conf
+usr/sbin/syslogd

@@ -21,8 +21,4 @@ then
     update-rc.d -f inetutils-syslogd remove >/dev/null
 fi
 
-# XXX: Workaround until CDBS can set rc.d priorities by package
-
-update-rc.d inetutils-syslogd defaults 10 90 >/dev/null
-
 #DEBHELPER#
