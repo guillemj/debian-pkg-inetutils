@@ -1,0 +1,20 @@
+#DPATCHLEVEL=0
+--- logger/Makefile.am	2005-10-11 14:29:11.000000000 +0300
++++ logger/Makefile.am	2005-12-12 04:56:34.000000000 +0200
+@@ -18,7 +18,7 @@
+ 
+ bin_PROGRAMS = @logger_BUILD@
+ 
+-LDADD = -L../libinetutils -linetutils
++LDADD = -L../lib -lgnu -L../libinetutils -linetutils
+ 
+ EXTRA_PROGRAMS = logger
+ 
+--- ifconfig/Makefile.am	2005-10-11 14:29:07.000000000 +0300
++++ ifconfig/Makefile.am	2005-12-12 05:04:09.000000000 +0200
+@@ -28,4 +28,4 @@
+ 
+ @PATHDEFS_MAKE@
+ 
+-LDADD = -L../libinetutils -linetutils
++LDADD = -L../lib -lgnu -L../libinetutils -linetutils

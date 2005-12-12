@@ -2,6 +2,15 @@ inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
 
   * New upstream snapshot.
     - debian/tarball.sh: New file.
+    - debian/patches/00_link_gnulib.patch: Likewise.
+    - debian/patches/20_inetd_pidfile.patch: Integrated upstrem. Remove.
+    - debian/patches/24_ftp_overflow.patch: Likewise.
+    - debian/patches/25_fix_net_fwd.patch: Likewise.
+    - debian/patches/30_ipv6.patch: Likewise.
+    - debian/patches/40_gcc-4.0.patch: Likewise.
+    - debian/patches/22_syslogd_conf.patch: Sync.
+    - debian/patches/23_ifconfig_enable.patch: Likewise.
+    - debian/patches/41_ptr_to_int_cast.patch: Likewise.
   * Switch back to plain debhelper.
     - Remove cdbs workaround for not being able to set per package specific
       rc.d priority.

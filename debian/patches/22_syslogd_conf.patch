@@ -76,7 +76,7 @@ diff -Naur inetutils-20030703-old/syslogd/syslog.conf inetutils-20030703/syslogd
 diff -Naur inetutils-20030703/syslogd/Makefile.am inetutils-20030703-patched/syslogd/Makefile.am
 --- inetutils-20030703/syslogd/Makefile.am	2002-04-28 19:24:36.000000000 +0200
 +++ inetutils-20030703-patched/syslogd/Makefile.am	2003-10-02 07:53:16.000000000 +0200
-@@ -8,6 +8,8 @@
+@@ -24,6 +24,8 @@
  
  syslogd_SOURCES = syslogd.c
  

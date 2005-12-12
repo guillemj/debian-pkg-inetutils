@@ -70,71 +70,50 @@ diff -urN rlogind/rlogind.c rlogind/rlogind.c
 +++ rlogind/rlogind.c	2005-07-17 04:07:25.644171121 -0600
 @@ -73,6 +73,8 @@
  #include <sys/ioctl.h>
- #include <sys/stat.h> /* Needed for chmod() */
+ #include <sys/stat.h>		/* Needed for chmod() */
  
 +#include "utmp_init.h"
 +
  /*
    The TIOCPKT_* macros may not be implemented in the pty driver.
    Defining them here allows the program to be compiled.  */
-@@ -129,6 +131,7 @@
- #endif
- 
- extern int __check_rhosts_file;
-+extern char *localhost __P ((void));
- 
- struct auth_data
- {
-@@ -603,9 +606,6 @@
+@@ -634,9 +636,6 @@
  }
  
  #ifdef UTMPX
--char *utmp_ptsid (); /*FIXME*/
--void utmp_init ();
+-char           *utmp_ptsid ();
+-/*FIXME*/ void  utmp_init ();
 -
  void
  setup_utmp (char *line)
  {
---- headers/Makefile.am~	2004-01-30 06:16:17.000000000 -0700
-+++ headers/Makefile.am	2005-07-17 06:29:09.444848199 -0600
-@@ -1,5 +1,5 @@
- EXTRA_DIST = crypt.h err.h getopt.h obstack.h osockaddr.h paths.h poll.h \
--        syslog-int.h tftpsubs.h confpaths.h.in stamp-h.in
-+        syslog-int.h tftpsubs.h confpaths.h.in stamp-h.in utmp_init.h
- 
- header_dirs = arpa protocols
- 
---- headers/Makefile.in~	2005-07-17 06:23:45.277859983 -0600
-+++ headers/Makefile.in	2005-07-17 06:34:12.498555424 -0600
-@@ -40,7 +40,8 @@
- DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
- 	$(srcdir)/crypt.h $(srcdir)/err.h $(srcdir)/getopt.h \
- 	$(srcdir)/obstack.h $(srcdir)/osockaddr.h $(srcdir)/poll.h \
--	$(srcdir)/syslog-int.h $(srcdir)/tftpsubs.h ChangeLog
-+	$(srcdir)/syslog-int.h $(srcdir)/tftpsubs.h $(srcdir)/utmp_init.h \
-+	ChangeLog
- ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
- am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
- 	$(top_srcdir)/configure.ac
---- configure.ac~	2005-07-17 06:34:56.595234572 -0600
-+++ configure.ac	2005-07-17 06:42:00.937026248 -0600
-@@ -33,7 +33,7 @@
- # Include files that we link into our own include directory from headers.
- # Initialize it with the things we always want to use.
- IU_CONFIG_LINKS([crypt.h, arpa/telnet.h, arpa/ftp.h, arpa/tftp.h,
--                 protocols/talkd.h, tftpsubs.h])
-+                 protocols/talkd.h, tftpsubs.h, utmp_init.h])
- 
- dnl For now, we always use libexecdir; later we may want to vary where the
- dnl daemons go.
 --- telnetd/pty.c~	2002-04-07 08:31:37.000000000 -0600
 +++ telnetd/pty.c	2005-07-17 06:51:11.121589821 -0600
 @@ -18,6 +18,7 @@
-    Boston, MA 02111-1307, USA. */
- 
+    Fifth Floor, Boston, MA 02110-1301 USA. */
+
  #include "telnetd.h"
 +#include "utmp_init.h"
  #include <sys/wait.h>
- 
- #ifdef AUTHENTICATION
 
+ #ifdef AUTHENTICATION
+--- headers/Makefile.am	2005-10-11 14:31:26.000000000 +0300
++++ headers/Makefile.am	2005-12-12 04:35:14.000000000 +0200
+@@ -16,4 +16,4 @@
+ # to the Free Software Foundation, Inc., 51 Franklin Street,
+ # Fifth Floor, Boston, MA 02110-1301 USA.
+ 
+-noinst_HEADERS = tftpsubs.h shishi_def.h
++noinst_HEADERS = tftpsubs.h shishi_def.h utmp_init.h
+--- telnetd/Makefile.am	2005-10-11 14:29:14.000000000 +0300
++++ telnetd/Makefile.am	2005-12-12 04:39:13.000000000 +0200
+@@ -30,7 +30,8 @@
+ @PATHDEFS_MAKE@
+ 
+ INCLUDES = $(PATHDEF_DEV) $(PATHDEF_TTY) $(PATHDEF_LOGIN) \
+-	   -I$(top_srcdir) -I$(top_srcdir)/lib @INCAUTH@
++	   -I$(top_srcdir) -I$(top_srcdir)/headers -I$(top_srcdir)/lib \
++	   @INCAUTH@
+ 
+ LIBTERMCAP = @LIBTERMCAP@
+ LIBCRYPT = @LIBCRYPT@

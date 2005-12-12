@@ -2,23 +2,23 @@
 diff -ur inetutils-1.4.2+20031022.old/configure.ac inetutils-1.4.2+20031022/configure.ac
 --- inetutils-1.4.2+20031022.old/configure.ac	2003-05-25 01:36:45.000000000 +0200
 +++ inetutils-1.4.2+20031022/configure.ac	2003-10-23 15:44:15.000000000 +0200
-@@ -798,6 +798,7 @@
+@@ -774,6 +774,7 @@
  rshd/Makefile logger/Makefile syslogd/Makefile talk/Makefile
  talkd/Makefile telnet/Makefile telnetd/Makefile tftp/Makefile
  tftpd/Makefile uucpd/Makefile gwhois/Makefile libls/Makefile
 +ifconfig/Makefile ifconfig/system/Makefile
- include/confpaths.h:headers/confpaths.h.in
+ confpaths.h:confpaths.h.in
  headers/Makefile
  doc/Makefile doc/rfc/Makefile])
 diff -ur inetutils-1.4.2+20031022.old/Makefile.am inetutils-1.4.2+20031022/Makefile.am
 --- inetutils-1.4.2+20031022.old/Makefile.am	2002-12-11 14:20:22.000000000 +0100
 +++ inetutils-1.4.2+20031022/Makefile.am	2003-10-23 15:44:25.000000000 +0200
-@@ -5,7 +5,7 @@
- SUBDIRS = headers libinetutils libtelnet glob \
+@@ -25,7 +25,7 @@
+ SUBDIRS = lib headers libinetutils libtelnet glob \
  	inetd telnetd libls ftpd rshd rlogind uucpd rexecd syslogd tftpd \
  	talkd telnet ftp rsh rcp rlogin tftp logger gwhois talk \
 -	libicmp ping doc
 +	libicmp ping doc ifconfig
- 
+
  DISTCLEANFILES = pathdefs.make paths.defs include/*.h include/*/*.h \
  	include/stamp-h
