@@ -116,13 +116,13 @@ binary-arch: install
 	cp $(CURDIR)/debian/inetutils-ping.overrides \
 	   $(CURDIR)/debian/inetutils-ping/usr/share/lintian/overrides/inetutils-ping
 	dh_installdebconf -a
-	dh_installdocs -a
+	dh_installdocs -a -A NEWS AUTHORS THANKS
 	dh_installexamples -a
 	dh_installinit -pinetutils-syslogd -- defaults 10 90
 	dh_installinit -a -Ninetutils-syslogd
 	dh_installman -a
 	dh_installinfo -a
-	dh_installchangelogs -a
+	dh_installchangelogs -a ChangeLog
 	dh_link -a
 	dh_strip -a
 	dh_compress -a
