@@ -11,6 +11,9 @@ inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
     - debian/patches/22_syslogd_conf.patch: Sync.
     - debian/patches/23_ifconfig_enable.patch: Likewise.
     - debian/patches/41_ptr_to_int_cast.patch: Likewise.
+    - Fix ftp segfaulting when doing dir. (Closes: #336194)
+    - Fix write out of bounds in ftpd. (Closes: #287560)
+    - Update NEWS file. (Closes: #287567)
   * Switch back to plain debhelper.
     - Remove cdbs workaround for not being able to set per package specific
       rc.d priority.
