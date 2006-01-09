@@ -21,6 +21,8 @@ inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
     - inetutils-inetd.prerm: Remove.
     - inetutils-syslogd.prerm: Likewise.
     - inetutils-syslogd.postinst: Likewise.
+  * Make inetutils-syslogd on linux Provide and Conflict on
+    linux-kernel-log-daemon. (Closes: #269813)
   * Upgrade to debhelper compat version 5.
   * Add lintian overrides for ping and ping6 being suid root.
 
