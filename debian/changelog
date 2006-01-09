@@ -1,6 +1,7 @@
 inetutils (2:1.4.3+20051212-2) UNRELEASED; urgency=low
 
   * Add texinfo to Build-Depends.
+  * Use LSB init script output functions, thus Depend on lsb-base.
 
  -- Guillem Jover <guillem@debian.org>  Mon,  9 Jan 2006 18:58:16 +0200
 

@@ -18,32 +18,35 @@ test -x $DAEMON || exit 0
 
 set -e
 
+. /lib/lsb/init-functions
+
 case "$1" in
   start)
-	echo -n "Starting $DESC: "
+	log_daemon_msg "Starting $DESC" "$NAME"
 	start-stop-daemon --start --quiet --oknodo \
 		--pidfile /var/run/$NAME.pid --exec $DAEMON
-	echo "$NAME."
+	log_end_msg $?
 	;;
   stop)
-	echo -n "Stopping $DESC: "
+	log_daemon_msg "Stopping $DESC" "$NAME"
 	start-stop-daemon --stop --quiet --oknodo \
 		--pidfile /var/run/$NAME.pid --exec $DAEMON
-	echo "$NAME."
+	log_end_msg $?
 	;;
   reload|force-reload)
-	echo "Reloading $DESC configuration files."
+	log_action_begin_msg "Reloading $DESC configuration files"
 	start-stop-daemon --stop --signal 1 --quiet --pidfile \
 		/var/run/$NAME.pid --exec $DAEMON
+	log_action_end_msg $?
 	;;
   restart)
-	echo -n "Restarting $DESC: "
+	log_daemon_msg "Restarting $DESC" "$NAME"
 	start-stop-daemon --stop --quiet --oknodo --pidfile \
 		/var/run/$NAME.pid --exec $DAEMON
 	sleep 1
 	start-stop-daemon --start --quiet --pidfile \
 		/var/run/$NAME.pid --exec $DAEMON
-	echo "$NAME."
+	log_end_msg $?
 	;;
   *)
 	N=/etc/init.d/inetutils-$NAME
