@@ -52,18 +52,18 @@ build: patch config.status
 debian/control: debian/control.in
 	# Set proper Priority and Section
 ifeq ($(DEB_HOST_ARCH_OS),linux)
-	cat debian/control.in \
-	| sed \
+	sed \
 	  -e 's/@inetutils:Priority@/extra/g' \
 	  -e 's/@syslogd:Priority@/extra/g' \
 	  -e 's/@syslogd:Section@/net/g' \
+	< debian/control.in \
 	> debian/control
 else
-	cat debian/control.in \
-	| sed \
+	sed \
 	  -e 's/@inetutils:Priority@/standard/g' \
 	  -e 's/@syslogd:Priority@/required/g' \
 	  -e 's/@syslogd:Section@/base/g' \
+	< debian/control.in \
 	> debian/control
 endif
 
