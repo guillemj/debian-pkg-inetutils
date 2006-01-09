@@ -25,6 +25,8 @@ inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
     linux-kernel-log-daemon. (Closes: #269813)
   * Upgrade to debhelper compat version 5.
   * Upgrade Build-Depends from automake1.8 to automake1.9.
+  * Document the use of /proc/kmsg by inetutils-syslogd on some systems.
+    (Closes: #212168)
   * Add lintian overrides for ping and ping6 being suid root.
   * Wrap lines in debian/control fields (knowingly breaking policy).
 
