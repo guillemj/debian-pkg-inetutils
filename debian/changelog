@@ -1,3 +1,9 @@
+inetutils (2:1.4.3+20051212-2) UNRELEASED; urgency=low
+
+  * Add texinfo to Build-Depends.
+
+ -- Guillem Jover <guillem@debian.org>  Mon,  9 Jan 2006 18:58:16 +0200
+
 inetutils (2:1.4.3+20051212-1) unstable; urgency=low
 
   * New upstream snapshot.
