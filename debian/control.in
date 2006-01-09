@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Debian inetutils Maintainers <pkg-inetutils-maint@lists.alioth.debian.org>
 Uploaders: Jeff Bailey <jbailey@nisa.net>, Marcus Brinkmann <brinkmd@debian.org>, Guillem Jover <guillem@debian.org>
 Standards-Version: 3.6.2
-Build-Depends: debhelper (>= 5), autoconf, automake1.8, bison, libreadline5-dev | libreadline-dev, libpam0g-dev, libopie-dev, zlib1g-dev
+Build-Depends: debhelper (>= 5), autoconf, automake1.9, bison, libreadline5-dev | libreadline-dev, libpam0g-dev, libopie-dev, zlib1g-dev
 Build-Conflicts: autoconf2.13
 
 Package: inetutils-ftp
