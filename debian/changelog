@@ -26,6 +26,7 @@ inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
   * Upgrade to debhelper compat version 5.
   * Upgrade Build-Depends from automake1.8 to automake1.9.
   * Add lintian overrides for ping and ping6 being suid root.
+  * Wrap lines in debian/control fields (knowingly breaking policy).
 
  -- Guillem Jover <guillem@debian.org>  Sun, 11 Dec 2005 20:05:09 +0200
 
