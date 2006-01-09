@@ -49,6 +49,9 @@ build: patch config.status
 	
 	$(MAKE) CFLAGS="$(CFLAGS)"
 
+# We need it forced on all builds.
+.PHONY: debian/control
+
 debian/control: debian/control.in
 	# Set proper Priority and Section
 ifeq ($(DEB_HOST_ARCH_OS),linux)
