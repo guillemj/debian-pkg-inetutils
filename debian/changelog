@@ -1,4 +1,4 @@
-inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
+inetutils (2:1.4.3+20051212-1) unstable; urgency=low
 
   * New upstream snapshot.
     - debian/tarball.sh: New file.
@@ -31,7 +31,7 @@ inetutils (2:1.4.3+20051212-1) UNRELEASED; urgency=low
   * Add lintian overrides for ping and ping6 being suid root.
   * Wrap lines in debian/control fields (knowingly breaking policy).
 
- -- Guillem Jover <guillem@debian.org>  Sun, 11 Dec 2005 20:05:09 +0200
+ -- Guillem Jover <guillem@debian.org>  Mon,  9 Jan 2006 07:53:50 +0200
 
 inetutils (2:1.4.2+20040207-6) unstable; urgency=low
 
