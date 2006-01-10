@@ -2,6 +2,10 @@ inetutils (2:1.4.3+20051212-3) UNRELEASED; urgency=low
 
   * Fix busy waiting in inetd when there are no sockets to listen.
     - debian/patches/30_inetd_busy_wait.patch: New file.
+  * Restore a patch hunk that got lost when syncing with latest upstream
+    release, that would make the code to segfault on 64 bit arches.
+    Although the code is not used by any produced package. (Closes: #347313)
+    Thanks to Dann Frazier <dannf@hp.com>.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 10 Jan 2006 23:57:07 +0200
 

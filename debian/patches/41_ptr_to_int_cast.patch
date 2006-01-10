@@ -77,6 +77,14 @@ diff -urN rlogind/rlogind.c rlogind/rlogind.c
  /*
    The TIOCPKT_* macros may not be implemented in the pty driver.
    Defining them here allows the program to be compiled.  */
+@@ -130,6 +132,7 @@
+ # define DEFPORT 513
+ #endif
+ extern int      __check_rhosts_file;
++extern char *localhost __P ((void));
+ 
+ #ifndef SHISHI
+ struct auth_data
 @@ -634,9 +636,6 @@
  }
  
