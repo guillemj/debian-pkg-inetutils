@@ -1,0 +1,31 @@
+#DPATCHLEVEL=1
+
+2006-01-10  Guillem Jover  <guillem@hadrons.org>
+
+	* inetd/inet.c (main): Use sigsuspend on POSIX systems, otherwise
+	sigpause with sysv semantics waits for no signal.
+
+
+diff -aur inetutils-1.4.3+20060110/inetd/inetd.c inetutils-1.4.3+20060110.new/inetd/inetd.c
+--- inetutils-1.4.3+20060110/inetd/inetd.c	2005-10-30 01:26:50.000000000 +0300
++++ inetutils-1.4.3+20060110.new/inetd/inetd.c	2006-01-10 23:53:15.000000000 +0200
+@@ -484,10 +484,18 @@
+ 
+       if (nsock == 0)
+ 	{
++#if defined(HAVE_SIGACTION)
++	  sigset_t empty;
++	
++	  sigemptyset(&empty);
++	  while (nsock == 0)
++	    sigsuspend(&empty);
++#else
+ 	  signal_block (NULL);
+ 	  while (nsock == 0)
+ 	    sigpause (0L);
+ 	  signal_unblock (NULL);
++#endif
+ 	}
+       readable = allsock;
+       if ((n = select (maxsock + 1, &readable, NULL, NULL, NULL)) <= 0)
+

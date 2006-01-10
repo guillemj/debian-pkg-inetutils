@@ -1,3 +1,10 @@
+inetutils (2:1.4.3+20051212-3) UNRELEASED; urgency=low
+
+  * Fix busy waiting in inetd when there are no sockets to listen.
+    - debian/patches/30_inetd_busy_wait.patch: New file.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 10 Jan 2006 23:57:07 +0200
+
 inetutils (2:1.4.3+20051212-2) unstable; urgency=low
 
   * Add texinfo to Build-Depends.
