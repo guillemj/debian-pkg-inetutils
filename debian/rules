@@ -46,7 +46,7 @@ config.status: configure
 	  --mandir=\$${prefix}/share/man \
 	  --infodir=\$${prefix}/share/info
 
-build: patch config.status
+build: patch debian/control config.status
 	dh_testdir
 	
 	$(MAKE) CFLAGS="$(CFLAGS)"
@@ -72,7 +72,7 @@ else
 	> debian/control
 endif
 
-clean: debian/control unpatch
+clean: unpatch
 	dh_testdir
 	dh_testroot
 	
