@@ -1,4 +1,4 @@
-inetutils (2:1.4.3+20051212-3) UNRELEASED; urgency=low
+inetutils (2:1.4.3+20051212-3) unstable; urgency=low
 
   * Fix busy waiting in inetd when there are no sockets to listen.
     - debian/patches/30_inetd_busy_wait.patch: New file.
@@ -11,7 +11,7 @@ inetutils (2:1.4.3+20051212-3) UNRELEASED; urgency=low
     Thanks to Aurelien Jarno <aurel32@debian.org>.
   * Enable installation of logrotate conffiles again.
 
- -- Guillem Jover <guillem@debian.org>  Tue, 10 Jan 2006 23:57:07 +0200
+ -- Guillem Jover <guillem@debian.org>  Wed, 11 Jan 2006 23:12:06 +0200
 
 inetutils (2:1.4.3+20051212-2) unstable; urgency=low
 
