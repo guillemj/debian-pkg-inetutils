@@ -7,6 +7,7 @@ inetutils (2:1.4.3+20051212-3) UNRELEASED; urgency=low
     Although the code is not used by any produced package. (Closes: #347313)
     Thanks to Dann Frazier <dannf@hp.com>.
   * Add automake1.4 to Build-Conflicts. (Closes: #347312)
+  * Enable installation of logrotate conffiles again.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 10 Jan 2006 23:57:07 +0200
 
