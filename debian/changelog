@@ -1,3 +1,11 @@
+inetutils (2:1.4.3+20051212-4) UNRELEASED; urgency=low
+
+  * Make syslogd really read /dev/klog. (Closes: #348184)
+    - debian/patches/01_klog.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 23 Feb 2006 23:22:59 +0200
+
 inetutils (2:1.4.3+20051212-3) unstable; urgency=low
 
   * Fix busy waiting in inetd when there are no sockets to listen.

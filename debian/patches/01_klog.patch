@@ -1,0 +1,12 @@
+#DPATCHLEVEL=0
+--- syslogd/Makefile.am	2005-10-11 14:29:12.000000000 +0300
++++ syslogd/Makefile.am	2006-02-23 23:27:30.000000000 +0200
+@@ -28,7 +28,7 @@
+ 
+ @PATHDEFS_MAKE@
+ 
+-INCLUDES = $(PATHDEF_LOG) $(PATHDEF_LOGCONF) $(PATHDEF_LOGPID) \
++INCLUDES = $(PATHDEF_LOG) $(PATHDEF_KLOG) $(PATHDEF_LOGCONF) $(PATHDEF_LOGPID) \
+ 	$(PATHDEF_CONSOLE)
+ 
+ LDADD = -L../lib -lgnu -L../libinetutils -linetutils
