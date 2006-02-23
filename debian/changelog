@@ -1,10 +1,10 @@
-inetutils (2:1.4.3+20051212-4) UNRELEASED; urgency=low
+inetutils (2:1.4.3+20051212-4) unstable; urgency=low
 
-  * Make syslogd really read /dev/klog. (Closes: #348184)
+  * Make syslogd really read /dev/klog on the Hurd. (Closes: #348184)
     - debian/patches/01_klog.patch: New file.
     Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 23 Feb 2006 23:22:59 +0200
+ -- Guillem Jover <guillem@debian.org>  Thu, 23 Feb 2006 23:59:22 +0200
 
 inetutils (2:1.4.3+20051212-3) unstable; urgency=low
 
