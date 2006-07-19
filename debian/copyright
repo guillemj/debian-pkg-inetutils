@@ -5,16 +5,17 @@ This package was put together by
 Marcus Brinkmann <Marcus.Brinkmann@ruhr-uni-bochum.de>
 from sources obtained from:
 
-   <ftp://ftp.gnu.org/pub/gnu/>
+    <ftp://ftp.gnu.org/pub/gnu/>
 
 The debian packages are maintained through Subversion on:
 
-   <svn://svn.debian.org/pkg-inetutils/>
+    <svn://svn.debian.org/pkg-inetutils/>
 
 The source code is covered by the following copyrights:
 
-* Most source files are copyrighted by
-  The Regents of the University of California under the BSD license.
+* Most source files are copyrighted by:
+
+    The Regents of the University of California under the BSD license.
 
 On Debian systems, the complete text of the BSD license
 can be found in `/usr/share/common-licenses/BSD'.
@@ -22,18 +23,18 @@ can be found in `/usr/share/common-licenses/BSD'.
 * Some additional files (esp. Makefiles), are copyrigthed by the Free
   Software Foundation, Inc. under the following terms:
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; version 2 dated June, 1991.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; version 2 dated June, 1991.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.

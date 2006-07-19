@@ -5,6 +5,7 @@ inetutils (2:1.4.3+20060719-1) UNRELEASED; urgency=low
     - debian/patches/01_klog.patch: Likewise.
     - debian/patches/30_inetd_busy_wait.patch: Likewise.
     - debian/patches/41_ptr_to_int_cast.patch: Likewise.
+  * Reindent debian/copyright.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 19 Jul 2006 08:21:08 +0300
 
