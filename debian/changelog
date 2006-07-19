@@ -1,4 +1,4 @@
-inetutils (2:1.4.3+20060719-1) UNRELEASED; urgency=low
+inetutils (2:1.4.3+20060719-1) unstable; urgency=low
 
   * New upstream snapshot.
     - debian/patches/00_link_gnulib.patch: Integrated upstrem. Remove.
@@ -13,7 +13,7 @@ inetutils (2:1.4.3+20060719-1) UNRELEASED; urgency=low
     - debian/patches/30_ping_suid_perms.patch: New file.
     - debian/inetutils-ping.overrides: Match overrides.
 
- -- Guillem Jover <guillem@debian.org>  Wed, 19 Jul 2006 08:21:08 +0300
+ -- Guillem Jover <guillem@debian.org>  Wed, 19 Jul 2006 09:24:47 +0300
 
 inetutils (2:1.4.3+20051212-4) unstable; urgency=low
 
