@@ -1,3 +1,13 @@
+inetutils (2:1.4.3+20060719-1) UNRELEASED; urgency=low
+
+  * New upstream snapshot.
+    - debian/patches/00_link_gnulib.patch: Integrated upstrem. Remove.
+    - debian/patches/01_klog.patch: Likewise.
+    - debian/patches/30_inetd_busy_wait.patch: Likewise.
+    - debian/patches/41_ptr_to_int_cast.patch: Likewise.
+
+ -- Guillem Jover <guillem@debian.org>  Wed, 19 Jul 2006 08:21:08 +0300
+
 inetutils (2:1.4.3+20051212-4) unstable; urgency=low
 
   * Make syslogd really read /dev/klog on the Hurd. (Closes: #348184)
