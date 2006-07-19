@@ -3,6 +3,7 @@ inetutils (2:1.4.3+20060719-1) UNRELEASED; urgency=low
   * New upstream snapshot.
     - debian/patches/00_link_gnulib.patch: Integrated upstrem. Remove.
     - debian/patches/01_klog.patch: Likewise.
+    - debian/patches/23_ifconfig_enable.patch: Likewise.
     - debian/patches/30_inetd_busy_wait.patch: Likewise.
     - debian/patches/41_ptr_to_int_cast.patch: Likewise.
   * Reindent debian/copyright.
