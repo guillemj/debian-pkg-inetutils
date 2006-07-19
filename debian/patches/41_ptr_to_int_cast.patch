@@ -1,6 +1,11 @@
 #DPATCHLEVEL=0
-Status: not-applied
 Author: Dann Frazier <dannf@hp.com>
+
+
+2006-03-24  Dann Frazier  <dannf@hp.com>
+
+	* main.c [HAVE_LIBREADLINE]: Include 'readline/readline.h'.
+
 
 diff -urN ftp/main.c ftp/main.c
 --- ftp/main.c	2002-04-29 14:40:30.000000000 -0600
@@ -16,6 +21,22 @@ diff -urN ftp/main.c ftp/main.c
  /* Define macro to nothing so declarations in ftp_var.h become definitions. */
  #define FTP_EXTERN
  #include "ftp_var.h"
+
+
+2006-03-24  Dann Frazier  <dannf@hp.com>
+
+	* Makefile.am (noinst_HEADERS): Add 'utmp_init.h'.
+	* utmp_init.h: New file.
+
+
+--- headers/Makefile.am	2005-10-11 14:31:26.000000000 +0300
++++ headers/Makefile.am	2005-12-12 04:35:14.000000000 +0200
+@@ -16,4 +16,4 @@
+ # to the Free Software Foundation, Inc., 51 Franklin Street,
+ # Fifth Floor, Boston, MA 02110-1301 USA.
+ 
+-noinst_HEADERS = tftpsubs.h shishi_def.h
++noinst_HEADERS = tftpsubs.h shishi_def.h utmp_init.h
 diff -urN headers/utmp_init.h headers/utmp_init.h
 --- headers/utmp_init.h	1969-12-31 17:00:00.000000000 -0700
 +++ headers/utmp_init.h	2005-07-17 04:04:55.086555778 -0600
@@ -65,6 +86,14 @@ diff -urN headers/utmp_init.h headers/utmp_init.h
 +char *utmp_ptsid(char *line, char *tag);
 +
 +#endif /* !UTMP_INIT_H_ */
+
+
+2006-03-24  Dann Frazier  <dannf@hp.com>
+
+	* rlogind.c: Include 'utmp_init.h'. Add prototype for localhost.
+	Move protypes for utmp_ptsid and utmp_init to 'utmp_init.h'.
+
+
 diff -urN rlogind/rlogind.c rlogind/rlogind.c
 --- rlogind/rlogind.c	2003-04-05 10:03:39.000000000 -0700
 +++ rlogind/rlogind.c	2005-07-17 04:07:25.644171121 -0600
@@ -95,6 +124,14 @@ diff -urN rlogind/rlogind.c rlogind/rlogind.c
  void
  setup_utmp (char *line)
  {
+
+
+2006-03-24  Dann Frazier  <dannf@hp.com>
+
+	* Makefile.am (INCLUDES): Add '-I$(top_srcdir)/headers'.
+	* pty.c: Include 'utmp_init.h'.
+
+
 --- telnetd/pty.c~	2002-04-07 08:31:37.000000000 -0600
 +++ telnetd/pty.c	2005-07-17 06:51:11.121589821 -0600
 @@ -18,6 +18,7 @@
@@ -105,14 +142,6 @@ diff -urN rlogind/rlogind.c rlogind/rlogind.c
  #include <sys/wait.h>
 
  #ifdef AUTHENTICATION
---- headers/Makefile.am	2005-10-11 14:31:26.000000000 +0300
-+++ headers/Makefile.am	2005-12-12 04:35:14.000000000 +0200
-@@ -16,4 +16,4 @@
- # to the Free Software Foundation, Inc., 51 Franklin Street,
- # Fifth Floor, Boston, MA 02110-1301 USA.
- 
--noinst_HEADERS = tftpsubs.h shishi_def.h
-+noinst_HEADERS = tftpsubs.h shishi_def.h utmp_init.h
 --- telnetd/Makefile.am	2005-10-11 14:29:14.000000000 +0300
 +++ telnetd/Makefile.am	2005-12-12 04:39:13.000000000 +0200
 @@ -30,7 +30,8 @@

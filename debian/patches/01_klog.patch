@@ -1,4 +1,10 @@
 #DPATCHLEVEL=0
+
+2006-03-24  Samuel Thibault  <samuel.thibault@ens-lyon.org>
+
+	* Makefile.am (INCLUDES): Add PATHDEF_KLOG.
+
+
 --- syslogd/Makefile.am	2005-10-11 14:29:12.000000000 +0300
 +++ syslogd/Makefile.am	2006-02-23 23:27:30.000000000 +0200
 @@ -28,7 +28,7 @@
