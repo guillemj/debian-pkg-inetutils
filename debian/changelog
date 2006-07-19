@@ -9,6 +9,9 @@ inetutils (2:1.4.3+20060719-1) UNRELEASED; urgency=low
   * Reindent debian/copyright.
   * Now using Standards-Version 3.7.2 (no changes needed).
   * Move myself from Uploaders to Maintainer.
+  * Fix ping and ping6 perms to 4755.
+    - debian/patches/30_ping_suid_perms.patch: New file.
+    - debian/inetutils-ping.overrides: Match overrides.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 19 Jul 2006 08:21:08 +0300
 

@@ -1,0 +1,12 @@
+#DPATCHLEVEL=0
+--- ping/Makefile.am	2005-10-11 14:29:11.000000000 +0300
++++ ping/Makefile.am	2006-07-19 09:15:57.000000000 +0300
+@@ -32,7 +32,7 @@
+ 
+ ping6_SOURCES = ping6.c ping_common.c ping_common.h ping6.h
+ 
+-SUIDMODE = -o root -m 4775
++SUIDMODE = -o root -m 4755
+ 
+ install-ping-hook:
+ 	-@for program in $(bin_PROGRAMS); do \
