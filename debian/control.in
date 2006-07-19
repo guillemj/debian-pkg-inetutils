@@ -1,9 +1,8 @@
 Source: inetutils
 Section: net
 Priority: extra
-Maintainer: Debian inetutils Maintainers <pkg-inetutils-maint@lists.alioth.debian.org>
-Uploaders: Jeff Bailey <jbailey@nisa.net>,
- Marcus Brinkmann <brinkmd@debian.org>, Guillem Jover <guillem@debian.org>
+Maintainer: Guillem Jover <guillem@debian.org>
+Uploaders: Jeff Bailey <jbailey@nisa.net>, Marcus Brinkmann <brinkmd@debian.org>
 Standards-Version: 3.7.2
 Build-Depends: debhelper (>= 5), autoconf, automake1.9, texinfo, bison,
  libreadline5-dev | libreadline-dev, libpam0g-dev, libopie-dev, zlib1g-dev
