@@ -6,6 +6,9 @@ inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
     - Include quilt.make from debian/rules.
     - Remove now unused debian/patch.mk.
   * Add a Tag: field to all binary packages, using the data from debtags.
+  * Do not link against uneeded libz, remove Build-Depends.
+    - debian/patches/00_no_link_libbsd.patch: Renamed to ...
+    - debian/patches/00_no_link_extralibs.patch: ... this.
 
  -- Guillem Jover <guillem@debian.org>  Tue,  3 Oct 2006 04:35:45 +0300
 
