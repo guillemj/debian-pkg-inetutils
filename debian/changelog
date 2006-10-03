@@ -1,3 +1,13 @@
+inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
+
+  * Switched to quilt:
+    - Add new debian/patches/series file.
+    - Add Build-Depends on 'quilt (>= 0.40)'.
+    - Include quilt.make from debian/rules.
+    - Remove now unused debian/patch.mk.
+
+ -- Guillem Jover <guillem@debian.org>  Tue,  3 Oct 2006 04:35:45 +0300
+
 inetutils (2:1.4.3+20060719-2) unstable; urgency=low
 
   * Avoid linking against libbsd for now.

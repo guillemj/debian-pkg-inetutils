@@ -1,0 +1,4 @@
+00_no_link_libbsd.patch -p0
+10_syslog_klog_doc.patch -p0
+22_syslogd_conf.patch -p1
+30_ping_suid_perms.patch -p0

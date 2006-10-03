@@ -27,7 +27,7 @@ mandir = usr/share/man
 man1dir = $(mandir)/man1
 man8dir = $(mandir)/man8
 
-include debian/patch.mk
+include /usr/share/quilt/quilt.make
 
 configure: configure.ac
 	dh_testdir
