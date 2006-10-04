@@ -44,7 +44,8 @@ config.status: configure
 	  --localstatedir=/var \
 	  --libexecdir=\$${prefix}/sbin \
 	  --mandir=\$${prefix}/share/man \
-	  --infodir=\$${prefix}/share/info
+	  --infodir=\$${prefix}/share/info \
+	  --with-wrap --with-pam
 
 build: patch debian/control config.status
 	dh_testdir
