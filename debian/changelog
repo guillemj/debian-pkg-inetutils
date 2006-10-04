@@ -9,6 +9,9 @@ inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
   * Do not link against uneeded libz, remove Build-Depends.
     - debian/patches/00_no_link_libbsd.patch: Renamed to ...
     - debian/patches/00_no_link_extralibs.patch: ... this.
+  * Update inetutils-inetd to match new changes in netbase:
+    - Change Provides and Conflicts on inetd to inet-superserver.
+    - Add a Depends on update-inetd.
 
  -- Guillem Jover <guillem@debian.org>  Tue,  3 Oct 2006 04:35:45 +0300
 
