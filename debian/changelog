@@ -13,6 +13,9 @@ inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
     - Change Provides and Conflicts on inetd to inet-superserver.
     - Add a Depends on update-inetd.
   * Add a Build-Depends on libwrap0-dev.
+  * Fix typos in inetutils-inetd manpage. (Closes: #389124)
+    - debian/patches/11_inetd_doc.patch: New file.
+    Thanks to Stephen Liebbe <sliebbe@gmail.com>.
 
  -- Guillem Jover <guillem@debian.org>  Tue,  3 Oct 2006 04:35:45 +0300
 
