@@ -1,3 +1,9 @@
+inetutils (2:1.4.3+20060719-4) UNRELEASED; urgency=low
+
+  * Fix Jeff Bailey's email address.
+
+ -- Guillem Jover <guillem@debian.org>  Thu,  5 Oct 2006 01:02:39 +0300
+
 inetutils (2:1.4.3+20060719-3) unstable; urgency=low
 
   * Switched to quilt:
