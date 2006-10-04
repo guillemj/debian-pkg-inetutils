@@ -18,6 +18,7 @@ inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
     Thanks to Stephen Liebbe <sliebbe@gmail.com>.
   * Add LSB dependency information to the init scripts for inetutils-inetd
     and inetutils-syslogd, and remove invalid comments.
+  * Add an empty /etc/inetd.d/ directory to the inetutils-inetd package.
 
  -- Guillem Jover <guillem@debian.org>  Tue,  3 Oct 2006 04:35:45 +0300
 
