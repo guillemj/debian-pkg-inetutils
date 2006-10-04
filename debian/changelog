@@ -1,4 +1,4 @@
-inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
+inetutils (2:1.4.3+20060719-3) unstable; urgency=low
 
   * Switched to quilt:
     - Add new debian/patches/series file.
@@ -21,7 +21,7 @@ inetutils (2:1.4.3+20060719-3) UNRELEASED; urgency=low
     and inetutils-syslogd, and remove invalid comments.
   * Add an empty /etc/inetd.d/ directory to the inetutils-inetd package.
 
- -- Guillem Jover <guillem@debian.org>  Tue,  3 Oct 2006 04:35:45 +0300
+ -- Guillem Jover <guillem@debian.org>  Wed,  4 Oct 2006 06:05:45 +0300
 
 inetutils (2:1.4.3+20060719-2) unstable; urgency=low
 
