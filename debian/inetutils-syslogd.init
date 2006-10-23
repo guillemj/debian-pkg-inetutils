@@ -11,6 +11,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/syslogd
 NAME=syslogd
+CONFIGFILE=/etc/default/syslogd
 PIDFILE=/var/run/syslog.pid
 DESC="system log daemon"
 
@@ -19,6 +20,8 @@ test -x $DAEMON || exit 0
 set -e
 
 . /lib/lsb/init-functions
+
+test -r $CONFIGFILE && . $CONFIGFILE
 
 # Create a xconsole pipe if it does not exist.
 # Don't create it if Linux's devfs is used, and symlink it on kFreeBSD as it
@@ -45,7 +48,7 @@ case "$1" in
   start)
 	log_daemon_msg "Starting $DESC" "$NAME"
 	start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE \
-		--exec $DAEMON
+		--exec $DAEMON -- $SYSLOGD_OPTS
 	log_end_msg $?
 	;;
   stop)
@@ -66,7 +69,7 @@ case "$1" in
 		--exec $DAEMON
 	sleep 1
 	start-stop-daemon --start --quiet --pidfile $PIDFILE \
-		--exec $DAEMON
+		--exec $DAEMON -- $SYSLOGD_OPTS
 	log_end_msg $?
 	;;
   *)
