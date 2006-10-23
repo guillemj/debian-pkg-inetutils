@@ -1,5 +1,8 @@
-inetutils (2:1.4.3+20060719-4) UNRELEASED; urgency=low
+inetutils (2:1.5.dfsg.1-1) UNRELEASED; urgency=low
 
+  * New upstream release.
+    - Remove non-free RFC. (Closes: #393376)
+    - Remove non-free GFDL documentation.
   * Fix Jeff Bailey's email address.
 
  -- Guillem Jover <guillem@debian.org>  Thu,  5 Oct 2006 01:02:39 +0300
