@@ -9,6 +9,7 @@ inetutils (2:1.5.dfsg.1-1) UNRELEASED; urgency=low
       upstream.
     - debian/patches/11_inetd_doc.patch: Remove. Merged upstream.
   * Do not Build-Depend on texinfo anymore, there's not info docs anymore.
+  * Enable telnet authentication ShiShi support. (Closes: #300282)
   * Fix Jeff Bailey's email address.
 
  -- Guillem Jover <guillem@debian.org>  Thu,  5 Oct 2006 01:02:39 +0300

@@ -6,7 +6,7 @@ Uploaders: Jeff Bailey <jbailey@raspberryginger.com>, Marcus Brinkmann <brinkmd@
 Standards-Version: 3.7.2
 Build-Depends: debhelper (>= 5), quilt (>= 0.40), autoconf, automake1.9,
  bison, libreadline5-dev | libreadline-dev, libpam0g-dev, libopie-dev,
- libwrap0-dev
+ libwrap0-dev, libshishi-dev
 Build-Conflicts: autoconf2.13, automake1.4
 
 Package: inetutils-ftp

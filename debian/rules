@@ -45,6 +45,7 @@ config.status: configure
 	  --libexecdir=\$${prefix}/sbin \
 	  --mandir=\$${prefix}/share/man \
 	  --infodir=\$${prefix}/share/info \
+	  --with-shishi \
 	  --with-wrap --with-pam
 
 build: patch debian/control config.status
