@@ -44,7 +44,7 @@ cp -al $SRCDIR $TARBALLDIR
 
 echo "-> cleaning snapshot."
 # Clean non-free stuff
-:
+rm -rf $TARBALLDIR/doc/
 
 # Clean cvs stuff
 find $TARBALLDIR -name 'CVS' -o -name '.cvsignore' | xargs rm -rf
