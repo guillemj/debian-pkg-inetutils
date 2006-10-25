@@ -13,6 +13,9 @@ The debian packages are maintained through Subversion on:
 
 The source code is covered by the following copyrights:
 
+* The doc/ directory was removed from the original tarball, and the
+  tarball repacked as it contained GFDL'd material, and a non-free RFC.
+
 * Most source files are copyrighted by:
 
     The Regents of the University of California under the BSD license.

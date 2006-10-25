@@ -1,14 +1,14 @@
 inetutils (2:1.5.dfsg.1-1) UNRELEASED; urgency=low
 
   * New upstream release.
-    - Remove non-free RFC. (Closes: #393376)
-    - Remove non-free GFDL documentation.
+    - Remove non-free RFC and GFDL documentation. Explain the situation
+      in debian/copyright. (Closes: #393376)
     - debian/patches/00_build_dfsg.patch: New file. Disable the doc/ dir.
     - debian/patches/00_no_link_extralibs.patch: Renamed to ...
     - debian/patches/01_no_link_extralibs.patch: ... this. Partially merged
       upstream.
     - debian/patches/11_inetd_doc.patch: Remove. Merged upstream.
-  * Do not Build-Depend on texinfo anymore, there's not info docs anymore.
+  * Do not Build-Depend on texinfo, there's no info docs anymore.
   * Enable telnet authentication ShiShi support. (Closes: #300282)
   * Disable syslogd forwarding by default, which was enabling inet
     connections.
