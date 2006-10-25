@@ -118,7 +118,7 @@ binary-arch: install
 	dh_install -a --sourcedir=$(D)
 	# Install ping6 only if built
 	if [ -x $(D)/usr/bin/ping6 ]; then \
-	  mv $(D)/usr/bin/ping6 \
+	  cp $(D)/usr/bin/ping6 \
 	     $(CURDIR)/debian/inetutils-ping/bin/; \
 	fi
 	# Install the syslogd default file

@@ -13,6 +13,8 @@ inetutils (2:1.5.dfsg.1-1) UNRELEASED; urgency=low
   * Disable syslogd forwarding by default, which was enabling inet
     connections.
   * Fix Jeff Bailey's email address.
+  * Make the binary target in debian/rules idempotent by cp'ing instead of
+    mv'ing ping6.
 
  -- Guillem Jover <guillem@debian.org>  Thu,  5 Oct 2006 01:02:39 +0300
 
