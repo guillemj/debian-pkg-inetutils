@@ -1,23 +1,23 @@
-inetutils (2:1.5.dfsg.1-1) UNRELEASED; urgency=low
+inetutils (2:1.5.dfsg.1-1) unstable; urgency=medium
 
   * New upstream release.
     - Remove non-free RFC and GFDL documentation. Explain the situation
       in debian/copyright and modify debian/tarball.sh accordingly.
-      (Closes: #393376)
+      (Closes: #393376) (Urgeny medium due to RC fix)
     - debian/patches/00_build_dfsg.patch: New file. Disable the doc/ dir.
     - debian/patches/00_no_link_extralibs.patch: Renamed to ...
     - debian/patches/01_no_link_extralibs.patch: ... this. Partially merged
       upstream.
     - debian/patches/11_inetd_doc.patch: Remove. Merged upstream.
   * Do not Build-Depend on texinfo, there's no info docs anymore.
-  * Enable telnet authentication ShiShi support. (Closes: #300282)
+  * Enable Shishi support for telnet authentication. (Closes: #300282)
   * Disable syslogd forwarding by default, which was enabling inet
     connections.
-  * Fix Jeff Bailey's email address.
   * Make the binary target in debian/rules idempotent by cp'ing instead of
     mv'ing ping6.
+  * Fix Jeff Bailey's email address.
 
- -- Guillem Jover <guillem@debian.org>  Thu,  5 Oct 2006 01:02:39 +0300
+ -- Guillem Jover <guillem@debian.org>  Wed, 25 Oct 2006 06:12:50 +0300
 
 inetutils (2:1.4.3+20060719-3) unstable; urgency=low
 
