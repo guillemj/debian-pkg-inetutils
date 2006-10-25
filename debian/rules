@@ -46,7 +46,8 @@ config.status: configure
 	  --mandir=\$${prefix}/share/man \
 	  --infodir=\$${prefix}/share/info \
 	  --with-shishi \
-	  --with-wrap --with-pam
+	  --with-wrap \
+	  --with-pam
 
 build: patch debian/control config.status
 	dh_testdir
@@ -115,6 +116,7 @@ binary-indep:
 binary-arch: install
 	dh_testdir
 	dh_testroot
+	
 	dh_install -a --sourcedir=$(D)
 	# Install ping6 only if built
 	if [ -x $(D)/usr/bin/ping6 ]; then \
@@ -127,6 +129,7 @@ binary-arch: install
 	# This should be in some dh_installoverrides
 	cp $(CURDIR)/debian/inetutils-ping.overrides \
 	   $(CURDIR)/debian/inetutils-ping/usr/share/lintian/overrides/inetutils-ping
+	
 	dh_installdebconf -a
 	dh_installdocs -a -A NEWS AUTHORS THANKS
 	dh_installexamples -a
