@@ -4,6 +4,11 @@ inetutils (2:1.5.dfsg.1-2) UNRELEASED; urgency=low
   * Fix FTBFS with automake >= 1.0 by adding the missing file config.rpath.
     - debian/patches/02_missing_config.rpath.patch: New file
   * Install a pam file for inetutils-ftpd.
+  * Fix possible segfaults (from the Coverity reports).
+    - debian/patches/40_ftpd_LOGCMD_NULL.patch: New file.
+    - debian/patches/41_gethostbyname_segfault.patch: Likewise.
+  * Fix file descriptor leaks (from the Coverity reports).
+    - debian/patches/42_syslogd_leaks.patch: New file.
 
  -- Guillem Jover <guillem@debian.org>  Mon,  6 Nov 2006 07:23:09 +0200
 
