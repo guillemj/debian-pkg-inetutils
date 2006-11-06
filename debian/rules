@@ -135,6 +135,7 @@ binary-arch: install
 	dh_installexamples -a
 	dh_installinit -pinetutils-syslogd -- defaults 10 90
 	dh_installinit -a -Ninetutils-syslogd
+	dh_installpam -pinetutils-ftpd --name ftp
 	dh_installlogrotate -a
 	dh_installman -a
 	dh_installinfo -a

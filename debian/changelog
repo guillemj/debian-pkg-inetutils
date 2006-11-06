@@ -3,6 +3,7 @@ inetutils (2:1.5.dfsg.1-2) UNRELEASED; urgency=low
   * Add a Depends on tcpd in inetutils-inetd.
   * Fix FTBFS with automake >= 1.0 by adding the missing file config.rpath.
     - debian/patches/02_missing_config.rpath.patch: New file
+  * Install a pam file for inetutils-ftpd.
 
  -- Guillem Jover <guillem@debian.org>  Mon,  6 Nov 2006 07:23:09 +0200
 
