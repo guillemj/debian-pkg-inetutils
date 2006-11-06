@@ -7,3 +7,4 @@
 40_ftpd_LOGCMD_NULL.patch -p0
 41_gethostbyname_segfault.patch -p0
 42_syslogd_leaks.patch -p0
+43_ret_converted_to_int.patch -p0
