@@ -13,6 +13,14 @@ inetutils (2:1.5.dfsg.1-2) UNRELEASED; urgency=low
     on 64 bit architectures. (Closes: #395216, #395218)
     - debian/patches/43_ret_converted_to_int.patch: New file.
     Thanks to Dann Frazier <dannf@debian.org>.
+  * Support adding and removing the inetd talk service, disabled by default.
+    (Closes: #316193)
+    - debian/inetutils-talkd.postinst: New file.
+    - debian/inetutils-talkd.postrm: Likewise.
+  * Support adding and removing the inetd telnet service, disabled by default.
+    (Closes: #325868)
+    - debian/inetutils-telnetd.postinst: New file.
+    - debian/inetutils-telnetd.postrm: Likewise.
 
  -- Guillem Jover <guillem@debian.org>  Mon,  6 Nov 2006 07:23:09 +0200
 
