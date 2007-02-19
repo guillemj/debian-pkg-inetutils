@@ -18,7 +18,8 @@ endif
 # Set proper Provides
 ifeq ($(DEB_HOST_ARCH_OS),linux)
   syslogd_provides = linux-kernel-log-daemon
-else
+endif
+ifeq ($(DEB_HOST_ARCH_OS),hurd)
   tools_provides = net-tools
 endif
 

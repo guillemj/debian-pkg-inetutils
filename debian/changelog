@@ -4,6 +4,8 @@ inetutils (2:1.5.dfsg.1-3) UNRELEASED; urgency=low
     package to FTBFS on GNU/kFreeBSD. (Closes: #403708)
     - debian/patches/03_ifreq_typo.patch: New file.
     Thanks to Petr Salinger <Petr.Salinger@seznam.cz>.
+  * Make inetutils-tools Provide net-tools only on GNU/Hurd.
+    Thanks to Petr Salinger <Petr.Salinger@seznam.cz>.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 19 Feb 2007 01:49:16 +0200
 
