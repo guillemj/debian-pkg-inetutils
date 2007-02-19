@@ -1,6 +1,7 @@
 00_build_dfsg.patch
 01_no_link_extralibs.patch -p0
 02_missing_config.rpath.patch -p0
+03_ifreq_typo.patch -p0
 10_syslog_klog_doc.patch -p0
 22_syslogd_conf.patch -p1
 30_ping_suid_perms.patch -p0
