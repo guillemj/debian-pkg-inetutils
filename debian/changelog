@@ -1,4 +1,4 @@
-inetutils (2:1.5.dfsg.1-3) UNRELEASED; urgency=low
+inetutils (2:1.5.dfsg.1-3) unstable; urgency=low
 
   * Fix typo for ifreq member check in configure.ac which was making the
     package to FTBFS on GNU/kFreeBSD. (Closes: #403708)
@@ -7,7 +7,7 @@ inetutils (2:1.5.dfsg.1-3) UNRELEASED; urgency=low
   * Make inetutils-tools Provide net-tools only on GNU/Hurd.
     Thanks to Petr Salinger <Petr.Salinger@seznam.cz>.
 
- -- Guillem Jover <guillem@debian.org>  Mon, 19 Feb 2007 01:49:16 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 20 Feb 2007 04:52:36 +0200
 
 inetutils (2:1.5.dfsg.1-2) unstable; urgency=low
 
