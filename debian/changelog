@@ -1,11 +1,11 @@
-inetutils (2:1.5.dfsg.1-4) UNRELEASED; urgency=medium
+inetutils (2:1.5.dfsg.1-4) unstable; urgency=medium
 
   * Fix Kerberos 5 authentication support in telnet via Shishi to make it
     actually work. (Closes: #414735)
     - debian/patches/04_shishi_telnet.patch: New file.
     Thanks to Simon Josefsson <simon@josefsson.org>.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 15 Mar 2007 03:16:48 +0200
+ -- Guillem Jover <guillem@debian.org>  Thu, 15 Mar 2007 03:34:46 +0200
 
 inetutils (2:1.5.dfsg.1-3) unstable; urgency=low
 
