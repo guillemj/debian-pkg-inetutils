@@ -8,6 +8,7 @@ inetutils (2:1.5.dfsg.1-5) UNRELEASED; urgency=low
   * Add Homepage field.
   * Fix parallel FTBFS in debian/rules by moving 'patch' dependency from
     the build to the configure.ac target.
+  * Do not ignore make errors on clean or install in debian/rules.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 18 May 2007 07:37:19 +0300
 

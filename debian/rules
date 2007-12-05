@@ -90,7 +90,7 @@ clean: unpatch
 	dh_testdir
 	dh_testroot
 	
-	-$(MAKE) clean
+	[ ! -f Makefile ] || $(MAKE) clean
 	
 	dh_clean
 
@@ -100,7 +100,7 @@ install: build
 	dh_clean -k
 	dh_installdirs -a
 	
-	-$(MAKE) install DESTDIR=$(D)
+	$(MAKE) install DESTDIR=$(D)
 	
 	# Move ping to /bin
 	mkdir -p $(D)/bin
