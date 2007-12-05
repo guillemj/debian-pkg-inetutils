@@ -38,9 +38,7 @@ include /usr/share/quilt/quilt.make
 
 # XXX: This can be moved back to build: once the patches touching this file
 #      have been merged upstream
-configure.ac: patch
-
-configure: configure.ac
+configure: patch configure.ac
 	dh_testdir
 	
 	autoreconf -f -i
