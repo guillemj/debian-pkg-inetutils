@@ -4,6 +4,7 @@ inetutils (2:1.5.dfsg.1-5) UNRELEASED; urgency=low
     as a side effect there's not typo to fix anymore. (Closes: #418539)
   * Now using Standards-Version 3.7.3 (no changes needed).
   * Call configure with autotools-dev recommended --build and --host options.
+  * Add Vcs-Browser and Vcs-Svn fields.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 18 May 2007 07:37:19 +0300
 
