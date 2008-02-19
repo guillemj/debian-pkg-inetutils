@@ -132,8 +132,8 @@ binary-arch: install
 	  cp $(D)/usr/bin/ping6 \
 	     $(CURDIR)/debian/inetutils-ping/bin/; \
 	fi
-	# Install the syslogd default file
-	cp $(CURDIR)/debian/inetutils-syslogd.default \
+	# Rename the syslogd default file
+	mv $(CURDIR)/debian/inetutils-syslogd/etc/default/inetutils-syslogd \
 	   $(CURDIR)/debian/inetutils-syslogd/etc/default/syslogd
 	# This should be in some dh_installoverrides
 	cp $(CURDIR)/debian/inetutils-ping.overrides \
