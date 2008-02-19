@@ -21,8 +21,18 @@ set -e
 
 . /lib/lsb/init-functions
 
+check_no_services()
+{
+  if ! grep -q "^[0-9A-Za-z/]" /etc/inetd.conf; then
+    log_warning_msg "Not starting internet superserver: no services enabled."
+    exit 0
+  fi
+}
+
+
 case "$1" in
   start)
+	check_no_services
 	log_daemon_msg "Starting $DESC" "$NAME"
 	start-stop-daemon --start --quiet --oknodo \
 		--pidfile /var/run/$NAME.pid --exec $DAEMON
@@ -44,6 +54,7 @@ case "$1" in
 	log_daemon_msg "Restarting $DESC" "$NAME"
 	start-stop-daemon --stop --quiet --oknodo --pidfile \
 		/var/run/$NAME.pid --exec $DAEMON
+	check_no_services
 	sleep 1
 	start-stop-daemon --start --quiet --pidfile \
 		/var/run/$NAME.pid --exec $DAEMON
