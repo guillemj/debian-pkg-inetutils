@@ -7,10 +7,6 @@ from sources obtained from:
 
     <ftp://ftp.gnu.org/pub/gnu/>
 
-The debian packages are maintained through Subversion on:
-
-    <svn://svn.debian.org/pkg-inetutils/>
-
 The source code is covered by the following copyrights and licenses:
 
 * The doc/ directory was removed from the original tarball, and the
