@@ -132,9 +132,6 @@ binary-arch: install
 	  cp $(D)/usr/bin/ping6 \
 	     $(CURDIR)/debian/inetutils-ping/bin/; \
 	fi
-	# Rename the syslogd default file
-	mv $(CURDIR)/debian/inetutils-syslogd/etc/default/inetutils-syslogd \
-	   $(CURDIR)/debian/inetutils-syslogd/etc/default/syslogd
 	# This should be in some dh_installoverrides
 	cp $(CURDIR)/debian/inetutils-ping.overrides \
 	   $(CURDIR)/debian/inetutils-ping/usr/share/lintian/overrides/inetutils-ping
@@ -143,6 +140,9 @@ binary-arch: install
 	dh_installdocs -a -A NEWS AUTHORS THANKS
 	dh_installexamples -a
 	dh_installinit -pinetutils-syslogd -- defaults 10 90
+	# Rename the syslogd default file
+	mv $(CURDIR)/debian/inetutils-syslogd/etc/default/inetutils-syslogd \
+	   $(CURDIR)/debian/inetutils-syslogd/etc/default/syslogd
 	dh_installinit -a -Ninetutils-syslogd
 	dh_installpam -pinetutils-ftpd --name ftp
 	dh_installlogrotate -a
