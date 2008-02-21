@@ -11,24 +11,38 @@ The debian packages are maintained through Subversion on:
 
     <svn://svn.debian.org/pkg-inetutils/>
 
-The source code is covered by the following copyrights:
+The source code is covered by the following copyrights and licenses:
 
 * The doc/ directory was removed from the original tarball, and the
   tarball repacked as it contained GFDL'd material, and a non-free RFC.
 
-* Most source files are copyrighted by:
+* Files utmp_{login,init}.{c,h} under libinetutils:
 
-    The Regents of the University of California under the BSD license.
+    Copyright © 1995 Wietse Venema
 
-On Debian systems, the complete text of the BSD license
-can be found in `/usr/share/common-licenses/BSD'.
+  under the following license:
 
-* Some additional files (esp. Makefiles), are copyrigthed by the Free
-  Software Foundation, Inc. under the following terms:
+    This material was originally written and compiled by Wietse Venema at
+    Eindhoven University of Technology, The Netherlands, in 1990, 1991,
+    1992, 1993, 1994 and 1995.
+
+    Redistribution and use in source and binary forms are permitted
+    provided that this entire copyright notice is duplicated in all such
+    copies.
+
+    This software is provided "as is" and without any expressed or implied
+    warranties, including, without limitation, the implied warranties of
+    merchantibility and fitness for any particular purpose.
+
+* Files under gwhois/ directory:
+
+    Copyright © 1999 Marco d'Itri
+
+  under the following license:
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; version 2 dated June, 1991.
+    the Free Software Foundation; version 2.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -39,6 +53,37 @@ can be found in `/usr/share/common-licenses/BSD'.
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-On Debian systems, the complete text of the GNU General
-Public License can be found in `/usr/share/common-licenses/GPL'.
+* Some additional files (esp. Makefiles), are copyrigthed by:
+
+    Copyright © 1985-2008 Free Software Foundation, Inc.
+    Copyright © 2002, 2003, 2007 Simon Josefsson
+
+  under the following license:
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+    MA 02110-1301 USA.
+
+  On Debian systems, the complete text of the GNU General
+  Public License can be found in `/usr/share/common-licenses/GPL-2'.
+
+* Most source files:
+
+    Copyright © 1985-1988, 1990, 2000 Massachusetts Institute of Technology.
+    Copyright © 1983-1985, 1988-1994, 1996, 2000, 2002
+              The Regents of the University of California.
+
+  under the BSD license. On Debian systems, the complete text of the BSD
+  license can be found in `/usr/share/common-licenses/BSD'.
 
