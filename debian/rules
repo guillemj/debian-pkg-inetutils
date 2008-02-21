@@ -36,9 +36,7 @@ man8dir = $(mandir)/man8
 
 include /usr/share/quilt/quilt.make
 
-# XXX: This can be moved back to build: once the patches touching this file
-#      have been merged upstream
-configure: patch configure.ac
+configure: configure.ac
 	dh_testdir
 	
 	autoreconf -f -i
@@ -58,7 +56,12 @@ config.status: configure
 	  --with-wrap \
 	  --with-pam
 
-build: debian/control config.status
+.PHONY: setup-source
+
+setup-source: patch
+	$(MAKE) -f debian/rules config.status
+
+build: debian/control setup-source
 	dh_testdir
 	
 	$(MAKE) CFLAGS="$(CFLAGS)"
