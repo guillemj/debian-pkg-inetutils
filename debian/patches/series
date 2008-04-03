@@ -10,3 +10,5 @@
 41_gethostbyname_segfault.patch -p0
 42_syslogd_leaks.patch -p0
 43_ret_converted_to_int.patch -p0
+50_split_load_conffile.patch
+51_add_load_confdir_support.patch

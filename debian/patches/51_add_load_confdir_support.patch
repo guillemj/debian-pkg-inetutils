@@ -1,0 +1,168 @@
+From 93bdf02b3d89ec8ef768d2949f637501ff67dc6d Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Wed, 20 Feb 2008 05:29:26 +0200
+Subject: [PATCH] Add load_confdir support
+
+---
+ paths               |    1 +
+ syslogd/Makefile.am |    3 +-
+ syslogd/syslogd.8   |    3 ++
+ syslogd/syslogd.c   |   56 ++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 4 files changed, 61 insertions(+), 2 deletions(-)
+
+Index: b/paths
+===================================================================
+--- a/paths	2006-10-12 00:46:22.000000000 +0300
++++ b/paths	2008-04-03 07:51:04.000000000 +0300
+@@ -91,6 +91,7 @@ PATH_LASTLOG	<utmp.h> $(localstatedir)/l
+ PATH_LOG	<syslog.h> /dev/log
+ PATH_KLOG	<syslog.h> /dev/klog no
+ PATH_LOGCONF	$(sysconfdir)/syslog.conf
++PATH_LOGCONFD	$(sysconfdir)/syslog.d
+ PATH_LOGIN	x $(bindir)/login search:login
+ PATH_LOGPID	$(localstatedir)/run/syslog.pid
+ PATH_NOLOGIN	$(sysconfdir)/nologin
+Index: b/syslogd/Makefile.am
+===================================================================
+--- a/syslogd/Makefile.am	2008-04-03 07:36:08.000000000 +0300
++++ b/syslogd/Makefile.am	2008-04-03 07:51:04.000000000 +0300
+@@ -31,7 +31,8 @@ man_MANS = syslog.conf.5 syslogd.8
+ @PATHDEFS_MAKE@
+ 
+ AM_CPPFLAGS = $(PATHDEF_LOG) $(PATHDEF_KLOG) $(PATHDEF_LOGCONF) \
+-              $(PATHDEF_LOGPID) $(PATHDEF_CONSOLE) $(PATHDEF_UTMP)
++              $(PATHDEF_LOGCONFD) $(PATHDEF_LOGPID) $(PATHDEF_CONSOLE) \
++              $(PATHDEF_UTMP)
+ 
+ INCLUDES = -I$(top_srcdir)/libinetutils -I$(top_srcdir)/lib -I../lib 
+ 
+Index: b/syslogd/syslogd.8
+===================================================================
+--- a/syslogd/syslogd.8	2008-04-03 07:36:08.000000000 +0300
++++ b/syslogd/syslogd.8	2008-04-03 07:51:04.000000000 +0300
+@@ -70,6 +70,9 @@ sockets.
+ .It \fB-f\fR, \fB--rcfile\fR=\fIFILE\fP
+ Specify the pathname of an alternate configuration file;
+ the default is system specific and displayed in the help output.
++.It \fB--rcdir\fR=\fIDIR\fP
++Specify the pathname of an alternate configuration directory;
++the default is system specific and displayed in the help output.
+ .It \fB-h\fR, \fB--hop\fR
+ Enable forwarding remote messages. By default syslogd will not
+ forward messages it receives from remote hosts.
+Index: b/syslogd/syslogd.c
+===================================================================
+--- a/syslogd/syslogd.c	2008-04-03 07:48:05.000000000 +0300
++++ b/syslogd/syslogd.c	2008-04-03 07:52:11.000000000 +0300
+@@ -101,6 +101,7 @@ static char sccsid[] = "@(#)syslogd.c	8.
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <dirent.h>
+ #include <unistd.h>
+ #include <getopt.h>
+ 
+@@ -128,6 +129,7 @@ static char sccsid[] = "@(#)syslogd.c	8.
+ int facilities_seen;
+ 
+ const char *ConfFile = PATH_LOGCONF; /* Default Configuration file.  */
++const char *ConfDir = PATH_LOGCONFD; /* Default Configuration directory.  */
+ const char *PidFile = PATH_LOGPID; /* Default path to tuck pid.  */
+ char ctty[] = PATH_CONSOLE; /* Default console to send message info.  */
+ 
+@@ -269,6 +271,7 @@ void die (int);
+ void domark (int);
+ void fprintlog (struct filed *, const char *, int, const char *);
+ static int load_conffile (const char *, struct filed **);
++static void load_confdir (struct filed **);
+ void init (int);
+ void logerror (const char *);
+ void logmsg (int, const char *, const char *, int);
+@@ -299,6 +302,7 @@ usage (int err)
+       fprintf (stdout, "Usage: %s [OPTION] ...\n", program_name);
+       puts ("Log system messages.\n\n\
+   -f, --rcfile=FILE  Override configuration file (default: " PATH_LOGCONF ")\n\
++      --rcdir=DIR    Override configuration directory (default: " PATH_LOGCONFD ")\n\
+       --pidfile=FILE Override pidfile (default: " PATH_LOGPID ")\n\
+   -n, --no-detach    Don't enter daemon mode\n\
+   -d, --debug        Print debug information (implies -n)\n\
+@@ -331,6 +335,7 @@ static struct option long_options[] =
+ {
+   { "debug", no_argument, 0, 'd' },
+   { "rcfile", required_argument, 0, 'f' },
++  {"rcdir", required_argument, 0, 'D'},
+   { "pidfile", required_argument, 0, 'P' },
+   { "hop", no_argument, 0, 'h' },
+   { "mark", required_argument, 0, 'm' },
+@@ -388,6 +393,10 @@ main (int argc, char *argv[])
+ 	  ConfFile = optarg;
+ 	  break;
+ 
++	case 'D': /* Override the default config directory.  */
++	  ConfDir = optarg;
++	  break;
++
+ 	case 'h': /* Disable forwarding.  */
+ 	  NoHops = 0;
+ 	  break;
+@@ -1709,6 +1718,51 @@ load_conffile (const char *filename, str
+   return 1;
+ }
+ 
++static void
++load_confdir (struct filed **nextp)
++{
++  struct dirent *dent;
++  DIR *dir;
++
++  if (!load_conffile (ConfFile, nextp))
++    return;
++
++  dir = opendir (ConfDir);
++  if (!dir)
++    {
++      dbg_printf ("cannot open %s\n", ConfDir);
++      return;
++    }
++
++
++  while ((dent = readdir (dir)) != NULL) {
++    struct stat st;
++    char *file;
++
++    file = malloc (strlen (ConfDir) + 1 + strlen (dent->d_name) + 1);
++    if (!file)
++      {
++        dbg_printf ("cannot allocate space for configuration filename\n");
++        return;
++      }
++
++    sprintf(file, "%s/%s", ConfDir, dent->d_name);
++
++    if (stat(file, &st) != 0)
++      {
++        dbg_printf ("cannot stat file configuration file\n");
++        continue;
++      }
++
++    if (S_ISREG(st.st_mode))
++      load_conffile(file, nextp);
++
++    free(file);
++  }
++
++  closedir(dir);
++}
++
+ /* INIT -- Initialize syslogd from configuration table.  */
+ RETSIGTYPE
+ init (int signo ARG_UNUSED)
+@@ -1755,7 +1809,7 @@ init (int signo ARG_UNUSED)
+   /* Foreach line in the conf table, open that file.  */
+   f = NULL;
+ 
+-  load_conffile (ConfFile, nextp);
++  load_confdir (nextp);
+ 
+   Initialized = 1;
+ 
