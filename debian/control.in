@@ -80,7 +80,8 @@ Architecture: any
 Provides: talkd
 Conflicts: talkd
 Replaces: talkd-hurd
-Depends: ${shlibs:Depends}, netbase, inetutils-syslogd | system-log-daemon
+Depends: ${shlibs:Depends}, netbase, inetutils-syslogd | system-log-daemon,
+ inetutils-inetd | inet-superserver
 Description: Remote user communication server
  Talkd is the server that notifies a user that someone else wants to initiate
  a conversation. It acts a repository of invitations, responding to requests
@@ -102,7 +103,8 @@ Architecture: any
 Provides: telnet-server
 Conflicts: telnet-server
 Replaces: telnetd-hurd
-Depends: ${shlibs:Depends}, netbase, inetutils-syslogd | system-log-daemon
+Depends: ${shlibs:Depends}, netbase, inetutils-syslogd | system-log-daemon,
+ inetutils-inetd | inet-superserver
 Description: Telnet server
  The in.telnetd program is a server which supports the DARPA telnet
  interactive communication protocol.

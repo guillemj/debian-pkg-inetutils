@@ -21,6 +21,8 @@ inetutils (2:1.5.dfsg.1-5) UNRELEASED; urgency=low
     - Move the unpatch step from the clean dependency to the body, after
       the distclean call.
     - Remove all files that autoreconf might have modified.
+  * Add dependency on 'inetutils-inetd | inet-superserver' to inetutils-talkd
+    and inetutils-telnetd as they use update-inetd.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 18 May 2007 07:37:19 +0300
 
