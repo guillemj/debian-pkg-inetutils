@@ -143,7 +143,7 @@ binary-arch: install
 	  cp $(D)/usr/bin/ping6 \
 	     $(CURDIR)/debian/inetutils-ping/bin/; \
 	fi
-	# This should be in some dh_installoverrides
+	# This should use the new dh_lintian instead
 	cp $(CURDIR)/debian/inetutils-ping.overrides \
 	   $(CURDIR)/debian/inetutils-ping/usr/share/lintian/overrides/inetutils-ping
 	
