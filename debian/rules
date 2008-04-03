@@ -87,11 +87,19 @@ else
 	> debian/control
 endif
 
-clean: unpatch
+clean:
 	dh_testdir
 	dh_testroot
 	
-	[ ! -f Makefile ] || $(MAKE) clean
+	[ ! -f Makefile ] || $(MAKE) distclean
+	
+	# Cleanup the mess after having run autoreconf ...
+	find -name Makefile.in | xargs rm -f
+	rm -f INSTALL aclocal.m4 config.hin configure
+	rm -rf build-aux
+	
+	# This is here so that we don't try to go under doc/
+	$(MAKE) -f debian/rules unpatch
 	
 	dh_clean
 
