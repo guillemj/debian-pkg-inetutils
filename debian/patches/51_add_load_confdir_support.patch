@@ -90,7 +90,7 @@ Index: b/syslogd/syslogd.c
  {
    { "debug", no_argument, 0, 'd' },
    { "rcfile", required_argument, 0, 'f' },
-+  {"rcdir", required_argument, 0, 'D'},
++  { "rcdir", required_argument, 0, 'D' },
    { "pidfile", required_argument, 0, 'P' },
    { "hop", no_argument, 0, 'h' },
    { "mark", required_argument, 0, 'm' },
