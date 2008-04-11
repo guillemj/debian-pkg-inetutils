@@ -151,9 +151,6 @@ binary-arch: install
 	dh_installdocs -a -A NEWS AUTHORS THANKS
 	dh_installexamples -a
 	dh_installinit -pinetutils-syslogd -- defaults 10 90
-	# Rename the syslogd default file
-	mv $(CURDIR)/debian/inetutils-syslogd/etc/default/inetutils-syslogd \
-	   $(CURDIR)/debian/inetutils-syslogd/etc/default/syslogd
 	dh_installinit -a -Ninetutils-syslogd
 	dh_installpam -pinetutils-ftpd --name ftp
 	dh_installlogrotate -a

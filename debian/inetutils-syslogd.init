@@ -11,7 +11,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/syslogd
 NAME=syslogd
-CONFIGFILE=/etc/default/syslogd
+CONFIGFILE=/etc/default/inetutils-syslogd
 PIDFILE=/var/run/syslog.pid
 DESC="system log daemon"
 

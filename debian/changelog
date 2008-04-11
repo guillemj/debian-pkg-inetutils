@@ -10,8 +10,9 @@ inetutils (2:1.5.dfsg.1-5) UNRELEASED; urgency=low
     the build to a new setup-source target thar serializes configureation.
   * Do not ignore make errors on clean or install in debian/rules.
   * Switch Build-Depends from automake1.9 to automake.
-  * Do not install a duplicated inetutils-syslogd in /etc/default/, just
-    syslogd. (Closes: #435049)
+  * Do not install a duplicated syslogd under /etc/default/, just
+    inetutils-syslogd. Take care of removing the obsolete conffile if not
+    modified, and move it to the new name otherwise. (Closes: #435049)
   * Do not start inetd if there's no services enabled (stolen from
     openbsd-inetd).
   * Complete copyright information in debian/copyright file.
