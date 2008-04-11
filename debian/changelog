@@ -31,6 +31,11 @@ inetutils (2:1.5.dfsg.1-5) UNRELEASED; urgency=low
   * Fix a race condition when setting the SIGALRM signal in syslogd parent
     when starting the daemon, causing it to exit with a non-zero status.
     - debian/patches/52_sigalarm.patch: New file.
+  * Delay initialization of Shishi until telnet knows Kerberos is needed.
+    Reducing the output when creating the directory has been fixed in
+    shishi itself. (Closes: #423944)
+    - debian/patches/05_shishi_delayed_init.patch: New file.
+    Thanks to Simon Josefsson <simon@josefsson.org>.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 18 May 2007 07:37:19 +0300
 
