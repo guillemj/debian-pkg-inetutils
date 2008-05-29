@@ -4,6 +4,7 @@
 03_ifreq_typo.patch -p0
 04_shishi_telnet.patch -p0
 05_shishi_delayed_init.patch 
+07_dev_test_e.patch
 10_syslog_klog_doc.patch -p0
 22_syslogd_conf.patch -p1
 30_ping_suid_perms.patch -p0

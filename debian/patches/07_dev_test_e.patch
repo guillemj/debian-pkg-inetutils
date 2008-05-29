@@ -1,0 +1,20 @@
+Author: Samuel Thibault <samuel.thibault@ens-lyon.org>
+Description:
+ While testing paths, ./configure uses test -r to check for those who
+ are not provided by system headers.  However, this does not work for
+ root-only files.  On hurd-i386 for instance, /dev/klog is only root
+ readable, so the test fails, and thus inetutils-syslogd doesn't fill
+ /dev/kern.log. ./configure should use test -e instead.
+
+
+--- a/acinclude.m4orig	2008-05-24 23:51:39.000000000 +0000
++++ b/acinclude.m4	2008-05-24 23:57:05.000000000 +0000
+@@ -306,7 +306,7 @@
+     else
+       # search for a reasonable value
+ 
+-      iu_test_type=r		# `exists'
++      iu_test_type=e		# `exists'
+       iu_default='' iu_prev_cross_test=''
+       for iu_try in $iu_paths_h $iu_search; do
+ 	iu_cross_test=''

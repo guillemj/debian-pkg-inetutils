@@ -1,3 +1,13 @@
+inetutils (2:1.5.dfsg.1-6) UNRELEASED; urgency=low
+
+  * Use 'test -e' instead of 'test -r' to check for device files, which might
+    be only readable by root. This should enable reading from /dev/klog in
+    GNU/Hurd. (Closes: #482779)
+    - debian/patches/07_dev_test_e.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 29 May 2008 05:21:13 +0300
+
 inetutils (2:1.5.dfsg.1-5) unstable; urgency=low
 
   * Remove Tag fields, those are better maintained outside the package,
