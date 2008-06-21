@@ -1,4 +1,3 @@
-#DPATCHLEVEL=1
 Index: b/syslogd/syslog.conf
 ===================================================================
 --- /dev/null

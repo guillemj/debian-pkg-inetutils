@@ -1,5 +1,3 @@
-#DPATCHLEVEL=0
-
 Index: b/syslogd/syslogd.8
 ===================================================================
 --- a/syslogd/syslogd.8
