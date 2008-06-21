@@ -1,7 +1,7 @@
 Index: b/syslogd/syslogd.c
 ===================================================================
---- a/syslogd/syslogd.c	2008-04-11 06:58:34.000000000 +0300
-+++ b/syslogd/syslogd.c	2008-04-11 07:16:16.000000000 +0300
+--- a/syslogd/syslogd.c
++++ b/syslogd/syslogd.c
 @@ -268,6 +268,7 @@ void cfline (const char *, struct filed 
  const char *cvthname (struct sockaddr_in *);
  int decode (const char *, CODE *);

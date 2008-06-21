@@ -2,6 +2,7 @@ inetutils (2:1.5.dfsg.1-7) UNRELEASED; urgency=low
 
   * Add a debian/README.source file.
   * Now using Standards-Version 3.8.0.
+  * Refresh patches with -pab. (Closes: #484949)
 
  -- Guillem Jover <guillem@debian.org>  Sat, 21 Jun 2008 07:32:02 +0300
 

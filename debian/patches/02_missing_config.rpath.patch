@@ -1,7 +1,7 @@
-Index: build-aux/config.rpath
+Index: b/build-aux/config.rpath
 ===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ build-aux/config.rpath	2006-11-07 00:39:27.000000000 +0200
+--- /dev/null
++++ b/build-aux/config.rpath
 @@ -0,0 +1,614 @@
 +#! /bin/sh
 +# Output a system dependent set of variables, describing how to set the

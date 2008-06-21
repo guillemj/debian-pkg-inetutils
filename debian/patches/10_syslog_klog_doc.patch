@@ -1,8 +1,10 @@
 #DPATCHLEVEL=0
 
---- syslogd/syslogd.8.orig	2000-08-05 15:39:00.000000000 +0300
-+++ syslogd/syslogd.8	2006-01-09 07:11:57.000000000 +0200
-@@ -116,9 +116,12 @@
+Index: b/syslogd/syslogd.8
+===================================================================
+--- a/syslogd/syslogd.8
++++ b/syslogd/syslogd.8
+@@ -116,9 +116,12 @@ domain socket
  .Pa /dev/log ,
  from an Internet domain socket specified in
  .Pa /etc/services ,
@@ -17,7 +19,7 @@
  .Pp
  .Nm Syslogd
  creates the file
-@@ -148,7 +151,7 @@
+@@ -148,7 +151,7 @@ The process id of current
  Name of the
  .Tn UNIX
  domain datagram log socket.

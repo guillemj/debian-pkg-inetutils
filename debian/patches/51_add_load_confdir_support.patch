@@ -12,8 +12,8 @@ Subject: [PATCH] Add load_confdir support
 
 Index: b/paths
 ===================================================================
---- a/paths	2006-10-12 00:46:22.000000000 +0300
-+++ b/paths	2008-04-03 07:51:04.000000000 +0300
+--- a/paths
++++ b/paths
 @@ -91,6 +91,7 @@ PATH_LASTLOG	<utmp.h> $(localstatedir)/l
  PATH_LOG	<syslog.h> /dev/log
  PATH_KLOG	<syslog.h> /dev/klog no
@@ -24,8 +24,8 @@ Index: b/paths
  PATH_NOLOGIN	$(sysconfdir)/nologin
 Index: b/syslogd/Makefile.am
 ===================================================================
---- a/syslogd/Makefile.am	2008-04-03 07:36:08.000000000 +0300
-+++ b/syslogd/Makefile.am	2008-04-03 07:51:04.000000000 +0300
+--- a/syslogd/Makefile.am
++++ b/syslogd/Makefile.am
 @@ -31,7 +31,8 @@ man_MANS = syslog.conf.5 syslogd.8
  @PATHDEFS_MAKE@
  
@@ -38,8 +38,8 @@ Index: b/syslogd/Makefile.am
  
 Index: b/syslogd/syslogd.8
 ===================================================================
---- a/syslogd/syslogd.8	2008-04-03 07:36:08.000000000 +0300
-+++ b/syslogd/syslogd.8	2008-04-03 07:51:04.000000000 +0300
+--- a/syslogd/syslogd.8
++++ b/syslogd/syslogd.8
 @@ -70,6 +70,9 @@ sockets.
  .It \fB-f\fR, \fB--rcfile\fR=\fIFILE\fP
  Specify the pathname of an alternate configuration file;
@@ -52,8 +52,8 @@ Index: b/syslogd/syslogd.8
  forward messages it receives from remote hosts.
 Index: b/syslogd/syslogd.c
 ===================================================================
---- a/syslogd/syslogd.c	2008-04-03 07:48:05.000000000 +0300
-+++ b/syslogd/syslogd.c	2008-04-03 07:52:11.000000000 +0300
+--- a/syslogd/syslogd.c
++++ b/syslogd/syslogd.c
 @@ -101,6 +101,7 @@ static char sccsid[] = "@(#)syslogd.c	8.
  #include <stdio.h>
  #include <stdlib.h>

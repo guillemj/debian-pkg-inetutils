@@ -3,10 +3,10 @@
 	* syslogd/syslogd.c (init): Close CF properly before returning.
 
 
-Index: syslogd/syslogd.c
+Index: b/syslogd/syslogd.c
 ===================================================================
---- syslogd/syslogd.c.orig	2006-10-21 15:11:57.000000000 +0300
-+++ syslogd/syslogd.c	2006-11-07 00:59:47.000000000 +0200
+--- a/syslogd/syslogd.c
++++ b/syslogd/syslogd.c
 @@ -1657,6 +1657,7 @@ init (int signo)
      {
        /* There is no graceful recovery here.  */

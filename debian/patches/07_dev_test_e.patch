@@ -7,9 +7,11 @@ Description:
  /dev/kern.log. ./configure should use test -e instead.
 
 
---- a/acinclude.m4orig	2008-05-24 23:51:39.000000000 +0000
-+++ b/acinclude.m4	2008-05-24 23:57:05.000000000 +0000
-@@ -306,7 +306,7 @@
+Index: b/acinclude.m4
+===================================================================
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -306,7 +306,7 @@ AC_DEFUN([IU_CONFIG_PATHS], [
      else
        # search for a reasonable value
  

@@ -1,7 +1,8 @@
 #DPATCHLEVEL=1
-diff -Naur inetutils-20030703-old/syslogd/syslog.conf inetutils-20030703/syslogd/syslog.conf
---- inetutils-20030703-old/syslogd/syslog.conf	1970-01-01 01:00:00.000000000 +0100
-+++ inetutils-20030703/syslogd/syslog.conf	2003-10-01 04:18:52.000000000 +0200
+Index: b/syslogd/syslog.conf
+===================================================================
+--- /dev/null
++++ b/syslogd/syslog.conf
 @@ -0,0 +1,70 @@
 +#  /etc/syslog.conf	Configuration file for inetutils-syslogd.
 +#
@@ -73,10 +74,11 @@ diff -Naur inetutils-20030703-old/syslogd/syslog.conf inetutils-20030703/syslogd
 +	*.=debug;*.=info;\
 +	*.=notice;*.=warn	|/dev/xconsole
 +
-diff -Naur inetutils-20030703/syslogd/Makefile.am inetutils-20030703-patched/syslogd/Makefile.am
---- inetutils-20030703/syslogd/Makefile.am	2002-04-28 19:24:36.000000000 +0200
-+++ inetutils-20030703-patched/syslogd/Makefile.am	2003-10-02 07:53:16.000000000 +0200
-@@ -24,6 +24,8 @@
+Index: b/syslogd/Makefile.am
+===================================================================
+--- a/syslogd/Makefile.am
++++ b/syslogd/Makefile.am
+@@ -24,6 +24,8 @@ EXTRA_PROGRAMS = syslogd
  
  syslogd_SOURCES = syslogd.c
  

@@ -1,7 +1,7 @@
-Index: rsh/rsh.c
+Index: b/rsh/rsh.c
 ===================================================================
---- rsh/rsh.c.orig	2006-11-07 01:01:29.000000000 +0200
-+++ rsh/rsh.c	2006-11-07 01:01:46.000000000 +0200
+--- a/rsh/rsh.c
++++ b/rsh/rsh.c
 @@ -70,6 +70,8 @@
  # include <sys/select.h>
  #endif
@@ -11,10 +11,10 @@ Index: rsh/rsh.c
  #ifdef SHISHI
  #define REALM_SZ 1040
  #endif
-Index: telnet/authenc.c
+Index: b/telnet/authenc.c
 ===================================================================
---- telnet/authenc.c.orig	2006-11-07 01:01:06.000000000 +0200
-+++ telnet/authenc.c	2006-11-07 01:01:14.000000000 +0200
+--- a/telnet/authenc.c
++++ b/telnet/authenc.c
 @@ -40,6 +40,7 @@ static char sccsid[] = "@(#)authenc.c	8.
  #include <arpa/telnet.h>
  #include <libtelnet/encrypt.h>

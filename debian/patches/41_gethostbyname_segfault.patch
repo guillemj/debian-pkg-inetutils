@@ -4,14 +4,11 @@
 	if gethostname did not fail.
 
 
-Index: libinetutils/localhost.c
+Index: b/libinetutils/localhost.c
 ===================================================================
-RCS file: /sources/inetutils/inetutils/libinetutils/localhost.c,v
-retrieving revision 1.13
-diff -u -r1.13 localhost.c
---- libinetutils/localhost.c	2 Dec 2005 14:05:28 -0000	1.13
-+++ libinetutils/localhost.c	21 Oct 2006 13:32:06 -0000
-@@ -77,22 +77,23 @@
+--- a/libinetutils/localhost.c
++++ b/libinetutils/localhost.c
+@@ -77,22 +77,23 @@ localhost (void)
        free (buf);
        buf = 0;
      }

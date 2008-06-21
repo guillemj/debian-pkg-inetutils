@@ -4,14 +4,11 @@
 	value, to avoid passing NULL to LOGCMD.
 
 
-Index: ftpd/ftpd.c
+Index: b/ftpd/ftpd.c
 ===================================================================
-RCS file: /sources/inetutils/inetutils/ftpd/ftpd.c,v
-retrieving revision 1.56
-diff -u -r1.56 ftpd.c
---- ftpd/ftpd.c	12 Oct 2006 09:57:27 -0000	1.56
-+++ ftpd/ftpd.c	21 Oct 2006 13:15:28 -0000
-@@ -934,11 +934,17 @@
+--- a/ftpd/ftpd.c
++++ b/ftpd/ftpd.c
+@@ -934,11 +934,17 @@ store (const char *name, const char *mod
    struct stat st;
    int (*closefunc) (FILE *);
  

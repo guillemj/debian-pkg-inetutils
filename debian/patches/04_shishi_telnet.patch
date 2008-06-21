@@ -4,15 +4,17 @@
         use-session-key ap-options, that is for user2user authentication
         which is not appropriate here.
 
---- libtelnet/shishi.c    08 Mar 2007 15:02:20 +0100      1.2
-+++ libtelnet/shishi.c    13 Mar 2007 17:31:30 +0100
+Index: b/libtelnet/shishi.c
+===================================================================
+--- a/libtelnet/shishi.c
++++ b/libtelnet/shishi.c
 @@ -1,4 +1,4 @@
 -/* Copyright (C) 2002, 2003 Simon Josefsson
 +/* Copyright (C) 2002, 2003, 2007 Simon Josefsson
     Copyright (C) 2003 Free Software Foundation, Inc.
  
  This file is part of Shishi / GNU Inetutils.
-@@ -169,10 +169,6 @@
+@@ -169,10 +169,6 @@ krb5shishi_send (TN_Authenticator * ap)
    else
      ap_opts = 0;
  

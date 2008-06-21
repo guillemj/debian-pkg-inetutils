@@ -1,7 +1,9 @@
 #DPATCHLEVEL=0
---- ping/Makefile.am	2005-10-11 14:29:11.000000000 +0300
-+++ ping/Makefile.am	2006-07-19 09:15:57.000000000 +0300
-@@ -32,7 +32,7 @@
+Index: b/ping/Makefile.am
+===================================================================
+--- a/ping/Makefile.am
++++ b/ping/Makefile.am
+@@ -32,7 +32,7 @@ ping_SOURCES = ping.c ping_common.c ping
  
  ping6_SOURCES = ping6.c ping_common.c ping_common.h ping6.h
  
