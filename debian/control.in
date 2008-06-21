@@ -3,7 +3,7 @@ Section: net
 Priority: extra
 Maintainer: Guillem Jover <guillem@debian.org>
 Uploaders: Jeff Bailey <jbailey@raspberryginger.com>, Marcus Brinkmann <brinkmd@debian.org>
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-inetutils/
 Vcs-Svn: svn://svn.debian.org/pkg-inetutils/trunk/
 Homepage: http://www.gnu.org/software/inetutils/
