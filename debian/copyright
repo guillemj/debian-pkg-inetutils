@@ -72,7 +72,7 @@ The source code is covered by the following copyrights and licenses:
     MA 02110-1301 USA.
 
   On Debian systems, the complete text of the GNU General
-  Public License can be found in `/usr/share/common-licenses/GPL-2'.
+  Public License can be found in '/usr/share/common-licenses/GPL-2'.
 
 * Most source files:
 
@@ -81,5 +81,5 @@ The source code is covered by the following copyrights and licenses:
               The Regents of the University of California.
 
   under the BSD license. On Debian systems, the complete text of the BSD
-  license can be found in `/usr/share/common-licenses/BSD'.
+  license can be found in '/usr/share/common-licenses/BSD'.
 
