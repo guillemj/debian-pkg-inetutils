@@ -4,6 +4,9 @@ inetutils (2:1.5.dfsg.1-9) UNRELEASED; urgency=low
   * Improve package desriptions:
     - Remove wrong acronym for ping. (Closes: #496441)
     - Decapitalize short descriptions.
+  * Make the inetutils-inetd init.d script provide inetutils-inetd instead of
+    inetd, to not conflict with other inetd implementations. (Closes: #507121)
+    Thanks to Petter Reinholdtsen <petter.reinholdtsen@usit.uio.no>.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 18 Dec 2008 07:51:43 +0200
 
