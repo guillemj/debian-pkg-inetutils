@@ -140,8 +140,8 @@ binary-arch: install
 	dh_install -a --sourcedir=$(D)
 	# Install ping6 only if built
 	if [ -x $(D)/usr/bin/ping6 ]; then \
-	  cp $(D)/usr/bin/ping6 \
-	     $(CURDIR)/debian/inetutils-ping/bin/; \
+	  cp -a $(D)/usr/bin/ping6 \
+	        $(CURDIR)/debian/inetutils-ping/bin/; \
 	fi
 	# This should use the new dh_lintian instead
 	cp $(CURDIR)/debian/inetutils-ping.overrides \

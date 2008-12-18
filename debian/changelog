@@ -1,3 +1,9 @@
+inetutils (2:1.5.dfsg.1-9) UNRELEASED; urgency=low
+
+  * Install ping6 suid root by using “cp -a”. (Closes: #501910)
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 18 Dec 2008 07:51:43 +0200
+
 inetutils (2:1.5.dfsg.1-8) unstable; urgency=low
 
   * Support max option on wait/nowait.max on inetd.conf. (Closes: #451478)
