@@ -1,4 +1,4 @@
-inetutils (2:1.5.dfsg.1-9) UNRELEASED; urgency=low
+inetutils (2:1.5.dfsg.1-9) unstable; urgency=low
 
   * Install ping6 suid root by using “cp -a”. (Closes: #501910)
   * Improve package desriptions:
@@ -7,13 +7,13 @@ inetutils (2:1.5.dfsg.1-9) UNRELEASED; urgency=low
   * Make the inetutils-inetd init.d script provide inetutils-inetd instead of
     inetd, to not conflict with other inetd implementations. (Closes: #507121)
     Thanks to Petter Reinholdtsen <petter.reinholdtsen@usit.uio.no>.
-  * Call 'set -e' in maintainer scripts to guarantee a correct exit status.
+  * Call “set -e” in maintainer scripts to guarantee a correct exit status.
   * Do not fail to start inetutils-inetd when there are services enabled in
     files under /etc/inetd.d/. (Closes: #500729)
   * Create a new /etc/inetd.conf on install if there was none. Template file
     stolen from openbsd-inetd.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 18 Dec 2008 07:51:43 +0200
+ -- Guillem Jover <guillem@debian.org>  Sat, 20 Dec 2008 09:36:28 +0200
 
 inetutils (2:1.5.dfsg.1-8) unstable; urgency=low
 
