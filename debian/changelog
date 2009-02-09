@@ -1,6 +1,7 @@
 inetutils (2:1.5.dfsg.1-10) UNRELEASED; urgency=low
 
   * Switch to debhelper compatibility level 7.
+  * Use dh_prep instead of “dh_clean -k”.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 09 Feb 2009 22:01:00 +0200
 
