@@ -1,7 +1,5 @@
 #!/bin/sh
 #
-# $Id$
-#
 # Copyright (C) 2004, 2005 Guillem Jover <guillem@debian.org>
 #
 # This program is free software; you can redistribute it and/or modify
