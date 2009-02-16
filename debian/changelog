@@ -22,6 +22,7 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
   * Switch to debhelper compatibility level 7.
   * Use dh_prep instead of “dh_clean -k”.
   * Remove RCS keywords from packaging files.
+  * Add misc:Depends substvar to all binary package Depends fields.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 09 Feb 2009 22:01:00 +0200
 
