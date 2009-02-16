@@ -1,0 +1,35 @@
+Index: b/inetd/inetd.8
+===================================================================
+--- a/inetd/inetd.8
++++ b/inetd/inetd.8
+@@ -88,7 +88,7 @@ Pass local and remote address data via e
+ \fBENVIRONMENT\fP below.
+ .It Fl R, -rate Ar rate
+ Specifies the maximum number of times a service can be invoked
+-in one minute; the default is 1000.
++in one minute; the default is 40.
+ .It Fl -resolve
+ Resolve local and remote IP addresses and pass them to the server program
+ via \fBTCPLOCALHOST\fP and \fBTCPREMOTEHOST\fP environment variables. See
+@@ -227,6 +227,21 @@ are both examples of the latter type of
+ datagram server.
+ .Xr Tftpd 8
+ is an example of a multi-threaded datagram server.
++The optional
++.Dq max
++suffix (separated from
++.Dq wait
++or
++.Dq nowait
++by a dot) specifies the maximum number of times a service can be invoked
++in one minute; the default is 40.
++If a service exceeds this limit,
++.Nm
++will log the problem
++and stop servicing requests for the specific service for ten minutes.
++See also the
++.Fl R
++option above.
+ .Pp
+ Servers using stream sockets generally are multi-threaded and
+ use the

@@ -2,7 +2,7 @@ Index: b/syslogd/syslogd.c
 ===================================================================
 --- a/syslogd/syslogd.c
 +++ b/syslogd/syslogd.c
-@@ -268,6 +268,7 @@ void cfline (const char *, struct filed 
+@@ -263,6 +263,7 @@ void cfline (const char *, struct filed 
  const char *cvthname (struct sockaddr_in *);
  int decode (const char *, CODE *);
  void die (int);
@@ -10,15 +10,15 @@ Index: b/syslogd/syslogd.c
  void domark (int);
  void fprintlog (struct filed *, const char *, int, const char *);
  static int load_conffile (const char *, struct filed **);
-@@ -477,6 +478,7 @@ main (int argc, char *argv[])
+@@ -475,6 +476,7 @@ main (int argc, char *argv[])
  
- 	 IMO, the GNU/Linux distributors should fix there booting
- 	 sequence. But we still keep the approach.  */
+          IMO, the GNU/Linux distributors should fix there booting
+          sequence. But we still keep the approach.  */
 +      signal (SIGTERM, doexit);
        ppid = waitdaemon (0, 0, 30);
        if (ppid < 0)
- 	{
-@@ -623,7 +625,7 @@ main (int argc, char *argv[])
+         error (1, errno, "could not become daemon");
+@@ -610,7 +612,7 @@ main (int argc, char *argv[])
    /* If we're doing waitdaemon(), tell the parent to exit,
       we are ready to roll.  */
    if (ppid)
@@ -27,7 +27,7 @@ Index: b/syslogd/syslogd.c
  
    for (;;)
      {
-@@ -1553,6 +1555,12 @@ logerror (const char *type)
+@@ -1521,6 +1523,12 @@ logerror (const char *type)
  }
  
  RETSIGTYPE

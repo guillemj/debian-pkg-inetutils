@@ -11,7 +11,7 @@ Index: b/syslogd/syslogd.c
 ===================================================================
 --- a/syslogd/syslogd.c
 +++ b/syslogd/syslogd.c
-@@ -268,6 +268,7 @@ int decode (const char *, CODE *);
+@@ -263,6 +263,7 @@ int decode (const char *, CODE *);
  void die (int);
  void domark (int);
  void fprintlog (struct filed *, const char *, int, const char *);
@@ -19,13 +19,13 @@ Index: b/syslogd/syslogd.c
  void init (int);
  void logerror (const char *);
  void logmsg (int, const char *, const char *, int);
-@@ -1583,12 +1584,11 @@ die (int signo)
+@@ -1551,12 +1552,11 @@ die (int signo)
    exit (0);
  }
  
 -/* INIT -- Initialize syslogd from configuration table.  */
 -RETSIGTYPE
--init (int signo)
+-init (int signo ARG_UNUSED)
 +static int
 +load_conffile (const char *filename, struct filed **nextp)
  {
@@ -34,8 +34,8 @@ Index: b/syslogd/syslogd.c
 +  struct filed *f;
    char *p;
  #ifndef LINE_MAX
- #define LINE_MAX 2048
-@@ -1597,60 +1597,20 @@ init (int signo)
+ # define LINE_MAX 2048
+@@ -1565,61 +1565,20 @@ init (int signo ARG_UNUSED)
    char *cbuf;
    char *cline;
    int cont_line = 0;
@@ -47,7 +47,8 @@ Index: b/syslogd/syslogd.c
 -    {
 -      errno = 0;
 -      logerror ("network logging disabled (syslog/udp service unknown).");
--      logerror ("see syslogd(8) for details of whether and how to enable it.");
+-      logerror
+-	("see syslogd(8) for details of whether and how to enable it.");
 -      return;
 -    }
 -  LogPort = sp->s_port;
@@ -58,7 +59,7 @@ Index: b/syslogd/syslogd.c
 -    {
 -      /* Flush any pending output.  */
 -      if (f->f_prevcount)
--	fprintlog (f, LocalHostName, 0, (char *)NULL);
+-	fprintlog (f, LocalHostName, 0, (char *) NULL);
 -
 -      switch (f->f_type)
 -	{
@@ -84,9 +85,9 @@ Index: b/syslogd/syslogd.c
      {
 -      dbg_printf ("cannot open %s\n", ConfFile);
 +      dbg_printf ("cannot open %s\n", filename);
-       *nextp = (struct filed *) calloc (1, sizeof(*f));
+       *nextp = (struct filed *) calloc (1, sizeof (*f));
        cfline ("*.ERR\t" PATH_CONSOLE, *nextp);
-       (*nextp)->f_next = (struct filed *) calloc (1, sizeof(*f));
+       (*nextp)->f_next = (struct filed *) calloc (1, sizeof (*f));
        cfline ("*.PANIC\t*", (*nextp)->f_next);
        Initialized = 1;
 -      return;
@@ -99,7 +100,7 @@ Index: b/syslogd/syslogd.c
    /* Allocate a buffer for line parsing.  */
    cbuf = malloc (line_max);
    if (cbuf == NULL)
-@@ -1658,7 +1618,7 @@ init (int signo)
+@@ -1627,7 +1586,7 @@ init (int signo ARG_UNUSED)
        /* There is no graceful recovery here.  */
        dbg_printf ("cannot allocate space for configuration\n");
        fclose (cf);
@@ -108,7 +109,7 @@ Index: b/syslogd/syslogd.c
      }
    cline = cbuf;
  
-@@ -1699,7 +1659,7 @@ init (int signo)
+@@ -1668,7 +1627,7 @@ init (int signo ARG_UNUSED)
  	      dbg_printf ("cannot allocate space configuration\n");
  	      fclose (cf);
  	      free (cbuf);
@@ -117,7 +118,7 @@ Index: b/syslogd/syslogd.c
  	    }
  	  else
  	    cbuf = tmp;
-@@ -1746,6 +1706,57 @@ init (int signo)
+@@ -1715,6 +1674,58 @@ init (int signo ARG_UNUSED)
    fclose (cf);
    free (cbuf);
  
@@ -137,7 +138,8 @@ Index: b/syslogd/syslogd.c
 +    {
 +      errno = 0;
 +      logerror ("network logging disabled (syslog/udp service unknown).");
-+      logerror ("see syslogd(8) for details of whether and how to enable it.");
++      logerror
++	("see syslogd(8) for details of whether and how to enable it.");
 +      return;
 +    }
 +  LogPort = sp->s_port;
