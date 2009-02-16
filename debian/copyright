@@ -9,10 +9,48 @@ from sources obtained from:
 
 The source code is covered by the following copyrights and licenses:
 
-* The doc/ directory was removed from the original tarball, and the
-  tarball repacked as it contained GFDL'd material, and a non-free RFC.
+* Documentation under doc/ copyrighted by:
 
-* Files utmp_{login,init}.{c,h} under libinetutils:
+    Copyright © 1994-1996, 2000-2001, 2007-2008 Free Software Foundation, Inc.
+
+  under the following license:
+
+    Permission is granted to copy, distribute and/or modify this
+    document under the terms of the GNU Free Documentation License,
+    Version 1.2 or any later version published by the Free Software
+    Foundation; with no Invariant Sections, with no Front-Cover Texts,
+    and with no Back-Cover Texts.  A copy of the license is included
+    in the section entitled "GNU Free Documentation License".
+
+  On Debian systems, the complete text of the GNU Free Documentation
+  License can be found in '/usr/share/common-licenses/GFDL'.
+
+* Some additional files (esp. Makefiles, gwhois/, hostname/, ifconfig/
+  libicmp/, libinetutils/, ping/, etc), are copyrigthed by:
+
+    Copyright © 1985-2008 Free Software Foundation, Inc.
+
+  under the following license:
+
+    GNU Inetutils is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 3 of the
+    License, or (at your option) any later version.
+
+    GNU Inetutils is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301 USA.
+
+  On Debian systems, the complete text of the GNU General Public
+  License can be found in '/usr/share/common-licenses/GPL-3'.
+
+* Files utmp_{login,init}.{c,h} under libinetutils/:
 
     Copyright © 1995 Wietse Venema
 
@@ -29,50 +67,6 @@ The source code is covered by the following copyrights and licenses:
     This software is provided "as is" and without any expressed or implied
     warranties, including, without limitation, the implied warranties of
     merchantibility and fitness for any particular purpose.
-
-* Files under gwhois/ directory:
-
-    Copyright © 1999 Marco d'Itri
-
-  under the following license:
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; version 2.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-
-* Some additional files (esp. Makefiles), are copyrigthed by:
-
-    Copyright © 1985-2008 Free Software Foundation, Inc.
-    Copyright © 2002, 2003, 2007 Simon Josefsson
-
-  under the following license:
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License
-    as published by the Free Software Foundation; either version 2
-    of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-    MA 02110-1301 USA.
-
-  On Debian systems, the complete text of the GNU General
-  Public License can be found in '/usr/share/common-licenses/GPL-2'.
 
 * Most source files:
 

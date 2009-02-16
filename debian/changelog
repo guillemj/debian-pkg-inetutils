@@ -1,5 +1,11 @@
-inetutils (2:1.5.dfsg.1-10) UNRELEASED; urgency=low
+inetutils (2:1.6-1) UNRELEASED; urgency=low
 
+  * New upstream release.
+    - The documentation is free now, add texinfo back to Build-Depends.
+    - The non-free RFC got removed upstream.
+    - debian/patches/00_build_dfsg.patch: Remove.
+    - debian/tarball.sh: No need to strip documentation anymore.
+    - Update debian/copyright file.
   * Switch to debhelper compatibility level 7.
   * Use dh_prep instead of “dh_clean -k”.
   * Remove RCS keywords from packaging files.
