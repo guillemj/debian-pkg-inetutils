@@ -22,7 +22,7 @@ The source code is covered by the following copyrights and licenses:
     in the section entitled "GNU Free Documentation License".
 
   On Debian systems, the complete text of the GNU Free Documentation
-  License can be found in '/usr/share/common-licenses/GFDL'.
+  License can be found in '/usr/share/common-licenses/GFDL-1.2'.
 
 * Some additional files (esp. Makefiles, gwhois/, hostname/, ifconfig/
   libicmp/, libinetutils/, ping/, etc), are copyrigthed by:
