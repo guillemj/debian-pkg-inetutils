@@ -1,4 +1,4 @@
-inetutils (2:1.6-1) UNRELEASED; urgency=low
+inetutils (2:1.6-1) unstable; urgency=low
 
   * New upstream release.
     - The documentation is free now, add texinfo back to Build-Depends.
@@ -41,7 +41,7 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
     removing INSTALL and build-aux.
   * Switch the unpatch make call inside the clean target to its dependency.
 
- -- Guillem Jover <guillem@debian.org>  Mon, 09 Feb 2009 22:01:00 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 17 Feb 2009 04:27:33 +0200
 
 inetutils (2:1.5.dfsg.1-9) unstable; urgency=low
 
