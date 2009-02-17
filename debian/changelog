@@ -25,6 +25,7 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
   * Add misc:Depends substvar to all binary package Depends fields.
   * Do not pass the --force option to autoreconf, and thus stop unneedingly
     removing INSTALL and build-aux.
+  * Switch the unpatch make call inside the clean target to its dependency.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 09 Feb 2009 22:01:00 +0200
 
