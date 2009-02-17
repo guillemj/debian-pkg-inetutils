@@ -5,7 +5,6 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
     - The non-free RFC got removed upstream.
     - debian/patches/00_build_dfsg.patch: Remove.
     - debian/tarball.sh: No need to strip documentation anymore.
-    - Update debian/copyright file.
     - debian/patches/02_missing_config.rpath.patch: Remove, fixed upstream.
     - debian/patches/03_ifreq_typo.patch: Likewise.
     - debian/patches/04_shishi_telnet.patch: Likewise.
@@ -19,6 +18,9 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
     - debian/patches/52_sigalarm.patch: Likewise.
     - debian/patches/99_inetd_max_conn.patch: Refresh, and rename to ...
     - debian/patches/53_man_inetd_max_conn.patch: ... this.
+  * Update debian/copyright file:
+    - Update download URL.
+    - Reword debianized by comment, and update Marcus' mail address.
   * Switch to debhelper compatibility level 7.
   * Use dh_prep instead of “dh_clean -k”.
   * Remove RCS keywords from packaging files.

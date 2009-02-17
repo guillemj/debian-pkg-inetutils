@@ -1,11 +1,10 @@
-This is the Debian prepackaged version of GNU inetutils.
-GNU inetutils were written by a lot of people.
+This package was debianized by:
 
-This package was put together by
-Marcus Brinkmann <Marcus.Brinkmann@ruhr-uni-bochum.de>
-from sources obtained from:
+    Marcus Brinkmann <brinkmd@debian.org> on Wed,  3 Feb 1999 15:53:32 +0100
 
-    <ftp://ftp.gnu.org/pub/gnu/>
+It was downloaded from:
+
+    <http://ftp.gnu.org/pub/gnu/inetutils/>
 
 The source code is covered by the following copyrights and licenses:
 
