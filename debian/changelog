@@ -25,6 +25,14 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
     - Change references from GPL-2 to GPL-3.
     - Remove comments about no longer stripped out non-free documentation.
     - Add reference to GFDL-1.2.
+  * Update debian/tarball.sh:
+    - Use git instead of CVS to get new snapshots.
+    - Use lower case variable names.
+    - Make snapshot argument handle both cloning and updating.
+    - Add a new tarball argument.
+    - Add code to bootstrap from gnulib.
+    - Refactor version detection into a function and use it when needed.
+  * Update documentation about debian/tarball.sh in debian/README.source.
   * Switch to debhelper compatibility level 7.
   * Use dh_prep instead of “dh_clean -k”.
   * Remove RCS keywords from packaging files.
