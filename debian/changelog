@@ -29,7 +29,7 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
 inetutils (2:1.5.dfsg.1-9) unstable; urgency=low
 
   * Install ping6 suid root by using “cp -a”. (Closes: #501910)
-  * Improve package desriptions:
+  * Improve package descriptions:
     - Remove wrong acronym for ping. (Closes: #496441)
     - Decapitalize short descriptions.
   * Make the inetutils-inetd init.d script provide inetutils-inetd instead of
