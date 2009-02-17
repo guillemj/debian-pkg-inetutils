@@ -36,7 +36,7 @@ include /usr/share/quilt/quilt.make
 configure: configure.ac
 	dh_testdir
 	
-	autoreconf -f -i
+	autoreconf -i
 
 config.status: configure
 	dh_testdir
@@ -92,8 +92,7 @@ clean:
 	
 	# Cleanup the mess after having run autoreconf ...
 	find -name Makefile.in | xargs rm -f
-	rm -f INSTALL aclocal.m4 config.hin configure
-	rm -rf build-aux
+	rm -f aclocal.m4 config.hin configure
 	
 	# This is here so that we don't try to go under doc/
 	$(MAKE) -f debian/rules unpatch
