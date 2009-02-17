@@ -21,6 +21,10 @@ inetutils (2:1.6-1) UNRELEASED; urgency=low
   * Update debian/copyright file:
     - Update download URL.
     - Reword debianized by comment, and update Marcus' mail address.
+    - Remove references to old copyright holders, now being held by the FSF.
+    - Change references from GPL-2 to GPL-3.
+    - Remove comments about no longer stripped out non-free documentation.
+    - Add reference to GFDL-1.2.
   * Switch to debhelper compatibility level 7.
   * Use dh_prep instead of “dh_clean -k”.
   * Remove RCS keywords from packaging files.
