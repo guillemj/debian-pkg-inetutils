@@ -1,3 +1,10 @@
+inetutils (2:1.6-2) UNRELEASED; urgency=low
+
+  * Use $(filter ...) instead of $(findstring ...) to extract space separated
+    options from DEB_BUILD_OPTIONS in debian/rules.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 18 Apr 2009 01:26:42 +0200
+
 inetutils (2:1.6-1) unstable; urgency=low
 
   * New upstream release.
