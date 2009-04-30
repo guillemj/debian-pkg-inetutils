@@ -60,9 +60,12 @@ case "$1" in
 		/var/run/$NAME.pid --exec $DAEMON
 	log_end_msg $?
 	;;
+  status)
+	status_of_proc $DAEMON $NAME
+	;;
   *)
 	N=/etc/init.d/inetutils-$NAME
-	echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
 	exit 1
 	;;
 esac
