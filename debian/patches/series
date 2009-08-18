@@ -7,3 +7,5 @@
 51_add_load_confdir_support.patch
 52_sigalarm.patch
 53_man_inetd_max_conn.patch
+99_acinclude_del_dnl.patch
+99_ping_default_inf_count.patch
