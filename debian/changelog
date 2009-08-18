@@ -1,16 +1,16 @@
-inetutils (2:1.6-2) UNRELEASED; urgency=low
+inetutils (2:1.6-2) unstable; urgency=low
 
   * Use $(filter ...) instead of $(findstring ...) to extract space separated
     options from DEB_BUILD_OPTIONS in debian/rules.
   * Add support for LSB status action on init scripts.
   * Use a variable instead of hardcoding the pid file path in inetutils-inetd
     init script.
-  * Restore the traditional behavior of ping without -c option. Closes: #524011
-    Stolen from upstream.
-  * Fix build failure due to an m4 comment eating a new line. Closes: #541775
-    Stolen from upstream.
+  * Restore the traditional behavior of ping without -c option.
+    Stolen from upstream. (Closes: #524011)
+  * Fix build failure due to an m4 comment eating a new line.
+    Stolen from upstream. (Closes: #541775)
 
- -- Guillem Jover <guillem@debian.org>  Sat, 18 Apr 2009 01:26:42 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 18 Aug 2009 05:51:23 +0200
 
 inetutils (2:1.6-1) unstable; urgency=low
 
