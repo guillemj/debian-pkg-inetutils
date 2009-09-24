@@ -1,3 +1,12 @@
+inetutils (2:1.6-3) UNRELEASED; urgency=low
+
+  * Fix init script dependency information: (Closes: #547513)
+    - Provide a unique service name.
+    - Require $remote_fs instead of $local_fs, as we use stuff from /usr.
+    Thanks to Petter Reinholdtsen <pere@hungry.com>.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 24 Sep 2009 20:12:48 +0200
+
 inetutils (2:1.6-2) unstable; urgency=low
 
   * Use $(filter ...) instead of $(findstring ...) to extract space separated

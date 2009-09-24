@@ -8,8 +8,8 @@ Vcs-Browser: http://svn.debian.org/wsvn/pkg-inetutils/
 Vcs-Svn: svn://svn.debian.org/pkg-inetutils/trunk/
 Homepage: http://www.gnu.org/software/inetutils/
 Build-Depends: debhelper (>= 7), quilt (>= 0.40), autoconf, automake, texinfo,
- bison, libreadline5-dev | libreadline-dev, libpam0g-dev, libopie-dev,
- libwrap0-dev, libshishi-dev
+ bison, libreadline-dev | libreadline6-dev | libreadline5-dev, libpam0g-dev,
+ libopie-dev, libwrap0-dev, libshishi-dev
 Build-Conflicts: autoconf2.13, automake1.4
 
 Package: inetutils-ftp
