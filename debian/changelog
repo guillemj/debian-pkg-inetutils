@@ -4,6 +4,8 @@ inetutils (2:1.6-3) UNRELEASED; urgency=low
     - Provide a unique service name.
     - Require $remote_fs instead of $local_fs, as we use stuff from /usr.
     Thanks to Petter Reinholdtsen <pere@hungry.com>.
+  * Move libreadline-dev to be the first Build-Depends alternative, and add
+    libreadline6-dev for compatibility purposes.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 24 Sep 2009 20:12:48 +0200
 
