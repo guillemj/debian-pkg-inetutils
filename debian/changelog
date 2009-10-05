@@ -1,4 +1,4 @@
-inetutils (2:1.6-3) UNRELEASED; urgency=low
+inetutils (2:1.6-3) unstable; urgency=low
 
   * Fix init script dependency information: (Closes: #547513)
     - Provide a unique service name.
@@ -7,7 +7,7 @@ inetutils (2:1.6-3) UNRELEASED; urgency=low
   * Move libreadline-dev to be the first Build-Depends alternative, and add
     libreadline6-dev for compatibility purposes.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 24 Sep 2009 20:12:48 +0200
+ -- Guillem Jover <guillem@debian.org>  Mon, 05 Oct 2009 12:27:34 +0200
 
 inetutils (2:1.6-2) unstable; urgency=low
 
