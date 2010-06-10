@@ -12,6 +12,10 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
     - debian/patches/50_split_load_conffile.patch: Likewise.
     - debian/patches/51_add_load_confdir_support.patch: Likewise.
     - debian/patches/53_man_inetd_max_conn.patch: Likewise.
+  * Upstream switched to generate man pages from --help output, which is
+    a regression from previous man pages inherited from BSD. Revert the
+    removal and disable help2man logic.
+    - debian/patches/01_revert_manpage_removal.patch: New file.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
 

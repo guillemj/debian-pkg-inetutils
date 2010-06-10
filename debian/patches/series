@@ -1,3 +1,4 @@
+01_revert_manpage_removal.patch
 10_syslog_klog_doc.patch
 22_syslogd_conf.patch
 30_ping_suid_perms.patch
