@@ -1,7 +1,10 @@
-Index: b/syslogd/syslog.conf
-===================================================================
+---
+ src/Makefile.am |    2 +
+ src/syslog.conf |   70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 72 insertions(+)
+
 --- /dev/null
-+++ b/syslogd/syslog.conf
++++ b/src/syslog.conf
 @@ -0,0 +1,70 @@
 +#  /etc/syslog.conf	Configuration file for inetutils-syslogd.
 +#
@@ -73,16 +76,14 @@ Index: b/syslogd/syslog.conf
 +	*.=debug;*.=info;\
 +	*.=notice;*.=warn	|/dev/xconsole
 +
-Index: b/syslogd/Makefile.am
-===================================================================
---- a/syslogd/Makefile.am
-+++ b/syslogd/Makefile.am
-@@ -24,6 +24,8 @@ EXTRA_PROGRAMS = syslogd
- 
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -114,6 +114,8 @@ inetdaemon_PROGRAMS += @syslogd_BUILD@
  syslogd_SOURCES = syslogd.c
+ EXTRA_PROGRAMS += syslogd
  
 +dist_sysconf_DATA = syslog.conf
 +
- man_MANS = syslog.conf.5 syslogd.8
- 
- @PATHDEFS_MAKE@
+ inetdaemon_PROGRAMS += @tftpd_BUILD@
+ tftpd_SOURCES = tftpd.c
+ EXTRA_PROGRAMS += tftpd

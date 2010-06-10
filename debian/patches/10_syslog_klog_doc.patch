@@ -1,7 +1,7 @@
-Index: b/syslogd/syslogd.8
+Index: b/src/syslogd.8
 ===================================================================
---- a/syslogd/syslogd.8
-+++ b/syslogd/syslogd.8
+--- a/src/syslogd.8
++++ b/src/syslogd.8
 @@ -116,9 +116,12 @@ domain socket
  .Pa /dev/log ,
  from an Internet domain socket specified in

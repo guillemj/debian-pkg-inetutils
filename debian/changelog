@@ -1,3 +1,20 @@
+inetutils (2:1.8-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - debian/patches/01_no_link_extralibs.patch: Remove, merged upstream.
+    - debian/patches/07_dev_test_e.patch: Likewise.
+    - debian/patches/52_sigalarm.patch: Likewise.
+    - debian/patches/99_acinclude_del_dnl.patch: Likewise.
+    - debian/patches/99_ping_default_inf_count.patch: Likewise.
+    - debian/patches/10_syslog_klog_doc.patch: Refreshed.
+    - debian/patches/22_syslogd_conf.patch: Likewise.
+    - debian/patches/30_ping_suid_perms.patch: Likewise.
+    - debian/patches/50_split_load_conffile.patch: Likewise.
+    - debian/patches/51_add_load_confdir_support.patch: Likewise.
+    - debian/patches/53_man_inetd_max_conn.patch: Likewise.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
+
 inetutils (2:1.6-3) unstable; urgency=low
 
   * Fix init script dependency information: (Closes: #547513)
