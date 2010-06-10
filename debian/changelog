@@ -16,6 +16,11 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
     a regression from previous man pages inherited from BSD. Revert the
     removal and disable help2man logic.
     - debian/patches/01_revert_manpage_removal.patch: New file.
+  * Switch to source format “3.0 (quilt)”:
+    - Remove quilt from Build-Depends.
+    - Remove quilt.make include from debian/rules.
+    - Remove patch and unpatch targets from debian/rules.
+    - Remove now unneeded quilt references in debian/README.source.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
 
