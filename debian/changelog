@@ -1,6 +1,7 @@
 inetutils (2:1.8-1) UNRELEASED; urgency=low
 
   * New upstream release.
+    - Implement “ping -w timeout”. (Closes: #565137)
     - debian/patches/01_no_link_extralibs.patch: Remove, merged upstream.
     - debian/patches/07_dev_test_e.patch: Likewise.
     - debian/patches/52_sigalarm.patch: Likewise.
