@@ -24,6 +24,7 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
     - Remove now unneeded quilt references in debian/README.source.
   * Remove Marcus Brinkmann and Jeff Bailey from Uploaders field, thanks for
     your previous work! (Closes: #503567)
+  * Switch Vcs fields to the new git repositories.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
 

@@ -3,8 +3,8 @@ Section: net
 Priority: extra
 Maintainer: Guillem Jover <guillem@debian.org>
 Standards-Version: 3.8.0
-Vcs-Browser: http://svn.debian.org/wsvn/pkg-inetutils/
-Vcs-Svn: svn://svn.debian.org/pkg-inetutils/trunk/
+Vcs-Browser: http://git.hadrons.org/?p=debian/pkgs/inetutils.git
+Vcs-Git: git://git.hadrons.org/git/debian/pkgs/inetutils.git
 Homepage: http://www.gnu.org/software/inetutils/
 Build-Depends: debhelper (>= 7), autoconf, automake, texinfo,
  bison, libreadline-dev | libreadline6-dev | libreadline5-dev, libpam0g-dev,
