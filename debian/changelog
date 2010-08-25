@@ -25,6 +25,8 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
   * Remove Marcus Brinkmann and Jeff Bailey from Uploaders field, thanks for
     your previous work! (Closes: #503567)
   * Switch Vcs fields to the new git repositories.
+  * Explicitly include BSD licenses into debian/copyright, instead of
+    referencing generic and non-matching file from common-licenses.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
 
