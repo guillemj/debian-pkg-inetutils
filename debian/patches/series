@@ -5,3 +5,4 @@
 50_split_load_conffile.patch
 51_add_load_confdir_support.patch
 53_man_inetd_max_conn.patch
+54_man_fixes.patch
