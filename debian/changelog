@@ -17,6 +17,7 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
     a regression from previous man pages inherited from BSD. Revert the
     removal and disable help2man logic.
     - debian/patches/01_revert_manpage_removal.patch: New file.
+  * Install man pages for inetutils-ifconfig and ping6.
   * Switch to source format “3.0 (quilt)”:
     - Remove quilt from Build-Depends.
     - Remove quilt.make include from debian/rules.

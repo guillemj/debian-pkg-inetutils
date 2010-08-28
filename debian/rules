@@ -103,6 +103,7 @@ install: build
 	
 	# Rename ifconfig to not break existing systems using net-tools
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
+	cp man/ifconfig.1 $(D)/usr/share/man/man1/inetutils-ifconfig.1
 	
 	# Rename inetd to be able to coexist with not purged netkit-inetd
 	mv $(D)/usr/sbin/inetd $(D)/usr/sbin/inetutils-inetd
