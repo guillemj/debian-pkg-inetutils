@@ -8,3 +8,4 @@
 53_man_inetd_max_conn.patch
 54_man_fixes.patch
 60_inetd_support_argless_services.patch
+61_inetd_listen_on_tcpmux_ports.patch
