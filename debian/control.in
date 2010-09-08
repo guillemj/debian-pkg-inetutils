@@ -8,7 +8,7 @@ Vcs-Git: git://git.hadrons.org/git/debian/pkgs/inetutils.git
 Homepage: http://www.gnu.org/software/inetutils/
 Build-Depends: debhelper (>= 7), autoconf, automake, texinfo,
  bison, libreadline-dev | libreadline6-dev | libreadline5-dev, libpam0g-dev,
- libopie-dev, libwrap0-dev, libshishi-dev
+ libwrap0-dev, libshishi-dev
 Build-Conflicts: autoconf2.13, automake1.4
 
 Package: inetutils-ftp
