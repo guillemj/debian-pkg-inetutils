@@ -34,6 +34,10 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
   * Do not segfault in inetd when a service does not have any argument.
     (Closes: #515070, #590128)
   * Make inetd listen on ports when enabling tcpmux services.
+  * Change inetd “tcp” and “udp” service protocol semantics to default them
+    to IPv4 only connections. Change “tcp6” and “udp6” to accept IPv4 mapped
+    addresses. And add “tcp6only” and “udp6only” for IPv6 only connections.
+    (Closes: #404760, #519316, #594422)
 
  -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
 

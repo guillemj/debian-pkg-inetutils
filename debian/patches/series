@@ -9,3 +9,4 @@
 54_man_fixes.patch
 60_inetd_support_argless_services.patch
 61_inetd_listen_on_tcpmux_ports.patch
+62_inetd_change_ipv6_protocol_semantics.patch
