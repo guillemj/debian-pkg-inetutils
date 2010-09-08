@@ -7,3 +7,4 @@
 51_add_load_confdir_support.patch
 53_man_inetd_max_conn.patch
 54_man_fixes.patch
+60_inetd_support_argless_services.patch

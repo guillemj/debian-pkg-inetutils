@@ -31,6 +31,8 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
     referencing generic and non-matching file from common-licenses.
   * Now using Standards-Version 3.9.1.
   * Remove obsolete and unused libopie-dev Build-Depends.
+  * Do not segfault in inetd when a service does not have any argument.
+    (Closes: #515070, #590128)
 
  -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
 
