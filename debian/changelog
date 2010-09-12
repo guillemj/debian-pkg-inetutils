@@ -1,4 +1,4 @@
-inetutils (2:1.8-1) UNRELEASED; urgency=low
+inetutils (2:1.8-1) experimental; urgency=low
 
   * New upstream release.
     - Implement “ping -w timeout”. (Closes: #565137)
@@ -39,7 +39,7 @@ inetutils (2:1.8-1) UNRELEASED; urgency=low
     addresses. And add “tcp6only” and “udp6only” for IPv6 only connections.
     (Closes: #404760, #519316, #594422)
 
- -- Guillem Jover <guillem@debian.org>  Tue, 08 Jun 2010 21:16:04 +0200
+ -- Guillem Jover <guillem@debian.org>  Sun, 12 Sep 2010 16:00:53 +0200
 
 inetutils (2:1.6-3) unstable; urgency=low
 
