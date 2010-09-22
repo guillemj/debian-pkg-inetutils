@@ -1,3 +1,13 @@
+inetutils (2:1.8-2) UNRELEASED; urgency=low
+
+  * Fix FTBFS on GNU/Hurd and GNU/kFreeBSD systems. (Closes: #596638)
+    - Use IFF_ flags conditionally.
+    - Do not include <stropts.h> to get ioctl declaration as we get it from
+      the wrapped <sys/ioctl.h>, otherwise we get conflicting symbols.
+    - Include <sys/types.h> in ifconfig/flags.h for size_t.
+
+ -- Guillem Jover <guillem@debian.org>  Wed, 22 Sep 2010 06:40:25 +0200
+
 inetutils (2:1.8-1) experimental; urgency=low
 
   * New upstream release.
