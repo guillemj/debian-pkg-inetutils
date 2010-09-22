@@ -1,4 +1,4 @@
-inetutils (2:1.8-2) UNRELEASED; urgency=low
+inetutils (2:1.8-2) experimental; urgency=low
 
   * Fix FTBFS on GNU/Hurd and GNU/kFreeBSD systems. (Closes: #596638)
     - Use IFF_ flags conditionally.
@@ -6,7 +6,7 @@ inetutils (2:1.8-2) UNRELEASED; urgency=low
       the wrapped <sys/ioctl.h>, otherwise we get conflicting symbols.
     - Include <sys/types.h> in ifconfig/flags.h for size_t.
 
- -- Guillem Jover <guillem@debian.org>  Wed, 22 Sep 2010 06:40:25 +0200
+ -- Guillem Jover <guillem@debian.org>  Wed, 22 Sep 2010 06:43:52 +0200
 
 inetutils (2:1.8-1) experimental; urgency=low
 
