@@ -10,4 +10,6 @@
 60_inetd_support_argless_services.patch
 61_inetd_listen_on_tcpmux_ports.patch
 62_inetd_change_ipv6_protocol_semantics.patch
+63_inetd_ipv6_sockaddrlen.patch
+64_telnetd_ipv6_sockaddrlen.patch
 70_ftbfs_non-linux.patch

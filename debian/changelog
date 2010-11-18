@@ -2,6 +2,10 @@ inetutils (2:1.8-3) UNRELEASED; urgency=low
 
   * Revert wrong hunk from the tcpmux services fix.
     Thanks to Mats Erik Andersson.
+  * Fix IPv6 support in inetd and telnetd on GNU/kFreeBSD by passing
+    the correct struct sockaddr length to socket functions depending on
+    the address family, instead of always passing the size of struct
+    sockaddr_storage. Thanks to Mats Erik Andersson and Simon Josefsson.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 18 Nov 2010 04:01:33 +0100
 
