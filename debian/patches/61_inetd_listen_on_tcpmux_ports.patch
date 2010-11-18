@@ -3,9 +3,8 @@ From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 09:00:58 +0200
 Subject: [PATCH] inetd: Listen on ports for tcpmux services
 
-* src/inetd.c (nextconfig): Call expand_enter instead of enter for
+* src/inetd.c (fix_tcpmux): Call expand_enter instead of enter for
 tcpmux services.
-(fix_tcpmux): Likewise.
 ---
  src/inetd.c |    6 ++----
  1 files changed, 2 insertions(+), 4 deletions(-)
@@ -14,18 +13,6 @@ diff --git a/src/inetd.c b/src/inetd.c
 index 354ae1d..1c51a51 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
-@@ -1161,10 +1161,8 @@ nextconfig (const char *file)
- 	{
- 	  sep->se_fd = -1;
- 	  sep->se_checked = 1;
--	  enter (sep);
- 	}
--      else
--	expand_enter (sep);
-+      expand_enter (sep);
-       freeconfig (sep);
-     }
-   endconfig (fconfig);
 @@ -1249,7 +1247,7 @@ fix_tcpmux (void)
        if (debug)
  	fprintf (stderr, "inserting default tcpmux entry\n");
