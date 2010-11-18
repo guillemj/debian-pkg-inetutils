@@ -1,4 +1,4 @@
-inetutils (2:1.8-3) UNRELEASED; urgency=low
+inetutils (2:1.8-3) unstable; urgency=low
 
   * Revert wrong hunk from the tcpmux services fix.
     Thanks to Mats Erik Andersson.
@@ -7,7 +7,7 @@ inetutils (2:1.8-3) UNRELEASED; urgency=low
     the address family, instead of always passing the size of struct
     sockaddr_storage. Thanks to Mats Erik Andersson and Simon Josefsson.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 18 Nov 2010 04:01:33 +0100
+ -- Guillem Jover <guillem@debian.org>  Thu, 18 Nov 2010 05:54:25 +0100
 
 inetutils (2:1.8-2) experimental; urgency=low
 
