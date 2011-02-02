@@ -130,10 +130,6 @@ binary-arch: install
 	  cp -a $(D)/usr/bin/ping6 \
 	        $(CURDIR)/debian/inetutils-ping/bin/; \
 	fi
-	# This should use the new dh_lintian instead
-	cp $(CURDIR)/debian/inetutils-ping.overrides \
-	   $(CURDIR)/debian/inetutils-ping/usr/share/lintian/overrides/inetutils-ping
-	
 	dh_installdebconf -a
 	dh_installdocs -a -A NEWS AUTHORS THANKS
 	dh_installexamples -a
@@ -144,6 +140,7 @@ binary-arch: install
 	dh_installman -a
 	dh_installinfo -a
 	dh_installchangelogs -a ChangeLog
+	dh_lintian
 	dh_link -a
 	dh_strip -a
 	dh_compress -a
