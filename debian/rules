@@ -18,6 +18,9 @@ else
 	CFLAGS += -O2
 endif
 
+# Override default upstream setuid mode, as they rejected this change.
+SUIDMODE="-o root -m 4755"
+
 # Set proper Provides
 ifeq ($(DEB_HOST_ARCH_OS),linux)
   syslogd_provides = linux-kernel-log-daemon
@@ -95,7 +98,7 @@ install: build
 	dh_prep
 	dh_installdirs -a
 	
-	$(MAKE) install DESTDIR=$(D)
+	$(MAKE) install DESTDIR=$(D) SUIDMODE=$(SUIDMODE)
 	
 	# Move ping to /bin
 	mkdir -p $(D)/bin
