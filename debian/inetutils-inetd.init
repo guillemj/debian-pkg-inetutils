@@ -14,6 +14,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/inetutils-inetd
 NAME=inetd
 DESC="internet superserver"
+CONFIGFILE=/etc/default/inetutils-inetd
 PIDFILE=/var/run/$NAME.pid
 
 test -x $DAEMON || exit 0
@@ -21,6 +22,8 @@ test -x $DAEMON || exit 0
 set -e
 
 . /lib/lsb/init-functions
+
+test -r $CONFIGFILE && . $CONFIGFILE
 
 check_no_services()
 {
@@ -36,7 +39,7 @@ case "$1" in
 	check_no_services
 	log_daemon_msg "Starting $DESC" "$NAME"
 	start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE \
-	                  --exec $DAEMON
+	                  --exec $DAEMON -- $INETD_OPTS
 	log_end_msg $?
 	;;
   stop)
@@ -58,7 +61,7 @@ case "$1" in
 	check_no_services
 	sleep 1
 	start-stop-daemon --start --quiet --pidfile $PIDFILE \
-	                  --exec $DAEMON
+	                  --exec $DAEMON -- $INETD_OPTS
 	log_end_msg $?
 	;;
   status)
