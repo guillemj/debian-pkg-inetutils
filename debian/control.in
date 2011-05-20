@@ -51,6 +51,18 @@ Description: ICMP echo tool
  Ping uses ICMP to send out echo requests, and uses the reply packets to
  calculate latency between the sending and the destination hosts.
 
+Package: inetutils-traceroute
+Priority: @inetutils:Priority@
+Architecture: any
+Provides: traceroute
+Depends: ${shlibs:Depends}, ${misc:Depends}, netbase
+Description: trace the IPv4 route to another host
+ The traceroute utility displays the route taken by IP packets on their
+ way to another host or another network.
+ .
+ Install this package if you need a tool to examine network connectivity
+ or to diagnose network problems.
+
 Package: inetutils-syslogd
 Priority: @syslogd:Priority@
 Architecture: any

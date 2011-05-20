@@ -126,6 +126,8 @@ install: build
 	cp $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
 	mv $(D)/usr/bin/talk $(D)/usr/bin/inetutils-talk
 	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
+	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute
+	cp man/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
 
 binary-indep:
 # Nothing to do.
@@ -154,8 +156,8 @@ binary-arch: install
 	dh_link -a
 	dh_strip -a
 	dh_compress -a
-	# pings are setuid
-	dh_fixperms -a -Xbin/ping -Xbin/ping6
+	# pings and traceroute are setuid
+	dh_fixperms -a -Xbin/ping -Xbin/ping6 -Xusr/bin/inetutils-traceroute
 	dh_installdeb -a
 	dh_shlibdeps -a
 	dh_gencontrol -a -- \

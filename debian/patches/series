@@ -9,3 +9,4 @@
 63_inetd_ipv6_sockaddrlen.patch
 64_telnetd_ipv6_sockaddrlen.patch
 70_ftbfs_non-linux.patch
+72_traceroute_fix_setsockopt.patch

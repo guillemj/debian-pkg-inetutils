@@ -3,6 +3,9 @@ inetutils (2:1.8-5) UNRELEASED; urgency=low
   * Move man pages from patches to actual files under debian/local/man/ to
     ease their modification, given that upstream has rejected including
     useful man pages there.
+  * Add a new inetutils-traceroute package providing a portable traceroute
+    implementation for GNU/Hurd and GNU/kFreeBSD. (Closes: #610437)
+    Thanks to Mats Erik Andersson <mats.andersson@gisladisker.se>.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 05 Nov 2011 00:28:58 +0100
 
