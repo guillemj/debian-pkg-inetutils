@@ -4,6 +4,9 @@ inetutils (2:1.8-4) UNRELEASED; urgency=low
     allowing to pass INETD_OPTS to it on start. (Closes: #606954)
   * Use dh_lintian instead of manually installing the overrides.
   * Override upstream SUIDMODE at make time, instead of patching the source.
+  * Do not change inetutils-syslogd Section to base on non-Linux architectures
+    as that section does not exist any longer, just inherit it from the
+    source stanza.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 02 Feb 2011 05:43:10 +0100
 

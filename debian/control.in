@@ -52,7 +52,6 @@ Description: ICMP echo tool
  calculate latency between the sending and the destination hosts.
 
 Package: inetutils-syslogd
-Section: @syslogd:Section@
 Priority: @syslogd:Priority@
 Architecture: any
 Provides: system-log-daemon, ${syslogd:Provides}
