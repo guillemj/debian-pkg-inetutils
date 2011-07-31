@@ -54,10 +54,14 @@ config.status: configure
 	  --with-wrap \
 	  --with-pam
 
-build: debian/control config.status
+build-indep:
+
+build-arch: debian/control config.status
 	dh_testdir
 	
 	$(MAKE) CFLAGS="$(CFLAGS)"
+
+build: build-indep build-arch
 
 # We need it forced on all builds.
 .PHONY: debian/control
@@ -157,5 +161,6 @@ binary-arch: install
 
 binary: binary-indep binary-arch
 
-.PHONY: build build-udeb clean binary-indep binary-arch binary install
+.PHONY: build-indep build-arch build build-udeb
+.PHONY: clean install binary-indep binary-arch binary
 
