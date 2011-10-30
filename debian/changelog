@@ -10,6 +10,7 @@ inetutils (2:1.8-4) UNRELEASED; urgency=low
   * Add build-indep and build-arch targets (rename build to build-arch).
   * Add libncurses-dev to Build-Depends, although only libtinfo-dev is
     really needed (but that does not ship term.h). (Closes: #646143)
+  * Now using Standards-Version 3.9.2 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Wed, 02 Feb 2011 05:43:10 +0100
 
