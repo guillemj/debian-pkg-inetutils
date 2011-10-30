@@ -1,4 +1,4 @@
-inetutils (2:1.8-4) UNRELEASED; urgency=low
+inetutils (2:1.8-4) unstable; urgency=low
 
   * Add new inetutils-inetd default configuration file for the init script,
     allowing to pass INETD_OPTS to it on start. (Closes: #606954)
@@ -12,7 +12,7 @@ inetutils (2:1.8-4) UNRELEASED; urgency=low
     really needed (but that does not ship term.h). (Closes: #646143)
   * Now using Standards-Version 3.9.2 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Wed, 02 Feb 2011 05:43:10 +0100
+ -- Guillem Jover <guillem@debian.org>  Sun, 30 Oct 2011 07:52:19 +0100
 
 inetutils (2:1.8-3) unstable; urgency=low
 
