@@ -6,6 +6,11 @@ inetutils (2:1.8-5) UNRELEASED; urgency=low
   * Add a new inetutils-traceroute package providing a portable traceroute
     implementation for GNU/Hurd and GNU/kFreeBSD. (Closes: #610437)
     Thanks to Mats Erik Andersson <mats.andersson@gisladisker.se>.
+  * Do not link against unused shared libraries. This removes the following
+    dependencies from binaries:
+    - inetutils-inetd, inetutils-syslogd → libshishi0
+    - inetutils-telnet, inetutils-telnetd → libncurses5
+    - inetutils-ftp → libncurses5, libtinfo5
 
  -- Guillem Jover <guillem@debian.org>  Sat, 05 Nov 2011 00:28:58 +0100
 

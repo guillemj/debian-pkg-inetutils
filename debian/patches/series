@@ -1,5 +1,6 @@
 01_disable_useless_man_pages.patch
 02_remove_unused_opie_check.patch
+03_reduce_shared_lib_depends.patch
 22_syslogd_conf.patch
 50_split_load_conffile.patch
 51_add_load_confdir_support.patch
