@@ -11,6 +11,7 @@ inetutils (2:1.8-5) UNRELEASED; urgency=low
     - inetutils-inetd, inetutils-syslogd → libshishi0
     - inetutils-telnet, inetutils-telnetd → libncurses5
     - inetutils-ftp → libncurses5, libtinfo5
+  * Disable silent rules to get useful build logs.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 05 Nov 2011 00:28:58 +0100
 

@@ -45,6 +45,7 @@ config.status: configure
 	
 	./configure \
 	  $(conf_gnu_type) \
+	  --disable-silent-rules \
 	  --prefix=/usr \
 	  --sysconfdir=/etc \
 	  --localstatedir=/var \
