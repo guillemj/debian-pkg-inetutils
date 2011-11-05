@@ -1,11 +1,8 @@
-01_revert_manpage_removal.patch
+01_disable_useless_man_pages.patch
 02_remove_unused_opie_check.patch
-10_syslog_klog_doc.patch
 22_syslogd_conf.patch
 50_split_load_conffile.patch
 51_add_load_confdir_support.patch
-53_man_inetd_max_conn.patch
-54_man_fixes.patch
 60_inetd_support_argless_services.patch
 61_inetd_listen_on_tcpmux_ports.patch
 62_inetd_change_ipv6_protocol_semantics.patch

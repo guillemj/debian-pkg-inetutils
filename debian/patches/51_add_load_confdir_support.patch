@@ -6,9 +6,8 @@ Subject: [PATCH] Add load_confdir support
 ---
  paths           |    1 
  src/Makefile.am |    2 -
- src/syslogd.8   |    3 ++
  src/syslogd.c   |   57 +++++++++++++++++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 61 insertions(+), 2 deletions(-)
+ 3 files changed, 58 insertions(+), 2 deletions(-)
 
 --- a/paths
 +++ b/paths
@@ -31,18 +30,6 @@ Subject: [PATCH] Add load_confdir support
  
  SUIDMODE = -o root -m 4775
  
---- a/src/syslogd.8
-+++ b/src/syslogd.8
-@@ -70,6 +70,9 @@ sockets.
- .It \fB-f\fR, \fB--rcfile\fR=\fIFILE\fP
- Specify the pathname of an alternate configuration file;
- the default is system specific and displayed in the help output.
-+.It \fB--rcdir\fR=\fIDIR\fP
-+Specify the pathname of an alternate configuration directory;
-+the default is system specific and displayed in the help output.
- .It \fB-h\fR, \fB--hop\fR
- Enable forwarding remote messages. By default syslogd will not
- forward messages it receives from remote hosts.
 --- a/src/syslogd.c
 +++ b/src/syslogd.c
 @@ -108,6 +108,7 @@

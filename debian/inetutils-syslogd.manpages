@@ -1,2 +1,2 @@
-debian/tmp/usr/share/man/man5/syslog.conf.5
-debian/tmp/usr/share/man/man8/syslogd.8
+debian/local/man/syslog.conf.5
+debian/local/man/syslogd.8

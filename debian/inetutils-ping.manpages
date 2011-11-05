@@ -1,2 +1,2 @@
-debian/tmp/usr/share/man/man8/ping.8
+debian/local/man/ping.8
 man/ping6.1

@@ -30,6 +30,7 @@ ifeq ($(DEB_HOST_ARCH_OS),hurd)
 endif
 
 D = $(CURDIR)/debian/tmp
+M = $(CURDIR)/debian/local/man
 mandir = usr/share/man
 man1dir = $(mandir)/man1
 man8dir = $(mandir)/man8
@@ -102,6 +103,10 @@ install: build
 	
 	$(MAKE) install DESTDIR=$(D) SUIDMODE=$(SUIDMODE)
 	
+	# Create man page directories
+	mkdir -p $(D)/$(man1dir)
+	mkdir -p $(D)/$(man8dir)
+	
 	# Move ping to /bin
 	mkdir -p $(D)/bin
 	mv $(D)/usr/bin/ping $(D)/bin/
@@ -112,15 +117,15 @@ install: build
 	
 	# Rename inetd to be able to coexist with not purged netkit-inetd
 	mv $(D)/usr/sbin/inetd $(D)/usr/sbin/inetutils-inetd
-	mv $(D)/$(man8dir)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8
+	cp $(M)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8
 	
 	# Needed to enable alternatives
 	mv $(D)/usr/bin/telnet $(D)/usr/bin/inetutils-telnet
-	mv $(D)/$(man1dir)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
+	cp $(M)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
 	mv $(D)/usr/bin/ftp $(D)/usr/bin/inetutils-ftp
-	mv $(D)/$(man1dir)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
+	cp $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
 	mv $(D)/usr/bin/talk $(D)/usr/bin/inetutils-talk
-	mv $(D)/$(man1dir)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
+	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
 
 binary-indep:
 # Nothing to do.
