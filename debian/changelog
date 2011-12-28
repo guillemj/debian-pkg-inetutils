@@ -3,6 +3,8 @@ inetutils (2:1.8-6) UNRELEASED; urgency=high
   * Fix buffer overflow in telnetd allowing remote attackers to execute
     arbitrary code via a long encryption key. Patch taken from FreeBSD.
     CVE-2011-4862
+  * Abort on error from ping's sendto(2) call, instead of trying to continue
+    sending echo packets in vain. (Closes: #323165)
 
  -- Guillem Jover <guillem@debian.org>  Wed, 28 Dec 2011 02:25:37 +0100
 

@@ -2,6 +2,7 @@
 02_remove_unused_opie_check.patch
 03_reduce_shared_lib_depends.patch
 22_syslogd_conf.patch
+30_ping-Abort-on-sendto-error.patch
 50_split_load_conffile.patch
 51_add_load_confdir_support.patch
 60_inetd_support_argless_services.patch
