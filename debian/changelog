@@ -1,4 +1,4 @@
-inetutils (2:1.9-1) UNRELEASED; urgency=low
+inetutils (2:1.9-1) unstable; urgency=low
 
   * New upstream release.
     - Implement ”ping -W linger”. (Closes: #566845)
@@ -22,7 +22,7 @@ inetutils (2:1.9-1) UNRELEASED; urgency=low
   * Improve inetutils-inetd package Description. (Closes: #348915)
   * Improve inetutils-ping package Description. (Closes: #524026)
 
- -- Guillem Jover <guillem@debian.org>  Sun, 01 Jan 2012 04:34:04 +0100
+ -- Guillem Jover <guillem@debian.org>  Sun, 01 Jan 2012 06:35:22 +0100
 
 inetutils (2:1.8-6) unstable; urgency=high
 
