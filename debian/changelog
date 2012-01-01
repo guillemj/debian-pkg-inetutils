@@ -1,3 +1,25 @@
+inetutils (2:1.9-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    - Implement ”ping -W linger”. (Closes: #566845)
+    - debian/patches/99_CVE-2011-4862.patch: Remove, merged upstream.
+    - debian/patches/02_remove_unused_opie_check.patch: Likewise.
+    - debian/patches/60_inetd_support_argless_services.patch: Likewise.
+    - debian/patches/61_inetd_listen_on_tcpmux_ports.patch: Likewise.
+    - debian/patches/63_inetd_ipv6_sockaddrlen.patch: Likewise.
+    - debian/patches/64_telnetd_ipv6_sockaddrlen.patch: Likewise.
+    - debian/patches/72_traceroute_fix_setsockopt.patch: Likewise.
+    - debian/patches/01_disable_useless_man_pages.patch: Refreshed.
+    - debian/patches/03_reduce_shared_lib_depends.patch: Likewise.
+    - debian/patches/22_syslogd_conf.patch: Likewise.
+    - debian/patches/50_split_load_conffile.patch: Likewise.
+    - debian/patches/51_add_load_confdir_support.patch: Likewise.
+    - debian/patches/62_inetd_change_ipv6_protocol_semantics.patch: Likewise.
+    - debian/patches/70_ftbfs_non-linux.patch: Likewise.
+  * Pass “-Im4 -Iam” to autoreconf call in debian/rules.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 01 Jan 2012 04:34:04 +0100
+
 inetutils (2:1.8-6) unstable; urgency=high
 
   * Fix buffer overflow in telnetd allowing remote attackers to execute

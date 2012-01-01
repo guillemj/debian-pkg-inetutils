@@ -38,7 +38,7 @@ man8dir = $(mandir)/man8
 configure: configure.ac
 	dh_testdir
 	
-	autoreconf -i
+	autoreconf -i -Im4 -Iam
 
 config.status: configure
 	dh_testdir
