@@ -19,6 +19,7 @@ inetutils (2:1.9-1) UNRELEASED; urgency=low
   * Pass “-Im4 -Iam” to autoreconf call in debian/rules.
   * Use dpkg-buildflags to set build flags (enables default hardening flags).
     Fix code to not fail on -Wformat-security. (Closes: #653436)
+  * Improve inetutils-inetd package Description. (Closes: #348915)
 
  -- Guillem Jover <guillem@debian.org>  Sun, 01 Jan 2012 04:34:04 +0100
 
