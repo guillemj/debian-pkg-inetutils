@@ -53,6 +53,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, netbase
 Description: ICMP echo tool
  Ping uses ICMP to send out echo requests, and uses the reply packets to
  calculate latency between the sending and the destination hosts.
+ .
+ This is the portable GNU implementation of ping.
 
 Package: inetutils-traceroute
 Priority: @inetutils:Priority@
