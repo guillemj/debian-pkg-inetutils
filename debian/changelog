@@ -17,6 +17,8 @@ inetutils (2:1.9-1) UNRELEASED; urgency=low
     - debian/patches/62_inetd_change_ipv6_protocol_semantics.patch: Likewise.
     - debian/patches/70_ftbfs_non-linux.patch: Likewise.
   * Pass “-Im4 -Iam” to autoreconf call in debian/rules.
+  * Use dpkg-buildflags to set build flags (enables default hardening flags).
+    Fix code to not fail on -Wformat-security. (Closes: #653436)
 
  -- Guillem Jover <guillem@debian.org>  Sun, 01 Jan 2012 04:34:04 +0100
 

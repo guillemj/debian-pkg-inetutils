@@ -10,13 +10,9 @@ else
   conf_gnu_type += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
 endif
 
-CFLAGS = -Wall -g
-
-ifneq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
-endif
+CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS = -Wall $(shell dpkg-buildflags --get CFLAGS)
+LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
 
 # Override default upstream setuid mode, as they rejected this change.
 SUIDMODE="-o root -m 4755"
@@ -61,7 +57,7 @@ build-indep:
 build-arch: debian/control config.status
 	dh_testdir
 	
-	$(MAKE) CFLAGS="$(CFLAGS)"
+	$(MAKE) CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
 
 build: build-indep build-arch
 

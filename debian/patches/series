@@ -6,3 +6,4 @@
 51_add_load_confdir_support.patch
 62_inetd_change_ipv6_protocol_semantics.patch
 70_ftbfs_non-linux.patch
+71_ftbfs_format_security.patch
