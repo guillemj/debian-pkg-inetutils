@@ -1,7 +1,8 @@
 inetutils (2:1.9-1) unstable; urgency=low
 
   * New upstream release.
-    - Implement ”ping -W linger”. (Closes: #566845)
+    - Implement “syslogd -b bindaddr”. (Closes: #207054)
+    - Implement “ping -W linger”. (Closes: #566845)
     - debian/patches/99_CVE-2011-4862.patch: Remove, merged upstream.
     - debian/patches/02_remove_unused_opie_check.patch: Likewise.
     - debian/patches/60_inetd_support_argless_services.patch: Likewise.
