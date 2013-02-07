@@ -7,3 +7,4 @@
 62_inetd_change_ipv6_protocol_semantics.patch
 70_ftbfs_non-linux.patch
 71_ftbfs_format_security.patch
+0001-ping-CVE-2010-2529.patch
