@@ -14,6 +14,7 @@ inetutils (2:1.9.1.282-e8541-1) UNRELEASED; urgency=low
     - debian/patches/50_split_load_conffile.patch: Likewise.
     - debian/patches/51_add_load_confdir_support.patch: Likewise.
     - debian/patches/62_inetd_change_ipv6_protocol_semantics.patch: Likewise.
+  * Now using Standards-Version 3.9.4 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Sat, 11 May 2013 04:12:10 +0200
 
