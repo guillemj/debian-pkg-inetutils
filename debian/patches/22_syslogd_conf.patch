@@ -78,12 +78,12 @@
 +
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -85,6 +85,8 @@ inetdaemon_PROGRAMS += @syslogd_BUILD@
+@@ -106,6 +106,8 @@ inetdaemon_PROGRAMS += $(syslogd_BUILD)
  syslogd_SOURCES = syslogd.c
  EXTRA_PROGRAMS += syslogd
  
 +dist_sysconf_DATA = syslog.conf
 +
- inetdaemon_PROGRAMS += @tftpd_BUILD@
+ inetdaemon_PROGRAMS += $(tftpd_BUILD)
  tftpd_SOURCES = tftpd.c
  EXTRA_PROGRAMS += tftpd

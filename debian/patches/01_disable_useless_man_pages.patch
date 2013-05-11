@@ -10,7 +10,7 @@ Subject: [PATCH] Disable useless man pages
 
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -22,7 +22,7 @@ EXTRA_DIST = paths ChangeLog.0
+@@ -23,7 +23,7 @@ EXTRA_DIST = paths ChangeLog.0 summary.s
  SUBDIRS = lib \
  	libinetutils libtelnet libicmp libls \
  	src telnet telnetd ftp ftpd talk talkd whois ping ifconfig \
@@ -18,18 +18,18 @@ Subject: [PATCH] Disable useless man pages
 +	doc \
  	tests
  
- DISTCLEANFILES = pathdefs.make paths.defs $(PACKAGE)-$(VERSION).tar.gz
+ DISTCLEANFILES = pathdefs.make paths.defs \
 --- a/configure.ac
 +++ b/configure.ac
-@@ -136,7 +136,6 @@ AC_PROG_MAKE_SET
- AC_PROG_RANLIB
+@@ -143,7 +143,6 @@ AC_PROG_RANLIB
  AC_PROG_YACC
  AC_PROG_LN_S
+ AC_PROG_SED
 -AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
- 
- gl_INIT
- 
-@@ -831,7 +830,6 @@ ping/Makefile
+ AC_ARG_VAR(GREP, [Location of preferred 'grep' utility.])
+ AC_ARG_VAR(SED, [Location of preferred 'sed' utility.])
+ AC_ARG_VAR(DD, [Location of 'dd'.])
+@@ -982,7 +981,6 @@ ping/Makefile
  ifconfig/Makefile
  ifconfig/system/Makefile
  doc/Makefile

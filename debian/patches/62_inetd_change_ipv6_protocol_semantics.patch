@@ -1,7 +1,7 @@
-From ee6ea58645a4db63f6ccad40566b37b23279797e Mon Sep 17 00:00:00 2001
+From 4434b2164f88ceed474700f14019532ca5c54ff1 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
-Subject: [PATCH 3/3] inetd: Change protocol semantics in inetd.conf
+Subject: [PATCH] inetd: Change protocol semantics in inetd.conf
 
 * src/inetd.c (setup): Update comment.
 (getconfigent) [IPV6]: Change default family to IPv4 for "tcp" and
@@ -10,12 +10,14 @@ Add "tcp6only" and "udp6only" protocols for IPv6 only addresses.
 (fix_tcpmux) [IPV6]: Set se_proto to "tcp6".
 [!IPV6]: Set se_proto to "tcp".
 ---
- src/inetd.c |    7 ++++---
+ src/inetd.c | 7 ++++---
  1 file changed, 4 insertions(+), 3 deletions(-)
 
+diff --git a/src/inetd.c b/src/inetd.c
+index 5c720de..d4894d0 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
-@@ -1048,9 +1048,9 @@ getconfigent (FILE *fconfig, const char
+@@ -1082,9 +1082,9 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
        sep->se_proto = newstr (argv[INETD_PROTOCOL]);
  
  #ifdef IPV6
@@ -27,7 +29,7 @@ Add "tcp6only" and "udp6only" protocols for IPv6 only addresses.
  
        if ((strncmp (sep->se_proto, "tcp", 3) == 0)
  	  || (strncmp (sep->se_proto, "udp", 3) == 0))
-@@ -1058,10 +1058,11 @@ getconfigent (FILE *fconfig, const char
+@@ -1092,10 +1092,11 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
  	  if (sep->se_proto[3] == '6')
  	    {
  	      sep->se_family = AF_INET6;
@@ -40,3 +42,6 @@ Add "tcp6only" and "udp6only" protocols for IPv6 only addresses.
  	    }
  	  else if (sep->se_proto[3] == '4')
  	    {
+-- 
+1.8.3.rc1
+

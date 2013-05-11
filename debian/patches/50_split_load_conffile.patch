@@ -1,23 +1,28 @@
-From 7cc1fba608d2d4a9c378f90a91cbd19646a15fd7 Mon Sep 17 00:00:00 2001
+From 81fef0288580b877a5f0a407812669653d02221d Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
-Date: Wed, 20 Feb 2008 05:23:19 +0200
-Subject: [PATCH] Split load_conffile
+Date: Sun, 6 Dec 2009 05:48:41 +0100
+Subject: [PATCH] Split configuration file loading into a new function
 
+* syslogd/syslogd.c (load_conffile): New declaration.
+(init): Move configuration file loading into ...
+(load_conffile): ... here. New function.
 ---
- src/syslogd.c |  117 +++++++++++++++++++++++++++++++---------------------------
- 1 file changed, 64 insertions(+), 53 deletions(-)
+ src/syslogd.c | 120 ++++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 66 insertions(+), 54 deletions(-)
 
+diff --git a/src/syslogd.c b/src/syslogd.c
+index fc633a8..0a4d698 100644
 --- a/src/syslogd.c
 +++ b/src/syslogd.c
-@@ -251,6 +251,7 @@ void die (int);
- void doexit (int);
+@@ -258,6 +258,7 @@ void doexit (int);
  void domark (int);
+ void find_inet_port (const char *);
  void fprintlog (struct filed *, const char *, int, const char *);
 +static int load_conffile (const char *, struct filed **);
  void init (int);
  void logerror (const char *);
  void logmsg (int, const char *, const char *, int);
-@@ -1697,12 +1698,11 @@ die (int signo)
+@@ -1796,12 +1797,11 @@ die (int signo)
    exit (EXIT_SUCCESS);
  }
  
@@ -33,7 +38,7 @@ Subject: [PATCH] Split load_conffile
    char *p;
  #ifndef LINE_MAX
  # define LINE_MAX 2048
-@@ -1712,63 +1712,19 @@ init (int signo _GL_UNUSED_PARAMETER)
+@@ -1811,64 +1811,19 @@ init (int signo _GL_UNUSED_PARAMETER)
    char *cline;
    int cont_line = 0;
  
@@ -69,6 +74,7 @@ Subject: [PATCH] Split load_conffile
 -	  free (f->f_un.f_user.f_unames);
 -	  break;
 -	}
+-      free (f->f_progname);
 -      free (f->f_prevhost);
 -      next = f->f_next;
 -      free (f);
@@ -100,7 +106,7 @@ Subject: [PATCH] Split load_conffile
    /* Allocate a buffer for line parsing.  */
    cbuf = malloc (line_max);
    if (cbuf == NULL)
-@@ -1776,7 +1732,7 @@ init (int signo _GL_UNUSED_PARAMETER)
+@@ -1876,7 +1831,7 @@ init (int signo _GL_UNUSED_PARAMETER)
        /* There is no graceful recovery here.  */
        dbg_printf ("cannot allocate space for configuration\n");
        fclose (cf);
@@ -109,7 +115,7 @@ Subject: [PATCH] Split load_conffile
      }
    cline = cbuf;
  
-@@ -1817,7 +1773,7 @@ init (int signo _GL_UNUSED_PARAMETER)
+@@ -1921,7 +1876,7 @@ init (int signo _GL_UNUSED_PARAMETER)
  	      dbg_printf ("cannot allocate space configuration\n");
  	      fclose (cf);
  	      free (cbuf);
@@ -118,7 +124,7 @@ Subject: [PATCH] Split load_conffile
  	    }
  	  else
  	    cbuf = tmp;
-@@ -1864,6 +1820,61 @@ init (int signo _GL_UNUSED_PARAMETER)
+@@ -2014,6 +1969,63 @@ init (int signo _GL_UNUSED_PARAMETER)
    fclose (cf);
    free (cbuf);
  
@@ -130,6 +136,7 @@ Subject: [PATCH] Split load_conffile
 +init (int signo _GL_UNUSED_PARAMETER)
 +{
 +  struct filed *f, *next, **nextp;
++  struct servent *sp;
 +
 +  dbg_printf ("init\n");
 +
@@ -163,6 +170,7 @@ Subject: [PATCH] Split load_conffile
 +	  free (f->f_un.f_user.f_unames);
 +	  break;
 +	}
++      free (f->f_progname);
 +      free (f->f_prevhost);
 +      next = f->f_next;
 +      free (f);
@@ -180,3 +188,6 @@ Subject: [PATCH] Split load_conffile
    Initialized = 1;
  
    if (Debug)
+-- 
+1.8.3.rc1
+

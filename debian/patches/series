@@ -1,10 +1,5 @@
 01_disable_useless_man_pages.patch
-03_reduce_shared_lib_depends.patch
 22_syslogd_conf.patch
-30_ping-Abort-on-sendto-error.patch
 50_split_load_conffile.patch
 51_add_load_confdir_support.patch
 62_inetd_change_ipv6_protocol_semantics.patch
-70_ftbfs_non-linux.patch
-71_ftbfs_format_security.patch
-0001-ping-CVE-2010-2529.patch
