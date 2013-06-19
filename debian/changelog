@@ -1,3 +1,14 @@
+inetutils (2:1.9.1.306-0a482-1) UNRELEASED; urgency=high
+
+  * New upstream snapshot.
+    - Fix security issue, by enforcing again ‘/etc/ftpusers’ access checks in
+      ftpd. Regression introduced in 2:1.9.1.282-e8541-1.
+      Thanks to Mats Erik Andersson <gnu@gisladisker.se> for reporting.
+    - debian/patches/50_split_load_conffile.patch: Remove, merged upstream.
+    - debian/patches/51_add_load_confdir_support.patch: Likewise.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 20 Jun 2013 00:39:51 +0200
+
 inetutils (2:1.9.1.282-e8541-1) unstable; urgency=low
 
   * New upstream snapshot.

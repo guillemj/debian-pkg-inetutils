@@ -1,5 +1,3 @@
 01_disable_useless_man_pages.patch
 22_syslogd_conf.patch
-50_split_load_conffile.patch
-51_add_load_confdir_support.patch
 62_inetd_change_ipv6_protocol_semantics.patch
