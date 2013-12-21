@@ -1,3 +1,9 @@
+inetutils (2:1.9.1.363-bbc1-1) UNRELEASED; urgency=low
+
+  * New upstream snapshot.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 21 Dec 2013 05:26:02 +0100
+
 inetutils (2:1.9.1.306-0a482-1) unstable; urgency=high
 
   * New upstream snapshot.
