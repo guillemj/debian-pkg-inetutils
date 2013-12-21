@@ -1,6 +1,9 @@
 inetutils (2:1.9.1.363-bbc1-1) UNRELEASED; urgency=low
 
   * New upstream snapshot.
+  * Fix update-inetd --remove syntax for talkd and telnetd, later versions
+    of update-inetd do not support a regex matching the start of the line
+    (including the comment).
 
  -- Guillem Jover <guillem@debian.org>  Sat, 21 Dec 2013 05:26:02 +0100
 
