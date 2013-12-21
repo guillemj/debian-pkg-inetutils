@@ -7,7 +7,7 @@ if [ "$1" = "configure" ]; then
     # Fix broken talk entry, and replace with correct one
     update-inetd --group BSD --pattern '.*/talkd' --remove talk
     update-inetd --group BSD \
-      --add "#<off># ntalk\tdgram\tudp4\twait\troot\t/usr/sbin/talkd\ttalkd"
+      --add "#<off># ntalk\tdgram\tudp4\twait\troot\t/usr/sbin/tcpd\t/usr/sbin/talkd"
   fi
 fi
 
