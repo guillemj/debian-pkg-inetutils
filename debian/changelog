@@ -14,6 +14,7 @@ inetutils (2:1.9.1.363-bbc1-1) UNRELEASED; urgency=low
   * Use «which» instead of hard-coding update-inetd pathnames.
   * Disable «set -e» in init scripts, just before the action case block.
   * Update debian/copyright information with new years and switch to GFDL-1.3.
+  * Remove first packaging information from debian/copyright.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 21 Dec 2013 05:26:02 +0100
 
