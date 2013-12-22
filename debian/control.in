@@ -135,4 +135,3 @@ Description: base networking utilities (experimental package)
  .
  WARNING: The current ifconfig implementation provided is not fully
  compatible with the net-tool's ifconfig version.
-

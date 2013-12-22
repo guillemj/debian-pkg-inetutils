@@ -7,4 +7,3 @@ update-alternatives --install /usr/bin/talk talk /usr/bin/inetutils-talk \
 				/usr/share/man/man1/inetutils-talk.1.gz
 
 #DEBHELPER#
-

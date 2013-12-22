@@ -7,4 +7,3 @@ update-alternatives --install /usr/bin/ftp ftp /usr/bin/inetutils-ftp \
 				/usr/share/man/man1/inetutils-ftp.1.gz
 
 #DEBHELPER#
-

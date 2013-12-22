@@ -7,4 +7,3 @@ update-alternatives --install /usr/bin/telnet telnet /usr/bin/inetutils-telnet \
 				/usr/share/man/man1/inetutils-telnet.1.gz
 
 #DEBHELPER#
-

@@ -35,7 +35,6 @@ check_no_services()
   fi
 }
 
-
 case "$1" in
   start)
 	check_no_services
