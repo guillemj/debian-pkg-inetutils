@@ -2,8 +2,9 @@
 
 set -e
 
-update-alternatives --install /usr/bin/telnet telnet /usr/bin/inetutils-telnet \
-		    100 --slave /usr/share/man/man1/telnet.1.gz telnet.1.gz \
-				/usr/share/man/man1/inetutils-telnet.1.gz
+update-alternatives \
+  --install /usr/bin/telnet telnet /usr/bin/inetutils-telnet 100 \
+  --slave /usr/share/man/man1/telnet.1.gz telnet.1.gz \
+          /usr/share/man/man1/inetutils-telnet.1.gz
 
 #DEBHELPER#
