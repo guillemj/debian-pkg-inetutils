@@ -1,4 +1,4 @@
-inetutils (2:1.9.1.363-bbc1-1) UNRELEASED; urgency=low
+inetutils (2:1.9.1.363-bbc1-1) unstable; urgency=low
 
   * New upstream snapshot.
   * Fix update-inetd --remove syntax for talkd and telnetd, later versions
@@ -16,7 +16,7 @@ inetutils (2:1.9.1.363-bbc1-1) UNRELEASED; urgency=low
   * Update debian/copyright information with new years and switch to GFDL-1.3.
   * Remove first packaging information from debian/copyright.
 
- -- Guillem Jover <guillem@debian.org>  Sat, 21 Dec 2013 05:26:02 +0100
+ -- Guillem Jover <guillem@debian.org>  Sun, 22 Dec 2013 05:42:05 +0100
 
 inetutils (2:1.9.1.306-0a482-1) unstable; urgency=high
 
