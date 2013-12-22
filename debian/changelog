@@ -12,6 +12,7 @@ inetutils (2:1.9.1.363-bbc1-1) UNRELEASED; urgency=low
     keys in debian/upstream-signing-key.pgp.
   * Use xz for source Debian packaging.
   * Use «which» instead of hard-coding update-inetd pathnames.
+  * Disable «set -e» in init scripts, just before the action case block.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 21 Dec 2013 05:26:02 +0100
 

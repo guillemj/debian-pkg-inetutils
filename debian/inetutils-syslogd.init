@@ -44,6 +44,8 @@ if [ ! -c /dev/.devfsd ]; then
   fi
 fi
 
+set +e
+
 case "$1" in
   start)
 	log_daemon_msg "Starting $DESC" "$NAME"
