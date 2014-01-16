@@ -35,6 +35,7 @@ inetutils (2:1.9.1.282-e8541-1) unstable; urgency=low
     - Fix FTBFS with newer glibc due to undefined gets. (Closes: #701399)
     - Do not accept invalid port numbers in telnet. (Closes: #300281)
     - Support <user>.<group> in inetd. (Closes: #342769)
+    - Fix talk to print error messages correctly. (Closes: #355588)
     - debian/patches/0001-ping-CVE-2010-2529.patch: Remove, merged upstream.
     - debian/patches/03_reduce_shared_lib_depends.patch: Likewise.
     - debian/patches/30_ping-Abort-on-sendto-error.patch: Likewise.
