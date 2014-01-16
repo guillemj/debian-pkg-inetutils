@@ -4,6 +4,8 @@ inetutils (2:1.9.2-1) UNRELEASED; urgency=low
   * Fix typos in local man pages.
   * Escape hyphens in local man pages.
   * Add tar.xz as an alternative upstream extension in the watch file.
+  * Use dh_autotools-dev_updateconfig and dh_autotools-dev_restoreconfig
+    from autotools-dev to update the config.sub and config.guess files.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 16 Jan 2014 20:01:48 +0100
 

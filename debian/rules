@@ -38,6 +38,7 @@ configure: configure.ac
 
 config.status: configure
 	dh_testdir
+	dh_autotools-dev_updateconfig
 	
 	./configure \
 	  $(conf_gnu_type) \
@@ -90,6 +91,7 @@ clean:
 	find -name Makefile.in | xargs rm -f
 	rm -f aclocal.m4 config.hin configure
 	
+	dh_autotools-dev_restoreconfig
 	dh_clean
 
 install: build
