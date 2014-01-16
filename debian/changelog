@@ -1,4 +1,4 @@
-inetutils (2:1.9.2-1) UNRELEASED; urgency=low
+inetutils (2:1.9.2-1) unstable; urgency=low
 
   * New upstream release.
   * Fix typos in local man pages.
@@ -7,7 +7,7 @@ inetutils (2:1.9.2-1) UNRELEASED; urgency=low
   * Use dh_autotools-dev_updateconfig and dh_autotools-dev_restoreconfig
     from autotools-dev to update the config.sub and config.guess files.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 16 Jan 2014 20:01:48 +0100
+ -- Guillem Jover <guillem@debian.org>  Thu, 16 Jan 2014 20:23:19 +0100
 
 inetutils (2:1.9.1.363-bbc1-1) unstable; urgency=low
 
