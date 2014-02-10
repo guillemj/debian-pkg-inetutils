@@ -1,3 +1,11 @@
+inetutils (2:1.9.2-2) UNRELEASED; urgency=low
+
+  * Switch from «debian/upstream-signing-key.pgp» to
+    «debian/upstream/signing-key.asc», and export it using pgp-clean
+    (signing-party) to get rid of useless bloat.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 11 Feb 2014 00:40:44 +0100
+
 inetutils (2:1.9.2-1) unstable; urgency=low
 
   * New upstream release.
