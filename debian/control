@@ -13,7 +13,6 @@ Build-Depends: debhelper (>= 9),
 Build-Conflicts: autoconf2.13, automake1.4
 
 Package: inetutils-ftp
-Priority: @inetutils:Priority@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, netbase
 Description: File Transfer Protocol client
@@ -21,7 +20,6 @@ Description: File Transfer Protocol client
  FTP protocol.
 
 Package: inetutils-ftpd
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: ftp-server
 Conflicts: ftp-server
@@ -32,7 +30,6 @@ Description: File Transfer Protocol server
  command to transfer files using the FTP protocol.
 
 Package: inetutils-inetd
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: inet-superserver, netkit-inetd
 Conflicts: inet-superserver, netkit-inetd
@@ -46,7 +43,6 @@ Description: internet super server
  IPv6, tcpmux services and unlimited server arguments.
 
 Package: inetutils-ping
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: ping
 Conflicts: ping, hurd (<= 20010718-1)
@@ -58,7 +54,6 @@ Description: ICMP echo tool
  This is the portable GNU implementation of ping.
 
 Package: inetutils-traceroute
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: traceroute
 Depends: ${shlibs:Depends}, ${misc:Depends}, netbase
@@ -70,7 +65,6 @@ Description: trace the IPv4 route to another host
  or to diagnose network problems.
 
 Package: inetutils-syslogd
-Priority: @syslogd:Priority@
 Architecture: any
 Provides: system-log-daemon, ${syslogd:Provides}
 Conflicts: system-log-daemon, ${syslogd:Provides}
@@ -82,7 +76,6 @@ Description: system logging daemon
  from remote hosts.
 
 Package: inetutils-talk
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: talk
 Replaces: talk-hurd
@@ -92,7 +85,6 @@ Description: talk to another user
  to that of another user.
 
 Package: inetutils-talkd
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: talkd
 Conflicts: talkd
@@ -105,7 +97,6 @@ Description: remote user communication server
  by clients wishing to rendezvous to hold a conversation.
 
 Package: inetutils-telnet
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: telnet-client
 Replaces: telnet-hurd
@@ -115,7 +106,6 @@ Description: telnet client
  using the TELNET protocol.
 
 Package: inetutils-telnetd
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: telnet-server
 Conflicts: telnet-server
@@ -127,7 +117,6 @@ Description: telnet server
  interactive communication protocol.
 
 Package: inetutils-tools
-Priority: @inetutils:Priority@
 Architecture: any
 Provides: ${tools:Provides}
 Depends: ${shlibs:Depends}, ${misc:Depends}
