@@ -4,6 +4,7 @@ inetutils (2:1.9.2-2) UNRELEASED; urgency=low
     «debian/upstream/signing-key.asc», and export it using pgp-clean
     (signing-party) to get rid of useless bloat.
   * Do not set source compression to xz, it's now the default.
+  * Improve debian/tarball.sh to handle latest snapshots.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 11 Feb 2014 00:40:44 +0100
 

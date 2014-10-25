@@ -21,7 +21,7 @@ get_version()
 {
   local d=$1
 
-  echo $(grep ^AC_INIT $d/configure.ac | sed -e 's/.*, *\[\([^,]*\)\] *,.*/\1/')
+  $d/configure --version | sed -ne 's/-/./;s/GNU inetutils configure *//p'
 }
 
 echo "-> getting the source."
@@ -41,10 +41,10 @@ case "$action" in
 
     echo " -> bootstrapping source tree form gnulib."
     cd $snapshot_dir
-    ./bootstrap --copy
+    ./bootstrap --copy --no-bootstrap-sync
     cd ..
 
-    version="$(get_version $snapshot_dir)+$(date +%Y%m%d)"
+    version="$(get_version $snapshot_dir)"
     ;;
   tarball)
     echo " -> unpacking upstream tarball."
@@ -54,15 +54,17 @@ case "$action" in
 
     mkdir $upstream_dir
     cd $upstream_dir
-    tar xzf ../$upstream_tarball --strip 1
+    tar xJf ../$upstream_tarball --strip 1
     cd ..
 
     version=$(get_version $upstream_dir)
     ;;
 esac
 
-tarball=${pkg}_${version}.orig.tar.gz
-tree=${pkg}-${version}
+tarball="${pkg}_${version}.orig.tar.xz"
+tree="${pkg}-${version}"
+
+echo "-> package ${pkg} version ${version}"
 
 echo "-> filling the working tree."
 case "$action" in
@@ -96,7 +98,7 @@ find $tree -name 'CVS' -o -name '.cvsignore' -o \
            -name '.git' -o -name '.gitignore' | xargs rm -rf
 
 echo "-> creating new tarball."
-tar czf $tarball $tree
+tar cJf $tarball $tree
 
 echo "-> cleaning directory tree."
 rm -rf $tree
