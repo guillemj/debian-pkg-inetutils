@@ -8,6 +8,10 @@ inetutils (2:1.9.2.39.3a460-1) UNRELEASED; urgency=medium
   * Do not set source compression to xz, it's now the default.
   * Improve debian/tarball.sh to handle latest snapshots.
   * Now using Standards-Version 3.9.6 (no changes needed).
+  * Add template man pages from help2man:
+    - local/man/ifconfig.1
+    - local/man/ping6.1
+    - local/man/traceroute.1
 
  -- Guillem Jover <guillem@debian.org>  Tue, 11 Feb 2014 00:40:44 +0100
 

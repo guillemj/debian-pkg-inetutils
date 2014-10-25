@@ -105,7 +105,7 @@ install: build
 	
 	# Rename ifconfig to not break existing systems using net-tools
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
-	cp man/ifconfig.1 $(D)/usr/share/man/man1/inetutils-ifconfig.1
+	cp $(M)/ifconfig.1 $(D)/usr/share/man/man1/inetutils-ifconfig.1
 	
 	# Rename inetd to be able to coexist with not purged netkit-inetd
 	mv $(D)/usr/sbin/inetd $(D)/usr/sbin/inetutils-inetd
@@ -119,7 +119,7 @@ install: build
 	mv $(D)/usr/bin/talk $(D)/usr/bin/inetutils-talk
 	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
 	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute
-	cp man/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
+	cp $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
 
 binary-indep:
 # Nothing to do.
