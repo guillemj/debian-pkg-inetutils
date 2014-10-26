@@ -1,7 +1,7 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: inetutils
 Upstream-Contact: bug-inetutils@gnu.org
-Source: http://ftp.gnu.org/pub/gnu/inetutils/
+Source: https://ftp.gnu.org/pub/gnu/inetutils/
 
 Files:
  *

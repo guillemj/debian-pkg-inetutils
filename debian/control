@@ -5,7 +5,7 @@ Maintainer: Guillem Jover <guillem@debian.org>
 Standards-Version: 3.9.6
 Vcs-Browser: http://git.hadrons.org/?p=debian/pkgs/inetutils.git
 Vcs-Git: git://git.hadrons.org/git/debian/pkgs/inetutils.git
-Homepage: http://www.gnu.org/software/inetutils/
+Homepage: https://www.gnu.org/software/inetutils/
 Build-Depends: debhelper (>= 9),
  autotools-dev, autoconf, automake, bison, texinfo,
  libreadline-dev | libreadline6-dev | libreadline5-dev, libncurses-dev,
