@@ -30,7 +30,7 @@ ifeq ($(DEB_HOST_ARCH_OS),linux)
   inetutils_priority = extra
   syslogd_priority = extra
 else
-  inetutild_priority = required
+  inetutils_priority = required
   syslogd_priority = standard
 endif
 
