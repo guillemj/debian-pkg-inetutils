@@ -2,6 +2,7 @@ inetutils (2:1.9.2.39.3a460-2) UNRELEASED; urgency=low
 
   * Fix typo in inetutils_priority variable name to avoid passing an empty
     value to dpkg-gencontrol, which makes it error out on non-Linux systems.
+  * Switch debian/copyright to machine-readable format 1.0.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 26 Oct 2014 09:01:07 +0100
 
