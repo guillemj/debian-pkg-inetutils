@@ -25,15 +25,6 @@ ifeq ($(DEB_HOST_ARCH_OS),hurd)
   tools_provides = net-tools
 endif
 
-# Set proper Priority and Section
-ifeq ($(DEB_HOST_ARCH_OS),linux)
-  inetutils_priority = extra
-  syslogd_priority = extra
-else
-  inetutils_priority = required
-  syslogd_priority = standard
-endif
-
 D = $(CURDIR)/debian/tmp
 M = $(CURDIR)/debian/local/man
 mandir = usr/share/man
@@ -153,10 +144,8 @@ binary-arch: install
 	dh_installdeb -a
 	dh_shlibdeps -a
 	dh_gencontrol -a -pinetutils-syslogd -- \
-	  -DPriority="$(syslogd_priority)" \
 	  -Vsyslogd:Provides="$(syslogd_provides)"
 	dh_gencontrol -a -Ninetutils-syslogd -- \
-	  -DPriority="$(inetutils_priority)" \
 	  -Vtools:Provides="$(tools_provides)"
 	dh_md5sums -a
 	dh_builddeb -a

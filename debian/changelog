@@ -1,3 +1,12 @@
+inetutils (2:1.9.2.39.3a460-3) UNRELEASED; urgency=low
+
+  * Do not bother setting different Priority field values on non-Linux ports
+    anymore, as the Debian archive does not currently support overrides that
+    differ per port anyway. This fixes a build failure due to dpkg-genchanges
+    not liking the debian/files and debian/control files disagreeing.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 28 Oct 2014 07:44:51 +0100
+
 inetutils (2:1.9.2.39.3a460-2) unstable; urgency=medium
 
   * Fix typo in inetutils_priority variable name to avoid passing an empty
