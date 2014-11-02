@@ -10,9 +10,7 @@ else
   conf_gnu_type += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
 endif
 
-CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
-CFLAGS = -Wall $(shell dpkg-buildflags --get CFLAGS)
-LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
+DEB_CFLAGS_PREPEND = -Wall
 
 # Override default upstream setuid mode, as they rejected this change.
 SUIDMODE="-o root -m 4755"
@@ -41,6 +39,7 @@ config.status: configure
 	dh_autotools-dev_updateconfig
 	
 	./configure \
+	  $(shell dpkg-buildflags --export=configure) \
 	  $(conf_gnu_type) \
 	  --disable-silent-rules \
 	  --prefix=/usr \
@@ -58,7 +57,7 @@ build-indep:
 build-arch: config.status
 	dh_testdir
 	
-	$(MAKE) CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
+	$(MAKE)
 
 build: build-indep build-arch
 
