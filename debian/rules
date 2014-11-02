@@ -54,10 +54,16 @@ config.status: configure
 
 build-indep:
 
-build-arch: config.status
+build-arch: build-arch-stamp
+build-arch-stamp: config.status
 	dh_testdir
 	
+ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	$(MAKE)
+else
+	$(MAKE) check
+endif
+	touch $@
 
 build: build-indep build-arch
 
@@ -70,6 +76,8 @@ clean:
 	# Cleanup the mess after having run autoreconf ...
 	find -name Makefile.in | xargs rm -f
 	rm -f aclocal.m4 config.hin configure
+	
+	rm -f build-arch-stamp
 	
 	dh_autotools-dev_restoreconfig
 	dh_clean

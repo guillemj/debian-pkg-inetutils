@@ -5,6 +5,7 @@ inetutils (2:1.9.2.39.3a460-4) UNRELEASED; urgency=low
     when debian/control was generated at release time.
   * Pass build flags through configure with a single dpkg-buildflags call,
     instead of on each make invocation.
+  * Run the testsuite during the build-arch target, and honor nocheck.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 02 May 2015 06:26:37 +0200
 
