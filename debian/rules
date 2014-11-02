@@ -55,15 +55,12 @@ config.status: configure
 
 build-indep:
 
-build-arch: debian/control config.status
+build-arch: config.status
 	dh_testdir
 	
 	$(MAKE) CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
 
 build: build-indep build-arch
-
-# We need it forced on all builds.
-.PHONY: debian/control
 
 clean:
 	dh_testdir
