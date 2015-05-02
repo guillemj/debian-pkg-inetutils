@@ -1,3 +1,9 @@
+inetutils (2:1.9.2.39.3a460-4) UNRELEASED; urgency=low
+
+  * Switch Vcs-Browser to a cgit URL.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 02 May 2015 06:26:37 +0200
+
 inetutils (2:1.9.2.39.3a460-3) unstable; urgency=low
 
   * Do not bother setting different Priority field values on non-Linux ports
