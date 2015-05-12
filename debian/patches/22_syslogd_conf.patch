@@ -78,7 +78,7 @@
 +
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -106,6 +106,8 @@ inetdaemon_PROGRAMS += $(syslogd_BUILD)
+@@ -107,6 +107,8 @@ inetdaemon_PROGRAMS += $(syslogd_BUILD)
  syslogd_SOURCES = syslogd.c
  EXTRA_PROGRAMS += syslogd
  

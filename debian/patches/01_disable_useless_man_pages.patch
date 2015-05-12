@@ -29,7 +29,7 @@ Subject: [PATCH] Disable useless man pages
  AC_ARG_VAR(GREP, [Location of preferred 'grep' utility.])
  AC_ARG_VAR(SED, [Location of preferred 'sed' utility.])
  AC_ARG_VAR(DD, [Location of 'dd'.])
-@@ -982,7 +981,6 @@ ping/Makefile
+@@ -1044,7 +1043,6 @@ ping/Makefile
  ifconfig/Makefile
  ifconfig/system/Makefile
  doc/Makefile

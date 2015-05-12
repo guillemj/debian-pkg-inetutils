@@ -1,5 +1,9 @@
-inetutils (2:1.9.2.39.3a460-4) UNRELEASED; urgency=low
+inetutils (2:1.9.3-1) UNRELEASED; urgency=low
 
+  * New upstream snapshot.
+    - Fix telnetd to handle all TIOCPKT control bytes. Closes: #779399
+    - Fix telnetd to allow autologin without authentication. Closes: #780884
+    - Fix ftp to allow alias names in netrc file. Closes: #780885
   * Switch Vcs-Browser to a cgit URL.
   * Fix build-arch target to not depend on debian/control, a leftover from
     when debian/control was generated at release time.
