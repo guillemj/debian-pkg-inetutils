@@ -27,6 +27,7 @@ D = $(CURDIR)/debian/tmp
 M = $(CURDIR)/debian/local/man
 mandir = usr/share/man
 man1dir = $(mandir)/man1
+man5dir = $(mandir)/man5
 man8dir = $(mandir)/man8
 
 configure: configure.ac
@@ -92,6 +93,7 @@ install: build
 	
 	# Create man page directories
 	mkdir -p $(D)/$(man1dir)
+	mkdir -p $(D)/$(man5dir)
 	mkdir -p $(D)/$(man8dir)
 	
 	# Move ping to /bin
@@ -111,6 +113,7 @@ install: build
 	cp $(M)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
 	mv $(D)/usr/bin/ftp $(D)/usr/bin/inetutils-ftp
 	cp $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
+	cp $(M)/netrc.5 $(D)/$(man5dir)/inetutils-netrc.5
 	mv $(D)/usr/bin/talk $(D)/usr/bin/inetutils-talk
 	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
 	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute

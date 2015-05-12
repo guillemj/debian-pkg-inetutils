@@ -12,6 +12,7 @@ inetutils (2:1.9.3-1) UNRELEASED; urgency=low
   * Run the testsuite during the build-arch target, and honor nocheck.
   * Add slave alternatives for pftp, pftp.1.gz and netrc.5.gz in
     inetutils-ftp. Closes: #781061
+  * Split inetutils-netrc.5 man page out from inetutils-ftp.1.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 02 May 2015 06:26:37 +0200
 

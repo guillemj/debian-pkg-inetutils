@@ -1024,103 +1024,6 @@ file transfer parameters:
 .Ic form ,
 and
 .Ic struct  .
-.Sh THE .netrc FILE
-The
-.Pa .netrc
-file contains login and initialization information
-used by the auto-login process.
-It resides in the user's home directory.
-The following tokens are recognized; they may be separated by spaces,
-tabs, or new-lines:
-.Bl -tag -width password
-.It Ic machine Ar name
-Identify a remote machine
-.Ar name .
-The auto-login process searches the
-.Pa .netrc
-file for a
-.Ic machine
-token that matches the remote machine specified on the
-.Nm ftp
-command line or as an
-.Ic open
-command argument.
-Once a match is made, the subsequent
-.Pa .netrc
-tokens are processed,
-stopping when the end of file is reached or another
-.Ic machine
-or a
-.Ic default
-token is encountered.
-.It Ic default
-This is the same as
-.Ic machine
-.Ar name
-except that
-.Ic default
-matches any name.
-There can be only one
-.Ic default
-token, and it must be after all
-.Ic machine
-tokens.
-This is normally used as:
-.Pp
-.Dl default login anonymous password user@site
-.Pp
-thereby giving the user
-.Ar automatic
-anonymous ftp login to
-machines not specified in
-.Pa .netrc .
-This can be overridden
-by using the
-.Fl n
-flag to disable auto-login.
-.It Ic login Ar name
-Identify a user on the remote machine.
-If this token is present, the auto-login process will initiate
-a login using the specified
-.Ar name .
-.It Ic password Ar string
-Supply a password.
-If this token is present, the auto-login process will supply the
-specified string if the remote server requires a password as part
-of the login process.
-Note that if this token is present in the
-.Pa .netrc
-file for any user other
-than
-.Ar anonymous  ,
-.Nm ftp
-will abort the auto-login process if the
-.Pa .netrc
-is readable by
-anyone besides the user.
-.It Ic account Ar string
-Supply an additional account password.
-If this token is present, the auto-login process will supply the
-specified string if the remote server requires an additional
-account password, or the auto-login process will initiate an
-.Dv ACCT
-command if it does not.
-.It Ic macdef Ar name
-Define a macro.
-This token functions like the
-.Nm ftp
-.Ic macdef
-command functions.
-A macro is defined with the specified name; its contents begin with the
-next
-.Pa .netrc
-line and continue until a null line (consecutive new-line
-characters) is encountered.
-If a macro named
-.Ic init
-is defined, it is automatically executed as the last step in the
-auto-login process.
-.El
 .Sh ENVIRONMENT
 .Nm Ftp
 utilizes the following environment variables.
@@ -1133,7 +1036,8 @@ file, if one exists.
 For default shell.
 .El
 .Sh SEE ALSO
-.Xr ftpd 8
+.Xr ftpd 8 ,
+.Xr netrc 5
 .Sh HISTORY
 The
 .Nm ftp
