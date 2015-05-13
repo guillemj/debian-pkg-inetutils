@@ -1,0 +1,28 @@
+diff --git a/ping/ping.c b/ping/ping.c
+index 3f939dc..3d1a004 100644
+--- a/ping/ping.c
++++ b/ping/ping.c
+@@ -295,6 +295,9 @@ main (int argc, char **argv)
+   /* Reset root privileges */
+   setuid (getuid ());
+ 
++  /* Force line buffering regardless of output device. */
++  setvbuf (stdout, NULL, _IOLBF, 0);
++
+   argv += index;
+   argc -= index;
+ 
+diff --git a/ping/ping6.c b/ping/ping6.c
+index 9d7609e..fd14648 100644
+--- a/ping/ping6.c
++++ b/ping/ping6.c
+@@ -254,6 +254,9 @@ main (int argc, char **argv)
+   /* Reset root privileges */
+   setuid (getuid ());
+ 
++  /* Force line buffering regardless of output device. */
++  setvbuf (stdout, NULL, _IOLBF, 0);
++
+   argc -= index;
+   argv += index;
+ 
