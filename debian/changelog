@@ -1,4 +1,4 @@
-inetutils (2:1.9.3-1) UNRELEASED; urgency=low
+inetutils (2:1.9.3-1) unstable; urgency=low
 
   * New upstream snapshot.
     - Fix telnetd to handle all TIOCPKT control bytes. Closes: #779399
@@ -18,7 +18,7 @@ inetutils (2:1.9.3-1) UNRELEASED; urgency=low
   * Always force ping and ping6 line buffering on stdout, so that programs
     parsing their output have more timely responses. Closes: #782727
 
- -- Guillem Jover <guillem@debian.org>  Sat, 02 May 2015 06:26:37 +0200
+ -- Guillem Jover <guillem@debian.org>  Wed, 13 May 2015 02:32:03 +0200
 
 inetutils (2:1.9.2.39.3a460-3) unstable; urgency=low
 
