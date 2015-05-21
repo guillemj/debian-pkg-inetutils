@@ -62,7 +62,7 @@ build-arch-stamp: config.status
 ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	$(MAKE)
 else
-	$(MAKE) check
+	$(MAKE) VERBOSE=1 check
 endif
 	touch $@
 
