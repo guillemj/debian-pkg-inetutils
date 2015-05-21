@@ -3,6 +3,7 @@ inetutils (2:1.9.3-2) UNRELEASED; urgency=low
   * Pass VERBOSE=1 to «make check» call, to get testsuite details on failure.
   * Fix misaligned memory access for stat struct in lstat() call. Fixes a
     build failure on sparc.
+  * Build-Depend on net-tools for netstat, used by the test suite.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 21 May 2015 05:15:51 +0200
 
