@@ -1,4 +1,4 @@
-inetutils (2:1.9.3-2) UNRELEASED; urgency=low
+inetutils (2:1.9.3-2) unstable; urgency=medium
 
   * Pass VERBOSE=1 to «make check» call, to get testsuite details on failure.
   * Fix misaligned memory access for stat struct in lstat() call. Fixes a
@@ -14,7 +14,7 @@ inetutils (2:1.9.3-2) UNRELEASED; urgency=low
   * Drop ancient hurd Conflicts from inetutils-ping.
   * Add LSB Description fields to inetd and syslogd init scripts.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 21 May 2015 05:15:51 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 26 May 2015 16:57:46 +0200
 
 inetutils (2:1.9.3-1) unstable; urgency=low
 
