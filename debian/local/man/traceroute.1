@@ -1,4 +1,4 @@
-.TH TRACEROUTE "1" "December 2013" "GNU inetutils" "User Commands"
+.TH TRACEROUTE "1" "2015-05-15" "GNU inetutils" "User Commands"
 .SH NAME
 traceroute \- Trace the route to a host
 .SH SYNOPSIS
@@ -8,54 +8,41 @@ traceroute \- Trace the route to a host
 Print the route packets trace to network host.
 .TP
 \fB\-f\fR, \fB\-\-first\-hop\fR=\fINUM\fR
-set initial hop distance, i.e., time\-to\-live
+Set initial hop distance, that is the time-to-live.
 .TP
 \fB\-g\fR, \fB\-\-gateways\fR=\fIGATES\fR
-list of gateways for loose source routing
+List of gateways for loose source routing.
 .TP
 \fB\-I\fR, \fB\-\-icmp\fR
-use ICMP ECHO as probe
+Use ICMP ECHO as probe.
 .TP
 \fB\-m\fR, \fB\-\-max\-hop\fR=\fINUM\fR
-set maximal hop count (default: 64)
+Set maximal hop count (default is \fB64\fP).
 .TP
 \fB\-M\fR, \fB\-\-type\fR=\fIMETHOD\fR
-use METHOD (`icmp' or `udp') for traceroute
-operations, defaulting to `udp'
+Use METHOD (\fBicmp\fP or \fBudp\fP) for traceroute operations,
+defaulting to \fBudp\fP.
 .TP
 \fB\-p\fR, \fB\-\-port\fR=\fIPORT\fR
-use destination PORT port (default: 33434)
+Use destination PORT port (default is \fB33434\fP).
 .TP
 \fB\-q\fR, \fB\-\-tries\fR=\fINUM\fR
-send NUM probe packets per hop (default: 3)
+Send NUM probe packets per hop (default is \fB3\fP).
 .TP
 \fB\-\-resolve\-hostnames\fR
-resolve hostnames
+Resolve hostnames.
 .TP
 \fB\-t\fR, \fB\-\-tos\fR=\fINUM\fR
-set type of service (TOS) to NUM
+Set type of service (TOS) to NUM.
 .TP
 \fB\-w\fR, \fB\-\-wait\fR=\fINUM\fR
-wait NUM seconds for response (default: 3)
+Wait NUM seconds for response (default is \fB3\fP).
 .TP
-\-?, \fB\-\-help\fR
-give this help list
+\fB\-?\fP, \fB\-\-help\fR
+Give this help list.
 .TP
 \fB\-\-usage\fR
-give a short usage message
+Give a short usage message.
 .TP
 \fB\-V\fR, \fB\-\-version\fR
-print program version
-.PP
-Mandatory or optional arguments to long options are also mandatory or optional
-for any corresponding short options.
-.SH AUTHOR
-Written by Elian Gidoni.
-.SH "REPORTING BUGS"
-Report bugs to <bug\-inetutils@gnu.org>.
-.SH COPYRIGHT
-Copyright \(co 2013 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
-.br
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
+Print program version.

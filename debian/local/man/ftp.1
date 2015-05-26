@@ -27,7 +27,7 @@
 .\"
 .\"	@(#)ftp.1	8.3 (Berkeley) 10/9/94
 .\"
-.Dd October 9, 1994
+.Dd May 15, 2015
 .Dt FTP 1
 .Os "GNU inetutils"
 .Sh NAME
@@ -54,12 +54,34 @@ remote network site.
 Options may be specified at the command line, or to the
 command interpreter.
 .Bl -tag -width flag
-.It Fl v
+.It Fl 4, -ipv4
+Use IPv4 to connect to hosts.
+.It Fl 4, -ipv6
+Use IPv6 to connect to hosts.
+.It Fl A, -active
+Enable active mode transfer, default for
+.Nm ftp .
+.It Fl p, -passive
+Enable passive mode transfer, default for
+.Nm pftp .
+.It Fl -prompt Op Ar text
+Print a command line prompt (optionally with
+.Ar text  ) ,
+even if not on a tty.
+.It Fl N, -netrc Ar filename
+Select a specific initialization file.
+.It Fl v, -verbose
 Verbose option forces
 .Nm ftp
 to show all responses from the remote server, as well
 as report on data transfer statistics.
-.It Fl n
+.It Fl t, -trace
+Enable packet tracing.
+.It Fl d, -debug
+Enables debugging.
+.It Fl e, -no-edit
+Disable command line editing.
+.It Fl n, -no-login
 Restrains
 .Nm ftp
 from attempting \*(Lqauto-login\*(Rq upon initial connection.
@@ -74,13 +96,16 @@ If no entry exists,
 will prompt for the remote machine login name (default is the user
 identity on the local machine), and, if necessary, prompt for a password
 and an account with which to login.
-.It Fl i
-Turns off interactive prompting during
-multiple file transfers.
-.It Fl d
-Enables debugging.
-.It Fl g
+.It Fl i, -no-prompt
+Turns off interactive prompting during multiple file transfers.
+.It Fl g, -no-glob
 Disables file name globbing.
+.It Fl -usage
+Display a short usage message.
+.It Fl ?, -help
+Display a help list.
+.It Fl V, -version
+Display program version.
 .El
 .Pp
 The client host with which
@@ -243,12 +268,14 @@ output comes to the terminal.
 .It Ic disconnect
 A synonym for
 .Ar close  .
+.It Ic epsv4
+Toggle the use of EPSV/EPRT for IPv4 addressing. Default is off.
 .It Ic form Ar format
 Set the file transfer
 .Ic form
 to
 .Ar format  .
-The default format is \*(Lqfile\*(Rq.
+The only supported format is \*(Lqnon\-print\*(Rq.
 .It Ic get Ar remote-file Op Ar local-file
 Retrieve the
 .Ar remote-file
@@ -323,12 +350,20 @@ seconds.
 If
 .Ar seconds
 is omitted, the current inactivity timer is printed.
+.It Ic ipv4
+Select IPv4 as the only addressing scheme.
+.It Ic ipv6
+Select IPv6 as the only addressing scheme.
+.It Ic ipany
+Allow IPv4 as well as IPv6 addressing.
 .It Ic lcd Op Ar directory
 Change the working directory on the local machine.
 If
 no
 .Ar directory
 is specified, the user's home directory is used.
+.It Ic lpwd
+Print the name of the current working directory on the local machine.
 .It Xo
 .Ic \&ls
 .Op Ar remote-directory
@@ -708,14 +743,14 @@ is continued from the apparent point of failure.
 This command
 is useful when transferring very large files over networks that
 are prone to dropping connections.
-.It Ic remotehelp Op Ar command-name
+.It Ic rhelp Op Ar command-name
 Request help from the remote
 .Tn FTP
 server.
 If a
 .Ar command-name
 is specified it is supplied to the server as well.
-.It Ic remotestatus Op Ar file-name
+.It Ic rstatus Op Ar file-name
 With no arguments, show status of remote machine.
 If
 .Ar file-name
@@ -1032,6 +1067,10 @@ utilizes the following environment variables.
 For default location of a
 .Pa .netrc
 file, if one exists.
+.It Ev NETRC
+Alternate location of the
+.Pa .netrc
+file, taking precedence over the standard location.
 .It Ev SHELL
 For default shell.
 .El

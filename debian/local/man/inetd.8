@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)inetd.8	8.4 (Berkeley) 6/1/94
 .\"
-.Dd October 21, 2006
+.Dd May 15, 2015
 .Dt INETD 8
 .Os "GNU inetutils"
 .Sh NAME
@@ -38,23 +38,10 @@
 .Nm inetd
 .Op Fl d
 .Op Fl R Ar rate
+.Op Fl p Op Ar filename
 .Op Fl -environment
 .Op Fl -resolve
 .Op Ar configuration_files ...
-.Sh WARNING
-The information in this man page may be inaccurate or incomplete.  The
-authoritative documentation for the
-.Nm inetd
-utility is contained in
-.Pa inetutils.info
-document.  To access it from your command line, type
-.Pp
-\fBinfo inetd\fR
-.Pp
-The online copy of the documentation is available at the following
-address:
-.Pp
-https://www.gnu.org/software/inetutils/manual.
 .Sh DESCRIPTION
 The
 .Nm inetd
@@ -86,6 +73,8 @@ Turns on debugging.
 .It Fl -environment
 Pass local and remote address data via environment variables. See
 \fBENVIRONMENT\fP below.
+.It Fl p, -pidfile Op Ar filename
+Specifies the pidfile to use instead of the default.
 .It Fl R, -rate Ar rate
 Specifies the maximum number of times a service can be invoked
 in one minute; the default is 40.
@@ -93,10 +82,12 @@ in one minute; the default is 40.
 Resolve local and remote IP addresses and pass them to the server program
 via \fBTCPLOCALHOST\fP and \fBTCPREMOTEHOST\fP environment variables. See
 \fBENVIRONMENT\fP below. This option implies \fB--environment\fP.
-.It Fl -version
+.It Fl V, -version
 Shows the version.
-.It Fl -help
+.It Fl ?, -help
 Shows the help.
+.It Fl -usage
+Shows the usage message.
 .El
 .Pp
 Upon execution,
@@ -409,7 +400,7 @@ Use the
 option,
 as described above, to change the rate limit.
 Once the limit is reached, the service will be
-reenabled automatically in 10 minutes.
+re-enabled automatically in 10 minutes.
 .sp
 .Bd -literal
 \fIservice\fP/\fIprotocol\fP: No such user '\fIuser\fP', service ignored

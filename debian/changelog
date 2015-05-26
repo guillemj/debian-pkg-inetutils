@@ -4,6 +4,13 @@ inetutils (2:1.9.3-2) UNRELEASED; urgency=low
   * Fix misaligned memory access for stat struct in lstat() call. Fixes a
     build failure on sparc.
   * Build-Depend on net-tools for netstat, used by the test suite.
+  * Review and update of obsolete man pages. Addresses: #609934, covering:
+    - local/man/ftp.1
+    - local/man/inetd.8
+    - local/man/netrc.5
+    - local/man/ping6.1
+    - local/man/talk.1
+    - local/man/trceroute.1
 
  -- Guillem Jover <guillem@debian.org>  Thu, 21 May 2015 05:15:51 +0200
 

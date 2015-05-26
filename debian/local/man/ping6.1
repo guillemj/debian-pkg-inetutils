@@ -1,4 +1,4 @@
-.TH PING6 "1" "December 2013" "GNU inetutils" "User Commands"
+.TH PING6 "1" "2015-05-15" "GNU inetutils" "User Commands"
 .SH NAME
 ping6 \- Packets to network hosts
 .SH SYNOPSIS
@@ -6,77 +6,64 @@ ping6 \- Packets to network hosts
 [\fIOPTION\fR...] \fIHOST \fR...
 .SH DESCRIPTION
 Send ICMP ECHO_REQUEST packets to network hosts.
-.IP
+.SS
 Options valid for all request types:
 .TP
 \fB\-c\fR, \fB\-\-count\fR=\fINUMBER\fR
-stop after sending NUMBER packets
+Stop after sending \fINUMBER\fP packets.
 .TP
 \fB\-d\fR, \fB\-\-debug\fR
-set the SO_DEBUG option
+Set the SO_DEBUG option.
 .TP
 \fB\-\-hoplimit\fR=\fIN\fR
-specify N as hop\-limit
+Specify \fIN\fP as hop\-limit.
 .TP
 \fB\-i\fR, \fB\-\-interval\fR=\fINUMBER\fR
-wait NUMBER seconds between sending each packet
+Wait \fINUMBER\fP seconds between sending each packet.
 .TP
 \fB\-n\fR, \fB\-\-numeric\fR
-do not resolve host addresses
+Do not resolve host addresses.
 .TP
 \fB\-r\fR, \fB\-\-ignore\-routing\fR
-send directly to a host on an attached network
+Send directly to a host on an attached network.
 .TP
 \fB\-\-ttl\fR=\fIN\fR
-synonym for \fB\-\-hoplimit\fR
+Synonym for \fB\-\-hoplimit\fR.
 .TP
 \fB\-T\fR, \fB\-\-tos\fR=\fIN\fR
-set traffic class to N
+Set traffic class to \fIN\fP.
 .TP
 \fB\-v\fR, \fB\-\-verbose\fR
-verbose output
+Verbose output.
 .TP
 \fB\-w\fR, \fB\-\-timeout\fR=\fIN\fR
-stop after N seconds
-.IP
+Stop after \fIN\fP seconds.
+.SS
 Options valid for \fB\-\-echo\fR requests:
 .TP
 \fB\-f\fR, \fB\-\-flood\fR
-flood ping (root only)
+Flood ping (root only).
 .TP
 \fB\-l\fR, \fB\-\-preload\fR=\fINUMBER\fR
-send NUMBER packets as fast as possible before
-falling into normal mode of behavior (root only)
+Send NUMBER packets as fast as possible before falling into normal mode
+of behavior (root only).
 .TP
 \fB\-p\fR, \fB\-\-pattern\fR=\fIPATTERN\fR
-fill ICMP packet with given pattern (hex)
+Fill ICMP packet with given pattern (hex).
 .TP
 \fB\-q\fR, \fB\-\-quiet\fR
-quiet output
+Quiet output.
 .TP
 \fB\-s\fR, \fB\-\-size\fR=\fINUMBER\fR
-send NUMBER data octets
+Send \fINUMBER\fP data octets.
 .TP
-\-?, \fB\-\-help\fR
-give this help list
+\fB\-?\fP, \fB\-\-help\fR
+Give this help list.
 .TP
 \fB\-\-usage\fR
-give a short usage message
+give a short usage message.
 .TP
 \fB\-V\fR, \fB\-\-version\fR
-print program version
-.PP
-Mandatory or optional arguments to long options are also mandatory or optional
-for any corresponding short options.
+Print program version.
 .PP
 Options marked with (root only) are available only to superuser.
-.SH AUTHOR
-Written by Jeroen Dekkers.
-.SH "REPORTING BUGS"
-Report bugs to <bug\-inetutils@gnu.org>.
-.SH COPYRIGHT
-Copyright \(co 2013 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
-.br
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
