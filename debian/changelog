@@ -12,6 +12,7 @@ inetutils (2:1.9.3-2) UNRELEASED; urgency=low
     - local/man/talk.1
     - local/man/trceroute.1
   * Drop ancient hurd Conflicts from inetutils-ping.
+  * Add LSB Description fields to inetd and syslogd init scripts.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 21 May 2015 05:15:51 +0200
 
