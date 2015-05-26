@@ -47,7 +47,7 @@ Description: internet super server
 Package: inetutils-ping
 Architecture: any
 Provides: ping
-Conflicts: ping, hurd (<= 20010718-1)
+Conflicts: ping
 Depends: ${shlibs:Depends}, ${misc:Depends}, netbase
 Description: ICMP echo tool
  Ping uses ICMP to send out echo requests, and uses the reply packets to
