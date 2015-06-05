@@ -1,3 +1,10 @@
+inetutils (2:1.9.3-3) UNRELEASED; urgency=low
+
+  * Add netbase to Build-Depends, used by the test suite.
+    Suggested by Mats Erik Andersson <mats.andersson@gisladisker.se>.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 05 Jun 2015 17:20:36 +0200
+
 inetutils (2:1.9.3-2) unstable; urgency=medium
 
   * Pass VERBOSE=1 to «make check» call, to get testsuite details on failure.

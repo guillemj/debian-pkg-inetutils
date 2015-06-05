@@ -7,8 +7,12 @@ Vcs-Browser: http://git.hadrons.org/cgit/debian/pkgs/inetutils.git
 Vcs-Git: git://git.hadrons.org/git/debian/pkgs/inetutils.git
 Homepage: https://www.gnu.org/software/inetutils/
 Build-Depends: debhelper (>= 9),
-# netstat is used by the test suite.
+# Used by the test suite:
+#  /etc/protocols and /etc/services
+ netbase,
+#  netstat(1)
  net-tools,
+# Used by the build system:
  autotools-dev, autoconf, automake, bison, texinfo,
  libreadline-dev | libreadline6-dev | libreadline5-dev, libncurses-dev,
  libpam0g-dev, libwrap0-dev, libshishi-dev,
