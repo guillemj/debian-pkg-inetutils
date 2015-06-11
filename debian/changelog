@@ -1,5 +1,9 @@
-inetutils (2:1.9.3-3) UNRELEASED; urgency=low
+inetutils (2:1.9.4-1) UNRELEASED; urgency=low
 
+  * New upstream release.
+    - debian/patches/01_disable_useless_man_pages.patch: Refreshed.
+    - debian/patches/fts_alignment.patch: Remove, merged upstream.
+    - debian/patches/ping_linebuff.patch: Likewise.
   * Add netbase to Build-Depends, used by the test suite.
     Suggested by Mats Erik Andersson <mats.andersson@gisladisker.se>.
 

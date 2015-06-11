@@ -10,7 +10,7 @@ Subject: [PATCH] Disable useless man pages
 
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -23,7 +23,7 @@ EXTRA_DIST = paths ChangeLog.0 summary.s
+@@ -25,7 +25,7 @@ EXTRA_DIST = paths ChangeLog.0 summary.s
  SUBDIRS = lib \
  	libinetutils libtelnet libicmp libls \
  	src telnet telnetd ftp ftpd talk talkd whois ping ifconfig \
