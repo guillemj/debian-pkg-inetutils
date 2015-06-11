@@ -25,7 +25,7 @@ inetutils (2:1.9.3-2) unstable; urgency=medium
 
 inetutils (2:1.9.3-1) unstable; urgency=low
 
-  * New upstream snapshot.
+  * New upstream release.
     - Fix telnetd to handle all TIOCPKT control bytes. Closes: #779399
     - Fix telnetd to allow autologin without authentication. Closes: #780884
     - Fix ftp to allow alias names in netrc file. Closes: #780885
