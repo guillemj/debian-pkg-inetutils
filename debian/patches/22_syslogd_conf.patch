@@ -1,3 +1,10 @@
+Description: Add a syslog.conf file
+Author: Guillem Jover <guillem@hadrons.org>
+Origin: vendor
+Forwarded: no
+Bug-Debian: 208336
+
+
 ---
  src/Makefile.am |    2 +
  src/syslog.conf |   70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
