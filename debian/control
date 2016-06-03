@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Guillem Jover <guillem@debian.org>
 Standards-Version: 3.9.8
 Vcs-Browser: https://git.hadrons.org/cgit/debian/pkgs/inetutils.git
-Vcs-Git: git://git.hadrons.org/git/debian/pkgs/inetutils.git
+Vcs-Git: https://git.hadrons.org/git/debian/pkgs/inetutils.git
 Homepage: https://www.gnu.org/software/inetutils/
 Build-Depends: debhelper (>= 9),
 # Used by the test suite:
