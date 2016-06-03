@@ -31,7 +31,7 @@ set +e
 check_no_services()
 {
   if ! grep -q "^[0-9A-Za-z/]" /etc/inetd.conf /etc/inetd.d/* 2>/dev/null; then
-    log_warning_msg "Not starting internet superserver: no services enabled."
+    log_action_msg "Not starting internet superserver, no services enabled"
     exit 0
   fi
 }
