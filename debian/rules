@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-DEB_CFLAGS_PREPEND = -Wall
+DEB_CFLAGS_MAINT_PREPEND = -Wall
 
 include /usr/share/dpkg/default.mk
 
