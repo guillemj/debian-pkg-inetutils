@@ -1,16 +1,14 @@
 #!/usr/bin/make -f
 
-DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+DEB_CFLAGS_PREPEND = -Wall
+
+include /usr/share/dpkg/default.mk
 
 ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
   conf_gnu_type += --build $(DEB_HOST_GNU_TYPE)
 else
   conf_gnu_type += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
 endif
-
-DEB_CFLAGS_PREPEND = -Wall
 
 # Override default upstream setuid mode, as they rejected this change.
 SUIDMODE="-o root -m 4755"
@@ -40,7 +38,9 @@ config.status: configure
 	dh_autotools-dev_updateconfig
 	
 	./configure \
-	  $(shell dpkg-buildflags --export=configure) \
+	  CPPFLAGS="$(CPPFLAGS)" \
+	  CFLAGS="$(CFLAGS)" \
+	  LDFLAGS="$(LDFLAGS)" \
 	  $(conf_gnu_type) \
 	  --disable-silent-rules \
 	  --prefix=/usr \
