@@ -10,6 +10,7 @@ inetutils (2:1.9.4-2) UNRELEASED; urgency=low
   * Use DEB_CFLAGS_MAINT_PREPEND instead of DEB_CFLAGS_PREPEND.
   * Enable all hardening flags.
   * Fix typo in ping output, reported by lintian.
+  * Fix netrc(5) alternative installation. Closes: #805984
 
  -- Guillem Jover <guillem@debian.org>  Thu, 02 Jul 2015 16:53:42 +0200
 
