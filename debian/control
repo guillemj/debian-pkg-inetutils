@@ -1,6 +1,6 @@
 Source: inetutils
 Section: net
-Priority: extra
+Priority: optional
 Maintainer: Guillem Jover <guillem@debian.org>
 Standards-Version: 3.9.8
 Vcs-Browser: https://git.hadrons.org/cgit/debian/pkgs/inetutils.git
