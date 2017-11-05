@@ -8,6 +8,7 @@ inetutils (2:1.9.4-3) UNRELEASED; urgency=medium
   * Replace dh_autotools-dev_* commands with dh_update_autotools_config,
     and remove explicit Build-Depends on autotools-dev.
   * Bump Standards-Version to 4.1.1 (no changes needed).
+  * Do not pass unnecessary «-o root» in SUIDMODE to upstream install target.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 05 Nov 2017 19:25:47 +0100
 
