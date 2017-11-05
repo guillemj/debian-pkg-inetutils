@@ -6,7 +6,6 @@ case "$1" in
 remove|deconfigure)
   update-alternatives --remove ftp /usr/bin/inetutils-ftp
   ;;
-*)
 esac
 
 #DEBHELPER#
