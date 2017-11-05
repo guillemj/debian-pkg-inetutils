@@ -14,6 +14,7 @@ inetutils (2:1.9.4-3) UNRELEASED; urgency=medium
   * Use «--retry 5» on sysvinit stop actions. Remove now unnecessary sleep.
   * Remove empty fallback in maintainer scripts argument handler.
   * Remove long obsolete conffile rename handling.
+  * Remove long obsolete inetd talk entry fixup handling.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 05 Nov 2017 19:25:47 +0100
 
