@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-3) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-3) unstable; urgency=medium
 
   * Line-wrap dependency fields.
   * Reindent shell scripts.
@@ -16,7 +16,7 @@ inetutils (2:1.9.4-3) UNRELEASED; urgency=medium
   * Remove long obsolete conffile rename handling.
   * Remove long obsolete inetd talk entry fixup handling.
 
- -- Guillem Jover <guillem@debian.org>  Sun, 05 Nov 2017 19:25:47 +0100
+ -- Guillem Jover <guillem@debian.org>  Sun, 05 Nov 2017 20:27:51 +0100
 
 inetutils (2:1.9.4-2) unstable; urgency=low
 
