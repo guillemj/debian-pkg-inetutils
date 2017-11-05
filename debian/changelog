@@ -10,6 +10,7 @@ inetutils (2:1.9.4-3) UNRELEASED; urgency=medium
   * Bump Standards-Version to 4.1.1 (no changes needed).
   * Do not pass unnecessary «-o root» in SUIDMODE to upstream install target.
   * Set Rules-Requires-Root to no.
+  * Switch git repo URL in debian/tarball.sh from git: to https:.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 05 Nov 2017 19:25:47 +0100
 

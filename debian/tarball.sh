@@ -36,7 +36,7 @@ snapshot)
     git pull
     cd ..
   else
-    git clone git://git.sv.gnu.org/inetutils.git $snapshot_dir
+    git clone https://git.savannah.gnu.org/git/inetutils.git $snapshot_dir
   fi
 
   echo " -> bootstrapping source tree form gnulib."
