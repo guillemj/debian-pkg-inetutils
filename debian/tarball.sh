@@ -26,39 +26,39 @@ get_version()
 
 echo "-> getting the source."
 case "$action" in
-  snapshot)
-    echo " -> making a git snapshot."
+snapshot)
+  echo " -> making a git snapshot."
 
-    snapshot_dir="$pkg-snapshot"
+  snapshot_dir="$pkg-snapshot"
 
-    if [ -d $snapshot_dir ]; then
-      cd $snapshot_dir
-      git pull
-      cd ..
-    else
-      git clone git://git.sv.gnu.org/inetutils.git $snapshot_dir
-    fi
-
-    echo " -> bootstrapping source tree form gnulib."
+  if [ -d $snapshot_dir ]; then
     cd $snapshot_dir
-    ./bootstrap --copy --no-bootstrap-sync
+    git pull
     cd ..
+  else
+    git clone git://git.sv.gnu.org/inetutils.git $snapshot_dir
+  fi
 
-    version="$(get_version $snapshot_dir)"
-    ;;
-  tarball)
-    echo " -> unpacking upstream tarball."
+  echo " -> bootstrapping source tree form gnulib."
+  cd $snapshot_dir
+  ./bootstrap --copy --no-bootstrap-sync
+  cd ..
 
-    upstream_dir="$pkg-tarball"
-    upstream_tarball=$1
+  version="$(get_version $snapshot_dir)"
+  ;;
+tarball)
+  echo " -> unpacking upstream tarball."
 
-    mkdir $upstream_dir
-    cd $upstream_dir
-    tar xJf ../$upstream_tarball --strip 1
-    cd ..
+  upstream_dir="$pkg-tarball"
+  upstream_tarball=$1
 
-    version=$(get_version $upstream_dir)
-    ;;
+  mkdir $upstream_dir
+  cd $upstream_dir
+  tar xJf ../$upstream_tarball --strip 1
+  cd ..
+
+  version=$(get_version $upstream_dir)
+  ;;
 esac
 
 tarball="${pkg}_${version}.orig.tar.xz"
@@ -68,12 +68,12 @@ echo "-> package ${pkg} version ${version}"
 
 echo "-> filling the working tree."
 case "$action" in
-  snapshot)
-    cp -al $snapshot_dir $tree
-    ;;
-  tarball)
-    mv $upstream_dir $tree
-    ;;
+snapshot)
+  cp -al $snapshot_dir $tree
+  ;;
+tarball)
+  mv $upstream_dir $tree
+  ;;
 esac
 
 if ! [ -e $tree/$pkg_file ]

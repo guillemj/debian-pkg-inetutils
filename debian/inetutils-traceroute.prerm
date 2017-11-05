@@ -3,10 +3,10 @@
 set -e
 
 case "$1" in
-    remove|deconfigure)
-        update-alternatives --remove traceroute /usr/bin/inetutils-traceroute
-        ;;
-    *)
+remove|deconfigure)
+  update-alternatives --remove traceroute /usr/bin/inetutils-traceroute
+  ;;
+*)
 esac
 
 #DEBHELPER#

@@ -37,43 +37,43 @@ check_no_services()
 }
 
 case "$1" in
-  start)
-	check_no_services
-	log_daemon_msg "Starting $DESC" "$NAME"
-	start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE \
-	                  --exec $DAEMON -- $INETD_OPTS
-	log_end_msg $?
-	;;
-  stop)
-	log_daemon_msg "Stopping $DESC" "$NAME"
-	start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
-	                  --exec $DAEMON
-	log_end_msg $?
-	;;
-  reload|force-reload)
-	log_action_begin_msg "Reloading $DESC configuration files"
-	start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE \
-	                  --exec $DAEMON
-	log_action_end_msg $?
-	;;
-  restart)
-	log_daemon_msg "Restarting $DESC" "$NAME"
-	start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
-	                  --exec $DAEMON
-	check_no_services
-	sleep 1
-	start-stop-daemon --start --quiet --pidfile $PIDFILE \
-	                  --exec $DAEMON -- $INETD_OPTS
-	log_end_msg $?
-	;;
-  status)
-	status_of_proc $DAEMON $NAME
-	;;
-  *)
-	N=/etc/init.d/inetutils-$NAME
-	echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
-	exit 1
-	;;
+start)
+  check_no_services
+  log_daemon_msg "Starting $DESC" "$NAME"
+  start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE \
+                    --exec $DAEMON -- $INETD_OPTS
+  log_end_msg $?
+  ;;
+stop)
+  log_daemon_msg "Stopping $DESC" "$NAME"
+  start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
+                    --exec $DAEMON
+  log_end_msg $?
+  ;;
+reload|force-reload)
+  log_action_begin_msg "Reloading $DESC configuration files"
+  start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE \
+                    --exec $DAEMON
+  log_action_end_msg $?
+  ;;
+restart)
+  log_daemon_msg "Restarting $DESC" "$NAME"
+  start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
+                    --exec $DAEMON
+  check_no_services
+  sleep 1
+  start-stop-daemon --start --quiet --pidfile $PIDFILE \
+                    --exec $DAEMON -- $INETD_OPTS
+  log_end_msg $?
+  ;;
+status)
+  status_of_proc $DAEMON $NAME
+  ;;
+*)
+  N=/etc/init.d/inetutils-$NAME
+  echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+  exit 1
+  ;;
 esac
 
 exit 0
