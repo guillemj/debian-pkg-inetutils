@@ -2,10 +2,10 @@ Source: inetutils
 Section: net
 Priority: optional
 Maintainer: Guillem Jover <guillem@debian.org>
-Standards-Version: 3.9.8
 Vcs-Browser: https://git.hadrons.org/cgit/debian/pkgs/inetutils.git
 Vcs-Git: https://git.hadrons.org/git/debian/pkgs/inetutils.git
 Homepage: https://www.gnu.org/software/inetutils/
+Standards-Version: 4.1.1
 Build-Depends:
  debhelper (>= 10),
 # Used by the test suite:
