@@ -11,6 +11,7 @@ inetutils (2:1.9.4-3) UNRELEASED; urgency=medium
   * Do not pass unnecessary «-o root» in SUIDMODE to upstream install target.
   * Set Rules-Requires-Root to no.
   * Switch git repo URL in debian/tarball.sh from git: to https:.
+  * Use «--retry 5» on sysvinit stop actions. Remove now unnecessary sleep.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 05 Nov 2017 19:25:47 +0100
 

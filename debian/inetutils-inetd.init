@@ -47,7 +47,7 @@ start)
 stop)
   log_daemon_msg "Stopping $DESC" "$NAME"
   start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
-                    --exec $DAEMON
+                    --exec $DAEMON --retry 5
   log_end_msg $?
   ;;
 reload|force-reload)
@@ -59,9 +59,8 @@ reload|force-reload)
 restart)
   log_daemon_msg "Restarting $DESC" "$NAME"
   start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
-                    --exec $DAEMON
+                    --exec $DAEMON --retry 5
   check_no_services
-  sleep 1
   start-stop-daemon --start --quiet --pidfile $PIDFILE \
                     --exec $DAEMON -- $INETD_OPTS
   log_end_msg $?
