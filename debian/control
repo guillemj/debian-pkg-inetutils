@@ -8,7 +8,7 @@ Homepage: https://www.gnu.org/software/inetutils/
 Standards-Version: 4.1.1
 Rules-Requires-Root: no
 Build-Depends:
- debhelper (>= 10),
+ debhelper (>= 11),
 # Used by the test suite:
 #  /etc/protocols and /etc/services
  netbase,

@@ -1,6 +1,7 @@
 inetutils (2:1.9.4-4) UNRELEASED; urgency=medium
 
   * Do not pass --group to update-inetd --remove. Closes: #909506
+  * Switch to debhelper compatibility level 11.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 25 Sep 2018 02:44:24 +0200
 
