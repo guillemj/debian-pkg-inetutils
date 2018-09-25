@@ -4,7 +4,7 @@ set -e
 
 if [ "$1" = "remove" ]; then
   if [ -x "$(which update-inetd)" ]; then
-    update-inetd --group STANDARD --remove telnet
+    update-inetd --remove telnet
   fi
 fi
 
