@@ -29,14 +29,10 @@ man1dir = $(mandir)/man1
 man5dir = $(mandir)/man5
 man8dir = $(mandir)/man8
 
-configure: configure.ac
-	dh_testdir
-	
-	autoreconf -i -Im4 -Iam
-
 config.status: configure
 	dh_testdir
 	dh_update_autotools_config
+	dh_autoreconf
 	
 	./configure \
 	  CPPFLAGS="$(CPPFLAGS)" \
@@ -75,12 +71,9 @@ clean:
 	
 	[ ! -f Makefile ] || $(MAKE) distclean
 	
-	# Cleanup the mess after having run autoreconf ...
-	find -name Makefile.in | xargs rm -f
-	rm -f aclocal.m4 config.hin configure
-	
 	rm -f build-arch-stamp
 	
+	dh_autoreconf_clean
 	dh_clean
 
 install: build
