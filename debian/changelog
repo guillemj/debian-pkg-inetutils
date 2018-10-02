@@ -4,6 +4,8 @@ inetutils (2:1.9.4-5) UNRELEASED; urgency=medium
     whether those are defined, not just their related option macros. The Hurd
     glibc is being fixed, but we'll use this workaround to get us built.
     - debian/patches/hurd-partially-disabled-ioctls.patch: New patch.
+  * Do not fail to rotate /var/log/syslog if it is missing, and do not rotate
+    it if it is empty. Fixes a piuparts failure.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 02 Oct 2018 22:23:53 +0200
 

@@ -108,9 +108,9 @@
 
 /var/log/uucp.log {
    rotate 4
+   weekly
    missingok
    notifempty
-   weekly
    compress
    delaycompress
 }
@@ -118,6 +118,8 @@
 /var/log/syslog {
    rotate 7
    daily
+   missingok
+   notifempty
    compress
    delaycompress
    postrotate
