@@ -8,6 +8,7 @@ inetutils (2:1.9.4-5) UNRELEASED; urgency=medium
     it if it is empty. Fixes a piuparts failure.
   * Do not call the init script directly in the logrotate fragment, use
     invoke-rc.d instead.
+  * Do not pass obsolete arguments to dh_installinit.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 02 Oct 2018 22:23:53 +0200
 
