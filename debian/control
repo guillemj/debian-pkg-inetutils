@@ -130,8 +130,6 @@ Package: inetutils-talk
 Architecture: any
 Provides:
  talk,
-Replaces:
- talk-hurd,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -146,8 +144,6 @@ Provides:
  talkd,
 Conflicts:
  talkd,
-Replaces:
- talkd-hurd,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -163,8 +159,6 @@ Package: inetutils-telnet
 Architecture: any
 Provides:
  telnet-client,
-Replaces:
- telnet-hurd,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -179,8 +173,6 @@ Provides:
  telnet-server,
 Conflicts:
  telnet-server,
-Replaces:
- telnetd-hurd,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
