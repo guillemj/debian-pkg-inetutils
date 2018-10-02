@@ -57,13 +57,10 @@ reload|force-reload)
   log_action_end_msg $?
   ;;
 restart)
-  log_daemon_msg "Restarting $DESC" "$NAME"
-  start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE \
-                    --exec $DAEMON --retry 5
+  log_action_msg "Restarting $DESC" "$NAME"
+  $0 stop
   check_no_services
-  start-stop-daemon --start --quiet --pidfile $PIDFILE \
-                    --exec $DAEMON -- $INETD_OPTS
-  log_end_msg $?
+  $0 start
   ;;
 status)
   status_of_proc $DAEMON $NAME

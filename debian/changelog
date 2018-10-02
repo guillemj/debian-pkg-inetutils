@@ -10,6 +10,8 @@ inetutils (2:1.9.4-5) UNRELEASED; urgency=medium
     invoke-rc.d instead.
   * Do not pass obsolete arguments to dh_installinit.
   * Remove Replaces for long obsolete «-hurd» variants.
+  * Fix init scripts restart output, by using start and stop actions, and
+    calling log_action_msg.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 02 Oct 2018 22:23:53 +0200
 
