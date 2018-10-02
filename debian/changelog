@@ -1,3 +1,12 @@
+inetutils (2:1.9.4-5) UNRELEASED; urgency=medium
+
+  * Fix build on the Hurd, due to some partially disabled ioctls, by checking
+    whether those are defined, not just their related option macros. The Hurd
+    glibc is being fixed, but we'll use this workaround to get us built.
+    - debian/patches/hurd-partially-disabled-ioctls.patch: New patch.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 02 Oct 2018 22:23:53 +0200
+
 inetutils (2:1.9.4-4) unstable; urgency=medium
 
   * Do not pass --group to update-inetd --remove. Closes: #909506

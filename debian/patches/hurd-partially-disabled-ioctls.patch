@@ -1,0 +1,49 @@
+Author: Guillem Jover <guillem@hadrons.org>
+Origin: vendor
+Forwarded: no
+Description: Several ioctls have been disabled in the Hurd's glibc, but not
+ the related option macros. inetutils uses those macros to decide whether
+ the ioctls are available, so it is FTBFS now. The Hurd's glibc is being
+ fixed, but we'll use this for now to get the builds going.
+
+Index: inetutils-1.9.4/telnet/sys_bsd.c
+===================================================================
+--- inetutils-1.9.4.orig/telnet/sys_bsd.c
++++ inetutils-1.9.4/telnet/sys_bsd.c
+@@ -63,6 +63,7 @@
+ #include <errno.h>
+ #include <arpa/telnet.h>
+ #include <sys/select.h>
++#include <sys/ioctl.h>
+ #include <unused-parameter.h>
+ 
+ #include "ring.h"
+@@ -157,7 +158,7 @@ TerminalRead (char *buf, int n)
+ int
+ TerminalAutoFlush (void)
+ {
+-#if defined LNOFLSH
++#if defined TIOCLGET && defined LNOFLSH
+   int flush;
+ 
+   ioctl (0, TIOCLGET, (char *) &flush);
+@@ -260,7 +261,9 @@ TerminalSaveState (void)
+   ioctl (0, TIOCGETP, (char *) &ottyb);
+   ioctl (0, TIOCGETC, (char *) &otc);
+   ioctl (0, TIOCGLTC, (char *) &oltc);
++#ifdef TIOCLGET
+   ioctl (0, TIOCLGET, (char *) &olmode);
++#endif
+ 
+   ntc = otc;
+   nltc = oltc;
+@@ -755,7 +758,9 @@ TerminalNewMode (register int f)
+ #endif
+     }
+ #ifndef USE_TERMIO
++#ifdef TIOCLSET
+   ioctl (tin, TIOCLSET, (char *) &lmode);
++#endif
+   ioctl (tin, TIOCSLTC, (char *) &ltc);
+   ioctl (tin, TIOCSETC, (char *) &tc);
+   ioctl (tin, TIOCSETN, (char *) &sb);
