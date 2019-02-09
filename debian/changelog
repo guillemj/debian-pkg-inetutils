@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-6) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-6) unstable; urgency=medium
 
   * Update man pages. Closes: #609934
   * Fix /dev/xconsole symlink creation on kFreeBSD, which does not support
@@ -6,7 +6,7 @@ inetutils (2:1.9.4-6) UNRELEASED; urgency=medium
   * Add spaces around make variable assignment in debian/rules.
   * Bump Standards-Version to 4.3.0 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Sat, 09 Feb 2019 19:38:19 +0100
+ -- Guillem Jover <guillem@debian.org>  Sun, 10 Feb 2019 00:29:29 +0100
 
 inetutils (2:1.9.4-5) unstable; urgency=medium
 
