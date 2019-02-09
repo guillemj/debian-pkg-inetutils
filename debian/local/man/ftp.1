@@ -27,7 +27,7 @@
 .\"
 .\"	@(#)ftp.1	8.3 (Berkeley) 10/9/94
 .\"
-.Dd May 15, 2015
+.Dd February 9, 2019
 .Dt FTP 1
 .Os "GNU inetutils"
 .Sh NAME
@@ -37,20 +37,16 @@
 file transfer program
 .Sh SYNOPSIS
 .Nm ftp
-.Op Fl v
-.Op Fl d
-.Op Fl i
-.Op Fl n
-.Op Fl g
-.Op Ar host
+.Op Ar option ...
+.Op Ar host Op Ar port
 .Sh DESCRIPTION
-.Nm Ftp
+.Nm ftp
 is the user interface to the
 .Tn ARPANET
 standard File Transfer Protocol.
 The program allows a user to transfer files to and from a
 remote network site.
-.Pp
+.Sh OPTIONS
 Options may be specified at the command line, or to the
 command interpreter.
 .Bl -tag -width flag
@@ -107,7 +103,7 @@ Display a help list.
 .It Fl V, -version
 Display program version.
 .El
-.Pp
+.Sh OPERATION
 The client host with which
 .Nm ftp
 is to communicate may be specified on the command line.
@@ -350,6 +346,8 @@ seconds.
 If
 .Ar seconds
 is omitted, the current inactivity timer is printed.
+.It Ic image
+Set binary transfer type.
 .It Ic ipv4
 Select IPv4 as the only addressing scheme.
 .It Ic ipv6
@@ -982,7 +980,7 @@ If the first character of the file name is
 .Sq \&| ,
 the
 remainder of the argument is interpreted as a shell command.
-.Nm Ftp
+.Nm ftp
 then forks a shell, using
 .Xr popen 3
 with the argument supplied, and reads (writes) from the stdout
@@ -1046,13 +1044,13 @@ may be one of \*(Lqascii\*(Rq, \*(Lqimage\*(Rq (binary),
 and
 .Tn PDP Ns -20's
 mostly).
-.Nm Ftp
+.Nm ftp
 supports the ascii and image types of file transfer,
 plus local byte size 8 for
 .Ic tenex
 mode transfers.
 .Pp
-.Nm Ftp
+.Nm ftp
 supports only the default values for the remaining
 file transfer parameters:
 .Ic mode  ,
@@ -1060,7 +1058,7 @@ file transfer parameters:
 and
 .Ic struct  .
 .Sh ENVIRONMENT
-.Nm Ftp
+.Nm ftp
 utilizes the following environment variables.
 .Bl -tag -width Fl
 .It Ev HOME

@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)syslogd.8	8.1 (Berkeley) 6/6/93
 .\"
-.Dd June 6, 1993
+.Dd February 9, 2019
 .Dt SYSLOGD 8
 .Os "GNU inetutils"
 .Sh NAME
@@ -50,51 +50,58 @@
 .Op Fl -no-unixaf
 .Op Fl -no-forward
 .Sh DESCRIPTION
-.Nm Syslogd
+.Nm syslogd
 reads and logs messages to the system console, log files, other
 machines and/or users as specified by its configuration file.
-The options are as follows:
+.Sh OPTIONS
 .Bl -tag -width Ds
-.It Fl V
-Print version number and exit.
-.It Fl -help
-Display help information and exit.
-.It Fl d
-Enter debug mode. syslogd does not put itself in the background, does
-not fork and shows debug information.
-.It Fl a
+.It Fl 4 , -ipv4
+Restrict to IPv4 transport (default).
+.It Fl 6 , -ipv6
+Restrict to IPv6 transport.
+.It Fl -ipany
+Allow transport with IPv4 and IPv6.
+.It Fl a Ar socket
 Specify additional sockets from that syslogd has to listen to.
 This is needed if you are going to let some daemon run within
 a chroot()'ed environment. You can specify up to 19 additional
 sockets.
-.It \fB-f\fR, \fB--rcfile\fR=\fIFILE\fP
+.It Fl b , -bind Ar addr
+Bind listener to this address/name.
+.It Fl B , -bind-port Ar port
+Bind listener to this port.
+.It Fl f , -rcfile Ar file
 Specify the pathname of an alternate configuration file;
 the default is system specific and displayed in the help output.
-.It \fB--rcdir\fR=\fIDIR\fP
+.It Fl D , -rcdir Ar dir
 Specify the pathname of an alternate configuration directory;
 the default is system specific and displayed in the help output.
-.It \fB-h\fR, \fB--hop\fR
+.It Fl h , -hop
 Enable forwarding remote messages. By default syslogd will not
 forward messages it receives from remote hosts.
-.It Fl l
+.It Fl l Ar host_list
 A colon-seperated lists of hosts which should be considered local;
 they are logged by their hostnames instead by their FQDN.
-.It \fB-m\fR, \fB--mark\fR=\fIINTERVAL/fP
+.It Fl s Ar domain_list
+A colon-seperated list of domainnames which should be stripped from
+the FQDNs of hosts when logging.
+.It Fl m , -mark Ar interval
 Select the number of minutes between ``mark'' messages;
 the default is 20 minutes. Setting it to 0 disables timestamps.
-.It \fB-n\fR, \fB--no-detach\fR
-Suppress backgrounding and detachment of the daemon from its
-controlling terminal.
-.It \fB-p\fR, \fB--socket\fR=\fIPATH\fP
+.It Fl p , -socket Ar path
 Specify the pathname of an alternate log socket.
-The default is systemspecific and displayed in the help output.
-.It \fB-r\fR, \fB--inet\fR
+The default is system specific and displayed in the help output.
+.It Fl r , -inet
 Enable to receive remote messages using an internet domain socket.
 The default is to not receive any messages from the network. Older
 version always accepted remote messages.
-.It Fl s
-A colon-seperated list of domainnames which should be stripped from
-the FQDNs of hosts when logging.
+.It Fl T , -local-time
+Set local time on received messages.
+.It Fl S , -sync
+Force a file sync on every line.
+.It Fl n , -no-detach
+Suppress backgrounding and detachment of the daemon from its
+controlling terminal.
 .It Fl -no-klog
 Do not listen to the kernel log device. This is only supported on
 systems which define a kernel log device, on all others this is already
@@ -103,16 +110,25 @@ the default, and the option will be silently ignored.
 Do not listen to any unix domain socket. This option overrides \-p and \-a.
 .It Fl -no-forward
 Do not forward any messages. This overrides \-h.
+.It Fl d , -debug
+Enter debug mode. syslogd does not put itself in the background, does
+not fork and shows debug information.
+.It Fl ? , -help
+Display help information and exit.
+.It Fl -usage
+Display a short usage message and exit.
+.It Fl V , -version
+Print version number and exit.
 .El
 .Pp
-.Nm Syslogd
+.Nm syslogd
 reads its configuration file when it starts up and whenever it
 receives a hangup signal.
 For information on the format of the configuration file,
 see
 .Xr syslog.conf 5 .
 .Pp
-.Nm Syslogd
+.Nm syslogd
 reads messages from the
 .Tn UNIX
 domain socket
@@ -126,7 +142,7 @@ or
 depending on the system (to read kernel messages). In a GNU/Linux system
 it will not parse the System.map and use it to annotate the kernel messages.
 .Pp
-.Nm Syslogd
+.Nm syslogd
 creates the file
 .Pa /var/run/syslog.pid ,
 and stores its process

@@ -27,7 +27,7 @@
 .\"
 .\"	@(#)telnet.1	8.6 (Berkeley) 6/1/94
 .\"
-.Dd June 1, 1994
+.Dd February 9, 2019
 .Dt TELNET 1
 .Os "GNU inetutils"
 .Sh NAME
@@ -37,16 +37,10 @@
 protocol
 .Sh SYNOPSIS
 .Nm telnet
-.Op Fl 8EFKLacdfrx
-.Op Fl S Ar tos
-.Op Fl X Ar authtype
-.Op Fl e Ar escapechar
-.Op Fl k Ar realm
-.Op Fl l Ar user
-.Op Fl n Ar tracefile
+.Op Ar options
 .Oo
 .Ar host
-.Op port
+.Op Ar port
 .Oc
 .Sh DESCRIPTION
 The
@@ -66,39 +60,32 @@ In this mode, it accepts and executes the commands listed below.
 If it is invoked with arguments, it performs an
 .Ic open
 command with those arguments.
-.Pp
-Options:
+.Sh OPTIONS
 .Bl -tag -width indent
-.It Fl 8
+.It Fl 4, -ipv4
+Use IPv4 to connect to hosts.
+.It Fl 4, -ipv6
+Use IPv6 to connect to hosts.
+.It Fl 8 , -binary
 Specifies an 8-bit data path.  This causes an attempt to
 negotiate the
 .Dv TELNET BINARY
 option on both input and output.
-.It Fl E
-Stops any character from being recognized as an escape character.
-.It Fl F
-If Kerberos V5 authentication is being used, the
-.Fl F
-option allows the local credentials to be forwarded
-to the remote system, including any credentials that
-have already been forwarded into the local environment.
-.It Fl K
-Specifies no automatic login to the remote system.
-.It Fl L
+.It Fl L , -binary-output
 Specifies an 8-bit data path on output.  This causes the
 BINARY option to be negotiated on output.
-.It Fl S Ar tos
-Sets the IP type-of-service (TOS) option for the telnet
-connection to the value
-.Ar tos,
-which can be a numeric TOS value
-or, on systems that support it, a symbolic
-TOS name found in the /etc/iptos file.
-.It Fl X Ar atype
-Disables the
-.Ar atype
-type of authentication.
-.It Fl a
+.It Fl e , -escape Ar escape-char
+Sets the initial
+.Nm telnet
+escape character to
+.Ar escape-char.
+If
+.Ar escape-char
+is omitted, then
+there will be no escape character.
+.It Fl E , -no-escape
+Stops any character from being recognized as an escape character.
+.It Fl a , -login
 Attempt automatic login.
 Currently, this sends the user name via the
 .Ev USER
@@ -110,40 +97,9 @@ The name used is that of the current user as returned by
 .Xr getlogin 2
 if it agrees with the current user ID,
 otherwise it is the name associated with the user ID.
-.It Fl c
-Disables the reading of the user's
-.Pa \&.telnetrc
-file.  (See the
-.Ic toggle skiprc
-command on this man page.)
-.It Fl d
-Sets the initial value of the
-.Ic debug
-toggle to
-.Dv TRUE
-.It Fl e Ar escape char
-Sets the initial
-.Nm
-.Nm telnet
-escape character to
-.Ar escape char.
-If
-.Ar escape char
-is omitted, then
-there will be no escape character.
-.It Fl f
-If Kerberos V5 authentication is being used, the
-.Fl f
-option allows the local credentials to be forwarded to the remote system.
-.ne 1i
-.It Fl k Ar realm
-If Kerberos authentication is being used, the
-.Fl k
-option requests that telnet obtain tickets for the remote host in
-realm realm instead of the remote host's realm, as determined
-by
-.Xr krb_realmofhost 3 .
-.It Fl l Ar user
+.It Fl K , -no-login
+Specifies no automatic login to the remote system.
+.It Fl l , -user Ar user
 When connecting to the remote system, if the remote system
 understands the
 .Ev ENVIRON
@@ -156,23 +112,54 @@ option.
 This option may also be used with the
 .Ic open
 command.
-.It Fl n Ar tracefile
+.It Fl n , -trace Ar tracefile
 Opens
 .Ar tracefile
 for recording trace information.
 See the
 .Ic set tracefile
 command below.
-.It Fl r
+.It Fl r , -rlogin
 Specifies a user interface similar to
 .Xr rlogin 1 .
 In this
 mode, the escape character is set to the tilde (~) character,
 unless modified by the \-e option.
-.It Fl x
-Turns on encryption of the data stream if possible.  This
-option is not available outside of the United States and
-Canada.
+.It Fl c , -no-rc
+Disables the reading of the user's
+.Pa \&.telnetrc
+file.  (See the
+.Ic toggle skiprc
+command on this man page.)
+.It Fl d , -debug
+Sets the initial value of the
+.Ic debug
+toggle to
+.Dv TRUE
+.It Fl x , -encrypt
+Turns on encryption of the data stream if possible.
+.It Fl X , -disable-auth Ar atype
+Disables the
+.Ar atype
+type of authentication.
+.It Fl k , -realm Ar realm
+If Kerberos authentication is being used, the
+.Fl k
+option requests that telnet obtain tickets for the remote host in
+realm realm instead of the remote host's realm, as determined
+by
+.Xr krb_realmofhost 3 .
+.It Fl F
+If Kerberos V5 authentication is being used, the
+.Fl F
+option allows the local credentials to be forwarded
+to the remote system, including any credentials that
+have already been forwarded into the local environment.
+.It Fl f , -fwd-credentials
+If Kerberos V5 authentication is being used, the
+.Fl f
+option allows the local credentials to be forwarded to the remote system.
+.ne 1i
 .It Ar host
 Indicates the official name, an alias, or the Internet address
 of a remote host.
@@ -182,7 +169,7 @@ not specified, the default
 .Nm telnet
 port is used.
 .El
-.Pp
+.Sh OPERATION
 When in rlogin mode, a line of the form ~.  disconnects from the
 remote host; ~ is the telnet escape character.
 Similarly, the line ~^Z suspends the telnet session.
@@ -1327,7 +1314,7 @@ If a command is specified,
 will print the help information for just that command.
 .El
 .Sh ENVIRONMENT
-.Nm Telnet
+.Nm telnet
 uses at least the
 .Ev HOME ,
 .Ev SHELL ,
@@ -1346,7 +1333,7 @@ user customized telnet startup values
 .El
 .Sh HISTORY
 The
-.Nm Telnet
+.Nm telnet
 command appeared in
 .Bx 4.2 .
 .Sh NOTES

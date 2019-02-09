@@ -1,3 +1,9 @@
+inetutils (2:1.9.4-6) UNRELEASED; urgency=medium
+
+  * Update man pages. Closes: #609934
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 09 Feb 2019 19:38:19 +0100
+
 inetutils (2:1.9.4-5) unstable; urgency=medium
 
   * Fix build on the Hurd, due to some partially disabled ioctls, by checking

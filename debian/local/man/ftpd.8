@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)ftpd.8	8.3 (Berkeley) 6/1/94
 .\"
-.Dd June 1, 1994
+.Dd February 9, 2019
 .Dt FTPD 8
 .Os "GNU inetutils"
 .Sh NAME
@@ -36,12 +36,9 @@
 Internet File Transfer Protocol server 
 .Sh SYNOPSIS
 .Nm ftpd
-.Op Fl dlADq
-.Op Fl T Ar maxtimeout
-.Op Fl t Ar timeout
-.Op Fl a Ar login-name
+.Op Ar option ...
 .Sh DESCRIPTION
-.Nm Ftpd
+.Nm ftpd
 is the
 Internet File Transfer Protocol
 server process.  The server uses the
@@ -51,27 +48,29 @@ and listens at the port specified in the
 .Dq ftp
 service specification; see
 .Xr services 5 .
-.Pp
-Available options:
+.Sh OPTIONS
 .Bl -tag -width Ds
-.It Fl d
-Debugging information is written to the syslog 
-using LOG_FTP.
-.It Fl l
+.It Fl 4 , -ipv4
+Restrict daemon to listen to IPv4 addresses only.
+.It Fl 6 , -ipv6
+Restrict daemon to listen to IPv6 addresses only.
+.It Fl d , -debug
+Debugging information is written to the syslog using LOG_FTP.
+.It Fl l , -logging
 Each successful and failed
 .Xr ftp 1
 session is logged using syslog with a facility of LOG_FTP.
 If this option is specified twice, the retrieve (get), store (put), append,
 delete, make directory, remove directory and rename operations and
 their filename arguments are also logged.
-.It Fl A 
+.It Fl A , -anonymous-only
 Only anonymous login is allowed.
-.It Fl D
+.It Fl D , -daemon
 ftpd enters daemon-mode. That allows ftpd to be run without inetd.
-.It Fl q
-Quiet mode. No information about the version of the ftpd is given to the 
+.It Fl q , -no-version
+Quiet mode. No information about the version of the ftpd is given to the
 client.
-.It Fl T
+.It Fl T , -max-timeout Ar timeout
 A client may also request a different timeout period;
 the maximum period allowed may be set to
 .Ar timeout
@@ -79,16 +78,36 @@ seconds with the
 .Fl T
 option.
 The default limit is 2 hours.
-.It Fl t
+.It Fl t , -timeout Ar timeout
 The inactivity timeout period is set to
 .Ar timeout
 seconds (the default is 15 minutes).
-.It Fl a
+.It Fl p , -pidfile Ar pidfile
+Change default location of pidfile.
+.It Fl a , -auth Ar auth
 Give anonymous another
-.Ar login-name 
+.Ar login-name
 (anonymous and ftpd will still work).
+It can be one of
+.Bl -tag -width Ds
+.It default
+Use passwd authentication.
+.It pam
+Use PAM service 'ftp'.
 .El
-.Pp
+.It Fl -non-rfc2577
+Neglect RFC 2577 by giving information on missing users.
+.It Fl u , -umask Ar value
+Set default umask to
+.Ar value .
+.It Fl ? , -help
+Display a help list.
+.It Fl -usage
+Display a short usage message.
+.It Fl V , -version
+Display program version.
+.El
+.Sh OPERATION
 The file
 .Pa /etc/nologin
 can be used to disable ftp access.
@@ -119,13 +138,19 @@ The case of the requests is ignored.
 .It CDUP Ta "change to parent of current working directory"
 .It CWD Ta "change working directory"
 .It DELE Ta "delete a file"
+.It EPRT Ta "extended data connection port, RFC 2428"
+.It EPSV Ta "extended passive transfer request, RFC 2428"
+.It FEAT Ta "display command extensions"
 .It HELP Ta "give help information"
 .It LIST Ta "give list files in a directory" Pq Dq Li "ls -lgA"
+.It LPRT Ta "long data connection port, RFC 1639"
+.It LPSV Ta "long passive transfer request, RFC 1639"
 .It MKD Ta "make a directory"
 .It MDTM Ta "show last modification time of file"
 .It MODE Ta "specify data transfer" Em mode
 .It NLST Ta "give name list of files in directory"
 .It NOOP Ta "do nothing"
+.It OPTS Ta "option settings"
 .It PASS Ta "specify password"
 .It PASV Ta "prepare for server-to-server transfer"
 .It PORT Ta "specify data connection port"
@@ -182,7 +207,7 @@ STAT
 command is received during a data transfer, preceded by a Telnet IP
 and Synch, transfer status will be returned.
 .Pp
-.Nm Ftpd
+.Nm ftpd
 interprets file names according to the
 .Dq globbing
 conventions used by
@@ -190,7 +215,7 @@ conventions used by
 This allows users to utilize the metacharacters
 .Dq Li \&*?[]{}~ .
 .Pp
-.Nm Ftpd
+.Nm ftpd
 authenticates users according to three rules.
 .Pp
 .Bl -enum -offset indent

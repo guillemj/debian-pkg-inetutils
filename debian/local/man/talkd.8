@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)talkd.8	8.2 (Berkeley) 12/11/93
 .\"
-.Dd December 11, 1993
+.Dd February 9, 2019
 .Dt TALKD 8
 .Os "GNU inetutils"
 .Sh NAME
@@ -35,8 +35,9 @@
 .Nd remote user communication server
 .Sh SYNOPSIS
 .Nm talkd
+.Op Ar options
 .Sh DESCRIPTION
-.Nm Talkd
+.Nm talkd
 is the server that notifies a user that someone else wants to
 initiate a conversation.
 It acts as a repository of invitations, responding to requests
@@ -61,6 +62,33 @@ When the callee responds, the local server uses the
 recorded invitation to respond with the appropriate rendezvous
 address and the caller and callee client programs establish a
 stream connection through which the conversation takes place.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl l , -logging
+Enable more verbose logging to syslog.
+.It Fl d , -debug
+Enable debug mode.
+.It Fl t , -timeout Ar seconds
+Set timeout value to
+.Ar seconds .
+.It Fl i , -idle-timeout Ar seconds
+Set idle timeout value to
+.Ar seconds .
+.It Fl r , -request-ttl Ar seconds
+Set request time-to-live value to
+.Ar seconds .
+.It Fl a , -acl Ar filename
+Read the site-wide ACLs from
+.Ar filename .
+.It Fl S , -strict-policy
+Apply a strict ACL policy.
+.It Fl ? , -help
+Display a help list.
+.It Fl -usage
+Display a short usage message.
+.It Fl V , -version
+Display program version.
+.El
 .Sh SEE ALSO
 .Xr talk 1 ,
 .Xr write 1

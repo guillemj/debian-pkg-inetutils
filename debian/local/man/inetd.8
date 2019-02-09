@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)inetd.8	8.4 (Berkeley) 6/1/94
 .\"
-.Dd May 15, 2015
+.Dd February 9, 2019
 .Dt INETD 8
 .Os "GNU inetutils"
 .Sh NAME
@@ -36,12 +36,10 @@
 .Dq super-server
 .Sh SYNOPSIS
 .Nm inetd
-.Op Fl d
-.Op Fl R Ar rate
-.Op Fl p Op Ar filename
-.Op Fl -environment
-.Op Fl -resolve
-.Op Ar configuration_files ...
+.Op Va option ...
+.Oo
+.Ar conf-file Op Ar conf-dir
+.Oc Ar ...
 .Sh DESCRIPTION
 The
 .Nm inetd
@@ -64,9 +62,9 @@ will be described below).  Essentially,
 .Nm inetd
 allows running one daemon to invoke several others,
 reducing load on the system.
-.Pp
+.Sh OPTIONS
 The options available for
-.Nm inetd:
+.Nm inetd :
 .Bl -tag -width Ds
 .It Fl d, -debug
 Turns on debugging.
@@ -89,7 +87,7 @@ Shows the help.
 .It Fl -usage
 Shows the usage message.
 .El
-.Pp
+.Sh OPERATION
 Upon execution,
 .Nm inetd
 reads its configuration information from a configuration

@@ -31,7 +31,7 @@
 .\"
 .\"     @(#)ping.8	8.3 (Berkeley) 4/28/95
 .\"
-.Dd April 28, 1995
+.Dd February 9, 2019
 .Dt PING 1
 .Os "GNU inetutils"
 .Sh NAME
@@ -41,15 +41,10 @@
 packets to network hosts
 .Sh SYNOPSIS
 .Nm ping
-.Op Fl Rdfnqrv
-.Op Fl c Ar count
-.Op Fl i Ar wait
-.Op Fl l Ar preload
-.Op Fl p Ar pattern
-.Op Fl s Ar packetsize
-.Ar host
+.Op Ar option ...
+.Ar host ...
 .Sh DESCRIPTION
-.Nm Ping
+.Nm ping
 uses the
 .Tn ICMP
 protocol's mandatory
@@ -65,18 +60,37 @@ followed by a
 .Dq struct timeval
 and then an arbitrary number of ``pad'' bytes used to fill out the
 packet.
-The options are as follows:
+.Sh OPTIONS
 .Bl -tag -width Ds
-.It Fl c Ar count
+.It Fl -address
+Send
+.Tn ICMP_ADDRESS
+packets (root only).
+.It Fl -mask
+Same as
+.Fl -address .
+.It Fl -echo
+Send
+.Tn ICMP_ECHO
+packets (default).
+.It Fl -timestamp
+Send
+.Tn ICMP_TIMESTAMP
+packets.
+.It Fl t , -type Ar type
+Send
+.Ar type
+packets.
+.It Fl c , -count Ar count
 Stop after sending (and receiving)
 .Ar count
 .Tn ECHO_RESPONSE
 packets.
-.It Fl d
+.It Fl d , -debug
 Set the
 .Dv SO_DEBUG
 option on the socket being used.
-.It Fl f
+.It Fl f , -flood
 Flood ping.
 Outputs packets as fast as they come back or one hundred times per second,
 whichever is more.
@@ -90,7 +104,7 @@ Only the super-user may use this option.
 .Bf -emphasis
 This can be very hard on a network and should be used with caution.
 .Ef
-.It Fl i Ar wait
+.It Fl i , -interval Ar wait
 Wait
 .Ar wait
 seconds
@@ -99,28 +113,28 @@ The default is to wait for one second between each packet.
 This option is incompatible with the
 .Fl f
 option.
-.It Fl l Ar preload
+.It Fl l , -preload Ar preload
 If
 .Ar preload
 is specified,
 .Nm ping
 sends that many packets as fast as possible before falling into its normal
 mode of behavior.
-.It Fl n
+.It Fl n , -numeric
 Numeric output only.
 No attempt will be made to lookup symbolic names for host addresses.
-.It Fl p Ar pattern
+.It Fl p , -pattern Ar pattern
 You may specify up to 16 ``pad'' bytes to fill out the packet you send.
 This is useful for diagnosing data-dependent problems in a network.
 For example,
 .Dq Li \-p ff
 will cause the sent packet to be filled with all
 ones.
-.It Fl q
+.It Fl q , -quiet
 Quiet output.
 Nothing is displayed except the summary lines at startup time and
 when finished.
-.It Fl R
+.It Fl R , -route
 Record route.
 Includes the
 .Tn RECORD_ROUTE
@@ -130,27 +144,51 @@ packet and displays
 the route buffer on returned packets.
 Note that the IP header is only large enough for nine such routes.
 Many hosts ignore or discard this option.
-.It Fl r
+.It Fl r , -ignore-routing
 Bypass the normal routing tables and send directly to a host on an attached
 network.
 If the host is not on a directly-attached network, an error is returned.
 This option can be used to ping a local host through an interface
 that has no route through it (e.g., after the interface was dropped by
 .Xr routed 8 ) .
-.It Fl s Ar packetsize
-Specifies the number of data bytes to be sent.  
+.It Fl s , -size Ar packetsize
+Specifies the number of data bytes to be sent.
 The default is 56, which translates into 64
 .Tn ICMP
 data bytes when combined
 with the 8 bytes of
 .Tn ICMP
 header data.
-.It Fl v
+.It Fl v , -verbose
 Verbose output.
 .Tn ICMP
 packets other than
 .Tn ECHO_RESPONSE
 that are received are listed.
+.It Fl -ttl Ar N
+Set
+.Ar N
+as the packet time-to-live.
+.It Fl T , -tos Ar num
+Set
+.Ar num
+as the packet type of service (TOS).
+.It Fl w , -timeout Ar N
+Stop after
+.Ar N
+seconds of sending packets.
+.It Fl W , -linger Ar N
+Number of seconds to wait for response.
+.It Fl -ip-timestamp Ar flag
+IP timestamp of type
+.Ar flag ,
+which is one of "tsonly" and "tsaddr".
+.It Fl ? , -help
+Display a help list.
+.It Fl -usage
+Display a short usage message.
+.It Fl V , -version
+Print the program version.
 .El
 .Pp
 When using
@@ -200,7 +238,7 @@ it uses in the computation of round trip times.
 If less than eight bytes of pad are specified, no round trip times are
 given.
 .Sh DUPLICATE AND DAMAGED PACKETS
-.Nm Ping
+.Nm ping
 will report duplicate and damaged packets.
 Duplicate packets should never occur, and seem to be caused by
 inappropriate link-level retransmissions.
