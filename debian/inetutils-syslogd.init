@@ -30,7 +30,8 @@ test -r $CONFIGFILE && . $CONFIGFILE
 
 case `uname -s` in
 *FreeBSD)
-  XCONSOLE=/var/run/xconsole
+  XCONSOLE=/run/xconsole
+  rm -f /dev/xconsole
   ln -sf $XCONSOLE /dev/xconsole
   ;;
 *)
