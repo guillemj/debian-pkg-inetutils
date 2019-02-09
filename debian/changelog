@@ -3,6 +3,7 @@ inetutils (2:1.9.4-6) UNRELEASED; urgency=medium
   * Update man pages. Closes: #609934
   * Fix /dev/xconsole symlink creation on kFreeBSD, which does not support
     overwriting a symlink with another one, so we need to remove it first.
+  * Add spaces around make variable assignment in debian/rules.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 09 Feb 2019 19:38:19 +0100
 

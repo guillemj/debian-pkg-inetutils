@@ -12,7 +12,7 @@ else
 endif
 
 # Override default upstream setuid mode, as they rejected this change.
-SUIDMODE="-m 4755"
+SUIDMODE = "-m 4755"
 
 # Set proper Provides
 ifeq ($(DEB_HOST_ARCH_OS),linux)
