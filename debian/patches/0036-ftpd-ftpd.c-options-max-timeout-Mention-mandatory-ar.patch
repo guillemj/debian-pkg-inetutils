@@ -1,0 +1,29 @@
+From 7f221ff1f910f963c1367f21b25e36137995cd5c Mon Sep 17 00:00:00 2001
+From: "Alfred M. Szmidt" <ams@gnu.org>
+Date: Mon, 10 Jul 2017 19:59:44 +0000
+Subject: [PATCH 36/42] ftpd/ftpd.c (options) <max-timeout>: Mention mandatory
+ argument.
+
+---
+ ChangeLog   | 4 ++++
+ ftpd/ftpd.c | 4 ++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/ftpd/ftpd.c b/ftpd/ftpd.c
+index 26835244..b88abcb9 100644
+--- a/ftpd/ftpd.c
++++ b/ftpd/ftpd.c
+@@ -294,8 +294,8 @@ static struct argp_option options[] = {
+   { "timeout", 't', "TIMEOUT", 0,
+     "set default idle timeout",
+     GRID+1 },
+-  { "max-timeout", 'T', NULL, 0,
+-    "reset maximum value of timeout allowed",
++  { "max-timeout", 'T', "MAX_TIMEOUT", 0,
++    "set maximum value of timeout allowed",
+     GRID+1 },
+   { "non-rfc2577", OPT_NONRFC2577, NULL, 0,
+     "neglect RFC 2577 by giving info on missing users",
+-- 
+2.20.1.791.gb4d0f1c61a
+

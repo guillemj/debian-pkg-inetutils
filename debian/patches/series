@@ -1,5 +1,31 @@
+# Local changes
 99_typos.patch
 01_disable_useless_man_pages.patch
 22_syslogd_conf.patch
 62_inetd_change_ipv6_protocol_semantics.patch
 hurd-partially-disabled-ioctls.patch
+# Taken from upstream git master
+0001-ifconfig-Sporadically-appearing-regression.patch
+0002-ifconfig-Improve-the-support-for-GNU-Hurd.patch
+0004-ifconfig-More-info-on-tunnel-interfaces.patch
+0005-ifconfig-Implement-hardware-list-for-BSD-systems.patch
+0006-ifconfig-Support-changing-of-hardware-address.patch
+0007-ifconfig-Symbolic-name-as-peer-address.patch
+0008-ifconfig-Hardware-detection-in-GNU-Hurd.patch
+0009-ifconfig-Apply-interface-flags-correctly.patch
+0010-ifconfig-Verbose-report-on-changed-flags.patch
+0011-ifconfig-Statistics-for-BSD-systems.patch
+0012-telnetd-Premature-connection-closure.patch
+0015-syslogd-Redefine-faulty-macro-LOG_MAKEPRI.patch
+0016-tests-ftp-localhost.sh-Incomplete-error-handling.patch
+0019-ftp-Allow-remote-user-in-command.patch
+0022-ping-Implement-subprivileged-echo-method.patch
+0023-traceroute-Subprivileged-use-case.patch
+0024-hostname-Avoid-a-trailing-space.patch
+0028-telnetd-Scrub-USER-from-environment.patch
+0029-telnetd-Portable-option-debugging.patch
+0033-Test-utility-displays-some-termcaps.patch
+0035-ftp-main.c-main-Don-t-assume-that-uninitialized-argv.patch
+0036-ftpd-ftpd.c-options-max-timeout-Mention-mandatory-ar.patch
+0037-src-hostname.c-set_name-Handle-case-when-hostname_ne.patch
+0038-src-hostname.c-parse_file-Free-name-and-allocate-one.patch

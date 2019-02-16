@@ -1,0 +1,32 @@
+From 91960071d72dcb4bfb5182b96ebe81694cfce3e1 Mon Sep 17 00:00:00 2001
+From: "Alfred M. Szmidt" <ams@gnu.org>
+Date: Mon, 10 Jul 2017 20:14:58 +0000
+Subject: [PATCH 38/42] src/hostname.c (parse_file): Free name and allocate one
+ extra byte for it.
+
+---
+ ChangeLog      | 5 +++++
+ src/hostname.c | 6 ++++--
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/hostname.c b/src/hostname.c
+index 95bf1080..f53bb201 100644
+--- a/src/hostname.c
++++ b/src/hostname.c
+@@ -410,9 +410,11 @@ parse_file (const char *const file_name)
+ 
+       if (buffer[0] != '#')
+         {
+-	  name = (char *) xmalloc (sizeof (char) * nread);
+-	  if (sscanf (buffer, "%s", name)  == 1)
++	  name = (char *) xmalloc (sizeof (char) * (nread + 1));
++	  if (sscanf (buffer, "%s", name) == 1)
+ 	    break;
++	  free (name);
++	  name = NULL;
+         }
+     }
+   while (feof (file) == 0);
+-- 
+2.20.1.791.gb4d0f1c61a
+

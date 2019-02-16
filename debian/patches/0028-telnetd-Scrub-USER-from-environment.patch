@@ -1,0 +1,34 @@
+From 127a8a349168cfc91bd3699f911c5de42e5863aa Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Fri, 24 Feb 2017 00:02:14 +0100
+Subject: [PATCH 28/42] telnetd: Scrub USER from environment.
+
+Avoid conflicting user identity by forgetting whatever
+the serving host considers to be the process owner.
+---
+ ChangeLog         | 11 +++++++++++
+ telnetd/telnetd.c |  8 ++++++++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
+index 1dcd9806..5e13e23d 100644
+--- a/telnetd/telnetd.c
++++ b/telnetd/telnetd.c
+@@ -504,6 +504,14 @@ telnetd_setup (int fd)
+ 
+   io_setup ();
+ 
++  /* Before doing anything related to the identity of the client,
++   * scrub the environment variable USER, since it may be set with
++   * an irrelevant user name at this point.  OpenBSD has been known
++   * to offend at this point with their own inetd.  Any demand for
++   * autologin will get attention in getterminaltype().
++   */
++  unsetenv ("USER");
++
+   /* get terminal type. */
+   uname[0] = 0;
+   level = getterminaltype (uname, sizeof (uname));
+-- 
+2.20.1.791.gb4d0f1c61a
+

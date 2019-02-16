@@ -1,0 +1,109 @@
+From d4114d50afdf7d08416c194ff71dff4abb046979 Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Sat, 1 Aug 2015 20:38:55 +0200
+Subject: [PATCH 09/42] ifconfig: Apply interface flags correctly.
+
+Changes of interface flags could be suppressed when
+an address assignment was requested at the same time.
+Suppress also printout when properties are changed.
+Reported by Hans-Peter Budek.
+---
+ ChangeLog          | 29 +++++++++++++++++++++++++++++
+ ifconfig/options.c | 27 ++++++++++++++++++++++++---
+ ifconfig/options.h |  6 ++----
+ 3 files changed, 55 insertions(+), 7 deletions(-)
+
+diff --git a/ifconfig/options.c b/ifconfig/options.c
+index 30320622..484f2522 100644
+--- a/ifconfig/options.c
++++ b/ifconfig/options.c
+@@ -49,8 +49,9 @@ int list_mode;
+ int verbose;
+ 
+ /* Flags asked for, possibly still pending application.  */
+-int pending_setflags;
+-int pending_clrflags;
++static int pending_setflags = 0;
++static int pending_clrflags = 0;
++static int pending_valid = 0;
+ 
+ /* Array of all interfaces on the command line.  */
+ struct ifconfig *ifs;
+@@ -270,7 +271,7 @@ static struct argp_option argp_options[] = {
+   { "format", FORMAT_OPTION, "FORMAT", 0,
+     "select output format; set to `help' for info", GRP },
+   { "up", UP_OPTION, NULL, 0,
+-    "activate the interface (default if address is given)", GRP },
++    "activate the interface", GRP },
+   { "down", DOWN_OPTION, NULL, 0,
+     "shut the interface down", GRP },
+   { "flags", 'F', "FLAG[,FLAG...]", 0,
+@@ -381,6 +382,11 @@ void
+ parse_opt_set_flag (struct ifconfig *ifp _GL_UNUSED_PARAMETER,
+ 		    int flag, int rev)
+ {
++  if (ifp)
++    ifp->valid |= IF_VALID_FLAGS;
++  else
++    pending_valid |= IF_VALID_FLAGS;
++
+   if (rev)
+     {
+       pending_clrflags |= flag;
+@@ -496,12 +502,27 @@ parse_opt_set_default_format_from_file (const char *file)
+ void
+ parse_opt_finalize (struct ifconfig *ifp)
+ {
++  /* The flags `--up' and `--down' are allowed early.  */
++  if (ifp && pending_valid)
++    {
++      ifp->valid |= pending_valid;
++      pending_valid = 0;
++    }
++
++  /* Only the empty set of actions, i.e., only the interface name
++   * is present on the command line, merits printout of status.
++   */
+   if (ifp && !ifp->valid)
+     {
+       ifp->valid = IF_VALID_FORMAT;
+       ifp->format = default_format;
++    }
++
++  if (ifp && (pending_setflags | pending_clrflags))
++    {
+       ifp->setflags |= pending_setflags;
+       ifp->clrflags |= pending_clrflags;
++      pending_setflags = pending_clrflags = 0;
+     }
+ }
+ 
+diff --git a/ifconfig/options.h b/ifconfig/options.h
+index 10528386..b3bfae43 100644
+--- a/ifconfig/options.h
++++ b/ifconfig/options.h
+@@ -50,9 +50,10 @@ struct ifconfig
+   int mtu;
+ # define IF_VALID_METRIC	0x100
+   int metric;
++# define IF_VALID_FLAGS		0x200
+   int setflags;
+   int clrflags;
+-# define IF_VALID_HWADDR	0x200
++# define IF_VALID_HWADDR	0x400
+   char *hwaddr;
+ };
+ 
+@@ -67,9 +68,6 @@ extern struct format formats[];
+ extern int all_option;
+ extern int ifs_cmdline;
+ 
+-extern int pending_setflags;
+-extern int pending_clrflags;
+-
+ /* Array of interfaces mentioned on the command line.  */
+ extern struct ifconfig *ifs;
+ extern int nifs;
+-- 
+2.20.1.791.gb4d0f1c61a
+

@@ -1,0 +1,48 @@
+From c1affe14d5e373b630358487fe1f89270cf73285 Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Sun, 2 Aug 2015 00:57:04 +0200
+Subject: [PATCH 10/42] ifconfig: Verbose report on changed flags.
+
+---
+ ChangeLog           |  8 ++++++++
+ ifconfig/changeif.c | 24 ++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
+
+diff --git a/ifconfig/changeif.c b/ifconfig/changeif.c
+index a040587b..beac6f6d 100644
+--- a/ifconfig/changeif.c
++++ b/ifconfig/changeif.c
+@@ -367,6 +367,30 @@ set_flags (int sfd, struct ifreq *ifr, int setflags, int clrflags)
+       error (0, errno, "SIOCSIFFLAGS failed");
+       return -1;
+     }
++
++  if (verbose)
++    {
++      printf ("Setting %sflags", setflags ? "" : "no ");
++
++      if (setflags)
++	{
++	  printf (" `");
++	  print_if_flags (setflags, NULL, ',');
++	  putchar ('\'');
++	}
++
++      printf (" of `%s'", ifr->ifr_name);
++
++      if (clrflags)
++	{
++	  printf (", clearing `");
++	  print_if_flags (clrflags, NULL, ',');
++	  putchar ('\'');
++	}
++
++      printf (".\n");
++    }
++
+   return 0;
+ #endif
+ }
+-- 
+2.20.1.791.gb4d0f1c61a
+

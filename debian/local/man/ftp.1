@@ -38,7 +38,7 @@ file transfer program
 .Sh SYNOPSIS
 .Nm ftp
 .Op Ar option ...
-.Op Ar host Op Ar port
+.Op Ar user@host Op Ar port
 .Sh DESCRIPTION
 .Nm ftp
 is the user interface to the
@@ -46,6 +46,11 @@ is the user interface to the
 standard File Transfer Protocol.
 The program allows a user to transfer files to and from a
 remote network site.
+A
+.Ar user
+can be specified in the
+.Ar host
+by prefixing it followed by an @.
 .Sh OPTIONS
 Options may be specified at the command line, or to the
 command interpreter.
@@ -104,7 +109,7 @@ Display a help list.
 Display program version.
 .El
 .Sh OPERATION
-The client host with which
+The client host (with an optional prefixed user followed by an @) with which
 .Nm ftp
 is to communicate may be specified on the command line.
 If this is done,
@@ -613,11 +618,14 @@ If the character's position in
 is longer than the length of
 .Ar outchars  ,
 the character is deleted from the file name.
-.It Ic open Ar host Op Ar port
+.It Ic open Ar user@host Op Ar port
 Establish a connection to the specified
 .Ar host
 .Tn FTP
 server.
+An optional user may be supplied, by prefixing it to the
+.Ar host
+followed by an @.
 An optional port number may be supplied,
 in which case,
 .Nm ftp

@@ -1,0 +1,38 @@
+From d0496fa7d025ad55d8da0ee51bb873ea71c1d072 Mon Sep 17 00:00:00 2001
+From: "Alfred M. Szmidt" <ams@gnu.org>
+Date: Thu, 22 Jun 2017 10:12:10 +0200
+Subject: [PATCH 35/42] ftp/main.c (main): Don't assume that uninitialized
+ argv[argv] is NULL.
+
+---
+ ChangeLog  | 5 +++++
+ ftp/main.c | 7 +++----
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/ftp/main.c b/ftp/main.c
+index 1b9d3f3e..7d4918fd 100644
+--- a/ftp/main.c
++++ b/ftp/main.c
+@@ -286,16 +286,15 @@ main (int argc, char *argv[])
+   if (argc > 0)
+     {
+       char *xargv[5];
++      int i;
+ 
+       if (setjmp (toplevel))
+ 	exit (EXIT_SUCCESS);
+       signal (SIGINT, intr);
+       signal (SIGPIPE, lostpeer);
+       xargv[0] = program_invocation_name;
+-      xargv[1] = argv[0];
+-      xargv[2] = argv[1];
+-      xargv[3] = argv[2];
+-      xargv[4] = NULL;
++      for (i = 0; i < argc && i < 3; i++)
++	xargv[i + 1] = argv[i];
+       setpeer (argc + 1, xargv);
+     }
+   top = setjmp (toplevel) == 0;
+-- 
+2.20.1.791.gb4d0f1c61a
+

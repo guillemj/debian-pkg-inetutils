@@ -1,0 +1,78 @@
+From 05a2f938e3f56ce0136966136410c5f9e20c37a7 Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Fri, 12 Feb 2016 14:45:33 +0100
+Subject: [PATCH 22/42] ping: Implement subprivileged echo method.
+
+The change implements a setuid-less use case of echo pinging
+for use on GNU/Linux systems.  The new mode is the fallback
+when a raw socket mode fails.
+---
+ ChangeLog      | 14 ++++++++++++++
+ ping/libping.c | 30 ++++++++++++++++++++++++++----
+ 2 files changed, 40 insertions(+), 4 deletions(-)
+
+diff --git a/ping/libping.c b/ping/libping.c
+index e85d58b9..0d77d419 100644
+--- a/ping/libping.c
++++ b/ping/libping.c
+@@ -39,6 +39,8 @@
+ 
+ #include "ping.h"
+ 
++static int useless_ident = 0;	/* Relevant at least for Linux.  */
++
+ static size_t _ping_packetsize (PING * p);
+ 
+ size_t
+@@ -72,8 +74,28 @@ ping_init (int type, int ident)
+   if (fd < 0)
+     {
+       if (errno == EPERM || errno == EACCES)
+-	fprintf (stderr, "ping: Lacking privilege for raw socket.\n");
+-      return NULL;
++	{
++	  errno = 0;
++
++	  /* At least Linux can allow subprivileged users to send ICMP
++	   * packets formally encapsulated and built as a datagram socket,
++	   * but then the identity number is set by the kernel itself.
++	   */
++	  fd = socket (AF_INET, SOCK_DGRAM, proto->p_proto);
++	  if (fd < 0)
++	    {
++	      if (errno == EPERM || errno == EACCES || errno == EPROTONOSUPPORT)
++		fprintf (stderr, "ping: Lacking privilege for icmp socket.\n");
++	      else
++		fprintf (stderr, "ping: %s\n", strerror (errno));
++
++	      return NULL;
++	    }
++
++	  useless_ident++;	/* SOCK_DGRAM overrides our set identity.  */
++	}
++      else
++	return NULL;
+     }
+ 
+   /* Allocate PING structure and initialize it to default values */
+@@ -172,7 +194,7 @@ my_echo_reply (PING * p, icmphdr_t * icmp)
+   return (orig_ip->ip_dst.s_addr == p->ping_dest.ping_sockaddr.sin_addr.s_addr
+ 	  && orig_ip->ip_p == IPPROTO_ICMP
+ 	  && orig_icmp->icmp_type == ICMP_ECHO
+-	  && ntohs (orig_icmp->icmp_id) == p->ping_ident);
++	  && (ntohs (orig_icmp->icmp_id) == p->ping_ident || useless_ident));
+ }
+ 
+ int
+@@ -206,7 +228,7 @@ ping_recv (PING * p)
+     case ICMP_ADDRESSREPLY:
+       /*    case ICMP_ROUTERADV: */
+ 
+-      if (ntohs (icmp->icmp_id) != p->ping_ident)
++      if (ntohs (icmp->icmp_id) != p->ping_ident && useless_ident == 0)
+ 	return -1;
+ 
+       if (rc)
+-- 
+2.20.1.791.gb4d0f1c61a
+
