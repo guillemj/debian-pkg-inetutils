@@ -196,6 +196,7 @@ Description: base networking utilities (experimental package)
   - ifconfig
   - hostname
   - dnsdomainname
+  - logger
  .
  WARNING: The current ifconfig implementation provided is not fully
  compatible with the net-tool's ifconfig version.
