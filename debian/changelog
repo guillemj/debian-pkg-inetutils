@@ -1,3 +1,9 @@
+inetutils (2:1.9.4-7) UNRELEASED; urgency=medium
+
+  * Remove debian/tmp prefix from man pages paths in debhelper fragment files.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 15 Feb 2019 01:35:50 +0100
+
 inetutils (2:1.9.4-6) unstable; urgency=medium
 
   * Update man pages. Closes: #609934
