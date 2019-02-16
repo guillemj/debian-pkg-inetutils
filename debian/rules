@@ -48,6 +48,7 @@ config.status: configure
 	  --infodir=\$${prefix}/share/info \
 	  --with-krb5 \
 	  --with-wrap \
+	  --with-idn \
 	  --with-pam
 
 build-indep:
