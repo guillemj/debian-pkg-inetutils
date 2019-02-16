@@ -13,6 +13,9 @@ inetutils (2:1.9.4-7) UNRELEASED; urgency=medium
   * Switch from GNU Shishi to MIT Kerberos 5. The former has seen no upstream
     release since 2013, and no upstream commit since 2015.
   * Add libidn11-dev to Build-Depends.
+  * Workaround reproducible issue by forcing the path for /bin/login at
+    configure time, to cope with systems broken by the bogus
+    /usr-merge-via-symlinks deployment hack.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 15 Feb 2019 01:35:50 +0100
 

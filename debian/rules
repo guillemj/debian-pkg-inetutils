@@ -46,6 +46,7 @@ config.status: configure
 	  --libexecdir=\$${prefix}/sbin \
 	  --mandir=\$${prefix}/share/man \
 	  --infodir=\$${prefix}/share/info \
+	  --with-path-login=/bin/login \
 	  --with-krb5 \
 	  --with-wrap \
 	  --with-idn \
