@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-7) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-7) unstable; urgency=medium
 
   * Remove debian/tmp prefix from man pages paths in debhelper fragment files.
   * Update man pages.
@@ -46,7 +46,7 @@ inetutils (2:1.9.4-7) UNRELEASED; urgency=medium
   * Remove unused debhelper fragment file for whois.
   * Use the Description as the Short-Description in the init scripts.
 
- -- Guillem Jover <guillem@debian.org>  Fri, 15 Feb 2019 01:35:50 +0100
+ -- Guillem Jover <guillem@debian.org>  Sat, 16 Feb 2019 18:09:37 +0100
 
 inetutils (2:1.9.4-6) unstable; urgency=medium
 
