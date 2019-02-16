@@ -46,6 +46,15 @@ config.status: configure
 	  --libexecdir=\$${prefix}/sbin \
 	  --mandir=\$${prefix}/share/man \
 	  --infodir=\$${prefix}/share/info \
+	  --disable-rcp           \
+	  --disable-rexec         \
+	  --disable-rexecd        \
+	  --disable-rlogin        \
+	  --disable-rlogind       \
+	  --disable-rsh           \
+	  --disable-rshd          \
+	  --disable-uucpd         \
+	  --disable-whois         \
 	  --with-path-login=/bin/login \
 	  --with-krb5 \
 	  --with-wrap \
