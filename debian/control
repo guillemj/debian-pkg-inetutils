@@ -191,7 +191,11 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
 Description: base networking utilities (experimental package)
- Base utilities for network administration (ifconfig, etc).
+ Base utilities for network administration:
+ .
+  - ifconfig
+  - hostname
+  - dnsdomainname
  .
  WARNING: The current ifconfig implementation provided is not fully
  compatible with the net-tool's ifconfig version.

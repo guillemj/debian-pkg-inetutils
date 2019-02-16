@@ -1,0 +1,32 @@
+.\" Copyright © 2015 Free Software Foundation, Inc.
+.\" License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.\"
+.\" This is free software: you are free to change and redistribute it.
+.\" There is NO WARRANTY, to the extent permitted by law.
+.TH DNSDOMAINNAME "1" "2019-02" "GNU inetutils" "User Commands"
+.SH NAME
+dnsdomainname \- show DNS domain name
+.SH SYNOPSIS
+.B dnsdomainname
+[\fI\,OPTION\/\fR...]
+.SH DESCRIPTION
+Show domain part of the system's fully qualified host name.
+.PP
+The tool uses
+.BR gethostname (2)
+to get the host name of the system and
+.BR getaddrinfo (2)
+to resolve it into a canonical name.
+The part after the first period ('.') of the canonical name is shown.
+.SH OPTIONS
+.TP
+\-?, \fB\-\-help\fR
+Give this help list.
+.TP
+\fB\-\-usage\fR
+Give a short usage message.
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print program version.
+.SH "SEE ALSO"
+gethostname(2), getaddrinfo(3)

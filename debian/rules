@@ -97,6 +97,12 @@ install: build
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
 	cp $(M)/ifconfig.1 $(D)/usr/share/man/man1/inetutils-ifconfig.1
 	
+	# Rename tools not break with Essential:yes packages
+	mv $(D)/usr/bin/dnsdomainname $(D)/usr/bin/inetutils-dnsdomainname
+	mv $(D)/usr/bin/hostname $(D)/usr/bin/inetutils-hostname
+	cp $(M)/dnsdomainname.1 $(D)/usr/share/man/man1/inetutils-dnsdomainname.1
+	cp $(M)/hostname.1 $(D)/usr/share/man/man1/inetutils-hostname.1
+	
 	# Rename inetd to be able to coexist with not purged netkit-inetd
 	mv $(D)/usr/sbin/inetd $(D)/usr/sbin/inetutils-inetd
 	cp $(M)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8

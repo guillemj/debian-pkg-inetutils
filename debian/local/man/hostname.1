@@ -1,0 +1,44 @@
+.\" Copyright © 2015 Free Software Foundation, Inc.
+.\" License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.\"
+.\" This is free software: you are free to change and redistribute it.
+.\" There is NO WARRANTY, to the extent permitted by law.
+.TH HOSTNAME "1" "2019-02" "GNU inetutils" "User Commands"
+.SH NAME
+hostname \- show or set system host name
+.SH SYNOPSIS
+.B hostname
+[\fI\,option\/\fR...] [\fI\,name\/\fR]
+.SH DESCRIPTION
+Show or set the system's host name.
+.SH OPTIONS
+.TP
+\fB\-a\fR, \fB\-\-aliases\fR
+Alias names.
+.TP
+\fB\-d\fR, \fB\-\-domain\fR
+DNS domain name.
+.TP
+\fB\-f\fR, \fB\-\-fqdn\fR, \fB\-\-long\fR
+DNS host name or FQDN.
+.TP
+\fB\-F\fR, \fB\-\-file\fR=\fI\,file\/\fR
+Set host name or NIS domain name from \fIfile\fP.
+.TP
+\fB\-i\fR, \fB\-\-ip\-addresses\fR
+Addresses for the host name.
+.TP
+\fB\-s\fR, \fB\-\-short\fR
+Short host name.
+.TP
+\fB\-y\fR, \fB\-\-yp\fR, \fB\-\-nis\fR
+NIS/YP domain name.
+.TP
+\-?, \fB\-\-help\fR
+Give this help list.
+.TP
+\fB\-\-usage\fR
+Give a short usage message.
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print program version.
