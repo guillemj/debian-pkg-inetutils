@@ -37,7 +37,7 @@
 protocol
 .Sh SYNOPSIS
 .Nm telnet
-.Op Ar options
+.Op Ar options ...
 .Oo
 .Ar host
 .Op Ar port
@@ -64,7 +64,7 @@ command with those arguments.
 .Bl -tag -width indent
 .It Fl 4, -ipv4
 Use IPv4 to connect to hosts.
-.It Fl 4, -ipv6
+.It Fl 6, -ipv6
 Use IPv6 to connect to hosts.
 .It Fl 8 , -binary
 Specifies an 8-bit data path.  This causes an attempt to
@@ -149,16 +149,6 @@ option requests that telnet obtain tickets for the remote host in
 realm realm instead of the remote host's realm, as determined
 by
 .Xr krb_realmofhost 3 .
-.It Fl F
-If Kerberos V5 authentication is being used, the
-.Fl F
-option allows the local credentials to be forwarded
-to the remote system, including any credentials that
-have already been forwarded into the local environment.
-.It Fl f , -fwd-credentials
-If Kerberos V5 authentication is being used, the
-.Fl f
-option allows the local credentials to be forwarded to the remote system.
 .ne 1i
 .It Ar host
 Indicates the official name, an alias, or the Internet address

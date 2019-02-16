@@ -27,7 +27,7 @@
 .\"
 .\"	@(#)logger.1	8.1 (Berkeley) 6/6/93
 .\"
-.Dd June 6, 1993
+.Dd February 15, 2019
 .Dt LOGGER 1
 .Os "GNU inetutils"
 .Sh NAME
@@ -35,28 +35,38 @@
 .Nd make entries in the system log
 .Sh SYNOPSIS
 .Nm logger
-.Op Fl is
-.Op Fl f Ar file
-.Op Fl p Ar pri
-.Op Fl t Ar tag
+.Op Ar options ...
 .Op Ar message ...
 .Sh DESCRIPTION
-.Nm Logger
+.Nm logger
 provides a shell command interface to the
-.Xr syslog  3
+.Xr syslog 3
 system log module.
-.Pp
-Options:
-.Pp
+.Sh OPTIONS
 .Bl -tag -width "message"
-.It Fl i
-Log the process id of the logger process
-with each line.
-.It Fl s
+.It Fl 4, -ipv4
+Use IPv4 to connect to hosts.
+.It Fl 6, -ipv6
+Use IPv6 to connect to hosts.
+.It Fl S , -source Ar ip
+Set source IP address.
+.It Fl h , -host Ar host
+Log to
+.Ar host
+instead of to the default
+.Pa /dev/log .
+.It Fl u , -unix Ar sock
+Log to UNIX socket
+.Ar sock
+instead of
+.Pa /dev/log .
+.It Fl i , -id Op Ar pid
+Log the process id of the logger process with each line.
+.It Fl s , -stderr
 Log the message to standard error, as well as the system log.
-.It Fl f Ar file
+.It Fl f , -file Ar file
 Log the specified file.
-.It Fl p Ar pri
+.It Fl p , -priority Ar pri
 Enter the message with the specified priority.
 The priority may be specified numerically or as a ``facility.level''
 pair.
@@ -66,9 +76,15 @@ level in the
 .Ar local3
 facility.
 The default is ``user.notice.''
-.It Fl t Ar tag
+.It Fl t , -tag Ar tag
 Mark every line in the log with the specified
 .Ar tag  .
+.It Fl -usage
+Display a short usage message.
+.It Fl ?, -help
+Display a help list.
+.It Fl V, -version
+Display program version.
 .It Ar message
 Write the message to log; if not specified, and the
 .Fl f
@@ -87,7 +103,7 @@ logger \-p local0.notice \-t HOSTIDM \-f /dev/idmc
 .Ed
 .Sh SEE ALSO
 .Xr syslog 3 ,
-.Xr syslogd 8
+.Xr syslogd 8 .
 .Sh STANDARDS
 The
 .Nm logger

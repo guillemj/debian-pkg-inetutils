@@ -35,20 +35,7 @@
 .Nd log systems messages
 .Sh SYNOPSIS
 .Nm syslogd
-.Op Fl V
-.Op Fl a Ar socket
-.Op Fl d
-.Op Fl f Ar config_file
-.Op Fl h
-.Op Fl l Ar host_list
-.Op Fl m Ar mark_interval
-.Op Fl n
-.Op Fl p Ar log_socket
-.Op Fl r
-.Op Fl s Ar domain_list
-.Op Fl -no-klog
-.Op Fl -no-unixaf
-.Op Fl -no-forward
+.Op Ar options ...
 .Sh DESCRIPTION
 .Nm syslogd
 reads and logs messages to the system console, log files, other
