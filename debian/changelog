@@ -17,6 +17,7 @@ inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
       This makes sure this path is populated during cross-compilation, as
       otherwise it defaults to being left unset, which makes the cross-build
       fail.
+  * Switch to Standards-Version 4.4.0 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
 
