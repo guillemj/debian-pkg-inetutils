@@ -3,52 +3,59 @@
 .\"
 .\" This is free software: you are free to change and redistribute it.
 .\" There is NO WARRANTY, to the extent permitted by law.
-.TH TRACEROUTE "1" "2019-02-09" "GNU Network Utilities" "User Commands"
-.SH NAME
-traceroute \- Trace the route to a host
-.SH SYNOPSIS
-.B traceroute
-[\fIoption\fR...] \fIhost\fR
-.SH DESCRIPTION
-Print the route packets trace to network \fIhost\fP.
-.SH OPTIONS
-.TP
-\fB\-f\fR, \fB\-\-first\-hop\fR=\fInum\fR
+.Dd February 9, 2019
+.Dt TRACEROUTE 1 URM
+.Os "GNU Network Utilities"
+.Sh NAME
+.Nm traceroute
+.Nd trace the route to a host
+.Sh SYNOPSIS
+.Nm traceroute
+.Op Ar option ...
+.Ar host
+.Sh DESCRIPTION
+Print the route packets trace to network
+.Ar host .
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl f , -first-hop Ns = Ns Ar num
 Set initial hop distance, that is the time-to-live.
-.TP
-\fB\-g\fR, \fB\-\-gateways\fR=\fIgates\fR
+.It Fl g , -gateways Ns = Ns Ar gates
 List of gateways for loose source routing.
-.TP
-\fB\-I\fR, \fB\-\-icmp\fR
+.It Fl I , -icmp
 Use ICMP ECHO as probe.
-.TP
-\fB\-m\fR, \fB\-\-max\-hop\fR=\fInum\fR
-Set maximal hop count (default is \fB64\fP).
-.TP
-\fB\-M\fR, \fB\-\-type\fR=\fImethod\fR
-Use \fImethod\fP (\fBicmp\fP or \fBudp\fP) for traceroute operations,
+.It Fl m , -max-hop Ns = Ns Ar num
+Set maximal hop count (default is
+.Li 64 ) .
+.It Fl M , -type Ns = Ns Ar method
+Use
+.Ar method
+(\fBicmp\fP or \fBudp\fP) for traceroute operations,
 defaulting to \fBudp\fP.
-.TP
-\fB\-p\fR, \fB\-\-port\fR=\fIport\fR
-Use destination \fIport\fP port (default is \fB33434\fP).
-.TP
-\fB\-q\fR, \fB\-\-tries\fR=\fInum\fR
-Send \fInum\fP probe packets per hop (default is \fB3\fP).
-.TP
-\fB\-\-resolve\-hostnames\fR
+.It Fl p , -port Ns = Ns Ar port
+Use destination
+.Ar port
+port (default is
+.Li 33434 ) .
+.It Fl q , -tries Ns = Ns Ar num
+Send
+.Ar num
+probe packets per hop (default is
+.Li 3 ) .
+.It Fl -resolve-hostnames
 Resolve hostnames.
-.TP
-\fB\-t\fR, \fB\-\-tos\fR=\fInum\fR
-Set type of service (TOS) to \fInum\fP.
-.TP
-\fB\-w\fR, \fB\-\-wait\fR=\fInum\fR
-Wait \fInum\fP seconds for response (default is \fB3\fP).
-.TP
-\fB\-?\fP, \fB\-\-help\fR
+.It Fl t , -tos Ns = Ns Ar num
+Set type of service (TOS) to
+.Ar num .
+.It Fl w , -wait Ns = Ns Ar num
+Wait
+.Ar num
+seconds for response (default is
+.Li 3 ) .
+.It Fl ? , -help
 Give this help list.
-.TP
-\fB\-\-usage\fR
+.It Fl -usage
 Give a short usage message.
-.TP
-\fB\-V\fR, \fB\-\-version\fR
+.It Fl V , -version
 Print program version.
+.El

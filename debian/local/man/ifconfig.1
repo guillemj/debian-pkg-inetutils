@@ -3,94 +3,92 @@
 .\"
 .\" This is free software: you are free to change and redistribute it.
 .\" There is NO WARRANTY, to the extent permitted by law.
-.TH IFCONFIG "1" "2019-02-09" "GNU Network Utilities" "User Commands"
-.SH NAME
-ifconfig \- configure network interfaces
-.SH SYNOPSIS
-.B ifconfig
-[\fIoption\fP...]
-\fIname\fP
-[\fIaddr\fP]
-[\fBbroadcast\fP \fIbrdaddr\fP]
-[\fBpointopoint\fP|\fBdstaddr\fP \fIdstaddr\fP]
-[\fBnetmask\fP \fImask\fP]
-[\fBether\fP|\fBhwaddr\fP|lladdr\fP \fImacaddr\fP]
-[\fBmetric\fP \fIn\fP]
-[\fBmtu\fP \fIn\fP]
-[\fBtxqueuelen\fP \fIn\fP]
-[\fBup\fP|\fBdown\fP]
-[\fIflags\fP]
-.SH DESCRIPTION
+.Dd February 9, 2019
+.Dt IFCONFIG 1 URM
+.Os "GNU Network Utilities"
+.Sh NAME
+.Nm ifconfig
+.Nd configure network interfaces
+.Sh SYNOPSIS
+.Nm ifconfig
+.Op Ar option ...
+.Ar name
+.Op Ar addr
+.Op Cm broadcast Ar brdaddr
+.Op Cm { pointopoint | dstaddr } Ar dstaddr
+.Op Cm netmask Ar mask
+.Op Cm { ether | hwaddr | lladdr } Ar macaddr
+.Op Cm metric Ar n
+.Op Cm mtu Ar n
+.Op Cm txqueuelen Ar n
+.Op Cm up | down
+.Op Ar flags
+.Sh DESCRIPTION
 Configure network interfaces.
-.PP
+.Pp
 Mandatory or optional arguments to long options are also mandatory or optional
 for any corresponding short options.
-.PP
-Known flags are: \fBallmulti\fP, \fBarp\fP, \fBautomedia\fP, \fBbroadcast\fP,
-\fBdebug\fP, \fBdynamic\fP, \fBmaster\fP, \fBmulticast\fP, \fBpointopoint\fP,
-\fBportsel\fP, \fBpromisc\fP, \fBslave\fP, \fBtrailers\fP, \fBup\fP.
-Prepending \fBno\fP to any of these flags will negate their effect.
-.SH OPTIONS
-.TP
-\fB\-a\fR, \fB\-\-all\fR
+.Pp
+Known flags are:
+.Cm allmulti , arp , automedia , broadcast , debug , dynamic , master ,
+.Cm multicast , pointopoint , portsel , promisc , slave , trailers , up .
+Prepending
+.Cm no
+to any of these flags will negate their effect.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl a , -all
 Display all available interfaces.
-.TP
-\fB\-A\fR, \fB\-\-address\fR=\fIaddr\fR
-Set interface address to \fIaddr\fP.
-.TP
-\fB\-B\fR, \fB\-\-broadcast\fR=\fIaddr\fR
-.TQ
-\fB\-b\fR, \fB\-\-brdaddr\fR=\fIaddr\fR
-Set broadcast address to \fIaddr\fP.
-.TP
-\fB\-d\fR, \fB\-\-dstaddr\fR=\fIaddr\fR
-.TQ
-\fB\-p\fR, \fB\-\-peer\fR=\fIaddr\fR
-Set destination (peer) address to \fIaddr\fP.
-.TP
-\fB\-\-up\fP
+.It Fl A , -address Ar addr
+Set interface address to
+.Ar addr .
+.It Fl B , -broadcast Ar addr
+.It Fl b , -brdaddr Ar addr
+Set broadcast address to
+.Ar addr .
+.It Fl d , -dstaddr Ar addr
+.It Fl p , -peer Ar addr
+Set destination (peer) address to
+.Ar addr .
+.It Fl -up
 Activate the interface (default if address is given).
-.TP
-\fB\-\-down\fR
+.It Fl -down
 Shut the interface down.
-.TP
-\fB\-F\fR, \fB\-\-flags\fR=\fIflag\fP[,\fIflag\fP...]
+.It Fl F , -flags Ar flag , Ns Op Ar flag ...
 Set interface flags.
-.TP
-\fB\-i\fR, \fB\-\-interface\fR=\fIname\fR
-Configure network interface \fIname\fP.
-.TP
-\fB\-l\fR, \fB\-\-list\fR
+.It Fl i , -interface Ar name
+Configure network interface
+.Ar name .
+.It Fl l , -list
 List available or selected interfaces.
-.TP
-\fB\-m\fR, \fB\-\-netmask\fR=\fImask\fR
-Set netmask to \fImask\fP.
-.TP
-\fB\-\-metric\fR=\fIn\fR
-Set metric of interface to \fIn\fP.
-.TP
-\fB\-M\fR, \fB\-\-mtu\fR=\fIn\fP
-Set mtu of interface to \fIn\fP.
-.TP
-\fB\-\-format\fR=\fIformat\fR
-Select output format; set to '\fBhelp\fP' for information.
-.TP
-\fB\-s\fR, \fB\-\-short\fP
+.It Fl m , -netmask Ar mask
+Set netmask to
+.Ar mask .
+.It Fl -metric Ar n
+Set metric of interface to
+.Ar n .
+.It Fl M , -mtu Ar n
+Set mtu of interface to
+.Ar n .
+.It Fl -format Ar format
+Select output format; set to
+.Li 'help'
+for information.
+.It Fl s , -short
 Short output format.
-.TP
-\fB\-v\fR, \fB\-\-verbose\fR
+.It Fl v , -verbose
 Output information when configuring interface.
-.TP
-\fB\-?\fP, \fB\-\-help\fR
+.It Fl ? , -help
 Give this help list.
-.TP
-\fB\-\-usage\fR
+.It Fl -usage
 Give a short usage message.
-.TP
-\fB\-V\fR, \fB\-\-version\fR
+.It Fl V , -version
 Print program version.
-.PP
+.El
+.Pp
 Linux\-specific options:
-.TP
-\fB\-T\fR, \fB\-\-txqlen\fR=\fIn\fR
-Set transmit queue length to \fIn\fP.
+.Bl -tag -width Ds
+.It Fl T , -txqlen Ar n
+Set transmit queue length to
+.Ar n .
+.El
