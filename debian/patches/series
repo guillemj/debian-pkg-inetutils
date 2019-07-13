@@ -4,6 +4,7 @@
 22_syslogd_conf.patch
 62_inetd_change_ipv6_protocol_semantics.patch
 hurd-partially-disabled-ioctls.patch
+0001-ping6-Fix-interval-to-be-in-seconds-not-milliseconds.patch
 # Taken from upstream git master
 0001-ifconfig-Sporadically-appearing-regression.patch
 0002-ifconfig-Improve-the-support-for-GNU-Hurd.patch

@@ -22,6 +22,9 @@ inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
   * Switch from debian/compat to debhelper-compat in Build-Depends.
   * Add ${misc:Pre-Depends} to inetutils-syslogd and inetutils-inetd
     Pre-Depends fields.
+  * Fix ping6 --interval parsing to use seconds instead of milliseconds,
+    to match the documentation and to avoid allowing unprivileged users
+    to flood. Closes: #926750
 
  -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
 
