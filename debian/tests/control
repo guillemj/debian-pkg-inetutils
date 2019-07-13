@@ -1,0 +1,32 @@
+Tests:
+ test-commands
+Depends:
+ build-essential,
+ autoconf,
+ automake,
+ file,
+ netbase,
+ net-tools,
+ inetutils-tools,
+ inetutils-syslogd,
+ inetutils-inetd,
+ inetutils-telnet,
+Restrictions:
+ rw-build-tree
+
+Tests:
+ test-root-commands
+Depends:
+ build-essential,
+ autoconf,
+ automake,
+ file,
+ netbase,
+ net-tools,
+ inetutils-ftp,
+ inetutils-ftpd,
+ inetutils-ping,
+ inetutils-traceroute,
+Restrictions:
+ rw-build-tree
+ needs-root

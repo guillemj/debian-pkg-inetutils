@@ -1,3 +1,9 @@
+inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
+
+  * Add autopkgtests using the upstream functional test suite.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
+
 inetutils (2:1.9.4-7) unstable; urgency=medium
 
   * Remove debian/tmp prefix from man pages paths in debhelper fragment files.

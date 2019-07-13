@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+autoreconf -f -i
+./configure \
+  --disable-libls \
+  --disable-ftp \
+  --disable-ftpd \
+  --disable-ping \
+  --disable-ping6 \
+  --disable-tftp \
+  --disable-tftpd \
+  --disable-traceroute \
+  # EOL
+
+PATH="/usr/sbin:/sbin:$PATH"
+
+export VERBOSE=1
+
+export DNSDOMAINNAME=$(which inetutils-dnsdomainname)
+export IFCONFIG=$(which inetutils-ifconfig)
+export INETD=$(which inetutils-inetd)
+export LOGGER=$(which inetutils-logger)
+export SYSLOGD=$(which syslogd)
+export TELNET=$(which inetutils-telnet)
+export hostname=$(which inetutils-hostname)
+
+make -C lib 2>&1
+make -C libinetutils 2>&1
+make -C tests check

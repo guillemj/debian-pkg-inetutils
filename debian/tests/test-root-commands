@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+autoreconf -f -i
+./configure \
+  --disable-libls \
+  --disable-servers \
+  --disable-clients \
+  --enable-ftp \
+  --enable-ftpd \
+  --enable-ping \
+  --enable-ping6 \
+  --enable-traceroute \
+  # EOL
+
+PATH="/usr/sbin:/sbin:$PATH"
+
+export VERBOSE=1
+
+export FTP=$(which inetutils-ftp)
+export FTPD=$(which ftpd)
+export PING6=$(which ping6)
+export PING=$(which ping)
+export TRACEROUTE=$(which inetutils-traceroute)
+
+make -C lib 2>&1
+make -C libinetutils 2>&1
+make -C tests check
