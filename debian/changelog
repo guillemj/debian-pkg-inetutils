@@ -18,6 +18,10 @@ inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
       otherwise it defaults to being left unset, which makes the cross-build
       fail.
   * Switch to Standards-Version 4.4.0 (no changes needed).
+  * Switch to debhelper compatibility level 12.
+  * Switch from debian/compat to debhelper-compat in Build-Depends.
+  * Add ${misc:Pre-Depends} to inetutils-syslogd and inetutils-inetd
+    Pre-Depends fields.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
 

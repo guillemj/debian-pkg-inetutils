@@ -8,7 +8,7 @@ Homepage: https://www.gnu.org/software/inetutils/
 Standards-Version: 4.4.0
 Rules-Requires-Root: no
 Build-Depends:
- debhelper (>= 11),
+ debhelper-compat (= 12),
 # Used by the test suite:
 #  /etc/protocols and /etc/services
  netbase,
@@ -62,6 +62,8 @@ Provides:
 Conflicts:
  inet-superserver,
  netkit-inetd,
+Pre-Depends:
+ ${misc:Pre-Depends},
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -117,6 +119,8 @@ Conflicts:
  system-log-daemon,
 Replaces:
  syslogd,
+Pre-Depends:
+ ${misc:Pre-Depends},
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
