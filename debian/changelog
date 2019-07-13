@@ -4,6 +4,7 @@ inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
   * Use "GNU Network Utilities" instead of "GNU inetutils", in man pages
     and init scripts.
   * Add license preambles to all local man pages.
+  * Add explicit non-BSD volume names to man page document titles.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
 
