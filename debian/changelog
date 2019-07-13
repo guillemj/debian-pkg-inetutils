@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-8) unstable; urgency=medium
 
   * Add autopkgtests using the upstream functional test suite.
   * Use "GNU Network Utilities" instead of "GNU inetutils", in man pages
@@ -26,7 +26,7 @@ inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
     to match the documentation and to avoid allowing unprivileged users
     to flood. Closes: #926750
 
- -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
+ -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 22:29:47 +0200
 
 inetutils (2:1.9.4-7) unstable; urgency=medium
 
