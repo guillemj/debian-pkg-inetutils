@@ -7,8 +7,8 @@
 # Should-Stop:       $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: GNU inetutils internet superserver
-# Description:       GNU inetutils internet superserver
+# Short-Description: GNU Network Utilities internet superserver
+# Description:       GNU Network Utilities internet superserver
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin

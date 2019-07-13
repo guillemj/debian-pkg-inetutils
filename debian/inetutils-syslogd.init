@@ -5,8 +5,8 @@
 # Required-Stop:     $network $remote_fs $time
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: GNU inetutils syslog daemon
-# Description:       GNU inetutils syslog daemon
+# Short-Description: GNU Network Utilities syslog daemon
+# Description:       GNU Network Utilities syslog daemon
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin

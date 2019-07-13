@@ -1,6 +1,8 @@
 inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
 
   * Add autopkgtests using the upstream functional test suite.
+  * Use "GNU Network Utilities" instead of "GNU inetutils", in man pages
+    and init scripts.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
 
