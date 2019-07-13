@@ -13,6 +13,10 @@ inetutils (2:1.9.4-8) UNRELEASED; urgency=medium
     - debian/local/man/traceroute.1
   * Update debian/rules:
     - Rename conf_gnu_type make variable to confflags.
+    - Pass --with-path-procnet-dev=/proc/net/dev to configure on Linux.
+      This makes sure this path is populated during cross-compilation, as
+      otherwise it defaults to being left unset, which makes the cross-build
+      fail.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 13 Jul 2019 03:02:37 +0200
 

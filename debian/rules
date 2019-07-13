@@ -17,6 +17,7 @@ SUIDMODE = "-m 4755"
 # Set proper Provides
 ifeq ($(DEB_HOST_ARCH_OS),linux)
   syslogd_provides = linux-kernel-log-daemon
+  confflags += --with-path-procnet-dev=/proc/net/dev
 endif
 ifeq ($(DEB_HOST_ARCH_OS),hurd)
   tools_provides = net-tools
