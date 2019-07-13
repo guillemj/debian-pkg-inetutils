@@ -6,9 +6,9 @@ DEB_CFLAGS_MAINT_PREPEND = -Wall
 include /usr/share/dpkg/default.mk
 
 ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-  conf_gnu_type += --build $(DEB_HOST_GNU_TYPE)
+  confflags += --build $(DEB_HOST_GNU_TYPE)
 else
-  conf_gnu_type += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
+  confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
 endif
 
 # Override default upstream setuid mode, as they rejected this change.
@@ -38,7 +38,7 @@ config.status: configure
 	  CPPFLAGS="$(CPPFLAGS)" \
 	  CFLAGS="$(CFLAGS)" \
 	  LDFLAGS="$(LDFLAGS)" \
-	  $(conf_gnu_type) \
+	  $(confflags) \
 	  --disable-silent-rules \
 	  --prefix=/usr \
 	  --sysconfdir=/etc \
