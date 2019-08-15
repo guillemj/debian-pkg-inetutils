@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-10) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-10) unstable; urgency=medium
 
   * Explicitly disable talk in the test-commands autopkgtest, because we are
     not testing it anyway, and the configure check outputs a warning that we
@@ -8,7 +8,7 @@ inetutils (2:1.9.4-10) UNRELEASED; urgency=medium
     where other tests are generating files.
   * Refresh and serialize patches from a dedicated upstream branch.
 
- -- Guillem Jover <guillem@debian.org>  Thu, 15 Aug 2019 23:10:05 +0200
+ -- Guillem Jover <guillem@debian.org>  Thu, 15 Aug 2019 23:22:04 +0200
 
 inetutils (2:1.9.4-9) unstable; urgency=medium
 
