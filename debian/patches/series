@@ -30,3 +30,5 @@ hurd-partially-disabled-ioctls.patch
 0036-ftpd-ftpd.c-options-max-timeout-Mention-mandatory-ar.patch
 0037-src-hostname.c-set_name-Handle-case-when-hostname_ne.patch
 0038-src-hostname.c-parse_file-Free-name-and-allocate-one.patch
+# Local patches
+tests-support-parallel-runs.patch

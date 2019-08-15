@@ -1,0 +1,37 @@
+---
+ tests/libls.sh |   22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+--- a/tests/libls.sh
++++ b/tests/libls.sh
+@@ -56,19 +56,19 @@ $LS -alTt >/dev/null 2>&1
+ # Several runs with different switches are compared by
+ # a simple count of printed lines.
+ #
+-REPLY_a1=`$LS -a1`
+-REPLY_A1=`$LS -A1`
++REPLY_a1=`$LS -a1 ..`
++REPLY_A1=`$LS -A1 ..`
+ 
+-REPLY_C=`$LS -C`
+-REPLY_Cf=`$LS -Cf`
+-REPLY_Cr=`$LS -Cr`
+-REPLY_Ct=`$LS -Ct`
+-REPLY_x=`$LS -x`
+-REPLY_m=`$LS -m`
++REPLY_C=`$LS -C ..`
++REPLY_Cf=`$LS -Cf ..`
++REPLY_Cr=`$LS -Cr ..`
++REPLY_Ct=`$LS -Ct ..`
++REPLY_x=`$LS -x ..`
++REPLY_m=`$LS -m ..`
+ 
+-REPLY_l=`$LS -l`
+-REPLY_lT=`$LS -l`
+-REPLY_n=`$LS -n`
++REPLY_l=`$LS -l ..`
++REPLY_lT=`$LS -l ..`
++REPLY_n=`$LS -n ..`
+ 
+ # In an attempt to counteract lack of subsecond accuracy,
+ # probe the parent directory where timing is known to be more
