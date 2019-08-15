@@ -1,15 +1,34 @@
-Description: Add a syslog.conf file
-Author: Guillem Jover <guillem@hadrons.org>
-Origin: vendor
-Forwarded: no
-Bug-Debian: 208336
+From ad173d557e24d79f9c8842cda2ad6282db3600af Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Fri, 16 Aug 2019 00:31:02 +0200
+Subject: [PATCH 34/35] syslogd: Add a syslog.conf file
 
+Add a default configuration file so that the users have something to
+start from.
 
+Ref: https://bugs.debian.org/208336
 ---
- src/Makefile.am |    2 +
- src/syslog.conf |   70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/Makefile.am |  2 ++
+ src/syslog.conf | 70 +++++++++++++++++++++++++++++++++++++++++++++++++
  2 files changed, 72 insertions(+)
+ create mode 100644 src/syslog.conf
 
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 7682d713..eef2254a 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -107,6 +107,8 @@ inetdaemon_PROGRAMS += $(syslogd_BUILD)
+ syslogd_SOURCES = syslogd.c
+ EXTRA_PROGRAMS += syslogd
+ 
++dist_sysconf_DATA = syslog.conf
++
+ inetdaemon_PROGRAMS += $(tftpd_BUILD)
+ tftpd_SOURCES = tftpd.c
+ EXTRA_PROGRAMS += tftpd
+diff --git a/src/syslog.conf b/src/syslog.conf
+new file mode 100644
+index 00000000..5b35eb8c
 --- /dev/null
 +++ b/src/syslog.conf
 @@ -0,0 +1,70 @@
@@ -83,14 +102,6 @@ Bug-Debian: 208336
 +	*.=debug;*.=info;\
 +	*.=notice;*.=warn	|/dev/xconsole
 +
---- a/src/Makefile.am
-+++ b/src/Makefile.am
-@@ -107,6 +107,8 @@ inetdaemon_PROGRAMS += $(syslogd_BUILD)
- syslogd_SOURCES = syslogd.c
- EXTRA_PROGRAMS += syslogd
- 
-+dist_sysconf_DATA = syslog.conf
-+
- inetdaemon_PROGRAMS += $(tftpd_BUILD)
- tftpd_SOURCES = tftpd.c
- EXTRA_PROGRAMS += tftpd
+-- 
+2.23.0.rc1.170.gbd704faa3e
+

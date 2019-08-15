@@ -1,7 +1,7 @@
-From 9d646ac0f01a29e32e25389ff7ddcd7c5e3c0515 Mon Sep 17 00:00:00 2001
+From fe3ef825e6d90cb2d4ebc31943de447f026d8201 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Mon, 27 Feb 2017 23:03:36 +0100
-Subject: [PATCH 29/42] telnetd: Portable option debugging.
+Subject: [PATCH 21/35] telnetd: Portable option debugging.
 
 Also report locally unsupported editing characters
 as free for the client to choose at his own will
@@ -11,8 +11,35 @@ as free for the client to choose at his own will
  telnetd/utility.c | 21 +++++++++++++++++++--
  3 files changed, 66 insertions(+), 7 deletions(-)
 
+diff --git a/ChangeLog b/ChangeLog
+index 8c95a08f..fefaf4a7 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,22 @@
++2017-02-27  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	telnetd: Portable option debugging.
++	BSD systems assign IAC and _POSIX_VDISABLE the common decimal
++	value 255. Hence the NVT enforces value duplication more often
++	during their transmission, than GNU and Solaris systems do.
++
++	* telnetd/utility.c (printsub) <LM_SLC>: Increase suboption
++	pointer I sufficiently to counteract duplication.  This has
++	to distinguish between in/out/none.  In recursive mode,
++	suppress newline at the end of suboption printing.
++
++	* telnetd/slc.c (send_slc) <SLC_EC, SLC_EL, SLC_EW, SLC_RP>
++	<SLC_LNEXT>: Editing characters are reported using SLC_DEFAULT
++	rather than ignored due to SLC_NOSUPPORT, when they are not
++	supported locally.  This conforms with RFC 1184, section 2.4.
++	The test for support checks the set 'current', not 'defset',
++	which fits the wording found in RFC 1184.
++
+ 2017-02-23  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	telnetd: Scrub USER from environment.
 diff --git a/telnetd/slc.c b/telnetd/slc.c
-index 1b9f1049..3f83f12c 100644
+index 197bc3e9..40b51e61 100644
 --- a/telnetd/slc.c
 +++ b/telnetd/slc.c
 @@ -73,14 +73,37 @@ send_slc (void)
@@ -59,7 +86,7 @@ index 1b9f1049..3f83f12c 100644
  
  }				/* end of send_slc */
 diff --git a/telnetd/utility.c b/telnetd/utility.c
-index 69faf7d7..35b19f7e 100644
+index e493dff2..8227775d 100644
 --- a/telnetd/utility.c
 +++ b/telnetd/utility.c
 @@ -1196,9 +1196,21 @@ printsub (int direction, unsigned char *pointer, int length)
@@ -100,5 +127,5 @@ index 69faf7d7..35b19f7e 100644
  
  /*
 -- 
-2.20.1.791.gb4d0f1c61a
+2.23.0.rc1.170.gbd704faa3e
 

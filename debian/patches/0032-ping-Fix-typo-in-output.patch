@@ -1,13 +1,14 @@
-Description: Fix typo in ping output
-Author: Guillem Jover <guillem@hadrons.org>
-Origin: vendor
-Forwarded: no
-
+From 0bda111c90171ee92dc2b8992df2929e62129099 Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Fri, 16 Aug 2019 00:33:07 +0200
+Subject: [PATCH 32/35] ping: Fix typo in output
 
 ---
- ping/ping_echo.c |    2 +-
+ ping/ping_echo.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/ping/ping_echo.c b/ping/ping_echo.c
+index aca5e427..b1eb719b 100644
 --- a/ping/ping_echo.c
 +++ b/ping/ping_echo.c
 @@ -391,7 +391,7 @@ struct icmp_diag icmp_diag[] = {
@@ -19,3 +20,6 @@ Forwarded: no
    {ICMP_ROUTERDISCOVERY, "Router Discovery", NULL, NULL},
    {ICMP_TIME_EXCEEDED, NULL, print_icmp, "Time exceeded"},
    {ICMP_PARAMETERPROB, NULL, print_parameterprob, NULL},
+-- 
+2.23.0.rc1.170.gbd704faa3e
+

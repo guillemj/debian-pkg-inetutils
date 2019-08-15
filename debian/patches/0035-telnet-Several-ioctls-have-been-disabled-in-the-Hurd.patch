@@ -1,15 +1,20 @@
-Author: Guillem Jover <guillem@hadrons.org>
-Origin: vendor
-Forwarded: no
-Description: Several ioctls have been disabled in the Hurd's glibc, but not
- the related option macros. inetutils uses those macros to decide whether
- the ioctls are available, so it is FTBFS now. The Hurd's glibc is being
- fixed, but we'll use this for now to get the builds going.
+From d379784b4461d17b2536effd1b52bae21cd28a32 Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Fri, 16 Aug 2019 00:34:03 +0200
+Subject: [PATCH 35/35] telnet: Several ioctls have been disabled in the Hurd's
+ glibc
 
-Index: inetutils-1.9.4/telnet/sys_bsd.c
-===================================================================
---- inetutils-1.9.4.orig/telnet/sys_bsd.c
-+++ inetutils-1.9.4/telnet/sys_bsd.c
+But not the related option macros. inetutils uses those macros to decide
+whether the ioctls are available, so it is FTBFS now. The Hurd's glibc
+is being fixed, but we'll use this for now to get the builds going.
+---
+ telnet/sys_bsd.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/telnet/sys_bsd.c b/telnet/sys_bsd.c
+index 662536ab..5eb35cb5 100644
+--- a/telnet/sys_bsd.c
++++ b/telnet/sys_bsd.c
 @@ -63,6 +63,7 @@
  #include <errno.h>
  #include <arpa/telnet.h>
@@ -47,3 +52,6 @@ Index: inetutils-1.9.4/telnet/sys_bsd.c
    ioctl (tin, TIOCSLTC, (char *) &ltc);
    ioctl (tin, TIOCSETC, (char *) &tc);
    ioctl (tin, TIOCSETN, (char *) &sb);
+-- 
+2.23.0.rc1.170.gbd704faa3e
+

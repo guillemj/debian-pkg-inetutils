@@ -1,7 +1,7 @@
-From ec8c9a31b46d325a2c1147dacd43971405e97c5d Mon Sep 17 00:00:00 2001
+From bc5dc7af74e6fa1c70aa4bbb1e482fd0c3663af3 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 15 Aug 2015 20:56:26 +0200
-Subject: [PATCH 12/42] telnetd: Premature connection closure.
+Subject: [PATCH 11/35] telnetd: Premature connection closure.
 
 A change, part of 0b7e8687, but secondary to its
 intention, turned out to cause service rejects during
@@ -15,6 +15,32 @@ Reported in `bug-inetutils/2015-07/msg00006.html'.
  telnetd/utility.c |  8 ++++++++
  3 files changed, 33 insertions(+), 1 deletion(-)
 
+diff --git a/ChangeLog b/ChangeLog
+index 73b281b9..03bb8a78 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,21 @@
++2015-08-15  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	telnetd: Premature connection closure.
++	When many connections are attempted in quick succession,
++	a substantial number of them are cancelled.  This does not
++	appear for manual use cases, but for contrived automated
++	set-ups.  The cause seems to be a change in the evaluation
++	of pty_read(), which was done to coincide with the condition
++	in use by the original BSD implementation.  Issue reported and
++	suggested by Chris Severance in
++	http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00006.html
++
++	* telnetd/telnetd.c (telnetd_run): Break the loop only by the
++	stronger condition `pty_read() < 0', i.e., only on non-masked
++	read errors.  This reverts a change introduced in 2015-03-15.
++	* telnetd/utility.c (pty_read): Add a comment that the read
++	errors EWOULDBLOCK, EAGAIN, and EIO are treated specially.
++
+ 2015-08-07  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	ifconfig: Statistics for BSD systems.
 diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
 index faecc072..0bf102ac 100644
 --- a/telnetd/telnetd.c
@@ -54,5 +80,5 @@ index e7ffb8ed..e493dff2 100644
  pty_read (void)
  {
 -- 
-2.20.1.791.gb4d0f1c61a
+2.23.0.rc1.170.gbd704faa3e
 

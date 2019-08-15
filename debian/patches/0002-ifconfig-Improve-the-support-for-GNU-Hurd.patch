@@ -1,7 +1,7 @@
 From 9a90d9b9119906df23cb2db1503cb0f099942dd9 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 18 Jul 2015 01:12:41 +0200
-Subject: [PATCH 02/42] ifconfig: Improve the support for GNU/Hurd.
+Subject: [PATCH 02/35] ifconfig: Improve the support for GNU/Hurd.
 
 Use system specific code instead of generic code.
 This provides abilities similar to other systems.
@@ -17,6 +17,31 @@ This provides abilities similar to other systems.
  create mode 100644 ifconfig/system/hurd.c
  create mode 100644 ifconfig/system/hurd.h
 
+diff --git a/ChangeLog b/ChangeLog
+index 7f799daa..18a584ba 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,20 @@
++2015-07-18  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	ifconfig: Improve the support for GNU/Hurd.
++	Add system specific abilities, including parsing of command
++	line and hardware addresses.
++
++	* ifconfig/system.h [__GNU__]: Include "system/hurd.h".
++	* ifconfig/system.c [__GNU__]: Include "system/hurd.c".
++	* ifconfig/system/Makefile.am (noinst_HEADERS): Add the
++	files `hurd.h' and `hurd.c'.
++	* ifconfig/system/hurd.h, ifconfig/system/hurd.c: New files.
++
++	* ifconfig/system/generic.c: Include <unused-parameter.h>.
++	(system_parse_opt, system_parse_opt_rest, system_configure):
++	Apply _GL_UNUSED_PARAMETER to all arguments, as these functions
++	are placeholders and no-ops.
++
+ 2015-07-17  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	ifconfig: Sporadically appearing regression.
 diff --git a/ifconfig/system.c b/ifconfig/system.c
 index 30677e41..e108dc2e 100644
 --- a/ifconfig/system.c
@@ -464,5 +489,5 @@ index 00000000..bab14565
 +
 +#endif /* !IFCONFIG_SYSTEM_HURD_H */
 -- 
-2.20.1.791.gb4d0f1c61a
+2.23.0.rc1.170.gbd704faa3e
 

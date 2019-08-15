@@ -1,7 +1,7 @@
-From 3b164f18445460fbea124b77c87b02acc07cdfea Mon Sep 17 00:00:00 2001
+From 6922b5fd00efbddf90ddcc5b05dc0161bdbbf6a0 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Mon, 20 Jul 2015 23:28:19 +0200
-Subject: [PATCH 04/42] ifconfig: More info on tunnel interfaces.
+Subject: [PATCH 03/35] ifconfig: More info on tunnel interfaces.
 
 All formats display point-to-point destination.
 Display tunnel endpoints on BSD systems.
@@ -12,6 +12,36 @@ Display tunnel endpoints on BSD systems.
  ifconfig/system/bsd.h |  8 +++++++-
  4 files changed, 71 insertions(+), 3 deletions(-)
 
+diff --git a/ChangeLog b/ChangeLog
+index 18a584ba..d0172fa8 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,25 @@
++2015-07-20  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	ifconfig: More info on tunnel interfaces.
++
++	* ifconfig/options.c (formats) <net-tools format>: Add
++	destination address for point-to-point interfaces.  It is
++	present in some other formats.
++	<unix format>: Display tunnel addresses for p-t-p interfaces.
++	<osf format>: Add destination address for p-t-p interfaces
++	and hardware type and hardware address for any device.
++
++	* ifconfig/system/bsd.c (system_fh_brdaddr_query): Check
++	that IFF_BROADCAST is set and access the relevant member
++	`fp->ifa_broadaddr'.
++	(system_fh_brdaddr): Check for set IFF_BROADCAST.
++	(system_fh_tunnel_query, system_fh_tundst, system_fh_tunsrc):
++	New functions.
++	* ifconfig/system/bsd.h (SYSTEM_FORMAT_HANDLER): Add the
++	keys `tunnel?', `tundst', and `tunsrc'.
++	(system_fh_tunnel_query, system_fh_tundst, system_fh_tunsrc):
++	New prototypes.
++
+ 2015-07-18  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	ifconfig: Improve the support for GNU/Hurd.
 diff --git a/ifconfig/options.c b/ifconfig/options.c
 index 3356f0e5..2f20e75f 100644
 --- a/ifconfig/options.c
@@ -132,5 +162,5 @@ index 0b802a60..918c1f2c 100644
  
  #endif /* IFCONFIG_SYSTEM_BSD_H */
 -- 
-2.20.1.791.gb4d0f1c61a
+2.23.0.rc1.170.gbd704faa3e
 

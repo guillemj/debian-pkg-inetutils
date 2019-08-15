@@ -1,0 +1,39 @@
+From 27f3597c73c8b69d8add142c2b42e17565500c16 Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Mon, 12 Nov 2018 16:36:29 +0100
+Subject: [PATCH 28/35] tftpd: Restore logging while chrooted.
+
+---
+ ChangeLog   | 5 +++++
+ src/tftpd.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index b5ced667..da451a45 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2018-11-12  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	* src/tftpd.c (main): Add LOG_NDELAY to openlog().  The file
++	descriptor for logging must be active before chrooting happens.
++
+ 2018-11-09  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	* configure.ac (AC_PREREQ): Require autoconf 2.63.  Gnulib needs
+diff --git a/src/tftpd.c b/src/tftpd.c
+index 56002a06..a4dfaa8d 100644
+--- a/src/tftpd.c
++++ b/src/tftpd.c
+@@ -221,7 +221,7 @@ main (int argc, char *argv[])
+   iu_argp_init ("tftpd", default_program_authors);
+   argp_parse (&argp, argc, argv, 0, &index, NULL);
+ 
+-  openlog ("tftpd", LOG_PID, LOG_FTP);
++  openlog ("tftpd", LOG_NDELAY | LOG_PID, LOG_FTP);
+ 
+   if (index < argc)
+     {
+-- 
+2.23.0.rc1.170.gbd704faa3e
+

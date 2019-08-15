@@ -1,7 +1,7 @@
-From 9d4bff64fd11773297ed05a5e6dd7eab6e780535 Mon Sep 17 00:00:00 2001
+From feb878abbf78925a12e578353bde2b652e73b4c3 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 25 Jul 2015 23:01:10 +0200
-Subject: [PATCH 06/42] ifconfig: Support changing of hardware address.
+Subject: [PATCH 05/35] ifconfig: Support changing of hardware address.
 
 Implemented for GNU/Linux as first step.
 ---
@@ -12,6 +12,39 @@ Implemented for GNU/Linux as first step.
  ifconfig/system/linux.c | 14 ++++++++++
  5 files changed, 101 insertions(+), 1 deletion(-)
 
+diff --git a/ChangeLog b/ChangeLog
+index 47c70e3a..c194a545 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,28 @@
++2015-07-25  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	ifconfig: Support changing of hardware address.
++	Implement the setting of link level addresses
++	for systems running GNU/Linux.
++
++	* ifconfig/changeif.c [HAVE_NETINET_ETHER_H]: Include
++	header <netinet/ether.h>.
++	(set_hwaddr): New function.
++	(configure_if): Call set_hwaddr() whenever `ifp->valid'
++	contains IF_VALID_HWADDR.
++	* ifconfig/options.c (ifconfig_initializer): Add a further
++	NULL at the end.
++	(parse_opt_set_hwaddr): New function built by the generic
++	macro PARSE_OPT_SET_ADDR.
++	* ifconfig/options.h (struct ifconfig): Define IF_VALID_HWADDR
++	and add a new member `hwaddr'.
++	(parse_opt_set_hwaddr): New prototype.
++
++	* ifconfig/system/linux.c (system_help): Add parsed option
++	`ether|hwaddr|lladdr MACADDR'.
++	(system_parse_opt_rest): New enum value EXPECT_HWADDR.  Insert
++	this into the parser, triggering on all the keywords `ether',
++	`hwaddr', and `lladdr' for best portability.
++
+ 2015-07-21  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	ifconfig: Implement a hardware list for BSD systems.
 diff --git a/ifconfig/changeif.c b/ifconfig/changeif.c
 index 99fc03b4..dfcae9ff 100644
 --- a/ifconfig/changeif.c
@@ -190,5 +223,5 @@ index ef27d65a..cad35442 100644
        error (0, 0, "option `metric' requires an argument");
        break;
 -- 
-2.20.1.791.gb4d0f1c61a
+2.23.0.rc1.170.gbd704faa3e
 
