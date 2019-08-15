@@ -5,6 +5,7 @@ set -e
 autoreconf -f -i
 ./configure \
   --disable-libls \
+  --disable-talk \
   --disable-ftp \
   --disable-ftpd \
   --disable-ping \

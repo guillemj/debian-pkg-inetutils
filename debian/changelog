@@ -1,3 +1,11 @@
+inetutils (2:1.9.4-10) UNRELEASED; urgency=medium
+
+  * Explicitly disable talk in the test-commands autopkgtest, because we are
+    not testing it anyway, and the configure check outputs a warning that we
+    cannot build it due to missing ncurses.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 15 Aug 2019 23:10:05 +0200
+
 inetutils (2:1.9.4-9) unstable; urgency=medium
 
   * Add missing gettext to debian/tests/control Depends.
