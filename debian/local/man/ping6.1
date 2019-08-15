@@ -8,58 +8,54 @@
 .Os "GNU Network Utilities"
 .Sh NAME
 .Nm ping6
-.Nd send
-.Tn ICMP6 ECHO_REQUEST
-packets to network hosts
+.Nd send ICMP6 ECHO_REQUEST packets to network hosts
 .Sh SYNOPSIS
 .Nm ping6
 .Op Ar option ...
 .Ar host ...
 .Sh DESCRIPTION
-Send
-.Tn ICMP6 ECHO_REQUEST
-packets to network hosts.
+Send ICMP6 ECHO_REQUEST packets to network hosts and report the replies
+received.
 .Sh OPTIONS
 .Bl -tag -width Ds
-.It Fl c , -count Ar number
-Stop after sending
-.Ar number
-packets.
-.It Fl i , -interval Ar number
-Wait
-.Ar number
+.It Fl c , -count Ar total
+Stop after sending the
+.Ar total
+number of packets.
+.It Fl i , -interval Ar pause
+Wait for
+.Ar pause
 seconds between sending each packet.
-.It Fl w , -timeout Ar n
+.It Fl w , -timeout Ar end
 Stop after
-.Ar n
+.Ar end
 seconds.
 .It Fl n , -numeric
 Do not resolve host addresses.
-.It Fl -hoplimit Ar n
-.It Fl -ttl Ar n
-Specify
-.Ar n
-as hop-limit.
+.It Fl -hoplimit Ar limit
+.It Fl -ttl Ar limit
+Set the maximum allowed number of hops to
+.Ar limit .
 .It Fl r , -ignore-routing
 Send directly to a host on an attached network.
-.It Fl T , -tos Ar n
-Set traffic class to
-.Ar n .
+.It Fl T , -tos Ar class
+Set the traffic
+.Ar class .
 .It Fl f , -flood
 Flood ping (root only).
-.It Fl l , -preload Ar number
-Send
-.Ar number
-packets as fast as possible before falling into normal mode
+.It Fl l , -preload Ar initial
+Send an
+.Ar initial
+number of packets as fast as possible before falling into normal mode
 of behavior (root only).
 .It Fl p , -pattern Ar pattern
-Fill ICMP6 packet with the given
+Fill ICMP6 packets with the given
 .Ar pattern
 (hex).
-.It Fl s , -size Ar number
-Send
-.Ar number
-data octets.
+.It Fl s , -size Ar octets
+Send the number of data
+.Ar octets
+in each packet.
 .It Fl v , -verbose
 Verbose output.
 .It Fl q , -quiet
@@ -76,4 +72,4 @@ Give a short usage message.
 Print program version.
 .El
 .Pp
-Options marked with (root only) are available only to superuser.
+Options marked with (root only) are available only to the superuser.

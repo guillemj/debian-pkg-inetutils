@@ -8,30 +8,32 @@
 .Os "GNU Network Utilities"
 .Sh NAME
 .Nm hostname
-.Nd show or set system host name
+.Nd show or set the system host name
 .Sh SYNOPSIS
 .Nm hostname
 .Op Ar option ...
 .Op Ar name
 .Sh DESCRIPTION
-Show or set the system's host name.
+Show the system's host name, or set it if
+.Ar name
+is specified.
 .Sh OPTIONS
 .Bl -tag -width Ds
 .It Fl a , -aliases
-Alias names.
+Also show aliases for the host name.
 .It Fl d , -domain
-DNS domain name.
+Show the DNS domain name.
 .It Fl f , -fqdn , -long
-DNS host name or FQDN.
+Show the DNS host name or FQDN.
 .It Fl F , -file Ar file
-Set host name or NIS domain name from
+Set the host name or NIS domain name from
 .Ar file .
 .It Fl i , -ip-addresses
-Addresses for the host name.
+Show the addresses for the host name.
 .It Fl s , -short
-Short host name.
+Show the short host name.
 .It Fl y , -yp , -nis
-NIS/YP domain name.
+Show the NIS/YP domain name.
 .It Fl ? , -help
 Give this help list.
 .It Fl -usage

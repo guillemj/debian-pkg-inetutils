@@ -13,14 +13,16 @@
 .Nm dnsdomainname
 .Op Ar option ...
 .Sh DESCRIPTION
-Show domain part of the system's fully qualified host name.
+Show the domain part of the system's fully qualified host name.
 .Pp
 The tool uses
 .Xr gethostname 2
 to get the host name of the system and
 .Xr getaddrinfo 2
 to resolve it into a canonical name.
-The part after the first period ('.') of the canonical name is shown.
+The part after the first period
+.Pq Sq \&.
+of the canonical name is shown.
 .Sh OPTIONS
 .Bl -tag -width Ds
 .It Fl ? , -help

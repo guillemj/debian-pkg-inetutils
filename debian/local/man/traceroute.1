@@ -18,40 +18,38 @@ Print the route packets trace to network
 .Ar host .
 .Sh OPTIONS
 .Bl -tag -width Ds
-.It Fl f , -first-hop Ns = Ns Ar num
-Set initial hop distance, that is the time-to-live.
+.It Fl f , -first-hop Ns = Ns Ar start
+Set the initial hop distance, that is the time-to-live.
 .It Fl g , -gateways Ns = Ns Ar gates
 List of gateways for loose source routing.
 .It Fl I , -icmp
 Use ICMP ECHO as probe.
 .It Fl m , -max-hop Ns = Ns Ar num
-Set maximal hop count (default is
-.Li 64 ) .
+Set the maximal hop count (default is 64).
 .It Fl M , -type Ns = Ns Ar method
-Use
+Use the
 .Ar method
-(\fBicmp\fP or \fBudp\fP) for traceroute operations,
-defaulting to \fBudp\fP.
+.Cm ( icmp
+or the default
+.Cm udp )
+for traceroute operations.
 .It Fl p , -port Ns = Ns Ar port
-Use destination
+Use the destination
 .Ar port
-port (default is
-.Li 33434 ) .
+port (default is 33434).
 .It Fl q , -tries Ns = Ns Ar num
 Send
 .Ar num
-probe packets per hop (default is
-.Li 3 ) .
+probe packets per hop (default is 3).
 .It Fl -resolve-hostnames
 Resolve hostnames.
-.It Fl t , -tos Ns = Ns Ar num
-Set type of service (TOS) to
-.Ar num .
-.It Fl w , -wait Ns = Ns Ar num
+.It Fl t , -tos Ns = Ns Ar class
+Set the type of service (TOS) to
+.Ar class .
+.It Fl w , -wait Ns = Ns Ar timeout
 Wait
-.Ar num
-seconds for response (default is
-.Li 3 ) .
+.Ar timeout
+seconds for responses (default is 3).
 .It Fl ? , -help
 Give this help list.
 .It Fl -usage
