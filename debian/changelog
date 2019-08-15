@@ -5,6 +5,7 @@ inetutils (2:1.9.4-9) UNRELEASED; urgency=medium
     Thanks to Ingo Schwarze <schwarze@usta.de>.
   * Fix grammar and mdoc syntax in ifconfig(1) man page.
   * Use make variables for man page directories in debian/rules.
+  * Switch to dh sequencer.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 15 Aug 2019 03:38:46 +0200
 

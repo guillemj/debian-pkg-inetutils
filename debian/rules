@@ -1,15 +1,9 @@
 #!/usr/bin/make -f
 
-DEB_BUILD_MAINT_OPTIONS = hardening=+all
-DEB_CFLAGS_MAINT_PREPEND = -Wall
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CFLAGS_MAINT_PREPEND = -Wall
 
 include /usr/share/dpkg/default.mk
-
-ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-  confflags += --build $(DEB_HOST_GNU_TYPE)
-else
-  confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
-endif
 
 # Override default upstream setuid mode, as they rejected this change.
 SUIDMODE = "-m 4755"
@@ -30,23 +24,17 @@ man1dir = $(mandir)/man1
 man5dir = $(mandir)/man5
 man8dir = $(mandir)/man8
 
-config.status: configure
-	dh_testdir
-	dh_update_autotools_config
-	dh_autoreconf
-	
-	./configure \
-	  CPPFLAGS="$(CPPFLAGS)" \
-	  CFLAGS="$(CFLAGS)" \
-	  LDFLAGS="$(LDFLAGS)" \
+%:
+	dh $@
+
+override_dh_auto_clean:
+	[ ! -f Makefile ] || dh_auto_clean
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
 	  $(confflags) \
-	  --disable-silent-rules \
-	  --prefix=/usr \
-	  --sysconfdir=/etc \
-	  --localstatedir=/var \
+	  --disable-rpath         \
 	  --libexecdir=\$${prefix}/sbin \
-	  --mandir=\$${prefix}/share/man \
-	  --infodir=\$${prefix}/share/info \
 	  --disable-rcp           \
 	  --disable-rexec         \
 	  --disable-rexecd        \
@@ -62,39 +50,8 @@ config.status: configure
 	  --with-idn \
 	  --with-pam
 
-build-indep:
-
-build-arch: build-arch-stamp
-build-arch-stamp: config.status
-	dh_testdir
-	
-ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	$(MAKE)
-else
-	$(MAKE) VERBOSE=1 check
-endif
-	touch $@
-
-build: build-indep build-arch
-
-clean:
-	dh_testdir
-	dh_testroot
-	
-	[ ! -f Makefile ] || $(MAKE) distclean
-	
-	rm -f build-arch-stamp
-	
-	dh_autoreconf_clean
-	dh_clean
-
-install: build
-	dh_testdir
-	dh_testroot
-	dh_prep
-	dh_installdirs -a
-	
-	$(MAKE) install DESTDIR=$(D) SUIDMODE=$(SUIDMODE)
+override_dh_auto_install:
+	dh_auto_install -- SUIDMODE=$(SUIDMODE)
 	
 	# Create man page directories
 	mkdir -p $(D)/$(man1dir)
@@ -107,69 +64,53 @@ install: build
 	
 	# Rename ifconfig to not break existing systems using net-tools
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
-	cp $(M)/ifconfig.1 $(D)/$(man1dir)/inetutils-ifconfig.1
+	mv $(M)/ifconfig.1 $(D)/$(man1dir)/inetutils-ifconfig.1
 	
 	# Rename tools not break with Essential:yes packages
 	mv $(D)/usr/bin/dnsdomainname $(D)/usr/bin/inetutils-dnsdomainname
 	mv $(D)/usr/bin/hostname $(D)/usr/bin/inetutils-hostname
 	mv $(D)/usr/bin/logger $(D)/usr/bin/inetutils-logger
-	cp $(M)/dnsdomainname.1 $(D)/$(man1dir)/inetutils-dnsdomainname.1
-	cp $(M)/hostname.1 $(D)/$(man1dir)/inetutils-hostname.1
-	cp $(M)/logger.1 $(D)/$(man1dir)/inetutils-logger.1
+	mv $(M)/dnsdomainname.1 $(D)/$(man1dir)/inetutils-dnsdomainname.1
+	mv $(M)/hostname.1 $(D)/$(man1dir)/inetutils-hostname.1
+	mv $(M)/logger.1 $(D)/$(man1dir)/inetutils-logger.1
 	
 	# Rename inetd to be able to coexist with not purged netkit-inetd
 	mv $(D)/usr/sbin/inetd $(D)/usr/sbin/inetutils-inetd
-	cp $(M)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8
+	mv $(M)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8
 	
 	# Needed to enable alternatives
 	mv $(D)/usr/bin/telnet $(D)/usr/bin/inetutils-telnet
-	cp $(M)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
+	mv $(M)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
 	mv $(D)/usr/bin/ftp $(D)/usr/bin/inetutils-ftp
-	cp $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
-	cp $(M)/netrc.5 $(D)/$(man5dir)/inetutils-netrc.5
+	mv $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
+	mv $(M)/netrc.5 $(D)/$(man5dir)/inetutils-netrc.5
 	mv $(D)/usr/bin/talk $(D)/usr/bin/inetutils-talk
-	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
+	mv $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
 	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute
-	cp $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
+	mv $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
 
-binary-indep:
-# Nothing to do.
-
-binary-arch: install
-	dh_testdir
-	dh_testroot
-	
-	dh_install -a --sourcedir=$(D)
+override_dh_install:
+	dh_install -a
 	# Install ping6 only if built
 	if [ -x $(D)/usr/bin/ping6 ]; then \
-	  cp -a $(D)/usr/bin/ping6 \
-	        $(CURDIR)/debian/inetutils-ping/bin/; \
+	  dh_install -p inetutils-ping /usr/bin/ping6 /bin; \
 	fi
-	dh_installdebconf -a
+
+override_dh_installdocs:
 	dh_installdocs -a -A NEWS AUTHORS THANKS
-	dh_installexamples -a
-	dh_installinit -a
+
+override_dh_installpam:
 	dh_installpam -pinetutils-ftpd --name ftp
-	dh_installlogrotate -a
-	dh_installman -a
-	dh_installinfo -a
+
+override_dh_installchangelogs:
 	dh_installchangelogs -a ChangeLog
-	dh_lintian
-	dh_link -a
-	dh_strip -a
-	dh_compress -a
+
+override_dh_fixperms:
 	# pings and traceroute are setuid
 	dh_fixperms -a -Xbin/ping -Xbin/ping6 -Xusr/bin/inetutils-traceroute
-	dh_installdeb -a
-	dh_shlibdeps -a
+
+override_dh_gencontrol:
 	dh_gencontrol -a -pinetutils-syslogd -- \
 	  -Vsyslogd:Provides="$(syslogd_provides)"
 	dh_gencontrol -a -Ninetutils-syslogd -- \
 	  -Vtools:Provides="$(tools_provides)"
-	dh_md5sums -a
-	dh_builddeb -a
-
-binary: binary-indep binary-arch
-
-.PHONY: build-indep build-arch build build-udeb
-.PHONY: clean install binary-indep binary-arch binary
