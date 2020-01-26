@@ -1,3 +1,9 @@
+inetutils (2:1.9.4-12) UNRELEASED; urgency=medium
+
+  * Switch to Standards-Version 4.5.0 (no changes needed).
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 26 Jan 2020 19:56:56 +0100
+
 inetutils (2:1.9.4-11) unstable; urgency=medium
 
   * Add patches from upstream:
