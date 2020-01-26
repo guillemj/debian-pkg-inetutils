@@ -1,3 +1,12 @@
+inetutils (2:1.9.4-11) UNRELEASED; urgency=medium
+
+  * Add patches from upstream:
+    - telnet: Validate supplied environment variables. CVE-2019-0053.
+      Closes: #945861
+    - telnet: Telnet -E(no escape) is treating _POSIX_VDISABLE char as escape.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 26 Jan 2020 02:43:35 +0100
+
 inetutils (2:1.9.4-10) unstable; urgency=medium
 
   * Explicitly disable talk in the test-commands autopkgtest, because we are

@@ -35,3 +35,6 @@
 0033-ping6-Fix-interval-to-be-in-seconds-not-milliseconds.patch
 0034-syslogd-Add-a-syslog.conf-file.patch
 0035-telnet-Several-ioctls-have-been-disabled-in-the-Hurd.patch
+# Taken from upstream git master
+0036-telnet-Telnet-E-no-escape-is-treating-_POSIX_VDISABL.patch
+0037-telnet-Validate-supplied-environment-variables.-CVE-.patch
