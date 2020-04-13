@@ -73,6 +73,9 @@ Pass local and remote address data via environment variables. See
 \fBENVIRONMENT\fP below.
 .It Fl p, -pidfile Op Ar filename
 Specifies the pidfile to use instead of the default.
+When a
+.Ar filename
+is not specified, that disables writing a pidfile.
 .It Fl R, -rate Ar rate
 Specifies the maximum number of times a service can be invoked
 in one minute; the default is 40.

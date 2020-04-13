@@ -22,6 +22,8 @@ inetutils (2:1.9.4-12) UNRELEASED; urgency=medium
   * Minor wording fixes to default templated inetd.conf.
   * Remove long obsolete netkit-inetd Provides and Conflicts from
     inetutils-inetd.
+  * Document that inetutils-inetd -p option without a filename disables
+    writing a pidfile. Closes: #951680
 
  -- Guillem Jover <guillem@debian.org>  Sun, 26 Jan 2020 19:56:56 +0100
 
