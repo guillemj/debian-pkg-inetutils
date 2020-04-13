@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-12) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-12) unstable; urgency=medium
 
   * Switch to Standards-Version 4.5.0 (no changes needed).
   * Remove patches from upstream:
@@ -27,7 +27,7 @@ inetutils (2:1.9.4-12) UNRELEASED; urgency=medium
   * Disable building tftp and tftpd, which we are not shipping, and are
     causing test suite failures on kfreebsd-amd64.
 
- -- Guillem Jover <guillem@debian.org>  Sun, 26 Jan 2020 19:56:56 +0100
+ -- Guillem Jover <guillem@debian.org>  Tue, 14 Apr 2020 04:08:13 +0200
 
 inetutils (2:1.9.4-11) unstable; urgency=medium
 
