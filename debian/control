@@ -58,10 +58,8 @@ Package: inetutils-inetd
 Architecture: any
 Provides:
  inet-superserver,
- netkit-inetd,
 Conflicts:
  inet-superserver,
- netkit-inetd,
 Pre-Depends:
  ${misc:Pre-Depends},
 Depends:
