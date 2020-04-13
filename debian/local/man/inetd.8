@@ -178,6 +178,21 @@ or
 .Dq udp .
 TCPMUX services must use
 .Dq tcp .
+By default the protocols will only listen on IPv4 connections.
+To modify this behavior per service, either
+.Dq 4
+or
+.Dq 6
+can be appended to the protocol name, such as
+.Dq udp4
+or
+.Dq tcp6
+to accept only IPv4 UDP connections or both IPv4 and IPv6 TCP connections
+respectively.
+To restrict to IPv6-only connections,
+.Dq 6only
+can be appended to the protocol name, such as
+.Dq tcp6only .
 .Pp
 The
 .Em wait/nowait[.max]

@@ -23,10 +23,10 @@ create_inetd_conf()
 # <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>
 #
 #:INTERNAL: Internal services
-#discard		stream	tcp	nowait	root	internal
-#discard		dgram	udp	wait	root	internal
-#daytime		stream	tcp	nowait	root	internal
-#time		stream	tcp	nowait	root	internal
+#discard		stream	tcp6	nowait	root	internal
+#discard		dgram	udp6	wait	root	internal
+#daytime		stream	tcp6	nowait	root	internal
+#time		stream	tcp6	nowait	root	internal
 
 #:STANDARD: These are standard services.
 
