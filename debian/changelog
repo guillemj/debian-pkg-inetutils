@@ -19,6 +19,7 @@ inetutils (2:1.9.4-12) UNRELEASED; urgency=medium
       directly, even though the information leak might appear to still remain.
   * Document inetutils-inetd IPv6 support in man page, and modify the
     default template inetd.conf to use udp6 and tcp6. Closes: #804766
+  * Minor wording fixes to default templated inetd.conf.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 26 Jan 2020 19:56:56 +0100
 

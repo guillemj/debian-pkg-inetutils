@@ -7,18 +7,18 @@ create_inetd_conf()
   [ -e /etc/inetd.conf ] && return 0
 
   cat <<EOF > /etc/inetd.conf
-# /etc/inetd.conf:  see inetd(8) for further informations.
+# /etc/inetd.conf: see inetd(8) for further informations.
 #
-# Internet superserver configuration database
+# Internet superserver configuration database.
 #
 #
 # Lines starting with "#:LABEL:" or "#<off>#" should not
 # be changed unless you know what you are doing!
 #
-# If you want to disable an entry so it isn't touched during
+# If you want to disable an entry so it is not touched during
 # package updates just comment it out with a single '#' character.
 #
-# Packages should modify this file by using update-inetd(8)
+# Packages should modify this file by using update-inetd(8).
 #
 # <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>
 #
