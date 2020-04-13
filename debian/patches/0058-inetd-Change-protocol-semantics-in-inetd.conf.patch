@@ -1,7 +1,7 @@
-From 9234dc5f5a8ea15329980165966071f0584c0aab Mon Sep 17 00:00:00 2001
+From 4762a0e2acd15d9e71904eb223ee37defeae847e Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
-Subject: [PATCH 31/35] inetd: Change protocol semantics in inetd.conf
+Subject: [PATCH 58/60] inetd: Change protocol semantics in inetd.conf
 
 * src/inetd.c (setup): Update comment.
 (getconfigent) [IPV6]: Change default family to IPv4 for "tcp" and
@@ -43,5 +43,5 @@ index ae7ab37d..fcfeffae 100644
  	  else if (sep->se_proto[3] == '4')
  	    {
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

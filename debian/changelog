@@ -1,6 +1,22 @@
 inetutils (2:1.9.4-12) UNRELEASED; urgency=medium
 
   * Switch to Standards-Version 4.5.0 (no changes needed).
+  * Remove patches from upstream:
+    - tftpd: Restore logging while chrooted. (We do not ship tftpd.)
+  * Add patches from upstream:
+    - Change header inclusion for ifconfig on GNU/Linux, to support musl.
+    - telnetd: More work on CVE-2019-0053.
+    - Various compiler warnings fixes.
+    - telnet: Various off-by-one checks.
+    - ftp: Fix buffer overflows.
+    - ping, ping6: Fix memory leaks.
+  * Add patch from Red Hat / Fedora:
+    - Fix arbitrary remote code execution in telnetd via short writes or
+      urgent data. Fixes CVE-2020-10188. Closes: #956084
+      Thanks to Michal Ruprich <michalruprich@gmail.com>.
+      Note: While the PoC exploit does not work on inetutils due to the
+      different codebases, the adapted patch was close enough to apply almost
+      directly, even though the information leak might appear to still remain.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 26 Jan 2020 19:56:56 +0100
 

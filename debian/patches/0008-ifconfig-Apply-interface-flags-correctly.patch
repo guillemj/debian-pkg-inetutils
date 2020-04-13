@@ -1,7 +1,7 @@
 From 31537b75b74ece069617b255f05d229a00943b28 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 1 Aug 2015 20:38:55 +0200
-Subject: [PATCH 08/35] ifconfig: Apply interface flags correctly.
+Subject: [PATCH 08/60] ifconfig: Apply interface flags correctly.
 
 Changes of interface flags could be suppressed when
 an address assignment was requested at the same time.
@@ -142,5 +142,5 @@ index 10528386..b3bfae43 100644
  extern struct ifconfig *ifs;
  extern int nifs;
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

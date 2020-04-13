@@ -1,7 +1,7 @@
 From fe3ef825e6d90cb2d4ebc31943de447f026d8201 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Mon, 27 Feb 2017 23:03:36 +0100
-Subject: [PATCH 21/35] telnetd: Portable option debugging.
+Subject: [PATCH 21/60] telnetd: Portable option debugging.
 
 Also report locally unsupported editing characters
 as free for the client to choose at his own will
@@ -127,5 +127,5 @@ index e493dff2..8227775d 100644
  
  /*
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

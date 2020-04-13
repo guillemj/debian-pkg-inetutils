@@ -1,7 +1,7 @@
 From cfbc55d15ae84e43e5c5b71b5ecde2555f1b1ac8 Mon Sep 17 00:00:00 2001
 From: "Alfred M. Szmidt" <ams@gnu.org>
 Date: Mon, 10 Jul 2017 20:14:58 +0000
-Subject: [PATCH 26/35] src/hostname.c (parse_file): Free name and allocate one
+Subject: [PATCH 26/60] src/hostname.c (parse_file): Free name and allocate one
  extra byte for it.
 
 ---
@@ -41,5 +41,5 @@ index d1f584f8..e340f8fd 100644
      }
    while (feof (file) == 0);
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

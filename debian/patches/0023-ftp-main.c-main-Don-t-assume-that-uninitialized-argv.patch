@@ -1,7 +1,7 @@
 From aeb147cc4a8bad6352441b8cd63e57a73be5ab91 Mon Sep 17 00:00:00 2001
 From: "Alfred M. Szmidt" <ams@gnu.org>
 Date: Thu, 22 Jun 2017 10:12:10 +0200
-Subject: [PATCH 23/35] ftp/main.c (main): Don't assume that uninitialized
+Subject: [PATCH 23/60] ftp/main.c (main): Don't assume that uninitialized
  argv[argv] is NULL.
 
 ---
@@ -47,5 +47,5 @@ index 4ccb079d..0ff6e044 100644
      }
    top = setjmp (toplevel) == 0;
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

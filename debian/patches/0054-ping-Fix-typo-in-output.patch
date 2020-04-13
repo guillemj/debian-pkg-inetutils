@@ -1,7 +1,7 @@
-From 0bda111c90171ee92dc2b8992df2929e62129099 Mon Sep 17 00:00:00 2001
+From da745474964c509e50077186168faa192a1e1222 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:33:07 +0200
-Subject: [PATCH 32/35] ping: Fix typo in output
+Subject: [PATCH 54/60] ping: Fix typo in output
 
 ---
  ping/ping_echo.c | 2 +-
@@ -21,5 +21,5 @@ index aca5e427..b1eb719b 100644
    {ICMP_TIME_EXCEEDED, NULL, print_icmp, "Time exceeded"},
    {ICMP_PARAMETERPROB, NULL, print_parameterprob, NULL},
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

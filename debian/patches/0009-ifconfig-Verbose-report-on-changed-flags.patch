@@ -1,7 +1,7 @@
 From 8bcc74c9e79b06d06160ae0268eed78796e772d6 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sun, 2 Aug 2015 00:57:04 +0200
-Subject: [PATCH 09/35] ifconfig: Verbose report on changed flags.
+Subject: [PATCH 09/60] ifconfig: Verbose report on changed flags.
 
 ---
  ChangeLog           |  8 ++++++++
@@ -60,5 +60,5 @@ index a040587b..beac6f6d 100644
  #endif
  }
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

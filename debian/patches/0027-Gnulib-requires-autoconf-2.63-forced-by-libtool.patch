@@ -1,7 +1,7 @@
 From fa7962cc9dda8aee39b5506373154fdbf46f3d47 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Fri, 9 Nov 2018 23:40:37 +0100
-Subject: [PATCH 27/35] Gnulib requires autoconf 2.63, forced by libtool.
+Subject: [PATCH 27/60] Gnulib requires autoconf 2.63, forced by libtool.
 
 ---
  ChangeLog    | 5 +++++
@@ -35,5 +35,5 @@ index aef32db6..6f543987 100644
  AC_INIT([GNU inetutils],
   m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

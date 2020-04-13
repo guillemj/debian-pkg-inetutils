@@ -1,7 +1,7 @@
 From 589dab9c7d3119da82837dabae34c8a3d16cbe49 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Thu, 30 Jul 2015 01:06:42 +0200
-Subject: [PATCH 07/35] ifconfig: Hardware detection in GNU/Hurd.
+Subject: [PATCH 07/60] ifconfig: Hardware detection in GNU/Hurd.
 
 A work-around needed to distinguish hardware type.
 ---
@@ -68,5 +68,5 @@ index 3bd19775..b6261a00 100644
    };
  
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

@@ -1,7 +1,7 @@
 From 3de647c8548f30f882c6ad5088df9acdc8cda300 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Fri, 17 Jul 2015 23:02:37 +0200
-Subject: [PATCH 01/35] ifconfig: Sporadically appearing regression.
+Subject: [PATCH 01/60] ifconfig: Sporadically appearing regression.
 
 Device flags are sometimes calculated before their
 query using SIOCGIFFLAGS.  First observed on GNU/Hurd.
@@ -112,5 +112,5 @@ index 615a630a..a269a508 100644
  }
  
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

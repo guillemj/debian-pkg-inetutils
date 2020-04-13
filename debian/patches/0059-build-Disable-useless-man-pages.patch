@@ -1,7 +1,7 @@
-From 687391e3ec01a4a604b108a8f4be0173751a93db Mon Sep 17 00:00:00 2001
+From 6dd7207555341b60177b9a73cccd263dfedbc7fc Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 9 Jun 2010 03:56:08 +0200
-Subject: [PATCH 29/35] build: Disable useless man pages
+Subject: [PATCH 59/60] build: Disable useless man pages
 
 ---
  Makefile.am  | 2 +-
@@ -42,5 +42,5 @@ index 6f543987..81dd3d20 100644
  confpaths.h:confpaths.h.in
  ])
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

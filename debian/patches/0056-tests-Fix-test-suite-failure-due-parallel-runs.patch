@@ -1,7 +1,7 @@
-From ce0b1e69b114d55b160ec75eec11e32b2fff3d93 Mon Sep 17 00:00:00 2001
+From 2ccf7650893532149393671fd9928ab3c221d690 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:34:47 +0200
-Subject: [PATCH 30/35] tests: Fix test suite failure due parallel runs
+Subject: [PATCH 56/60] tests: Fix test suite failure due parallel runs
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -50,5 +50,5 @@ index daf626c0..1326345c 100755
  # In an attempt to counteract lack of subsecond accuracy,
  # probe the parent directory where timing is known to be more
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

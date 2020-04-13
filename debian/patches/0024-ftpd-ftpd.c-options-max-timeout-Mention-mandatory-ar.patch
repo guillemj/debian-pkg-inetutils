@@ -1,7 +1,7 @@
 From 84ac94c03cb118bde0b7655d8fc1213d8adf0234 Mon Sep 17 00:00:00 2001
 From: "Alfred M. Szmidt" <ams@gnu.org>
 Date: Mon, 10 Jul 2017 19:59:44 +0000
-Subject: [PATCH 24/35] ftpd/ftpd.c (options) <max-timeout>: Mention mandatory
+Subject: [PATCH 24/60] ftpd/ftpd.c (options) <max-timeout>: Mention mandatory
  argument.
 
 ---
@@ -37,5 +37,5 @@ index 5db88d0b..f77fcafe 100644
    { "non-rfc2577", OPT_NONRFC2577, NULL, 0,
      "neglect RFC 2577 by giving info on missing users",
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

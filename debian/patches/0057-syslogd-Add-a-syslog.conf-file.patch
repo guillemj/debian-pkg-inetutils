@@ -1,7 +1,7 @@
-From ad173d557e24d79f9c8842cda2ad6282db3600af Mon Sep 17 00:00:00 2001
+From ee926ea1bd602095ba6d5f148451c93e9712beb9 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:31:02 +0200
-Subject: [PATCH 34/35] syslogd: Add a syslog.conf file
+Subject: [PATCH 57/60] syslogd: Add a syslog.conf file
 
 Add a default configuration file so that the users have something to
 start from.
@@ -103,5 +103,5 @@ index 00000000..5b35eb8c
 +	*.=notice;*.=warn	|/dev/xconsole
 +
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

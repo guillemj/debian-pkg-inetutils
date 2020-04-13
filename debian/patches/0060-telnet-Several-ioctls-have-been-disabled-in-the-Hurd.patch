@@ -1,7 +1,7 @@
-From d379784b4461d17b2536effd1b52bae21cd28a32 Mon Sep 17 00:00:00 2001
+From f893d5431d49142667d11d24510707dff6d49a56 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:34:03 +0200
-Subject: [PATCH 35/35] telnet: Several ioctls have been disabled in the Hurd's
+Subject: [PATCH 60/60] telnet: Several ioctls have been disabled in the Hurd's
  glibc
 
 But not the related option macros. inetutils uses those macros to decide
@@ -53,5 +53,5 @@ index 662536ab..5eb35cb5 100644
    ioctl (tin, TIOCSETC, (char *) &tc);
    ioctl (tin, TIOCSETN, (char *) &sb);
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

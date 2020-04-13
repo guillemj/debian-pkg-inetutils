@@ -1,7 +1,7 @@
 From f95f228d39dcc0204a71c8afe9187188de313dfb Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Thu, 8 Oct 2015 19:04:43 +0200
-Subject: [PATCH 12/35] syslogd: Redefine faulty macro LOG_MAKEPRI.
+Subject: [PATCH 12/60] syslogd: Redefine faulty macro LOG_MAKEPRI.
 
 Old versions of Glibc cause remotely logged kernel
 messages to be rewritten for facility `uucp', not
@@ -83,5 +83,5 @@ index 0fa41945..352a5bd0 100644
  #  define LOG_MAKEPRI(fac, p)	((fac) | (p))
  #endif
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

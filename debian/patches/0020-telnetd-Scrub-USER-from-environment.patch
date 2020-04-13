@@ -1,7 +1,7 @@
 From e971f2bdfab2465d9f86cf092ce3ab8ba05e57c9 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Fri, 24 Feb 2017 00:02:14 +0100
-Subject: [PATCH 20/35] telnetd: Scrub USER from environment.
+Subject: [PATCH 20/60] telnetd: Scrub USER from environment.
 
 Avoid conflicting user identity by forgetting whatever
 the serving host considers to be the process owner.
@@ -49,5 +49,5 @@ index 0bf102ac..b7c57dd2 100644
    uname[0] = 0;
    level = getterminaltype (uname, sizeof (uname));
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

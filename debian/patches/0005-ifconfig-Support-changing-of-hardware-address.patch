@@ -1,7 +1,7 @@
 From feb878abbf78925a12e578353bde2b652e73b4c3 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 25 Jul 2015 23:01:10 +0200
-Subject: [PATCH 05/35] ifconfig: Support changing of hardware address.
+Subject: [PATCH 05/60] ifconfig: Support changing of hardware address.
 
 Implemented for GNU/Linux as first step.
 ---
@@ -223,5 +223,5 @@ index ef27d65a..cad35442 100644
        error (0, 0, "option `metric' requires an argument");
        break;
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

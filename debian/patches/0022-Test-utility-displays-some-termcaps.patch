@@ -1,7 +1,7 @@
 From 0668f264f91f841740416042a37f50b38b59bfff Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Fri, 3 Mar 2017 19:49:55 +0100
-Subject: [PATCH 22/35] Test utility displays some termcaps.
+Subject: [PATCH 22/60] Test utility displays some termcaps.
 
 ---
  ChangeLog         |  13 +++++
@@ -197,5 +197,5 @@ index 39bf29d0..276b67e2 100644
    return 0;
  }
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 

@@ -1,7 +1,7 @@
 From bc5dc7af74e6fa1c70aa4bbb1e482fd0c3663af3 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 15 Aug 2015 20:56:26 +0200
-Subject: [PATCH 11/35] telnetd: Premature connection closure.
+Subject: [PATCH 11/60] telnetd: Premature connection closure.
 
 A change, part of 0b7e8687, but secondary to its
 intention, turned out to cause service rejects during
@@ -80,5 +80,5 @@ index e7ffb8ed..e493dff2 100644
  pty_read (void)
  {
 -- 
-2.23.0.rc1.170.gbd704faa3e
+2.26.0.292.g33ef6b2f38
 
