@@ -42,6 +42,8 @@ override_dh_auto_configure:
 	  --disable-rlogind       \
 	  --disable-rsh           \
 	  --disable-rshd          \
+	  --disable-tftp          \
+	  --disable-tftpd         \
 	  --disable-uucpd         \
 	  --disable-whois         \
 	  --with-path-login=/bin/login \
