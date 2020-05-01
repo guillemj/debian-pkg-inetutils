@@ -51,6 +51,7 @@
 0050-telnet-commands.c-Use-strdup-instead-malloc-strcpy.patch
 0051-ChangeLog-Add-missing-entries.patch
 0052-ping-ping6.c-print_packet_too_big-Use-u-when-printin.patch
+0001-Support-for-libidn2-in-addition-to-libidn.patch
 # Local patches
 0053-telnetd-Fix-arbitrary-remote-code-execution-via-shor.patch
 0054-ping-Fix-typo-in-output.patch

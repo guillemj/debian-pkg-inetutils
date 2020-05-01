@@ -8,14 +8,12 @@ low values.
 
 Closes: #926750
 ---
- ping/ping6.c | 6 +++++-
+ ping/ping6.c |    6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/ping/ping6.c b/ping/ping6.c
-index 114b9c0c..299cd56c 100644
 --- a/ping/ping6.c
 +++ b/ping/ping6.c
-@@ -75,6 +75,8 @@ int tclass = -1;	/* Kernel sets default: -1, RFC 3542.  */
+@@ -77,6 +77,8 @@ int tclass = -1;	/* Kernel sets default:
  int flowinfo;
  #endif
  
@@ -24,7 +22,7 @@ index 114b9c0c..299cd56c 100644
  static int ping_echo (char *hostname);
  static void ping_reset (PING * p);
  static int send_echo (PING * ping);
-@@ -159,7 +161,9 @@ parse_opt (int key, char *arg, struct argp_state *state)
+@@ -161,7 +163,9 @@ parse_opt (int key, char *arg, struct ar
  
      case 'i':
        options |= OPT_INTERVAL;
@@ -35,6 +33,3 @@ index 114b9c0c..299cd56c 100644
        break;
  
      case 'l':
--- 
-2.26.0.292.g33ef6b2f38
-

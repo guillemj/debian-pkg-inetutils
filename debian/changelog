@@ -1,3 +1,10 @@
+inetutils (2:1.9.4-13) UNRELEASED; urgency=medium
+
+  * Add patch from upstream:
+    - Switch from libidn to libidn2.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 01 May 2020 05:35:34 +0200
+
 inetutils (2:1.9.4-12) unstable; urgency=medium
 
   * Switch to Standards-Version 4.5.0 (no changes needed).

@@ -1,0 +1,433 @@
+From 705750b8b4a62f23cc08dfc0eb06813fb49e4d1f Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Sun, 5 Apr 2020 16:21:30 +0200
+Subject: [PATCH] Support for libidn2 in addition to libidn.
+
+Prefer libidn2 when both are present and usable.
+---
+ ChangeLog         |   27 +++++++++++++++++++++++++++
+ am/libidn.m4      |   43 +++++++++++++++++++++++++++++++------------
+ configure.ac      |   16 +++++++++-------
+ ftp/ftp.c         |    8 +++++---
+ ping/libping.c    |   12 +++++++-----
+ ping/ping6.c      |   10 ++++++----
+ src/tftp.c        |   10 ++++++----
+ src/traceroute.c  |    8 +++++---
+ talk/get_addrs.c  |   12 +++++++-----
+ telnet/commands.c |   12 +++++++-----
+ 10 files changed, 110 insertions(+), 48 deletions(-)
+
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,30 @@
++2020-04-05  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	Support for libidn2 in addition to libidn.
++
++	* am/libidn.m4 (have_IDN2, have_IDN): New local variables.
++	Detect presence of libidn2 by checking for `idn2_to_ascii_lz',
++	but still aim at backwards compatibility.  Detect header file
++	`idna.h' as well as `idn2.h', but prefer libidn2 to libidn,
++	should both libraries be detected.
++	* configure.ac (--with-idn): Mention that IDN2 is acceptable.
++	(idn_link): New variable.
++	(ftp_PROPS, ping_PROPS, talk_PROPS, telnet_PROPS, tftp_PROPS)
++	(traceroute_PROPS): Update these to state `idn', or `idn2'.
++
++	* ftp/ftp.c [HAVE_IDN2_H && HAVE_IDN2]: Include `idn2.h'.
++	[(!HAVE_IDN2_H || !HAVE_IDN2) && HAVE_IDNA_H]: Include `idna.h'.
++	(hookup) [HAVE_IDN || HAVE_IDN2]: Use compatibility function
++	idna_to_ascii_lz().
++	* ping/libping.c (ping_set_dest): Likewise.
++	* ping/ping6.c (ping_set_dest): Likewise.
++	* src/tftp.c (resolve_name): Likewise.
++	* src/traceroute.c (main): Likewise.
++	* talk/get_addrs.c (get_addrs)
++	[HAVE_DECL_GETADDRINFO || HAVE_IDN || HAVE_IDN2]: Declare ERR.
++	[HAVE_IDN || HAVE_IDN2]: Likewise.
++	* telnet/commands.c (tn): Declare HOSTTMP.  Likewise.
++
+ 2020-04-04  Alfred M. Szmidt  <ams@gnu.org>
+ 
+ 	* ping/ping6.c (print_packet_too_big): Use %u when printing MTU.
+--- a/am/libidn.m4
++++ b/am/libidn.m4
+@@ -1,5 +1,5 @@
+-# libidn.m4 serial 1
+-dnl Copyright (C) 2013, 2014, 2015 Free Software Foundation, Inc.
++# libidn.m4 serial 2
++dnl Copyright (C) 2013-2020 Free Software Foundation, Inc.
+ dnl
+ dnl This file is part of GNU Inetutils.
+ dnl
+@@ -44,9 +44,21 @@ then
+     INCIDN=-I$2
+   fi
+ 
+-  AC_CHECK_LIB([idn], [idna_to_ascii_lz],
+-	       [LIBIDN="$LIBIDN -lidn"], [INCIDN= LIBIDN=],
+-	       [$LIBIDN])
++  AC_CHECK_LIB([idn2], [idn2_to_ascii_lz], [have_IDN2=yes], , [$LIBIDN])
++
++  AC_CHECK_LIB([idn], [idna_to_ascii_lz], [have_IDN=yes], , [$LIBIDN])
++
++  if test x"$have_IDN2" = xyes
++  then
++    LIBIDN="$LIBIDN -lidn2"
++  else
++    if test x"$have_IDN" = xyes
++    then
++      LIBIDN="$LIBIDN -lidn"
++    else
++      INCIDN= LIBIDN=
++    fi
++  fi
+ 
+   # Some systems are known to install <idna.h> below
+   # '/usr/include/idn'.  The caching performed by
+@@ -54,16 +66,23 @@ then
+   # repeated call of the macro.  Functional alternative?
+   save_CPPFLAGS=$CPPFLAGS
+   CPPFLAGS="$CPPFLAGS $INCIDN"
+-  AC_CHECK_HEADERS([idna.h])
++
++  AC_CHECK_HEADERS([idna.h idn2.h])
+ 
+   AC_MSG_CHECKING([if GNU libidn is available])
+-  if test "$ac_cv_lib_idn_idna_to_ascii_lz" = yes \
+-      && test "$ac_cv_header_idna_h" = yes; then
+-    AC_DEFINE(HAVE_IDN, 1, [Define to 1 for use of GNU Libidn.])
+-    AC_MSG_RESULT($ac_cv_lib_idn_idna_to_ascii_lz)
++  if test "$ac_cv_lib_idn2_idn2_to_ascii_lz" = yes \
++      && test "$ac_cv_header_idn2_h" = yes; then
++    AC_DEFINE(HAVE_IDN2, 1, [Define to 1 for use of GNU Libidn2.])
++    AC_MSG_RESULT($ac_cv_lib_idn2_idn2_to_ascii_lz)
+   else
+-    AC_MSG_RESULT([no])
+-    INCIDN= LIBIDN=
++    if test "$ac_cv_lib_idn_idna_to_ascii_lz" = yes \
++	&& test "$ac_cv_header_idna_h" = yes; then
++      AC_DEFINE(HAVE_IDN, 1, [Define to 1 for use of GNU Libidn.])
++      AC_MSG_RESULT($ac_cv_lib_idn_idna_to_ascii_lz)
++    else
++      AC_MSG_RESULT([no])
++      INCIDN= LIBIDN=
++    fi
+   fi
+   CPPFLAGS=$save_CPPFLAGS
+ fi
+--- a/configure.ac
++++ b/configure.ac
+@@ -88,7 +88,7 @@ AC_ARG_WITH([pam],
+                            [Add support for PAM]))
+ AC_ARG_WITH([idn],
+   AS_HELP_STRING([--with-idn[[=DIR]]],
+-		 [Use IDN support, with optional inclusion directory]), ,
++		 [Use IDN or IDN2 support, with optional inclusion directory]), ,
+ 		 [with_idn=no])
+ AC_ARG_WITH([libidn-prefix],
+   AS_HELP_STRING([--with-libidn-prefix[[=DIR]]],
+@@ -1081,12 +1081,14 @@ rlogind_PROPS="${rlogind_PROPS:+$rlogind
+ 
+ # Support for libidn.
+ 
+-ftp_PROPS="${ftp_PROPS:+$ftp_PROPS }${LIBIDN:+-lidn}"
+-ping_PROPS="${ping_PROPS:+$ping_PROPS }${LIBIDN:+-lidn}"
+-talk_PROPS="${talk_PROPS:+$talk_PROPS }${LIBIDN:+-lidn}"
+-telnet_PROPS="${telnet_PROPS:+$telnet_PROPS }${LIBIDN:+-lidn}"
+-tftp_PROPS="${tftp_PROPS:+$tftp_PROPS }${LIBIDN:+-lidn}"
+-traceroute_PROPS="${traceroute_PROPS:+$traceroute_PROPS }${LIBIDN:+-lidn}"
++idn_link=`expr X"$LIBIDN" : '.*-l\(idn2*\)'`
++
++ftp_PROPS="${ftp_PROPS:+$ftp_PROPS }${LIBIDN:+$idn_link}"
++ping_PROPS="${ping_PROPS:+$ping_PROPS }${LIBIDN:+$idn_link}"
++talk_PROPS="${talk_PROPS:+$talk_PROPS }${LIBIDN:+$idn_link}"
++telnet_PROPS="${telnet_PROPS:+$telnet_PROPS }${LIBIDN:+$idn_link}"
++tftp_PROPS="${tftp_PROPS:+$tftp_PROPS }${LIBIDN:+$idn_link}"
++traceroute_PROPS="${traceroute_PROPS:+$traceroute_PROPS }${LIBIDN:+$idn_link}"
+ 
+ # Termcap variants.
+ 
+--- a/ftp/ftp.c
++++ b/ftp/ftp.c
+@@ -83,7 +83,9 @@
+ #include <stdarg.h>
+ #include <sys/select.h>
+ 
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -139,7 +141,7 @@ hookup (char *host, int port)
+   if (p && p != host && isprint (p[1]))
+     host = ++p;
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   status = idna_to_ascii_lz (host, &rhost, 0);
+   if (status)
+     {
+@@ -147,7 +149,7 @@ hookup (char *host, int port)
+       code = -1;
+       return ((char *) 0);
+     }
+-#else /* !HAVE_IDN */
++#else /* !HAVE_IDN && !HAVE_IDN2 */
+   rhost = strdup (host);
+ #endif
+ 
+--- a/ping/libping.c
++++ b/ping/libping.c
+@@ -33,7 +33,9 @@
+ #include <stdio.h>
+ #include <errno.h>
+ #include <string.h>
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -294,7 +296,7 @@ ping_set_dest (PING * ping, const char *
+   struct addrinfo hints, *res;
+   char *rhost;
+ 
+-# ifdef HAVE_IDN
++# if defined HAVE_IDN || defined HAVE_IDN2
+   rc = idna_to_ascii_lz (host, &rhost, 0);	/* P is allocated.  */
+   if (rc)
+     return 1;
+@@ -325,7 +327,7 @@ ping_set_dest (PING * ping, const char *
+   if (res->ai_canonname)
+     ping->ping_hostname = strdup (res->ai_canonname);
+   else
+-# ifdef HAVE_IDN
++# if defined HAVE_IDN || defined HAVE_IDN2
+     ping->ping_hostname = host;
+ #else
+     ping->ping_hostname = strdup (host);
+@@ -346,7 +348,7 @@ ping_set_dest (PING * ping, const char *
+   else
+     {
+       struct hostent *hp;
+-# ifdef HAVE_IDN
++# if defined HAVE_IDN || defined HAVE_IDN2
+       char *rhost;
+       int rc;
+ 
+@@ -355,7 +357,7 @@ ping_set_dest (PING * ping, const char *
+ 	return 1;
+       hp = gethostbyname (rhost);
+       free (rhost);
+-# else /* !HAVE_IDN */
++# else /* !HAVE_IDN && !HAVE_IDN2 */
+       hp = gethostbyname (host);
+ # endif
+       if (!hp)
+--- a/ping/ping6.c
++++ b/ping/ping6.c
+@@ -45,7 +45,9 @@
+ #ifdef HAVE_LOCALE_H
+ # include <locale.h>
+ #endif
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -1005,12 +1007,12 @@ ping_set_dest (PING * ping, const char *
+   struct addrinfo *result, hints;
+   char *rhost;
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   err = idna_to_ascii_lz (host, &rhost, 0);
+   if (err)
+     return 1;
+   host = rhost;
+-#else /* !HAVE_IDN */
++#else /* !HAVE_IDN && !HAVE_IDN2 */
+   rhost = NULL;
+ #endif
+ 
+@@ -1036,7 +1038,7 @@ ping_set_dest (PING * ping, const char *
+   if (result->ai_canonname)
+     ping->ping_hostname = strdup (result->ai_canonname);
+   else
+-#if HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+     ping->ping_hostname = host;
+ #else
+   ping->ping_hostname = strdup (host);
+--- a/src/tftp.c
++++ b/src/tftp.c
+@@ -75,7 +75,9 @@
+ #ifdef HAVE_LOCALE_H
+ # include <locale.h>
+ #endif
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -315,14 +317,14 @@ resolve_name (char *name)
+   struct sockaddr_storage ss;
+   struct addrinfo hints, *ai, *aiptr;
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   err = idna_to_ascii_lz (name, &rname, 0);
+   if (err)
+     {
+       fprintf (stderr, "tftp: %s: %s\n", name, idna_strerror (err));
+       return RESOLVE_FAIL;
+     }
+-#else /* !HAVE_IDN */
++#else /* !HAVE_IDN && !HAVE_IDN2 */
+   rname = name;
+ #endif
+ 
+@@ -344,7 +346,7 @@ resolve_name (char *name)
+       return RESOLVE_FAIL;
+     }
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   free (rname);
+ #endif
+ 
+--- a/src/traceroute.c
++++ b/src/traceroute.c
+@@ -54,7 +54,9 @@
+ #ifdef HAVE_LOCALE_H
+ # include <locale.h>
+ #endif
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -302,13 +304,13 @@ main (int argc, char **argv)
+ # endif
+ #endif
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   rc = idna_to_ascii_lz (hostname, &rhost, 0);
+   free (hostname);
+ 
+   if (rc)
+     error (EXIT_FAILURE, 0, "unknown host");
+-#else /* !HAVE_IDN */
++#else /* !HAVE_IDN && !HAVE_IDN2 */
+   rhost = hostname;
+ #endif
+ 
+--- a/talk/get_addrs.c
++++ b/talk/get_addrs.c
+@@ -59,7 +59,9 @@
+ #include <netdb.h>
+ #include <stdio.h>
+ #include <unistd.h>
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -68,7 +70,7 @@
+ int
+ get_addrs (char *my_machine_name, char *his_machine_name)
+ {
+-#if HAVE_DECL_GETADDRINFO || defined HAVE_IDN
++#if HAVE_DECL_GETADDRINFO || defined HAVE_IDN || defined HAVE_IDN2
+   int err;
+ #endif
+   char *lhost, *rhost;
+@@ -79,7 +81,7 @@ get_addrs (char *my_machine_name, char *
+ #endif
+   struct servent *sp;
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   err = idna_to_ascii_lz (my_machine_name, &lhost, 0);
+   if (err)
+     {
+@@ -95,7 +97,7 @@ get_addrs (char *my_machine_name, char *
+ 	       his_machine_name, idna_strerror (err));
+       exit (-1);
+     }
+-#else /* !HAVE_IDN */
++#else /* !HAVE_IDN && !HAVE_IDN2 */
+   lhost = my_machine_name;
+   rhost = his_machine_name;
+ #endif
+@@ -238,7 +240,7 @@ get_addrs (char *my_machine_name, char *
+     }
+   daemon_port = ntohs (sp->s_port);
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   free (lhost);
+   free (rhost);
+ #endif
+--- a/telnet/commands.c
++++ b/telnet/commands.c
+@@ -74,7 +74,9 @@
+ #include <arpa/inet.h>
+ #include <arpa/telnet.h>
+ 
+-#ifdef HAVE_IDNA_H
++#if defined HAVE_IDN2_H && defined HAVE_IDN2
++# include <idn2.h>
++#elif defined HAVE_IDNA_H
+ # include <idna.h>
+ #endif
+ 
+@@ -2456,7 +2458,7 @@ tn (int argc, char *argv[])
+   const int on = 1;
+   int err;
+   char *cmd, *hostp = 0, *portp = 0, *user = 0;
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   char *hosttmp = 0;
+ #endif
+ 
+@@ -2604,7 +2606,7 @@ tn (int argc, char *argv[])
+   }
+ #endif /* AUTHENTICATION || ENCRYPTION */
+ 
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   err = idna_to_ascii_lz (hostp, &hosttmp, 0);
+   if (err)
+     {
+@@ -2613,7 +2615,7 @@ tn (int argc, char *argv[])
+       return 0;
+     }
+   hostp = hosttmp;
+-#endif /* !HAVE_IDN */
++#endif /* !HAVE_IDN && !HAVE_IDN2 */
+ 
+ #ifdef IPV6
+   hints.ai_socktype = SOCK_STREAM;
+@@ -2788,7 +2790,7 @@ tn (int argc, char *argv[])
+ #endif /* !IPV6 */
+ 
+   cmdrc (hostp, hostname);
+-#ifdef HAVE_IDN
++#if defined HAVE_IDN || defined HAVE_IDN2
+   /* Last use of HOSTP, alias HOSTTMP.  */
+   free (hosttmp);
+ #endif

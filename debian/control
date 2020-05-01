@@ -23,7 +23,7 @@ Build-Depends:
  libncurses-dev,
  libpam0g-dev,
  libwrap0-dev,
- libidn11-dev,
+ libidn2-dev,
  libkrb5-dev,
 Build-Conflicts:
  autoconf2.13,
