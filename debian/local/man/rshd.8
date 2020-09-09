@@ -13,7 +13,7 @@
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 .\" ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
@@ -51,7 +51,7 @@ The
 .Nm rshd
 server
 listens for service requests at the port indicated in
-the ``cmd'' service specification; see
+the "cmd" service specification; see
 .Xr services 5 .
 When a service request is received the following protocol
 is initiated:
@@ -62,7 +62,7 @@ If the port is not in the range 512-1023, the server
 aborts the connection.
 .It
 The server reads characters from the socket up
-to a null (`\e0') byte.  The resultant string is
+to a null ('\e0') byte.  The resultant string is
 interpreted as an
 .Tn ASCII
 number, base 10.
@@ -91,7 +91,7 @@ option is given,
 the addresses for the hostname are requested,
 verifying that the name and address correspond.
 If address verification fails, the connection is aborted
-with the message, ``Host address mismatch.''
+with the message, "Host address mismatch."
 .It
 A null terminated user name of at most 16 characters
 is retrieved on the initial socket.  This user name
@@ -121,7 +121,7 @@ file found in the user's home directory.  The
 .Fl l
 option prevents
 .Xr ruserok 3
-from doing any validation based on the user's ``.rhosts'' file,
+from doing any validation based on the user's ".rhosts" file,
 unless the user is the superuser.
 .It
 If the file
@@ -197,7 +197,7 @@ and is not preceded by a flag byte.
 .Sh BUGS
 The authentication procedure used here assumes the integrity
 of each client machine and the connecting medium.  This is
-insecure, but is useful in an ``open'' environment.
+insecure, but is useful in an "open" environment.
 .Pp
 A facility to allow all data exchanges to be encrypted should be
 present.

@@ -13,7 +13,7 @@
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 .\" ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
@@ -333,7 +333,7 @@ transferring a
 .Xr tar 1
 archive of the subtree (in binary mode).
 .It Ic hash Op Ar size
-Toggle hash-sign (``#'') printing for each data block
+Toggle hash-sign ("#") printing for each data block
 transferred.
 The 
 .Ar size
@@ -408,16 +408,16 @@ defined macros.
 Macros remain defined until a
 .Ic close
 command is executed.
-The macro processor interprets `$' and `\e' as special characters.
-A `$' followed by a number (or numbers) is replaced by the
+The macro processor interprets '$' and '\e' as special characters.
+A '$' followed by a number (or numbers) is replaced by the
 corresponding argument on the macro invocation command line.
-A `$' followed by an `i' signals that macro processor that the
+A '$' followed by an 'i' signals that macro processor that the
 executing macro is to be looped.
-On the first pass `$i' is
+On the first pass '$i' is
 replaced by the first argument on the macro invocation command line,
 on the second pass it is replaced by the second argument, and so on.
-A `\e' followed by any character is replaced by that character.
-Use the `\e' to prevent special treatment of the `$'.
+A '\e' followed by any character is replaced by that character.
+Use the '\e' to prevent special treatment of the '$'.
 .It Ic mdelete Op Ar remote-files
 Delete the
 .Ar remote-files
@@ -547,9 +547,9 @@ and
 .Ic case
 settings).
 Variable templating is accomplished by including the
-sequences `$1', `$2', ..., `$9' in
+sequences '$1', '$2', ..., '$9' in
 .Ar inpattern  .
-Use `\\' to prevent this special treatment of the `$' character.
+Use '\\' to prevent this special treatment of the '$' character.
 All other characters are treated literally, and are used to determine the
 .Ic nmap
 .Op Ar inpattern
@@ -561,11 +561,11 @@ $1.$2 and the remote file name "mydata.data", $1 would have the value
 The
 .Ar outpattern
 determines the resulting mapped filename.
-The sequences `$1', `$2', ...., `$9' are replaced by any value resulting
+The sequences '$1', '$2', ...., '$9' are replaced by any value resulting
 from the
 .Ar inpattern
 template.
-The sequence `$0' is replace by the original filename.
+The sequence '$0' is replace by the original filename.
 Additionally, the sequence
 .Ql Op Ar seq1 , Ar seq2
 is replaced by
@@ -586,9 +586,9 @@ the output filename "myfile.data" for input filenames "myfile.data" and
 "myfile.myfile" for the input filename ".myfile".
 Spaces may be included in
 .Ar outpattern  ,
-as in the example: `nmap $1 sed "s/  *$//" > $1' .
-Use the `\e' character to prevent special treatment
-of the `$','[','[', and `,' characters.
+as in the example: 'nmap $1 sed "s/  *$//" > $1' .
+Use the '\e' character to prevent special treatment
+of the '$','[','[', and ',' characters.
 .It Ic ntrans Op Ar inchars Op Ar outchars
 Set or unset the filename character translation mechanism.
 If no arguments are specified, the filename character
@@ -941,7 +941,7 @@ A synonym for help.
 .El
 .Pp
 Command arguments which have embedded spaces may be quoted with
-quote `"' marks.
+quote '"' marks.
 .Sh ABORTING A FILE TRANSFER
 To abort a file transfer, use the terminal interrupt key
 (usually Ctrl-C).
@@ -999,7 +999,7 @@ must be quoted; e.g.
 A particularly
 useful example of this mechanism is: \*(Lqdir more\*(Rq.
 .It
-Failing the above checks, if ``globbing'' is enabled,
+Failing the above checks, if "globbing" is enabled,
 local file names are expanded
 according to the rules used in the
 .Xr csh  1  ;
