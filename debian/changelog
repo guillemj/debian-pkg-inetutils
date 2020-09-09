@@ -3,6 +3,7 @@ inetutils (2:1.9.4-13) UNRELEASED; urgency=medium
   * Copy instead of moving local files to the staging directory, to fix
     building twice in a row.
   * Use single and double quotes instead of unbalanced backticks.
+  * Rename lintian override tags to their new names.
   * Add patch from upstream:
     - Switch from libidn to libidn2.
 
