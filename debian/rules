@@ -66,30 +66,30 @@ override_dh_auto_install:
 	
 	# Rename ifconfig to not break existing systems using net-tools
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
-	mv $(M)/ifconfig.1 $(D)/$(man1dir)/inetutils-ifconfig.1
+	cp $(M)/ifconfig.1 $(D)/$(man1dir)/inetutils-ifconfig.1
 	
 	# Rename tools not break with Essential:yes packages
 	mv $(D)/usr/bin/dnsdomainname $(D)/usr/bin/inetutils-dnsdomainname
 	mv $(D)/usr/bin/hostname $(D)/usr/bin/inetutils-hostname
 	mv $(D)/usr/bin/logger $(D)/usr/bin/inetutils-logger
-	mv $(M)/dnsdomainname.1 $(D)/$(man1dir)/inetutils-dnsdomainname.1
-	mv $(M)/hostname.1 $(D)/$(man1dir)/inetutils-hostname.1
-	mv $(M)/logger.1 $(D)/$(man1dir)/inetutils-logger.1
+	cp $(M)/dnsdomainname.1 $(D)/$(man1dir)/inetutils-dnsdomainname.1
+	cp $(M)/hostname.1 $(D)/$(man1dir)/inetutils-hostname.1
+	cp $(M)/logger.1 $(D)/$(man1dir)/inetutils-logger.1
 	
 	# Rename inetd to be able to coexist with not purged netkit-inetd
 	mv $(D)/usr/sbin/inetd $(D)/usr/sbin/inetutils-inetd
-	mv $(M)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8
+	cp $(M)/inetd.8 $(D)/$(man8dir)/inetutils-inetd.8
 	
 	# Needed to enable alternatives
 	mv $(D)/usr/bin/telnet $(D)/usr/bin/inetutils-telnet
-	mv $(M)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
+	cp $(M)/telnet.1 $(D)/$(man1dir)/inetutils-telnet.1
 	mv $(D)/usr/bin/ftp $(D)/usr/bin/inetutils-ftp
-	mv $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
-	mv $(M)/netrc.5 $(D)/$(man5dir)/inetutils-netrc.5
+	cp $(M)/ftp.1 $(D)/$(man1dir)/inetutils-ftp.1
+	cp $(M)/netrc.5 $(D)/$(man5dir)/inetutils-netrc.5
 	mv $(D)/usr/bin/talk $(D)/usr/bin/inetutils-talk
-	mv $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
+	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
 	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute
-	mv $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
+	cp $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
 
 override_dh_install:
 	dh_install -a
