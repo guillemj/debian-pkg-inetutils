@@ -104,9 +104,6 @@ override_dh_installdocs:
 override_dh_installpam:
 	dh_installpam -pinetutils-ftpd --name ftp
 
-override_dh_installchangelogs:
-	dh_installchangelogs -a ChangeLog
-
 override_dh_fixperms:
 	# pings and traceroute are setuid
 	dh_fixperms -a -Xbin/ping -Xbin/ping6 -Xusr/bin/inetutils-traceroute
