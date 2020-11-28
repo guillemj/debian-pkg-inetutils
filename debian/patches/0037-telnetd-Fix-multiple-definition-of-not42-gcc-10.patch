@@ -1,0 +1,25 @@
+From ad85d893f13a75e05dc708f48e1daa7826e78825 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tim=20R=C3=BChsen?= <tim.ruehsen@gmx.de>
+Date: Sun, 16 Feb 2020 19:42:05 +0100
+Subject: [PATCH 37/64] telnetd: Fix multiple definition of 'not42' (gcc 10)
+
+---
+ telnetd/utility.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/telnetd/utility.c b/telnetd/utility.c
+index 170537af..1fa4ed8c 100644
+--- a/telnetd/utility.c
++++ b/telnetd/utility.c
+@@ -63,7 +63,7 @@ static int ncc;
+ static char ptyibuf[BUFSIZ], *ptyip;
+ static int pcc;
+ 
+-int not42;
++extern int not42;
+ 
+ static int
+ readstream (int p, char *ibuf, int bufsize)
+-- 
+2.28.0.163.g6104cc2f0b6
+

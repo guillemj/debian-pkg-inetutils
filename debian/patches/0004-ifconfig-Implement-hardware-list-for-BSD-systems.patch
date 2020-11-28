@@ -1,7 +1,7 @@
 From 3891528b1a2979fcda2c17fd6987e85894504983 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Tue, 21 Jul 2015 23:04:46 +0200
-Subject: [PATCH 04/60] ifconfig: Implement hardware list for BSD systems.
+Subject: [PATCH 04/64] ifconfig: Implement hardware list for BSD systems.
 
 Let formats `gnu' and `osf' report tunnel endpoints.
 ---
@@ -282,5 +282,5 @@ index 910a75ef..1db525ba 100644
  
  /* Lookup structures provided by the system, each decoding
 -- 
-2.26.0.292.g33ef6b2f38
+2.28.0.163.g6104cc2f0b6
 

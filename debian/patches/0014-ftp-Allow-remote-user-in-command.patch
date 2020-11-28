@@ -1,7 +1,7 @@
 From 3c767cb5c1113d2b9a340fb2dae2527f71a52a39 Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Sat, 23 Jan 2016 22:47:41 +0100
-Subject: [PATCH 14/60] ftp: Allow remote user in command.
+Subject: [PATCH 14/64] ftp: Allow remote user in command.
 
 Implement the extended host argument form `user@host'
 for quick selection of the remote user name.
@@ -132,5 +132,5 @@ index 98135865..d3726069 100644
      {
        char *myname = getlogin ();
 -- 
-2.26.0.292.g33ef6b2f38
+2.28.0.163.g6104cc2f0b6
 

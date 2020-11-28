@@ -1,0 +1,91 @@
+From 389fc7caead55660136985fab952184754db8cd8 Mon Sep 17 00:00:00 2001
+From: Mats Erik Andersson <gnu@gisladisker.se>
+Date: Mon, 27 Feb 2017 23:20:12 +0100
+Subject: [PATCH 23/64] telnetd: Portability of TTY termcap to Solaris.
+
+---
+ ChangeLog      | 10 ++++++++++
+ telnetd/term.c | 30 ++++++++++++++++++++++++++++--
+ 2 files changed, 38 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index eb0fde3a..fe8414ef 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,13 @@
++2017-02-27  Mats Erik Andersson  <gnu@gisladisker.se>
++
++	telnetd: Portability of TTY termcap to Solaris systems.
++
++	* telnetd/term.c: Include header <fcntl.h>.
++	[SOLARIS10 || SOLARIS] (init_termbuf): If applicable, open
++	the slave TTY and extract terminal capabilities, since these
++	systems do not assign a line discipline to the master PTY.
++	New variables NAME and TTY.
++
+ 2017-02-27  Mats Erik Andersson  <gnu@gisladisker.se>
+ 
+ 	telnetd: Portable option debugging.
+diff --git a/telnetd/term.c b/telnetd/term.c
+index e7b3181d..cf3aa54b 100644
+--- a/telnetd/term.c
++++ b/telnetd/term.c
+@@ -21,6 +21,8 @@
+ 
+ #include <telnetd.h>
+ 
++#include <fcntl.h>
++
+ typedef struct termios TERMDESC;
+ #define _term_getattr tcgetattr
+ #define _term_setattr(fd, tp) tcsetattr (fd, TCSANOW, tp)
+@@ -213,7 +215,7 @@ tty_iscrnl ()
+   return termbuf.sg.sg_flags & CRMOD;
+ }
+ 
+-#else
++#else /* !IOCTL_INTERFACE */
+ 
+ # define termdesc_eofc    c_cc[VEOF]
+ # define termdesc_erase   c_cc[VERASE]
+@@ -496,12 +498,36 @@ tty_iscrnl (void)
+   return termbuf.c_iflag & ICRNL;
+ }
+ 
+-#endif
++#endif /* !IOCTL_INTERFACE */
+ 
+ void
+ init_termbuf (void)
+ {
++#if defined SOLARIS10 || defined SOLARIS
++  /* On Solaris the master PTY is not able to report terminal
++   * settings about the slave TTY, since it is only the slave
++   * that is working with an designated line discipline.
++   * Therefore we must determine the slave descriptor, which
++   * exists only if ptsname() returns a non-empty string.
++   * This happens for the parent process.  The child process
++   * sees an empty name, so undergoes minimal processing.
++   */
++  char *name = ptsname(pty);
++
++  if (!name)
++    _term_getattr (pty, &termbuf);
++  else
++    {
++      /* Minimal access means read only!  */
++      int tty = open(name, O_RDONLY | O_NONBLOCK);
++
++      _term_getattr (tty, &termbuf);
++      close(tty);
++    }
++#else /* !SOLARIS && !SOLARIS10 */
+   _term_getattr (pty, &termbuf);
++#endif
++
+   termbuf2 = termbuf;
+ }
+ 
+-- 
+2.28.0.163.g6104cc2f0b6
+

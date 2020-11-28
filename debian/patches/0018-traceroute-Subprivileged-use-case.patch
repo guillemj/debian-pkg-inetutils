@@ -1,7 +1,7 @@
 From 64ee5ba5cad6298f72271539cb96e2de164dfc2f Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Tue, 16 Feb 2016 23:29:25 +0100
-Subject: [PATCH 18/60] traceroute: Subprivileged use case.
+Subject: [PATCH 18/64] traceroute: Subprivileged use case.
 
 A fallback for ICMP tracing relevant to GNU/Linux is implemented,
 allowing a rudimentary but suid-less use case.
@@ -106,5 +106,5 @@ index 785dc6f2..2a56a53d 100644
  	/* The sequence number is updated to a valid value!  */
  	if (icmp_echo_encode ((unsigned char *) &hdr, sizeof (hdr),
 -- 
-2.26.0.292.g33ef6b2f38
+2.28.0.163.g6104cc2f0b6
 

@@ -1,7 +1,7 @@
 From 7f02c7f2269b3672e007556d93a5c9667925004c Mon Sep 17 00:00:00 2001
 From: Mats Erik Andersson <gnu@gisladisker.se>
 Date: Fri, 12 Feb 2016 14:45:33 +0100
-Subject: [PATCH 17/60] ping: Implement subprivileged echo method.
+Subject: [PATCH 17/64] ping: Implement subprivileged echo method.
 
 The change implements a setuid-less use case of echo pinging
 for use on GNU/Linux systems.  The new mode is the fallback
@@ -96,5 +96,5 @@ index 4a9f73de..9ae5d671 100644
  
        if (rc)
 -- 
-2.26.0.292.g33ef6b2f38
+2.28.0.163.g6104cc2f0b6
 

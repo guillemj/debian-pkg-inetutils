@@ -1,0 +1,47 @@
+From 7e1f35d8ea1771f50e60bcf85ae99f86a469fa93 Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Wed, 2 Sep 2020 23:26:31 +0200
+Subject: [PATCH 60/64] ping, ping6: Check setuid() return value and abort on
+ failure
+
+Even for root the setuid() call can fail, so we need to check whether it
+has failed and abort the program at that point, as these are usually
+installed as set-user-ID root programs.
+
+Based-on-patch-by: Jayakrishna Vadayath <jvadayat@asu.edu>
+---
+ ping/ping.c  | 3 ++-
+ ping/ping6.c | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/ping/ping.c b/ping/ping.c
+index a0a386d5..2bf484ef 100644
+--- a/ping/ping.c
++++ b/ping/ping.c
+@@ -294,7 +294,8 @@ main (int argc, char **argv)
+   ping_set_sockopt (ping, SO_BROADCAST, (char *) &one, sizeof (one));
+ 
+   /* Reset root privileges */
+-  setuid (getuid ());
++  if (setuid (getuid ()) < 0)
++    error (0, errno, "setuid()");
+ 
+   /* Force line buffering regardless of output device.  */
+   setvbuf (stdout, NULL, _IOLBF, 0);
+diff --git a/ping/ping6.c b/ping/ping6.c
+index eefd7146..44993e16 100644
+--- a/ping/ping6.c
++++ b/ping/ping6.c
+@@ -259,7 +259,8 @@ main (int argc, char **argv)
+   setsockopt (ping->ping_fd, SOL_SOCKET, SO_BROADCAST, (char *) &one, sizeof (one));
+ 
+   /* Reset root privileges */
+-  setuid (getuid ());
++  if (setuid (getuid ()) < 0)
++    error (0, errno, "setuid()");
+ 
+   /* Force line buffering regardless of output device.  */
+   setvbuf (stdout, NULL, _IOLBF, 0);
+-- 
+2.28.0.163.g6104cc2f0b6
+

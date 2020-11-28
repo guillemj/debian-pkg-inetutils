@@ -1,0 +1,31 @@
+From 52ddcb10c64f3a4c2da6d5ba158183387ac953e9 Mon Sep 17 00:00:00 2001
+From: Simon Josefsson <simon@josefsson.org>
+Date: Wed, 1 Jan 2020 12:38:52 +0100
+Subject: [PATCH 29/64] telnet: Telnet -E(no escape) is treating
+ _POSIX_VDISABLE char as escape.
+
+Reported by Mikhail Bychek <mikhail.bychek@sputnix.ru>.
+
+See also:
+https://github.com/freebsd/freebsd/commit/c3694d985891efb8a156e933600d23132577a053
+https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=6317
+---
+ telnet/telnet.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/telnet/telnet.c b/telnet/telnet.c
+index 55992d79..97be8add 100644
+--- a/telnet/telnet.c
++++ b/telnet/telnet.c
+@@ -2223,7 +2223,7 @@ telsnd (void)
+ 	  if ((sc == '\n') || (sc == '\r'))
+ 	    bol = 1;
+ 	}
+-      else if (sc == escape)
++      else if (escape != _POSIX_VDISABLE && sc == escape)
+ 	{
+ 	  /*
+ 	   * Double escape is a pass through of a single escape character.
+-- 
+2.28.0.163.g6104cc2f0b6
+

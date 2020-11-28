@@ -1,0 +1,24 @@
+From cc9d5a445f7f40843d065320c3b191a3b4b82c3c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tim=20R=C3=BChsen?= <tim.ruehsen@gmx.de>
+Date: Sat, 29 Feb 2020 19:18:58 +0100
+Subject: [PATCH 50/64] telnetd: Silence unused warning for getterminaltype
+
+---
+ telnetd/utility.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/telnetd/utility.c b/telnetd/utility.c
+index 1fa4ed8c..7dc7616e 100644
+--- a/telnetd/utility.c
++++ b/telnetd/utility.c
+@@ -733,6 +733,7 @@ getterminaltype (char *uname, size_t len)
+     }
+ #else /* !AUTHENTICATION */
+   (void) uname;	/* Silence warning.  */
++  (void) len;	/* Silence warning.  */
+ #endif
+ 
+ #ifdef	ENCRYPTION
+-- 
+2.28.0.163.g6104cc2f0b6
+
