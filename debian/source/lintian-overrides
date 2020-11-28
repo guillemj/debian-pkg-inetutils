@@ -1,0 +1,2 @@
+# GNU projects do not maintain proper man pages
+inetutils: maintainer-manual-page *
