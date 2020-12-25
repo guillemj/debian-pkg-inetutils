@@ -1,4 +1,4 @@
-inetutils (2:1.9.4-13) UNRELEASED; urgency=medium
+inetutils (2:1.9.4-13) unstable; urgency=medium
 
   * Copy instead of moving local files to the staging directory, to fix
     building twice in a row.
@@ -9,7 +9,7 @@ inetutils (2:1.9.4-13) UNRELEASED; urgency=medium
   * Switch to debhelper compatibility level 13.
   * Switch to Standards-Version 4.5.1 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Fri, 01 May 2020 05:35:34 +0200
+ -- Guillem Jover <guillem@debian.org>  Fri, 25 Dec 2020 13:31:24 +0100
 
 inetutils (2:1.9.4-12) unstable; urgency=medium
 
