@@ -6,6 +6,7 @@ inetutils (2:1.9.4-13) UNRELEASED; urgency=medium
   * Rename lintian override tags to their new names.
   * Add patch from upstream:
     - Switch from libidn to libidn2.
+  * Switch to debhelper compatibility level 13.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 01 May 2020 05:35:34 +0200
 
