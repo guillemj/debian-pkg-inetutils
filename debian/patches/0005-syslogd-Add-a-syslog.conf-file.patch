@@ -1,7 +1,7 @@
-From 3464fe66c49c90053f336e73e019cbca7d8e1d43 Mon Sep 17 00:00:00 2001
+From fbb49db1df3cc263abcdfffde38298373b6a24eb Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:31:02 +0200
-Subject: [PATCH 62/64] syslogd: Add a syslog.conf file
+Subject: [PATCH 5/7] syslogd: Add a syslog.conf file
 
 Add a default configuration file so that the users have something to
 start from.
@@ -14,7 +14,7 @@ Ref: https://bugs.debian.org/208336
  create mode 100644 src/syslog.conf
 
 diff --git a/src/Makefile.am b/src/Makefile.am
-index 7682d713..eef2254a 100644
+index 5037440a..e906c47e 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
 @@ -107,6 +107,8 @@ inetdaemon_PROGRAMS += $(syslogd_BUILD)
@@ -103,5 +103,5 @@ index 00000000..5b35eb8c
 +	*.=notice;*.=warn	|/dev/xconsole
 +
 -- 
-2.28.0.163.g6104cc2f0b6
+2.30.0.284.gd98b1dd5eaa7
 

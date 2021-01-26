@@ -1,7 +1,7 @@
-From 364b4d98093d2d46eeccb7046d39b503516f235f Mon Sep 17 00:00:00 2001
+From f7635407df2ec19a5fa1ab983e43e8ad6172790b Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Sat, 13 Jul 2019 22:38:53 +0200
-Subject: [PATCH 59/64] ping6: Fix --interval to be in seconds not milliseconds
+Subject: [PATCH 2/7] ping6: Fix --interval to be in seconds not milliseconds
 
 This was allowing unprivileged users to use ping floods by setting very
 low values.
@@ -12,10 +12,10 @@ Closes: #926750
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/ping/ping6.c b/ping/ping6.c
-index 90d427d1..eefd7146 100644
+index e3d49d6b..f10faf91 100644
 --- a/ping/ping6.c
 +++ b/ping/ping6.c
-@@ -77,6 +77,8 @@ int tclass = -1;	/* Kernel sets default: -1, RFC 3542.  */
+@@ -78,6 +78,8 @@ int tclass = -1;	/* Kernel sets default: -1, RFC 3542.  */
  int flowinfo;
  #endif
  
@@ -24,7 +24,7 @@ index 90d427d1..eefd7146 100644
  static int ping_echo (char *hostname);
  static void ping_reset (PING * p);
  static int send_echo (PING * ping);
-@@ -161,7 +163,9 @@ parse_opt (int key, char *arg, struct argp_state *state)
+@@ -162,7 +164,9 @@ parse_opt (int key, char *arg, struct argp_state *state)
  
      case 'i':
        options |= OPT_INTERVAL;
@@ -36,5 +36,5 @@ index 90d427d1..eefd7146 100644
  
      case 'l':
 -- 
-2.28.0.163.g6104cc2f0b6
+2.30.0.284.gd98b1dd5eaa7
 

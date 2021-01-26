@@ -1,7 +1,7 @@
-From d4673e39aafdb324c2f509fe1c683ef5d77732c1 Mon Sep 17 00:00:00 2001
+From 3da5dc94575dd7a16c1c56a2db401574dc203b64 Mon Sep 17 00:00:00 2001
 From: Michal Ruprich <michalruprich@gmail.com>
 Date: Sun, 12 Apr 2020 22:41:50 +0200
-Subject: [PATCH 58/64] telnetd: Fix arbitrary remote code execution via short
+Subject: [PATCH 1/7] telnetd: Fix arbitrary remote code execution via short
  writes or urgent data
 
 Fixes: CVE-2020-10188
@@ -15,7 +15,7 @@ Patch-URL: https://src.fedoraproject.org/rpms/telnet/raw/master/f/telnet-0.17-ov
  2 files changed, 23 insertions(+), 14 deletions(-)
 
 diff --git a/telnetd/telnetd.h b/telnetd/telnetd.h
-index 044025d2..fa970e24 100644
+index 065b5cbe..4d5876ca 100644
 --- a/telnetd/telnetd.h
 +++ b/telnetd/telnetd.h
 @@ -271,7 +271,7 @@ void io_drain (void);
@@ -28,10 +28,10 @@ index 044025d2..fa970e24 100644
  void netflush (void);
  
 diff --git a/telnetd/utility.c b/telnetd/utility.c
-index 7dc7616e..d3738906 100644
+index 32bcc110..fc82cf38 100644
 --- a/telnetd/utility.c
 +++ b/telnetd/utility.c
-@@ -484,10 +484,14 @@ stilloob (int s)
+@@ -487,10 +487,14 @@ stilloob (int s)
   * character.
   */
  char *
@@ -47,7 +47,7 @@ index 7dc7616e..d3738906 100644
  
    switch (*(current + 1) & 0xff)
      {
-@@ -495,19 +499,20 @@ nextitem (char *current)
+@@ -498,19 +502,20 @@ nextitem (char *current)
      case DONT:
      case WILL:
      case WONT:
@@ -73,7 +73,7 @@ index 7dc7616e..d3738906 100644
      }
  }				/* end of nextitem */
  
-@@ -529,8 +534,9 @@ nextitem (char *current)
+@@ -532,8 +537,9 @@ nextitem (char *current)
   * us in any case.
   */
  #define wewant(p)					\
@@ -85,7 +85,7 @@ index 7dc7616e..d3738906 100644
  
  
  void
-@@ -545,7 +551,7 @@ netclear (void)
+@@ -548,7 +554,7 @@ netclear (void)
    thisitem = netobuf;
  #endif /* ENCRYPTION */
  
@@ -94,7 +94,7 @@ index 7dc7616e..d3738906 100644
      thisitem = next;
  
    /* Now, thisitem is first before/at boundary. */
-@@ -556,15 +562,18 @@ netclear (void)
+@@ -559,15 +565,18 @@ netclear (void)
    good = netobuf;		/* where the good bytes go */
  #endif /* ENCRYPTION */
  
@@ -116,7 +116,7 @@ index 7dc7616e..d3738906 100644
  
  	  length = next - thisitem;
  	  memmove (good, thisitem, length);
-@@ -573,7 +582,7 @@ netclear (void)
+@@ -576,7 +585,7 @@ netclear (void)
  	}
        else
  	{
@@ -126,5 +126,5 @@ index 7dc7616e..d3738906 100644
      }
  
 -- 
-2.28.0.163.g6104cc2f0b6
+2.30.0.284.gd98b1dd5eaa7
 
