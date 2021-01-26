@@ -33,19 +33,19 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 	dh_auto_configure -- \
 	  $(confflags) \
-	  --disable-rpath         \
+	  --disable-rpath \
 	  --libexecdir=\$${prefix}/sbin \
-	  --disable-rcp           \
-	  --disable-rexec         \
-	  --disable-rexecd        \
-	  --disable-rlogin        \
-	  --disable-rlogind       \
-	  --disable-rsh           \
-	  --disable-rshd          \
-	  --disable-tftp          \
-	  --disable-tftpd         \
-	  --disable-uucpd         \
-	  --disable-whois         \
+	  --disable-rcp \
+	  --disable-rexec \
+	  --disable-rexecd \
+	  --disable-rlogin \
+	  --disable-rlogind \
+	  --disable-rsh \
+	  --disable-rshd \
+	  --disable-tftp \
+	  --disable-tftpd \
+	  --disable-uucpd \
+	  --disable-whois \
 	  --with-path-login=/bin/login \
 	  --with-krb5 \
 	  --with-wrap \

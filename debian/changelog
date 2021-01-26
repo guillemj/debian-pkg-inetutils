@@ -4,6 +4,7 @@ inetutils (2:1.9.4.90-1) UNRELEASED; urgency=medium
     - Remove upstream patches, now unneeded.
   * Use service(8) instead of invoke-rc.d(8) in inetutils-syslogd logrotate
     script, as the latter is intended to be used only in maintainer scripts.
+  * Remove spurious spaces from debian/rules.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 19 Jan 2021 04:20:45 +0100
 
