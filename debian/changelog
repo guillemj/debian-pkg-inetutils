@@ -2,6 +2,7 @@ inetutils (2:1.9.4.90-1) UNRELEASED; urgency=medium
 
   * New upstream release.
     - Remove upstream patches, now unneeded.
+    - Update debian/upstream/signing-key.asc.
   * Use service(8) instead of invoke-rc.d(8) in inetutils-syslogd logrotate
     script, as the latter is intended to be used only in maintainer scripts.
   * Remove spurious spaces from debian/rules.
