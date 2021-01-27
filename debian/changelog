@@ -1,4 +1,4 @@
-inetutils (2:1.9.4.90-1) UNRELEASED; urgency=medium
+inetutils (2:1.9.4.90-1) unstable; urgency=medium
 
   * New upstream release.
     - Remove upstream patches, now unneeded.
@@ -7,7 +7,7 @@ inetutils (2:1.9.4.90-1) UNRELEASED; urgency=medium
     script, as the latter is intended to be used only in maintainer scripts.
   * Remove spurious spaces from debian/rules.
 
- -- Guillem Jover <guillem@debian.org>  Tue, 19 Jan 2021 04:20:45 +0100
+ -- Guillem Jover <guillem@debian.org>  Wed, 27 Jan 2021 01:21:38 +0100
 
 inetutils (2:1.9.4-13) unstable; urgency=medium
 
