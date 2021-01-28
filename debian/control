@@ -11,9 +11,9 @@ Build-Depends:
  debhelper-compat (= 13),
 # Used by the test suite:
 #  /etc/protocols and /etc/services
- netbase,
+ netbase <!nocheck>,
 #  netstat(1)
- net-tools,
+ net-tools <!nocheck>,
 # Used by the build system:
  autoconf,
  automake,
