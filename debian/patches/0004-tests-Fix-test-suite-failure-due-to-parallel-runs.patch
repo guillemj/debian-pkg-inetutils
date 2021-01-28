@@ -1,7 +1,7 @@
-From 9a41724ba497d5912f8111a49791d9eb3e0db493 Mon Sep 17 00:00:00 2001
+From f5364e7331bb982525769118c7e2181327d0f8d6 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:34:47 +0200
-Subject: [PATCH 4/7] tests: Fix test suite failure due parallel runs
+Subject: [PATCH 4/7] tests: Fix test suite failure due to parallel runs
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

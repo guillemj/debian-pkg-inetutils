@@ -1,4 +1,4 @@
-From fbb49db1df3cc263abcdfffde38298373b6a24eb Mon Sep 17 00:00:00 2001
+From 51e8fb0726966bb4147adedc313fa5b72004183e Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 16 Aug 2019 00:31:02 +0200
 Subject: [PATCH 5/7] syslogd: Add a syslog.conf file
