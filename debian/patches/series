@@ -5,4 +5,4 @@
 0004-tests-Fix-test-suite-failure-due-parallel-runs.patch
 0005-syslogd-Add-a-syslog.conf-file.patch
 0006-inetd-Change-protocol-semantics-in-inetd.conf.patch
-0007-build-Disable-useless-man-pages.patch
+0007-build-Disable-GFDL-info-files-and-useless-man-pages.patch

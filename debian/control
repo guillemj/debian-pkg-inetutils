@@ -18,7 +18,6 @@ Build-Depends:
  autoconf,
  automake,
  bison,
- texinfo,
  libreadline-dev | libreadline6-dev | libreadline5-dev,
  libncurses-dev,
  libpam0g-dev,
