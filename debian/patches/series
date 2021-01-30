@@ -1,8 +1,3 @@
 # Local patches
-0001-telnetd-Fix-arbitrary-remote-code-execution-via-shor.patch
-0002-ping6-Fix-interval-to-be-in-seconds-not-milliseconds.patch
-0003-ping-ping6-Check-setuid-return-value-and-abort-on-fa.patch
-0004-tests-Fix-test-suite-failure-due-to-parallel-runs.patch
-0005-syslogd-Add-a-syslog.conf-file.patch
-0006-inetd-Change-protocol-semantics-in-inetd.conf.patch
-0007-build-Disable-GFDL-info-files-and-useless-man-pages.patch
+0001-inetd-Change-protocol-semantics-in-inetd.conf.patch
+0002-build-Disable-GFDL-info-files-and-useless-man-pages.patch

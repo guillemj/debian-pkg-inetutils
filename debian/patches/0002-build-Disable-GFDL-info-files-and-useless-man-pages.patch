@@ -1,7 +1,7 @@
-From 59d722b0bd224c10e6f9ba59f05d6535efd3eec7 Mon Sep 17 00:00:00 2001
+From 56aef354cb75892c4db6e71be10937bc8965eb5b Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 9 Jun 2010 03:56:08 +0200
-Subject: [PATCH 7/7] build: Disable GFDL info files and useless man pages
+Subject: [PATCH 2/2] build: Disable GFDL info files and useless man pages
 
 We do not install the info file due to GFDL, and because it would
 require an inetutils-doc package. Nor the man pages from upstream
@@ -30,7 +30,7 @@ index 5df19417..127e285c 100644
  
  DISTCLEANFILES = pathdefs.make paths.defs \
 diff --git a/configure.ac b/configure.ac
-index c65572ee..aefb8e6b 100644
+index 86136fb3..f954fb3a 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -143,7 +143,6 @@ AC_PROG_RANLIB
@@ -41,7 +41,7 @@ index c65572ee..aefb8e6b 100644
  AC_ARG_VAR(GREP, [Location of preferred 'grep' utility.])
  AC_ARG_VAR(EGREP, [Location of preferred 'egrep' utility.])
  AC_ARG_VAR(FGREP, [Location of preferred 'fgrep' utility.])
-@@ -1089,8 +1088,6 @@ whois/Makefile
+@@ -1073,8 +1072,6 @@ whois/Makefile
  ping/Makefile
  ifconfig/Makefile
  ifconfig/system/Makefile

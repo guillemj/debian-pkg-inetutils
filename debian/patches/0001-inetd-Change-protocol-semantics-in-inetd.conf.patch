@@ -1,7 +1,7 @@
-From 3cf99e97173982530099cb49f66d420e4d3509f0 Mon Sep 17 00:00:00 2001
+From fa63e1a184aceecfe74cc51218f3980c59396c74 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
-Subject: [PATCH 6/7] inetd: Change protocol semantics in inetd.conf
+Subject: [PATCH 1/2] inetd: Change protocol semantics in inetd.conf
 
 Readd parts of the original patch that got botched when applied
 upstream.
