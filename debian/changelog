@@ -8,6 +8,7 @@ inetutils (2:1.9.4.91-1) UNRELEASED; urgency=medium
     Thanks to Helmut Grohne <helmut@subdivi.de>.
   * Improve patch descriptions and names.
   * Disable libidn2 linking, IDN support already provided by glibc.
+  * Cleanup syslog.conf formatting and comments.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 28 Jan 2021 17:19:31 +0100
 
