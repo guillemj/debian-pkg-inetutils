@@ -46,10 +46,10 @@ override_dh_auto_configure:
 	  --disable-tftpd \
 	  --disable-uucpd \
 	  --disable-whois \
+	  --without-idn \
 	  --with-path-login=/bin/login \
 	  --with-krb5 \
 	  --with-wrap \
-	  --with-idn \
 	  --with-pam
 
 override_dh_auto_install:

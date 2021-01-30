@@ -4,6 +4,7 @@ inetutils (2:1.9.4.90-2) UNRELEASED; urgency=medium
   * Annotate test suite Build-Depends with <!nocheck>. Closes: #981261
     Thanks to Helmut Grohne <helmut@subdivi.de>.
   * Improve patch descriptions and names.
+  * Disable libidn2 linking, IDN support already provided by glibc.
 
  -- Guillem Jover <guillem@debian.org>  Thu, 28 Jan 2021 17:19:31 +0100
 
