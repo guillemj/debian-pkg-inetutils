@@ -3,6 +3,8 @@ inetutils (2:1.9.4.91-1) unstable; urgency=medium
   * New upstream release.
     - Remove patches merged upstream.
     - Switch syslog.conf from a patch to a local file.
+    - Rename local logout() function conflicting with system one.
+      Closes: #748553
   * Disable building texinfo documentation which we were not shipping anyway.
   * Annotate test suite Build-Depends with <!nocheck>. Closes: #981261
     Thanks to Helmut Grohne <helmut@subdivi.de>.
