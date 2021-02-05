@@ -1,8 +1,8 @@
-inetutils (2:2.0-1) UNRELEASED; urgency=medium
+inetutils (2:2.0-1) unstable; urgency=medium
 
   * New upstream release.
 
- -- Guillem Jover <guillem@debian.org>  Fri, 05 Feb 2021 22:59:09 +0100
+ -- Guillem Jover <guillem@debian.org>  Fri, 05 Feb 2021 23:14:20 +0100
 
 inetutils (2:1.9.4.91-1) unstable; urgency=medium
 
