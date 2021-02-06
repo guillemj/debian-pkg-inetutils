@@ -27,30 +27,27 @@ Build-Conflicts:
  autoconf2.13,
  automake1.4,
 
-Package: inetutils-ftp
-Architecture: any
-Depends:
- ${misc:Depends},
- ${shlibs:Depends},
- netbase,
-Description: File Transfer Protocol client
- The ftp command is used to transfer files between hosts using the
- FTP protocol.
-
-Package: inetutils-ftpd
+Package: inetutils-syslogd
 Architecture: any
 Provides:
- ftp-server,
+ ${syslogd:Provides},
+ system-log-daemon,
 Conflicts:
- ftp-server,
+ ${syslogd:Provides},
+ system-log-daemon,
+Replaces:
+ syslogd,
+Pre-Depends:
+ ${misc:Pre-Depends},
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- inetutils-syslogd | system-log-daemon,
+ lsb-base,
  netbase,
-Description: File Transfer Protocol server
- Ftpd is the server that allows another host to connect with the ftp
- command to transfer files using the FTP protocol.
+Description: system logging daemon
+ The syslog daemon is responsible for providing logging of messages
+ received from programs and facilities on the local host as well as
+ from remote hosts.
 
 Package: inetutils-inetd
 Architecture: any
@@ -105,56 +102,48 @@ Description: trace the IPv4 route to another host
  Install this package if you need a tool to examine network connectivity
  or to diagnose network problems.
 
-Package: inetutils-syslogd
+Package: inetutils-tools
 Architecture: any
 Provides:
- ${syslogd:Provides},
- system-log-daemon,
-Conflicts:
- ${syslogd:Provides},
- system-log-daemon,
-Replaces:
- syslogd,
-Pre-Depends:
- ${misc:Pre-Depends},
+ ${tools:Provides},
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- lsb-base,
- netbase,
-Description: system logging daemon
- The syslog daemon is responsible for providing logging of messages
- received from programs and facilities on the local host as well as
- from remote hosts.
+Description: base networking utilities (experimental package)
+ Base utilities for network administration:
+ .
+  - ifconfig
+  - hostname
+  - dnsdomainname
+  - logger
+ .
+ WARNING: The current ifconfig implementation provided is not fully
+ compatible with the net-tool's ifconfig version.
 
-Package: inetutils-talk
+Package: inetutils-ftp
 Architecture: any
-Provides:
- talk,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  netbase,
-Description: talk to another user
- Talk is a visual communication program which copies lines from your terminal
- to that of another user.
+Description: File Transfer Protocol client
+ The ftp command is used to transfer files between hosts using the
+ FTP protocol.
 
-Package: inetutils-talkd
+Package: inetutils-ftpd
 Architecture: any
 Provides:
- talkd,
+ ftp-server,
 Conflicts:
- talkd,
+ ftp-server,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- inetutils-inetd | inet-superserver,
  inetutils-syslogd | system-log-daemon,
  netbase,
-Description: remote user communication server
- Talkd is the server that notifies a user that someone else wants to initiate
- a conversation. It acts a repository of invitations, responding to requests
- by clients wishing to rendezvous to hold a conversation.
+Description: File Transfer Protocol server
+ Ftpd is the server that allows another host to connect with the ftp
+ command to transfer files using the FTP protocol.
 
 Package: inetutils-telnet
 Architecture: any
@@ -184,20 +173,31 @@ Description: telnet server
  The in.telnetd program is a server which supports the DARPA telnet
  interactive communication protocol.
 
-Package: inetutils-tools
+Package: inetutils-talk
 Architecture: any
 Provides:
- ${tools:Provides},
+ talk,
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
-Description: base networking utilities (experimental package)
- Base utilities for network administration:
- .
-  - ifconfig
-  - hostname
-  - dnsdomainname
-  - logger
- .
- WARNING: The current ifconfig implementation provided is not fully
- compatible with the net-tool's ifconfig version.
+ netbase,
+Description: talk to another user
+ Talk is a visual communication program which copies lines from your terminal
+ to that of another user.
+
+Package: inetutils-talkd
+Architecture: any
+Provides:
+ talkd,
+Conflicts:
+ talkd,
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ inetutils-inetd | inet-superserver,
+ inetutils-syslogd | system-log-daemon,
+ netbase,
+Description: remote user communication server
+ Talkd is the server that notifies a user that someone else wants to initiate
+ a conversation. It acts a repository of invitations, responding to requests
+ by clients wishing to rendezvous to hold a conversation.
