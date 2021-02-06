@@ -156,6 +156,8 @@ Depends:
 Description: telnet client
  The telnet command is used for interactive communication with another host
  using the TELNET protocol.
+ .
+ This implementation supports Kerberos, for authentication and encryption.
 
 Package: inetutils-telnetd
 Architecture: any
@@ -170,8 +172,10 @@ Depends:
  inetutils-syslogd | system-log-daemon,
  netbase,
 Description: telnet server
- The in.telnetd program is a server which supports the DARPA telnet
+ The telnetd program is a server which supports the DARPA telnet
  interactive communication protocol.
+ .
+ This implementation supports Kerberos, for authentication and encryption.
 
 Package: inetutils-talk
 Architecture: any
@@ -182,8 +186,8 @@ Depends:
  ${shlibs:Depends},
  netbase,
 Description: talk to another user
- Talk is a visual communication program which copies lines from your terminal
- to that of another user.
+ The talk program is used for visual communication which copies lines from
+ your terminal to that of another user.
 
 Package: inetutils-talkd
 Architecture: any
@@ -198,6 +202,7 @@ Depends:
  inetutils-syslogd | system-log-daemon,
  netbase,
 Description: remote user communication server
- Talkd is the server that notifies a user that someone else wants to initiate
- a conversation. It acts a repository of invitations, responding to requests
- by clients wishing to rendezvous to hold a conversation.
+ The talkd program is a server that notifies a user that someone else
+ wants to initiate a conversation. It acts a repository of invitations,
+ responding to requests by clients wishing to rendezvous to hold a
+ conversation.

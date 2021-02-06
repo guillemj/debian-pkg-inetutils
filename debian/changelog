@@ -4,6 +4,7 @@ inetutils (2:2.1-1) UNRELEASED; urgency=medium
   * Stop using obsolete autoconf macros, to stop emitting warnings that
     break the autopkgtest. Closes: #993135
   * Reorder debian/control stanzas by relevance.
+  * Improve package descriptions, and mention Kerberos support.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 28 Aug 2021 00:34:25 +0200
 
