@@ -1,7 +1,7 @@
 From b707f508cb77af4bd6ca10d8eaec1559059c8a3c Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 9 Jun 2010 03:56:08 +0200
-Subject: [PATCH 2/2] build: Disable GFDL info files and useless man pages
+Subject: [PATCH 2/4] build: Disable GFDL info files and useless man pages
 
 We do not install the info file due to GFDL, and because it would
 require an inetutils-doc package. Nor the man pages from upstream

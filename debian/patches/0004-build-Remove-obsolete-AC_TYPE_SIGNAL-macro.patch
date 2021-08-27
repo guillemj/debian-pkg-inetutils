@@ -1,0 +1,26 @@
+From a0a0f24159166081358b4347ebd695c2105d8ebc Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Sat, 28 Aug 2021 01:07:03 +0200
+Subject: [PATCH 4/4] build: Remove obsolete AC_TYPE_SIGNAL macro
+
+---
+ configure.ac | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index a79280a8..a9601a7e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -652,9 +652,6 @@ fi
+ 
+ ### Checks for types.
+ 
+-# Checks return type of signal handlers
+-AC_TYPE_SIGNAL
+-
+ AC_CHECK_TYPE(socklen_t, ,
+   [AC_DEFINE([socklen_t], int,
+     [Define to int if <sys/types.h> does not define])],
+-- 
+2.33.0
+

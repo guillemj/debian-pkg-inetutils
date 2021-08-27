@@ -1,6 +1,8 @@
 inetutils (2:2.1-1) UNRELEASED; urgency=medium
 
   * New upstream release. Closes: #993144
+  * Stop using obsolete autoconf macros, to stop emitting warnings that
+    break the autopkgtest. Closes: #993135
 
  -- Guillem Jover <guillem@debian.org>  Sat, 28 Aug 2021 00:34:25 +0200
 
