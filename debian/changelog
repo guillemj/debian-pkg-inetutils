@@ -1,3 +1,10 @@
+inetutils (2:2.1-2) UNRELEASED; urgency=medium
+
+  * Allow stderr output on autopkgtests, given that we are running configure
+    which tends to output there.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 30 Aug 2021 05:46:15 +0200
+
 inetutils (2:2.1-1) unstable; urgency=medium
 
   * New upstream release. Closes: #993144

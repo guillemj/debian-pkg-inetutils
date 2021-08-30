@@ -13,6 +13,7 @@ Depends:
  inetutils-inetd,
  inetutils-telnet,
 Restrictions:
+ allow-stderr
  rw-build-tree
 
 Tests:
@@ -30,5 +31,6 @@ Depends:
  inetutils-ping,
  inetutils-traceroute,
 Restrictions:
+ allow-stderr
  rw-build-tree
  needs-root
