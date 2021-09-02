@@ -1,4 +1,4 @@
-From e57da242f5abefc8da7b31c36a963582cb714bb3 Mon Sep 17 00:00:00 2001
+From 935352bc28cd26d73a72cb677eff68633b9ba467 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Sat, 28 Aug 2021 00:54:31 +0200
 Subject: [PATCH 3/4] build: Use AC_*_IFELSE instead of obsolete AC_TRY_*
@@ -119,10 +119,10 @@ index 05f54120..7c20aa79 100644
  		    [inetutils_cv_curses_needs_termcap=yes]))
        if test $inetutils_cv_curses_needs_termcap = yes; then
 diff --git a/configure.ac b/configure.ac
-index 210d779e..a79280a8 100644
+index 450270d8..fd7856b9 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -591,9 +591,11 @@ if test "$with_wrap" = yes; then
+@@ -590,9 +590,11 @@ if test "$with_wrap" = yes; then
    AC_MSG_CHECKING(hosts_ctl in -lwrap);
    save_LIBS=$LIBS
    LIBS="$save_LIBS -lwrap"
@@ -137,7 +137,7 @@ index 210d779e..a79280a8 100644
    LIBS=$save_LIBS
    if test "$ac_cv_lib_wrap_hosts_ctl" = yes \
        && test "$ac_cv_header_tcpd_h" = yes; then
-@@ -924,8 +926,9 @@ AC_CHECK_DECLS(environ, , ,
+@@ -896,8 +898,9 @@ AC_CHECK_DECLS(htons, , ,
  # See if we have h_errno (the test is here so we can use -lresolv if
  # necessary).
  AC_CACHE_CHECK([for h_errno], inetutils_cv_var_h_errno,

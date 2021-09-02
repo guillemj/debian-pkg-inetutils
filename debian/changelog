@@ -1,3 +1,11 @@
+inetutils (2:2.2-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+    - Fix inetutils-ftp security bug trusting FTP PASV responses.
+      Closes: #993476
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 02 Sep 2021 06:49:19 +0200
+
 inetutils (2:2.1-2) unstable; urgency=medium
 
   * Allow stderr output on autopkgtests, given that we are running configure
