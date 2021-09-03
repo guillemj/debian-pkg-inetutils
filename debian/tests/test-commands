@@ -19,13 +19,13 @@ PATH="/usr/sbin:/sbin:$PATH"
 
 export VERBOSE=1
 
-export DNSDOMAINNAME=$(which inetutils-dnsdomainname)
-export IFCONFIG=$(which inetutils-ifconfig)
-export INETD=$(which inetutils-inetd)
-export LOGGER=$(which inetutils-logger)
-export SYSLOGD=$(which syslogd)
-export TELNET=$(which inetutils-telnet)
-export hostname=$(which inetutils-hostname)
+export DNSDOMAINNAME=$(command -v inetutils-dnsdomainname)
+export IFCONFIG=$(command -v inetutils-ifconfig)
+export INETD=$(command -v inetutils-inetd)
+export LOGGER=$(command -v inetutils-logger)
+export SYSLOGD=$(command -v syslogd)
+export TELNET=$(command -v inetutils-telnet)
+export hostname=$(command -v inetutils-hostname)
 
 make -C lib 2>&1
 make -C libinetutils 2>&1

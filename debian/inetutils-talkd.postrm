@@ -3,7 +3,7 @@
 set -e
 
 if [ "$1" = "remove" ]; then
-  if [ -x "$(which update-inetd)" ]; then
+  if [ -x "$(command -v update-inetd)" ]; then
     update-inetd --remove ntalk
   fi
 fi

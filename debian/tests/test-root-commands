@@ -18,11 +18,11 @@ PATH="/usr/sbin:/sbin:$PATH"
 
 export VERBOSE=1
 
-export FTP=$(which inetutils-ftp)
-export FTPD=$(which ftpd)
-export PING6=$(which ping6)
-export PING=$(which ping)
-export TRACEROUTE=$(which inetutils-traceroute)
+export FTP=$(command -v inetutils-ftp)
+export FTPD=$(command -v ftpd)
+export PING6=$(command -v ping6)
+export PING=$(command -v ping)
+export TRACEROUTE=$(command -v inetutils-traceroute)
 
 make -C lib 2>&1
 make -C libinetutils 2>&1
