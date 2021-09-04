@@ -16,7 +16,7 @@ DAEMON=/usr/sbin/inetutils-inetd
 NAME=inetd
 DESC="internet superserver"
 CONFIGFILE=/etc/default/inetutils-inetd
-PIDFILE=/var/run/$NAME.pid
+PIDFILE=/run/$NAME.pid
 
 test -x $DAEMON || exit 0
 

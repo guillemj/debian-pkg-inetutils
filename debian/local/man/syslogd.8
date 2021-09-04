@@ -131,7 +131,7 @@ it will not parse the System.map and use it to annotate the kernel messages.
 .Pp
 .Nm syslogd
 creates the file
-.Pa /var/run/syslog.pid ,
+.Pa /run/syslog.pid ,
 and stores its process
 id there.
 This can be used to kill or reconfigure
@@ -147,10 +147,10 @@ This priority code should map into the priorities defined in the
 include file
 .Aq Pa sys/syslog.h .
 .Sh FILES
-.Bl -tag -width /var/run/syslog.pid -compact
+.Bl -tag -width /run/syslog.pid -compact
 .It Pa /etc/syslog.conf
 The configuration file.
-.It Pa /var/run/syslog.pid
+.It Pa /run/syslog.pid
 The process id of current
 .Nm syslogd .
 .It Pa /dev/log

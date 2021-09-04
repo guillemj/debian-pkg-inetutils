@@ -1,6 +1,7 @@
 inetutils (2:2.2-2) UNRELEASED; urgency=medium
 
   * Use «command -v» instead of «which».
+  * Switch from /var/run to /run.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 03 Sep 2021 05:58:48 +0200
 

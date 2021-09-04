@@ -35,6 +35,7 @@ override_dh_auto_configure:
 	  $(confflags) \
 	  --disable-rpath \
 	  --libexecdir=\$${prefix}/sbin \
+	  --runstatedir=/run \
 	  --disable-rcp \
 	  --disable-rexec \
 	  --disable-rexecd \
