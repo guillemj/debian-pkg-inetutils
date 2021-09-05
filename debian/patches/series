@@ -4,3 +4,5 @@
 0003-build-Use-AC_-_IFELSE-instead-of-obsolete-AC_TRY_-ma.patch
 0004-build-Remove-obsolete-AC_TYPE_SIGNAL-macro.patch
 0001-build-Use-runstatedir-for-run-directory.patch
+# Upstream git
+0001-telnet-Don-t-infloop-for-malicious-server.patch

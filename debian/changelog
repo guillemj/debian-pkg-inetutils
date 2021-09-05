@@ -3,6 +3,9 @@ inetutils (2:2.2-2) UNRELEASED; urgency=medium
   * Use «command -v» instead of «which».
   * Switch from /var/run to /run.
   * Switch to declarative alternatives.
+  * Add patch from upstream to fix infinite loop causing a stack exhaustion
+    induced crash in telnet client due to malicious server commands.
+    Closes: #945861
 
  -- Guillem Jover <guillem@debian.org>  Fri, 03 Sep 2021 05:58:48 +0200
 
