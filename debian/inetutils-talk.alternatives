@@ -1,0 +1,6 @@
+Name: talk
+Link: /usr/bin/talk
+Alternative: /usr/bin/inetutils-talk
+Dependents:
+ /usr/share/man/man1/talk.1.gz talk.1.gz /usr/share/man/man1/inetutils-talk.1.gz
+Priority: 100

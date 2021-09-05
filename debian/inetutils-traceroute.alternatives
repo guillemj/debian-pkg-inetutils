@@ -1,0 +1,6 @@
+Name: traceroute
+Link: /usr/bin/traceroute
+Alternative: /usr/bin/inetutils-traceroute
+Dependents:
+ /usr/share/man/man1/traceroute.1.gz traceroute.1.gz /usr/share/man/man1/inetutils-traceroute.1.gz
+Priority: 100
