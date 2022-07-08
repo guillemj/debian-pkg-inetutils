@@ -1,4 +1,4 @@
-inetutils (2:2.3-1) UNRELEASED; urgency=medium
+inetutils (2:2.3-1) unstable; urgency=medium
 
   * New upstream release.
     - Remove patches merged upstream.
@@ -9,7 +9,7 @@ inetutils (2:2.3-1) UNRELEASED; urgency=medium
   * Update lintian overrides for renamed tag names and format.
   * Switch to Standards-Version 4.6.1 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Fri, 08 Jul 2022 20:04:31 +0200
+ -- Guillem Jover <guillem@debian.org>  Fri, 08 Jul 2022 20:59:04 +0200
 
 inetutils (2:2.2-2) unstable; urgency=medium
 
