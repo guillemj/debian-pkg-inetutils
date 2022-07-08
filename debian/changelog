@@ -1,5 +1,8 @@
-inetutils (2:2.2-3) UNRELEASED; urgency=medium
+inetutils (2:2.3-1) UNRELEASED; urgency=medium
 
+  * New upstream release.
+    - Remove patches merged upstream.
+    - Update debian/upstream/signing-key.asc.
   * Remove libreadline6-dev | libreadline5-dev obsolete alternatives from
     Build-Depends.
   * Document group support in «user[:group]» in inetd(8) man page.

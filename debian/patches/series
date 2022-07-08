@@ -1,8 +1,6 @@
 # Local patches
-0001-inetd-Change-protocol-semantics-in-inetd.conf.patch
-0002-build-Disable-GFDL-info-files-and-useless-man-pages.patch
-0003-build-Use-AC_-_IFELSE-instead-of-obsolete-AC_TRY_-ma.patch
-0004-build-Remove-obsolete-AC_TYPE_SIGNAL-macro.patch
-0001-build-Use-runstatedir-for-run-directory.patch
+0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
+0002-build-Use-runstatedir-for-run-directory.patch
+0003-inetd-Change-protocol-semantics-in-inetd.conf.patch
+0004-telnet-Add-checks-for-option-reply-parsing-limits.patch
 # Upstream git
-0001-telnet-Don-t-infloop-for-malicious-server.patch
