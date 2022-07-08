@@ -108,7 +108,7 @@ service name
 socket type
 protocol
 wait/nowait[.max]
-user
+user[:group]
 server program
 server program arguments
 .Ed
@@ -282,7 +282,11 @@ within an interval of 60 seconds.  It overrides the settings of the
 .Pp
 The
 .Em user
-entry should contain the user name of the user as whom the server
+entry should contain the user name, and the optional
+.Em group
+name (separated from
+.Dq user
+by a semicolon or a dot) of the user (and group) as whom the server
 should run.  This allows for servers to be given less permission
 than root.
 .Pp
