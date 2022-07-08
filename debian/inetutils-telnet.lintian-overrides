@@ -1,4 +1,4 @@
-inetutils-telnet: spelling-error-in-binary usr/bin/inetutils-telnet dont don't
-inetutils-telnet: spelling-error-in-binary usr/bin/inetutils-telnet wont won't
-inetutils-telnet: typo-in-manual-page usr/share/man/man1/inetutils-telnet.1.gz dont don't
-inetutils-telnet: typo-in-manual-page usr/share/man/man1/inetutils-telnet.1.gz wont won't
+inetutils-telnet: spelling-error-in-binary dont don't [usr/bin/inetutils-telnet]
+inetutils-telnet: spelling-error-in-binary wont won't [usr/bin/inetutils-telnet]
+inetutils-telnet: typo-in-manual-page dont don't [usr/share/man/man1/inetutils-telnet.1.gz:*]
+inetutils-telnet: typo-in-manual-page wont won't [usr/share/man/man1/inetutils-telnet.1.gz:*]

@@ -1,2 +1,2 @@
-inetutils-telnetd: spelling-error-in-binary usr/sbin/telnetd dont don't
-inetutils-telnetd: spelling-error-in-binary usr/sbin/telnetd wont won't
+inetutils-telnetd: spelling-error-in-binary dont don't [usr/sbin/telnetd]
+inetutils-telnetd: spelling-error-in-binary wont won't [usr/sbin/telnetd]

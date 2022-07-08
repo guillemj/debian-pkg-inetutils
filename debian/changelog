@@ -6,6 +6,7 @@ inetutils (2:2.3-1) UNRELEASED; urgency=medium
   * Remove libreadline6-dev | libreadline5-dev obsolete alternatives from
     Build-Depends.
   * Document group support in «user[:group]» in inetd(8) man page.
+  * Update lintian overrides for renamed tag names and format.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 08 Jul 2022 20:04:31 +0200
 
