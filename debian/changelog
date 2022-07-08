@@ -7,6 +7,7 @@ inetutils (2:2.3-1) UNRELEASED; urgency=medium
     Build-Depends.
   * Document group support in «user[:group]» in inetd(8) man page.
   * Update lintian overrides for renamed tag names and format.
+  * Switch to Standards-Version 4.6.1 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Fri, 08 Jul 2022 20:04:31 +0200
 
