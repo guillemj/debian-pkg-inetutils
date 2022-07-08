@@ -18,7 +18,7 @@ Build-Depends:
  autoconf,
  automake,
  bison,
- libreadline-dev | libreadline6-dev | libreadline5-dev,
+ libreadline-dev,
  libncurses-dev,
  libpam0g-dev,
  libwrap0-dev,

@@ -1,3 +1,10 @@
+inetutils (2:2.2-3) UNRELEASED; urgency=medium
+
+  * Remove libreadline6-dev | libreadline5-dev obsolete alternatives from
+    Build-Depends.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 08 Jul 2022 20:04:31 +0200
+
 inetutils (2:2.2-2) unstable; urgency=medium
 
   * Use «command -v» instead of «which».
