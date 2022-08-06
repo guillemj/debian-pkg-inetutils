@@ -3,4 +3,4 @@ Link: /usr/bin/telnet
 Alternative: /usr/bin/inetutils-telnet
 Dependents:
  /usr/share/man/man1/telnet.1.gz telnet.1.gz /usr/share/man/man1/inetutils-telnet.1.gz
-Priority: 100
+Priority: 150

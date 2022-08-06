@@ -1,3 +1,11 @@
+inetutils (2:2.3-2) UNRELEASED; urgency=medium
+
+  * Bump inetutils-telnet alternatives priority from 100 to 150, to take
+    precedence over the netkit-telnet implementation, as we are now the
+    default and preferred implementation in Debian.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 06 Aug 2022 05:07:25 +0200
+
 inetutils (2:2.3-1) unstable; urgency=medium
 
   * New upstream release.
