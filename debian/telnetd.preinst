@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ]; then
+  if [ -x "$(command -v update-inetd)" ]; then
+    # Remove netkit telnetd entry.
+    update-inetd --pattern 'in\.telnetd' --remove 'telnet'
+  fi
+fi
+
+#DEBHELPER#
+
+exit 0

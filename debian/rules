@@ -110,7 +110,9 @@ override_dh_fixperms:
 	dh_fixperms -Xbin/ping -Xbin/ping6 -Xusr/bin/inetutils-traceroute
 
 override_dh_gencontrol:
+	dh_gencontrol -ptelnet -ptelnetd -- \
+	  -v0.17+$(DEB_VERSION_UPSTREAM_REVISION)
 	dh_gencontrol -pinetutils-syslogd -- \
 	  -Vsyslogd:Provides="$(syslogd_provides)"
-	dh_gencontrol -Ninetutils-syslogd -- \
+	dh_gencontrol -Ninetutils-syslogd -Ntelnet -Ntelnetd -- \
 	  -Vtools:Provides="$(tools_provides)"

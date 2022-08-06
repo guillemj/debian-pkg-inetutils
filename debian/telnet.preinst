@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ]; then
+  # Remove netkit telnet alternative.
+  update-alternatives --remove telnet /usr/bin/telnet.netkit
+fi
+
+#DEBHELPER#
+
+exit 0

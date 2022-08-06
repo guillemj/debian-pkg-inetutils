@@ -146,8 +146,10 @@ Description: File Transfer Protocol server
  command to transfer files using the FTP protocol.
 
 Package: inetutils-telnet
+Priority: standard
 Architecture: any
 Provides:
+ telnet,
  telnet-client,
 Depends:
  ${misc:Depends},
@@ -159,12 +161,32 @@ Description: telnet client
  .
  This implementation supports Kerberos, for authentication and encryption.
 
+Package: telnet
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ inetutils-telnet,
+Description: transitional dummy package for inetutils-telnet default switch
+ This package will force a switch from the old netkit telnet implementation
+ to the inetutils-telnet one, which is an upstream maintained project.
+ .
+ This package can be safely removed once it has been upgraded, as
+ inetutils-telnet provides a matching virtual package. It will stop being
+ provided after Debian bookworm's release.
+ .
+ If you want to keep using the netkit implementation, then install
+ netkit-telnet instead.
+
 Package: inetutils-telnetd
 Architecture: any
 Provides:
+ telnetd,
  telnet-server,
 Conflicts:
  telnet-server,
+Breaks:
+ telnetd (<< 0.17-46),
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -176,6 +198,24 @@ Description: telnet server
  interactive communication protocol.
  .
  This implementation supports Kerberos, for authentication and encryption.
+
+Package: telnetd
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ inetutils-telnetd,
+ update-inetd,
+Description: transitional dummy package for inetutils-telnetd default switch
+ This package will force a switch from the old netkit telnetd implementation
+ to the inetutils-telnetd one, which is an upstream maintained project.
+ .
+ This package can be safely removed once it has been upgraded, as
+ inetutils-telnetd provides a matching virtual package. It will stop being
+ provided after Debian bookworm's release.
+ .
+ If you want to keep using the netkit implementation, then install
+ netkit-telnetd instead.
 
 Package: inetutils-talk
 Architecture: any

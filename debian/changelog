@@ -4,6 +4,20 @@ inetutils (2:2.3-2) UNRELEASED; urgency=medium
     precedence over the netkit-telnet implementation, as we are now the
     default and preferred implementation in Debian.
   * Remove unnecessary -a restriction for debhelper commands.
+  * Make inetutils-telnet and inetutils-telnetd the default implementations in
+    Debian (Closes: #987729):
+    - Bump inetutils-telnet Priority to standard.
+    - Add telnet to inetutils-telnet Provides.
+    - Add telnetd to inetutils-telnetd Provides.
+    - Add a versioned telnetd Breaks to inetutils-telnetd.
+    - Add a telnet transitional dummy package that depends on
+      inetutils-telnet and removes the netkit-telnet alternative on preinst.
+    - Add a telnetd transitional dummy package that depends on
+      inetutils-telnetd and removes the netkit-telnetd inetd entry on preinst.
+    - Set the telnet and telnetd binary package versions to
+      0.17+$(DEB_VERSION_UPSTREAM_REVISION), to avoid introducing an epoch and
+      leave room for a possible revert, even though the plan is to get rid of
+      these packages after Debian's bookworm release.
 
  -- Guillem Jover <guillem@debian.org>  Sat, 06 Aug 2022 05:07:25 +0200
 
