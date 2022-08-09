@@ -162,6 +162,7 @@ Description: telnet client
  This implementation supports Kerberos, for authentication and encryption.
 
 Package: telnet
+Section: oldlibs
 Architecture: all
 Multi-Arch: foreign
 Depends:
@@ -200,6 +201,7 @@ Description: telnet server
  This implementation supports Kerberos, for authentication and encryption.
 
 Package: telnetd
+Section: oldlibs
 Architecture: all
 Multi-Arch: foreign
 Depends:

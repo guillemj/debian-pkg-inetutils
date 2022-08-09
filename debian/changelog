@@ -1,3 +1,9 @@
+inetutils (2:2.3-4) UNRELEASED; urgency=medium
+
+  * Set telnet and telnetd Section to oldlibs.
+
+ -- Guillem Jover <guillem@debian.org>  Wed, 10 Aug 2022 01:58:28 +0200
+
 inetutils (2:2.3-3) unstable; urgency=medium
 
   * Switch from conditional dh_install invocation to use a glob to install
