@@ -1,4 +1,4 @@
-inetutils (2:2.3-2) UNRELEASED; urgency=medium
+inetutils (2:2.3-2) unstable; urgency=medium
 
   * Bump inetutils-telnet alternatives priority from 100 to 150, to take
     precedence over the netkit-telnet implementation, as we are now the
@@ -19,7 +19,7 @@ inetutils (2:2.3-2) UNRELEASED; urgency=medium
       leave room for a possible revert, even though the plan is to get rid of
       these packages after Debian's bookworm release.
 
- -- Guillem Jover <guillem@debian.org>  Sat, 06 Aug 2022 05:07:25 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 09 Aug 2022 13:18:23 +0200
 
 inetutils (2:2.3-1) unstable; urgency=medium
 
