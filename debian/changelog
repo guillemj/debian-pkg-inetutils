@@ -1,10 +1,10 @@
-inetutils (2:2.3-3) UNRELEASED; urgency=medium
+inetutils (2:2.3-3) unstable; urgency=medium
 
   * Switch from conditional dh_install invocation to use a glob to install
     the not always present ping6. This fixes a build failure on arch-indep
     only builds.
 
- -- Guillem Jover <guillem@debian.org>  Tue, 09 Aug 2022 13:57:00 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 09 Aug 2022 14:00:02 +0200
 
 inetutils (2:2.3-2) unstable; urgency=medium
 
