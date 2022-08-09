@@ -64,6 +64,9 @@ override_dh_auto_install:
 	# Move ping to /bin
 	mkdir -p $(D)/bin
 	mv $(D)/usr/bin/ping $(D)/bin/
+	if [ -x $(D)/usr/bin/ping6 ]; then \
+	  mv $(D)/usr/bin/ping6 $(D)/bin/; \
+	fi
 	
 	# Rename ifconfig to not break existing systems using net-tools
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
@@ -91,13 +94,6 @@ override_dh_auto_install:
 	cp $(M)/talk.1 $(D)/$(man1dir)/inetutils-talk.1
 	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute
 	cp $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
-
-override_dh_install:
-	dh_install
-	# Install ping6 only if built
-	if [ -x $(D)/usr/bin/ping6 ]; then \
-	  dh_install -p inetutils-ping /usr/bin/ping6 /bin; \
-	fi
 
 override_dh_installdocs:
 	dh_installdocs -A NEWS AUTHORS THANKS
