@@ -1,7 +1,7 @@
 From 24dcb23ceab395644051a3da37f1cbd00fe80c17 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 3 Sep 2021 03:58:13 +0200
-Subject: [PATCH 4/4] telnet: Add checks for option reply parsing limits
+Subject: [PATCH 4/5] telnet: Add checks for option reply parsing limits
 
 Taken from FreeBSD.
 ---

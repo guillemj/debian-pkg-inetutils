@@ -1,7 +1,7 @@
 From bcbf754472f323f3d71b3d2f49018ab0197d95b6 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Sun, 5 Sep 2021 05:00:23 +0200
-Subject: [PATCH 2/4] build: Use runstatedir for /run directory
+Subject: [PATCH 2/5] build: Use runstatedir for /run directory
 
 ---
  paths | 10 +++++-----

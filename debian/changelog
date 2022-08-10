@@ -1,6 +1,8 @@
 inetutils (2:2.3-4) UNRELEASED; urgency=medium
 
   * Set telnet and telnetd Section to oldlibs.
+  * Use krb5_auth_con_getsendsubkey() instead of deprecated
+    krb5_auth_con_getlocalsubkey(). Warned by the buildd log scanner.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 10 Aug 2022 01:58:28 +0200
 
