@@ -5,3 +5,4 @@
 # Upstream git
 0001-telnet-Don-t-infloop-for-malicious-server.patch
 0001-ftp-check-that-PASV-LSPV-addresses-match.patch
+inetutils-telnetd-EC_EL_null_deref.patch

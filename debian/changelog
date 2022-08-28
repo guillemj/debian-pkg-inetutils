@@ -8,6 +8,11 @@ inetutils (2:2.0-1+deb11u1) UNRELEASED; urgency=medium
     Closes: #945861
   * Fix inetutils-ftp security bug trusting FTP PASV responses.
     Fixes CVE-2021-40491. Closes: #993476
+  * Fix remote DoS vulnerability in inetutils-telnetd, caused by a crash by
+    a NULL pointer dereference when sending the byte sequences «0xff 0xf7»
+    or «0xff 0xf8». Found by Pierre Kim and Alexandre Torres. Patch
+    adapted by Erik Auerswald <auerswal@unix-ag.uni-kl.de>.
+    Fixes CVE-2022-39028.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 28 Aug 2022 15:57:10 +0200
 
