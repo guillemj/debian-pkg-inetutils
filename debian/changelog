@@ -1,4 +1,4 @@
-inetutils (2:2.0-1+deb11u1) UNRELEASED; urgency=medium
+inetutils (2:2.0-1+deb11u1) bullseye; urgency=medium
 
   * telnet: Add checks for option reply parsing limits causing buffer
     overflow induced crashes due to long option values.
@@ -14,7 +14,7 @@ inetutils (2:2.0-1+deb11u1) UNRELEASED; urgency=medium
     adapted by Erik Auerswald <auerswal@unix-ag.uni-kl.de>.
     Fixes CVE-2022-39028.
 
- -- Guillem Jover <guillem@debian.org>  Sun, 28 Aug 2022 15:57:10 +0200
+ -- Guillem Jover <guillem@debian.org>  Tue, 30 Aug 2022 13:34:41 +0200
 
 inetutils (2:2.0-1) unstable; urgency=medium
 
