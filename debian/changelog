@@ -6,6 +6,8 @@ inetutils (2:2.0-1+deb11u1) UNRELEASED; urgency=medium
   * Add patch from upstream to fix infinite loop causing a stack exhaustion
     induced crash in telnet client due to malicious server commands.
     Closes: #945861
+  * Fix inetutils-ftp security bug trusting FTP PASV responses.
+    Fixes CVE-2021-40491. Closes: #993476
 
  -- Guillem Jover <guillem@debian.org>  Sun, 28 Aug 2022 15:57:10 +0200
 

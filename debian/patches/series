@@ -4,3 +4,4 @@
 0001-telnet-Add-checks-for-option-reply-parsing-limits.patch
 # Upstream git
 0001-telnet-Don-t-infloop-for-malicious-server.patch
+0001-ftp-check-that-PASV-LSPV-addresses-match.patch
