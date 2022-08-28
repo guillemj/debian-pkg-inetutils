@@ -1,3 +1,12 @@
+inetutils (2:2.3-5) UNRELEASED; urgency=medium
+
+  * Fix remote DoS vulnerability in inetutils-telnetd, caused by a crash by
+    a NULL pointer dereference when sending the byte sequences «0xff 0xf7»
+    or «0xff 0xf8». Found by Pierre Kim and Alexandre Torres. Patch
+    adapted by Erik Auerswald <auerswal@unix-ag.uni-kl.de>.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 28 Aug 2022 14:51:13 +0200
+
 inetutils (2:2.3-4) unstable; urgency=medium
 
   * Set telnet and telnetd Section to oldlibs.
