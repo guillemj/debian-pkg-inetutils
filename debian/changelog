@@ -1,9 +1,16 @@
+inetutils (2:2.3-6) UNRELEASED; urgency=medium
+
+  * Add CVE references to changelog entries and patches.
+
+ -- Guillem Jover <guillem@debian.org>  Wed, 31 Aug 2022 00:21:05 +0200
+
 inetutils (2:2.3-5) unstable; urgency=high
 
   * Fix remote DoS vulnerability in inetutils-telnetd, caused by a crash by
     a NULL pointer dereference when sending the byte sequences «0xff 0xf7»
     or «0xff 0xf8». Found by Pierre Kim and Alexandre Torres. Patch
     adapted by Erik Auerswald <auerswal@unix-ag.uni-kl.de>.
+    Fixes CVE-2022-39028.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 28 Aug 2022 15:08:06 +0200
 

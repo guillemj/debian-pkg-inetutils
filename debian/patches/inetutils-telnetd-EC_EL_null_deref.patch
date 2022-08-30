@@ -1,6 +1,7 @@
 Description: Fix remote DoS vulnerability in inetutils-telnetd
  This is caused by a crash by a NULL pointer dereference when sending the
  byte sequences «0xff 0xf7» or «0xff 0xf8».
+Fixes: CVE-2022-39028
 Authors:
  Pierre Kim (original patch),
  Alexandre Torres (original patch),
