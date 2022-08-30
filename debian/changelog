@@ -1,6 +1,7 @@
 inetutils (2:2.3-6) UNRELEASED; urgency=medium
 
   * Add CVE references to changelog entries and patches.
+  * Place Source field next to Format in debian/copyright.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 31 Aug 2022 00:21:05 +0200
 
