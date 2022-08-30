@@ -1,0 +1,54 @@
+From 24dcb23ceab395644051a3da37f1cbd00fe80c17 Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Fri, 3 Sep 2021 03:58:13 +0200
+Subject: [PATCH] telnet: Add checks for option reply parsing limits
+
+This fixes buffer overflows caused by for example:
+
+  telnet -l`perl -e 'print "A"x5000'` localhost
+
+Taken from FreeBSD.
+---
+ telnet/telnet.c |   10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+--- a/telnet/telnet.c
++++ b/telnet/telnet.c
+@@ -1678,8 +1678,8 @@ env_opt (register unsigned char *buf, re
+     }
+ }
+ 
+-#define OPT_REPLY_SIZE	256
+-unsigned char *opt_reply;
++#define OPT_REPLY_SIZE	(2 * SUBBUFSIZE)
++unsigned char *opt_reply = NULL;
+ unsigned char *opt_replyp;
+ unsigned char *opt_replyend;
+ 
+@@ -1762,6 +1762,8 @@ env_opt_add (register unsigned char *ep)
+     {
+       while ((c = *ep++))
+ 	{
++	  if (opt_replyp + (2 + 2) > opt_replyend)
++	    return;
+ 	  switch (c & 0xff)
+ 	    {
+ 	    case IAC:
+@@ -1778,6 +1780,8 @@ env_opt_add (register unsigned char *ep)
+ 	}
+       if ((ep = vp))
+ 	{
++	  if (opt_replyp + (1 + 2 + 2) > opt_replyend)
++	    return;
+ #ifdef	OLD_ENVIRON
+ 	  if (telopt_environ == TELOPT_OLD_ENVIRON)
+ 	    *opt_replyp++ = old_env_value;
+@@ -1808,6 +1812,8 @@ env_opt_end (register int emptyok)
+ {
+   register int len;
+ 
++  if (opt_replyp + 2 > opt_replyend)
++    return;
+   len = opt_replyp - opt_reply + 2;
+   if (emptyok || len > 6)
+     {

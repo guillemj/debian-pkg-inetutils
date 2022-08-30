@@ -1,3 +1,4 @@
 # Local patches
 0001-inetd-Change-protocol-semantics-in-inetd.conf.patch
 0002-build-Disable-GFDL-info-files-and-useless-man-pages.patch
+0001-telnet-Add-checks-for-option-reply-parsing-limits.patch
