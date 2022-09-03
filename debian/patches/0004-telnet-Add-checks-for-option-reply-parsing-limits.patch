@@ -3,7 +3,12 @@ From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 3 Sep 2021 03:58:13 +0200
 Subject: [PATCH 4/5] telnet: Add checks for option reply parsing limits
 
-Taken from FreeBSD.
+This fixes buffer overflows caused by for example:
+
+  telnet -l`perl -e 'print "A"x5000'` localhost
+
+Origin: FreeBSD, https://cgit.freebsd.org/src/commit/?id=14aab889f4e50072a6b914eb95ebbfa939539dad
+Fixes: CVE-2019-0053
 ---
  telnet/telnet.c | 10 ++++++++--
  1 file changed, 8 insertions(+), 2 deletions(-)
