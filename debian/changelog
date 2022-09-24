@@ -1,4 +1,4 @@
-inetutils (2:2.3-6) UNRELEASED; urgency=medium
+inetutils (2:2.3-6) unstable; urgency=medium
 
   * Add CVE references to changelog entries and patches.
   * Place Source field next to Format in debian/copyright.
@@ -9,7 +9,7 @@ inetutils (2:2.3-6) UNRELEASED; urgency=medium
     except for the SSL/TLS support. (Closes: #1020542)
     Thanks to Bastian Germann <bage@debian.org>.
 
- -- Guillem Jover <guillem@debian.org>  Wed, 31 Aug 2022 00:21:05 +0200
+ -- Guillem Jover <guillem@debian.org>  Sat, 24 Sep 2022 21:16:43 +0200
 
 inetutils (2:2.3-5) unstable; urgency=high
 
