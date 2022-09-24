@@ -177,7 +177,7 @@ Description: transitional dummy package for inetutils-telnet default switch
  provided after Debian bookworm's release.
  .
  If you want to keep using the netkit implementation, then install
- netkit-telnet instead.
+ telnet-ssl instead.
 
 Package: inetutils-telnetd
 Architecture: any
@@ -217,7 +217,8 @@ Description: transitional dummy package for inetutils-telnetd default switch
  provided after Debian bookworm's release.
  .
  If you want to keep using the netkit implementation, then install
- netkit-telnetd instead.
+ telnetd-ssl instead, and run in.telnetd with the «-z nossl» argument for
+ the clear-text protocol.
 
 Package: inetutils-talk
 Architecture: any
