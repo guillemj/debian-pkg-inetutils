@@ -1,7 +1,7 @@
-From 1240cebe9f6313e10241f1b18e52d499dec70135 Mon Sep 17 00:00:00 2001
+From 9d091c7fbdb510ec8ef567a521e208688e237885 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
-Subject: [PATCH 3/5] inetd: Change protocol semantics in inetd.conf
+Subject: [PATCH 3/4] inetd: Change protocol semantics in inetd.conf
 
 Readd parts of the original patch that got botched when applied
 upstream.
@@ -15,7 +15,7 @@ Fixes: commit a12021ee959a88b48cd16e947c671f8f59e29c9d
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/src/inetd.c b/src/inetd.c
-index 82384383..06927a45 100644
+index 9d0d62f8..2f5dbb3f 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
 @@ -1107,7 +1107,7 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
@@ -36,5 +36,5 @@ index 82384383..06927a45 100644
  	      if (strcmp (&sep->se_proto[3], "6only") == 0)
  	        sep->se_v4mapped = 0;
 -- 
-2.36.1
+2.37.2
 

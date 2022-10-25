@@ -2,7 +2,5 @@
 0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 0002-build-Use-runstatedir-for-run-directory.patch
 0003-inetd-Change-protocol-semantics-in-inetd.conf.patch
-0004-telnet-Add-checks-for-option-reply-parsing-limits.patch
-0005-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
-inetutils-telnetd-EC_EL_null_deref.patch
+0004-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
 # Upstream git

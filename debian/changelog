@@ -1,3 +1,11 @@
+inetutils (2:2.4-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+    - Remove patches merged upstream.
+    - Update debian/upstream/signing-key.asc.
+
+ -- Guillem Jover <guillem@debian.org>  Wed, 26 Oct 2022 00:22:43 +0200
+
 inetutils (2:2.3-6) unstable; urgency=medium
 
   * Add CVE references to changelog entries and patches.
