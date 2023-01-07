@@ -1,0 +1,30 @@
+From 16ff78c6711aa77093e717ba5498959e1bc757d6 Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Sun, 8 Jan 2023 11:04:18 +0100
+Subject: [PATCH] Add support for new RFC4443 ICMPv6 destination unreachable
+ codes
+
+We use literal integers, as glibc does not define macros for these,
+and we are not going to invent them.
+
+Closes: #1027778
+---
+ ping/ping6.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/ping/ping6.c b/ping/ping6.c
+index 91b60dd6..6d83e65c 100644
+--- a/ping/ping6.c
++++ b/ping/ping6.c
+@@ -637,6 +637,8 @@ static struct icmp_code_descr icmp_dest_unreach_desc[] = {
+   {ICMP6_DST_UNREACH_BEYONDSCOPE, "Beyond scope of source address"},
+   {ICMP6_DST_UNREACH_ADDR, "Address unreachable"},
+   {ICMP6_DST_UNREACH_NOPORT, "Port unreachable"},
++  {5, "Source address failed ingress/egress policy"},
++  {6, "Reject route to destination"},
+ };
+ 
+ static void
+-- 
+2.39.0
+

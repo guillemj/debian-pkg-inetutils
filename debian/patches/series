@@ -3,4 +3,5 @@
 0002-build-Use-runstatedir-for-run-directory.patch
 0003-inetd-Change-protocol-semantics-in-inetd.conf.patch
 0004-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
+0001-Add-support-for-new-RFC4443-ICMPv6-destination-unrea.patch
 # Upstream git
