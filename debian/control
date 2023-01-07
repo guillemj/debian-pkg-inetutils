@@ -9,6 +9,7 @@ Standards-Version: 4.6.1
 Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 13),
+ debhelper (>= 13.10),
 # Used by the test suite:
 #  /etc/protocols and /etc/services
  netbase <!nocheck>,

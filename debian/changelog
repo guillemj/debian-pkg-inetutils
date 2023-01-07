@@ -2,6 +2,7 @@ inetutils (2:2.4-2) UNRELEASED; urgency=medium
 
   * Add support for new RFC4443 ICMPv6 destination unreachable codes.
     (Closes: #1027778)
+  * Do not trim debian/changelog.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 08 Jan 2023 00:22:40 +0100
 

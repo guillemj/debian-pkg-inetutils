@@ -95,6 +95,9 @@ override_dh_auto_install:
 	mv $(D)/usr/bin/traceroute $(D)/usr/bin/inetutils-traceroute
 	cp $(M)/traceroute.1 $(D)/$(man1dir)/inetutils-traceroute.1
 
+override_dh_installchangelogs:
+	dh_installchangelogs --no-trim
+
 override_dh_installdocs:
 	dh_installdocs -A NEWS AUTHORS THANKS
 
