@@ -1,6 +1,8 @@
 From dd9528410865ed43112a8cbca50e83fa84397427 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 10 Aug 2022 01:57:24 +0200
+Origin: vendor
+Forwarded: no
 Subject: [PATCH 4/4] Use krb5_auth_con_getsendsubkey() instead of
  krb5_auth_con_getlocalsubkey()
 

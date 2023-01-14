@@ -1,6 +1,8 @@
 From 9d091c7fbdb510ec8ef567a521e208688e237885 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
+Origin: vendor
+Forwarded: yes
 Subject: [PATCH 3/4] inetd: Change protocol semantics in inetd.conf
 
 Readd parts of the original patch that got botched when applied
