@@ -43,7 +43,7 @@ Pre-Depends:
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- lsb-base,
+ sysvinit-utils (>= 3.05-4~),
  netbase,
 Description: system logging daemon
  The syslog daemon is responsible for providing logging of messages
@@ -62,7 +62,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  inetutils-syslogd | system-log-daemon,
- lsb-base,
+ sysvinit-utils (>= 3.05-4~),
  tcpd,
  update-inetd,
 Description: internet super server
