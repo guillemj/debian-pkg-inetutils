@@ -24,9 +24,6 @@ Build-Depends:
  libpam0g-dev,
  libwrap0-dev,
  libkrb5-dev,
-Build-Conflicts:
- autoconf2.13,
- automake1.4,
 
 Package: inetutils-syslogd
 Architecture: any
