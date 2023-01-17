@@ -1,2 +1,4 @@
 # GNU projects do not maintain proper man pages
 inetutils: maintainer-manual-page *
+# Ignore generated file
+inetutils: very-long-line-length-in-source-file * > * [aclocal.m4:*]
