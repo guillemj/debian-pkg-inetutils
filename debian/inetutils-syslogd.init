@@ -25,8 +25,7 @@ set -e
 test -r $CONFIGFILE && . $CONFIGFILE
 
 # Create a xconsole pipe if it does not exist.
-# Don't create it if Linux's devfs is used, and symlink it on kFreeBSD as it
-# does not allow pipes on /dev.
+# On kFreeBSD symlink it into /run as it does not allow pipes on /dev.
 
 case `uname -s` in
 *FreeBSD)
@@ -39,11 +38,9 @@ case `uname -s` in
   ;;
 esac
 
-if [ ! -c /dev/.devfsd ]; then
-  if [ ! -p $XCONSOLE ]; then
-    rm -f $XCONSOLE
-    mkfifo -m 0640 $XCONSOLE
-  fi
+if [ ! -p $XCONSOLE ]; then
+  rm -f $XCONSOLE
+  mkfifo -m 0640 $XCONSOLE
 fi
 
 set +e

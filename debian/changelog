@@ -1,3 +1,9 @@
+inetutils (2:2.4-3) UNRELEASED; urgency=medium
+
+  * Remove support for Linux devfs from syslogd init script.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 07 Aug 2023 00:42:16 +0200
+
 inetutils (2:2.4-2) unstable; urgency=medium
 
   * Add support for new RFC4443 ICMPv6 destination unreachable codes.
