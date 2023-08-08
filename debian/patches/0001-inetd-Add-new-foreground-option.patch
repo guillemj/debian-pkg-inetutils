@@ -1,0 +1,67 @@
+From 01c0fa37570ffdab5d474c3ff6872445cd2c021c Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Tue, 8 Aug 2023 03:45:28 +0200
+Subject: [PATCH] inetd: Add new --foreground option
+
+This option avoids daemonizing, like --debug, except that it does not
+imply debugging output. To be used primary by the systemd service.
+---
+ src/inetd.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/src/inetd.c b/src/inetd.c
+index 2f5dbb3f..78eb8cc8 100644
+--- a/src/inetd.c
++++ b/src/inetd.c
+@@ -150,6 +150,7 @@
+ #define SIGBLOCK	(sigmask(SIGCHLD)|sigmask(SIGHUP)|sigmask(SIGALRM))
+ 
+ bool debug = false;
++bool foreground = false;
+ int nsock, maxsock;
+ fd_set allsock;
+ int options;
+@@ -171,6 +172,7 @@ const char doc[] = "Internet super-server.";
+ /* Define keys for long options that do not have short counterparts. */
+ enum {
+   OPT_ENVIRON = 256,
++  OPT_FOREGROUND,
+   OPT_RESOLVE
+ };
+ 
+@@ -182,6 +184,8 @@ const char *program_authors[] = {
+ 
+ static struct argp_option argp_options[] = {
+ #define GRP 0
++  {"foreground", OPT_FOREGROUND, NULL, 0,
++   "run in foreground mode", GRP+1},
+   {"debug", 'd', NULL, 0,
+    "turn on debugging, run in foreground mode", GRP+1},
+   {"environment", OPT_ENVIRON, NULL, 0,
+@@ -209,9 +213,14 @@ parse_opt (int key, char *arg,
+     {
+     case 'd':
+       debug = true;
++      foreground = true;
+       options |= SO_DEBUG;
+       break;
+ 
++    case OPT_FOREGROUND:
++      foreground = true;
++      break;
++
+     case OPT_ENVIRON:
+       env_option = true;
+       break;
+@@ -1959,7 +1968,7 @@ main (int argc, char *argv[], char *envp[])
+       config_files[1] = newstr (PATH_INETDDIR);
+     }
+ 
+-  if (!debug)
++  if (!foreground)
+     {
+       if (daemon (0, 0) < 0)
+ 	{
+-- 
+2.40.1
+
