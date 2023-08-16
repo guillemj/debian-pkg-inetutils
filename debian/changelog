@@ -8,6 +8,7 @@ inetutils (2:2.4-3) UNRELEASED; urgency=medium
   * Add new /etc/ftpusers and /etc/ftpchroot in inetutils-ftpd package.
   * Add systemd service files for inetutils-syslogd and inetutils-inetd,
     and a systemd tmpfiles for /dev/xconsole. (Closes: #1030079)
+  * Reorganize patch queue and move metadata into the commit trailer.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 07 Aug 2023 00:42:16 +0200
 

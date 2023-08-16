@@ -1,8 +1,7 @@
-From c2cfa7889c09b6bd1ef7bc9967111e6509e610c7 Mon Sep 17 00:00:00 2001
+From de23162a593815a77baa87be0e27b9bd584cadc6 Mon Sep 17 00:00:00 2001
 From: Enrik Berkhan <Enrik.Berkhan@inka.de>
 Date: Tue, 3 Jan 2023 22:03:36 +0100
 Subject: [PATCH] ping: decode unreachable codes added in RFC 4443
-Origin: upstream, commit:c2cfa7889c09b6bd1ef7bc9967111e6509e610c7
 
 RFC 4443 added two new codes for ICMPv6 destination unreachable messages
 (type 1):
@@ -34,13 +33,14 @@ Signed-off-by: Enrik Berkhan <Enrik.Berkhan@inka.de>
 Signed-off-by: Simon Josefsson <simon@josefsson.org>
 Copyright-paperwork-exempt: Yes
 Closes: #1027778
+Forwarded: not-needed
+Origin: upstream, commit:c2cfa7889c09b6bd1ef7bc9967111e6509e610c7
 ---
- NEWS         |  5 +++++
  ping/ping6.c | 12 ++++++++++++
- 2 files changed, 17 insertions(+)
+ 1 file changed, 12 insertions(+)
 
 diff --git a/ping/ping6.c b/ping/ping6.c
-index 91b60dd6..1e458507 100644
+index c2791596..0c2df6b2 100644
 --- a/ping/ping6.c
 +++ b/ping/ping6.c
 @@ -55,6 +55,16 @@
@@ -70,5 +70,5 @@ index 91b60dd6..1e458507 100644
  
  static void
 -- 
-2.39.0
+2.40.1
 

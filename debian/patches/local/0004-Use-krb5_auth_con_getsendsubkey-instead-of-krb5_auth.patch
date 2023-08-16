@@ -1,12 +1,13 @@
-From dd9528410865ed43112a8cbca50e83fa84397427 Mon Sep 17 00:00:00 2001
+From c085ee041fa5dc65f5ca40a3f3295643a1567a7b Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 10 Aug 2022 01:57:24 +0200
-Origin: vendor
-Forwarded: no
-Subject: [PATCH 4/4] Use krb5_auth_con_getsendsubkey() instead of
+Subject: [PATCH 4/5] Use krb5_auth_con_getsendsubkey() instead of
  krb5_auth_con_getlocalsubkey()
 
 The latter is not exposed in the headers anymore.
+
+Origin: vendor, Debian
+Forwarded: no
 ---
  libinetutils/kerberos5.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -25,5 +26,5 @@ index 37764847..cedb943a 100644
    /* send size of AP-REQ to the server */
  
 -- 
-2.37.2
+2.40.1
 
