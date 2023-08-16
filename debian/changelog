@@ -9,6 +9,8 @@ inetutils (2:2.4-3) UNRELEASED; urgency=medium
   * Add systemd service files for inetutils-syslogd and inetutils-inetd,
     and a systemd tmpfiles for /dev/xconsole. (Closes: #1030079)
   * Reorganize patch queue and move metadata into the commit trailer.
+  * Add patch from upstream to check return values for set*id() functions.
+    Fixes CVE-2023-40303. (Closes: #1049365)
 
  -- Guillem Jover <guillem@debian.org>  Mon, 07 Aug 2023 00:42:16 +0200
 

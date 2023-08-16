@@ -1,7 +1,7 @@
 From de23162a593815a77baa87be0e27b9bd584cadc6 Mon Sep 17 00:00:00 2001
 From: Enrik Berkhan <Enrik.Berkhan@inka.de>
 Date: Tue, 3 Jan 2023 22:03:36 +0100
-Subject: [PATCH] ping: decode unreachable codes added in RFC 4443
+Subject: [PATCH 1/2] ping: decode unreachable codes added in RFC 4443
 
 RFC 4443 added two new codes for ICMPv6 destination unreachable messages
 (type 1):
