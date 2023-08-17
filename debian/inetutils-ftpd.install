@@ -1,1 +1,3 @@
+debian/local/etc/ftpchroot etc
+debian/local/etc/ftpusers etc
 usr/sbin/ftpd
