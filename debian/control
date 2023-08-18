@@ -137,6 +137,7 @@ Conflicts:
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
+ inetutils-inetd | inet-superserver,
  inetutils-syslogd | system-log-daemon,
  netbase,
 Description: File Transfer Protocol server

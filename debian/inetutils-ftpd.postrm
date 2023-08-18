@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+  if [ -x "$(command -v update-inetd)" ]; then
+    update-inetd --remove ftp
+  fi
+fi
+
+#DEBHELPER#
+
+exit 0

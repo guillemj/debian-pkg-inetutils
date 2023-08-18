@@ -2,6 +2,7 @@ inetutils (2:2.4-3) UNRELEASED; urgency=medium
 
   * Remove support for Linux devfs from syslogd init script.
   * Use "$()" instead of `` in syslogd init script.
+  * Register inetutils-ftpd with inetd.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 07 Aug 2023 00:42:16 +0200
 
