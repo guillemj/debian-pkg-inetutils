@@ -1,0 +1,27 @@
+[Unit]
+Description=GNU Network Utilities system log daemon
+Documentation=man:syslogd(8)
+Documentation=https://www.gnu.org/software/inetutils/manual/
+After=network-online.target
+After=remote-fs.target
+After=time-sync.target
+# The daemon does not implement the socket protocol now, but we do not care.
+Requires=syslog.socket
+Requires=network.target
+Requires=remote-fs.target
+Requires=time-sync.target
+ConditionPathExists=/etc/syslog.conf
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/inetutils-syslogd
+ExecStart=/usr/sbin/syslogd --no-detach $SYSLOGD_OPTS
+ExecReload=+/bin/kill -HUP $MAINPID
+PIDFile=/run/syslog.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=syslogd.service
+# The daemon does not implement the socket protocol now, but we do not care.
+Alias=syslog.service

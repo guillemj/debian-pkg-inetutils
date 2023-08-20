@@ -1,0 +1,21 @@
+[Unit]
+Description=GNU Network Utilities internet superserver
+Documentation=man:inetutils-inetd(8)
+Documentation=https://www.gnu.org/software/inetutils/manual/
+After=network-online.target
+After=remote-fs.target
+Wants=network-online.target
+Wants=remote-fs.target
+ConditionPathExists=/etc/inetd.conf
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/inetutils-inetd
+ExecCondition=grep -qr "^[0-9A-Za-z/]" /etc/inetd.conf /etc/inetd.d/
+ExecStart=/usr/sbin/inetutils-inetd --foreground $INETD_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=inetd.service
