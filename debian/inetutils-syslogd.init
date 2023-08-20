@@ -27,7 +27,7 @@ test -r $CONFIGFILE && . $CONFIGFILE
 # Create a xconsole pipe if it does not exist.
 # On kFreeBSD symlink it into /run as it does not allow pipes on /dev.
 
-case `uname -s` in
+case "$(uname -s)" in
 *FreeBSD)
   XCONSOLE=/run/xconsole
   rm -f /dev/xconsole
