@@ -1,9 +1,9 @@
-inetutils (2:2.4-2+deb12u1) UNRELEASED; urgency=medium
+inetutils (2:2.4-2+deb12u1) bookworm; urgency=medium
 
   * Add patch from upstream to check return values for set*id() functions.
     Fixes CVE-2023-40303. (Closes: #1049365)
 
- -- Guillem Jover <guillem@debian.org>  Mon, 07 Aug 2023 00:42:16 +0200
+ -- Guillem Jover <guillem@debian.org>  Wed, 23 Aug 2023 12:01:39 +0200
 
 inetutils (2:2.4-2) unstable; urgency=medium
 
