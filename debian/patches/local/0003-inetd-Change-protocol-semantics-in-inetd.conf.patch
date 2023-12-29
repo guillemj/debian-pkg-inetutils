@@ -1,4 +1,4 @@
-From b5e43a27c00d516196c7982c09ce2b5bd8d796df Mon Sep 17 00:00:00 2001
+From db2589f9e008501e9c246266a19b258be99a9cae Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
 Subject: [PATCH 3/5] inetd: Change protocol semantics in inetd.conf
@@ -17,10 +17,10 @@ Forwarded: https://lists.gnu.org/archive/html/bug-inetutils/2018-01/msg00001.htm
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/src/inetd.c b/src/inetd.c
-index 9d0d62f8..2f5dbb3f 100644
+index eed7cc76..6930e7bc 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
-@@ -1107,7 +1107,7 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
+@@ -1102,7 +1102,7 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
        sep->se_proto = newstr (argv[INETD_PROTOCOL]);
  
  #ifdef IPV6
@@ -29,14 +29,14 @@ index 9d0d62f8..2f5dbb3f 100644
        sep->se_family = AF_INET;
        sep->se_v4mapped = 1;
  
-@@ -1117,7 +1117,6 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
+@@ -1112,7 +1112,6 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
  	  if (sep->se_proto[3] == '6')
  	    {
  	      sep->se_family = AF_INET6;
 -	      sep->se_v4mapped = 0;
  	      /* Check for tcp6only and udp6only.  */
  	      if (strcmp (&sep->se_proto[3], "6only") == 0)
- 	        sep->se_v4mapped = 0;
+ 		sep->se_v4mapped = 0;
 -- 
-2.40.1
+2.43.0
 

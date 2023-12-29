@@ -1,4 +1,4 @@
-From 4792d43cfcdb383a06905459b4634a73d67cf74d Mon Sep 17 00:00:00 2001
+From 5edbdeedd13a8d72d1d468c54874165087accab8 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Tue, 8 Aug 2023 03:45:28 +0200
 Subject: [PATCH 5/5] inetd: Add new --foreground option
@@ -13,7 +13,7 @@ Forwarded: no
  1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/src/inetd.c b/src/inetd.c
-index 2f5dbb3f..78eb8cc8 100644
+index 6930e7bc..bbe0180f 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
 @@ -150,6 +150,7 @@
@@ -24,24 +24,24 @@ index 2f5dbb3f..78eb8cc8 100644
  int nsock, maxsock;
  fd_set allsock;
  int options;
-@@ -171,6 +172,7 @@ const char doc[] = "Internet super-server.";
- /* Define keys for long options that do not have short counterparts. */
- enum {
+@@ -172,6 +173,7 @@ const char doc[] = "Internet super-server.";
+ enum
+ {
    OPT_ENVIRON = 256,
 +  OPT_FOREGROUND,
    OPT_RESOLVE
  };
  
-@@ -182,6 +184,8 @@ const char *program_authors[] = {
+@@ -184,6 +186,8 @@ const char *program_authors[] = {
  
  static struct argp_option argp_options[] = {
  #define GRP 0
 +  {"foreground", OPT_FOREGROUND, NULL, 0,
 +   "run in foreground mode", GRP+1},
    {"debug", 'd', NULL, 0,
-    "turn on debugging, run in foreground mode", GRP+1},
+    "turn on debugging, run in foreground mode", GRP + 1},
    {"environment", OPT_ENVIRON, NULL, 0,
-@@ -209,9 +213,14 @@ parse_opt (int key, char *arg,
+@@ -211,9 +215,14 @@ parse_opt (int key, char *arg, struct argp_state *state MAYBE_UNUSED)
      {
      case 'd':
        debug = true;
@@ -56,7 +56,7 @@ index 2f5dbb3f..78eb8cc8 100644
      case OPT_ENVIRON:
        env_option = true;
        break;
-@@ -1959,7 +1968,7 @@ main (int argc, char *argv[], char *envp[])
+@@ -1955,7 +1964,7 @@ main (int argc, char *argv[], char *envp[])
        config_files[1] = newstr (PATH_INETDDIR);
      }
  
@@ -66,5 +66,5 @@ index 2f5dbb3f..78eb8cc8 100644
        if (daemon (0, 0) < 0)
  	{
 -- 
-2.40.1
+2.43.0
 

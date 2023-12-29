@@ -1,4 +1,4 @@
-From c085ee041fa5dc65f5ca40a3f3295643a1567a7b Mon Sep 17 00:00:00 2001
+From f0224e42008535564f0d59ad02e24be3fc8cbf39 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 10 Aug 2022 01:57:24 +0200
 Subject: [PATCH 4/5] Use krb5_auth_con_getsendsubkey() instead of
@@ -13,10 +13,10 @@ Forwarded: no
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/libinetutils/kerberos5.c b/libinetutils/kerberos5.c
-index 37764847..cedb943a 100644
+index 5df12e77..f77bc412 100644
 --- a/libinetutils/kerberos5.c
 +++ b/libinetutils/kerberos5.c
-@@ -156,7 +156,7 @@ kerberos_auth (krb5_context *ctx, int verbose, char **cname,
+@@ -154,7 +154,7 @@ kerberos_auth (krb5_context *ctx, int verbose, char **cname,
    krb5_data_free (&cksum_data);
  # endif
  
@@ -26,5 +26,5 @@ index 37764847..cedb943a 100644
    /* send size of AP-REQ to the server */
  
 -- 
-2.40.1
+2.43.0
 

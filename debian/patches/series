@@ -1,6 +1,3 @@
-# Upstream git
-upstream/0001-ping-decode-unreachable-codes-added-in-RFC-4443.patch
-upstream/0002-ftpd-rcp-rlogin-rsh-rshd-uucpd-fix-check-set-id-retu.patch
 # Local patches
 local/0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 local/0002-build-Use-runstatedir-for-run-directory.patch
