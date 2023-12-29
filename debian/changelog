@@ -1,10 +1,10 @@
-inetutils (2:2.5-1) UNRELEASED; urgency=medium
+inetutils (2:2.5-1) unstable; urgency=medium
 
   * New upstream release.
     - Remove patches merged upstream.
     - Update debian/upstream/signing-key.asc.
 
- -- Guillem Jover <guillem@debian.org>  Fri, 29 Dec 2023 19:47:26 +0100
+ -- Guillem Jover <guillem@debian.org>  Fri, 29 Dec 2023 20:08:36 +0100
 
 inetutils (2:2.4-3) unstable; urgency=medium
 
