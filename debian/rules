@@ -61,13 +61,6 @@ override_dh_auto_install:
 	mkdir -p $(D)/$(man5dir)
 	mkdir -p $(D)/$(man8dir)
 	
-	# Move ping to /bin
-	mkdir -p $(D)/bin
-	mv $(D)/usr/bin/ping $(D)/bin/
-	if [ -x $(D)/usr/bin/ping6 ]; then \
-	  mv $(D)/usr/bin/ping6 $(D)/bin/; \
-	fi
-	
 	# Rename ifconfig to not break existing systems using net-tools
 	mv $(D)/usr/bin/ifconfig $(D)/usr/bin/inetutils-ifconfig
 	cp $(M)/ifconfig.1 $(D)/$(man1dir)/inetutils-ifconfig.1
@@ -106,7 +99,7 @@ override_dh_installpam:
 
 override_dh_fixperms:
 	# pings and traceroute are setuid
-	dh_fixperms -Xbin/ping -Xbin/ping6 -Xusr/bin/inetutils-traceroute
+	dh_fixperms -Xusr/bin/ping -Xusr/bin/ping6 -Xusr/bin/inetutils-traceroute
 
 override_dh_gencontrol:
 	dh_gencontrol -ptelnet -ptelnetd -- \

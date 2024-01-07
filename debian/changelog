@@ -1,3 +1,10 @@
+inetutils (2:2.5-2) UNRELEASED; urgency=medium
+
+  * Move ping programs to their canonical location under /usr, and setup
+    backward compatibility symlinks if necessary.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 07 Jan 2024 04:01:08 +0100
+
 inetutils (2:2.5-1) unstable; urgency=medium
 
   * New upstream release.
