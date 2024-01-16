@@ -1,8 +1,8 @@
-inetutils (2:2.5-3) UNRELEASED; urgency=medium
+inetutils (2:2.5-3) unstable; urgency=medium
 
   * Take DPKG_ROOT into account in maintainer scripts.
 
- -- Guillem Jover <guillem@debian.org>  Tue, 16 Jan 2024 04:46:40 +0100
+ -- Guillem Jover <guillem@debian.org>  Tue, 16 Jan 2024 04:48:45 +0100
 
 inetutils (2:2.5-2) experimental; urgency=medium
 
