@@ -1,3 +1,9 @@
+inetutils (2:2.5-4) UNRELEASED; urgency=medium
+
+  * Move license location in Debian systems into a Comment field.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 07 Apr 2024 01:02:45 +0200
+
 inetutils (2:2.5-3) unstable; urgency=medium
 
   * Take DPKG_ROOT into account in maintainer scripts.
