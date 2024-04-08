@@ -19,6 +19,7 @@ Build-Depends:
  autoconf,
  automake,
  bison,
+ gnulib,
  libreadline-dev,
  libncurses-dev,
  libpam0g-dev,

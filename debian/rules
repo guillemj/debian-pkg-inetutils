@@ -30,6 +30,17 @@ man8dir = $(mandir)/man8
 override_dh_auto_clean:
 	[ ! -f Makefile ] || dh_auto_clean
 
+override_dh_autoreconf:
+	cp /usr/share/gnulib/build-aux/bootstrap .
+	cp debian/upstream/bootstrap.conf .
+	dh_autoreconf ./bootstrap -- \
+	  --gnulib-srcdir=/usr/share/gnulib \
+	  --no-git \
+	  --skip-po \
+	  --copy \
+	  --force \
+	  # EOL
+
 override_dh_auto_configure:
 	dh_auto_configure -- \
 	  $(confflags) \

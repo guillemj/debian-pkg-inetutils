@@ -1,6 +1,13 @@
 inetutils (2:2.5-4) UNRELEASED; urgency=medium
 
   * Move license location in Debian systems into a Comment field.
+  * Regenerate gnulib files at build time:
+    - Add upstream bootstrap.conf into debian/upstream/, but remove makeinfo
+      and help2man from its dependencies which we have disabled in patches.
+    - Add gnulib to Build-Depends.
+    - Copy the gnulib build-aux/bootstrap file during build.
+    - Override dh_autoreconf and call bootstrap with no network access and in
+      copy and force mode.
 
  -- Guillem Jover <guillem@debian.org>  Sun, 07 Apr 2024 01:02:45 +0200
 
