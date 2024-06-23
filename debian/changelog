@@ -4,6 +4,7 @@ inetutils (2:2.5-5) UNRELEASED; urgency=medium
     Essential:yes to Protected:yes. (Closes: #1074100)
   * Add systemd-sysv as an alternative dependency for a syslog provider.
     (Closes: #1072022, #1072023, #1072024, #1072025)
+  * Switch to Standards-Version 4.7.0 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Sun, 23 Jun 2024 11:44:48 +0200
 
