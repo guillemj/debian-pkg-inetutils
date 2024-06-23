@@ -193,6 +193,7 @@ Depends:
  ${shlibs:Depends},
  inetutils-inetd | inet-superserver,
  inetutils-syslogd | system-log-daemon,
+ login,
  netbase,
 Description: telnet server
  The telnetd program is a server which supports the DARPA telnet
