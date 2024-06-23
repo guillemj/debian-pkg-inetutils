@@ -59,7 +59,7 @@ Pre-Depends:
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- inetutils-syslogd | system-log-daemon,
+ inetutils-syslogd | system-log-daemon | systemd-sysv,
  sysvinit-utils (>= 3.05-4~),
  tcpd,
  update-inetd,
@@ -139,7 +139,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  inetutils-inetd | inet-superserver,
- inetutils-syslogd | system-log-daemon,
+ inetutils-syslogd | system-log-daemon | systemd-sysv,
  netbase,
 Description: File Transfer Protocol server
  Ftpd is the server that allows another host to connect with the ftp
@@ -192,7 +192,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  inetutils-inetd | inet-superserver,
- inetutils-syslogd | system-log-daemon,
+ inetutils-syslogd | system-log-daemon | systemd-sysv,
  login,
  netbase,
 Description: telnet server
@@ -243,7 +243,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  inetutils-inetd | inet-superserver,
- inetutils-syslogd | system-log-daemon,
+ inetutils-syslogd | system-log-daemon | systemd-sysv,
  netbase,
 Description: remote user communication server
  The talkd program is a server that notifies a user that someone else
