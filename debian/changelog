@@ -8,6 +8,7 @@ inetutils (2:2.5-6) UNRELEASED; urgency=medium
     - Do not use non-breaking space for options specification.
     - Markup option arguments in italic.
     - Markup domain names in bold.
+    - Do not quote SEE ALSO.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 18 Feb 2025 03:13:07 +0100
 
