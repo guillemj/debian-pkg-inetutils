@@ -4,6 +4,7 @@ inetutils (2:2.5-6) UNRELEASED; urgency=medium
   * Fix man pages:
     - Lowercase titles to match their referred object.
     - Lowercase whois reference.
+    - Do not markup comma in bold for option separators.
 
  -- Guillem Jover <guillem@debian.org>  Tue, 18 Feb 2025 03:13:07 +0100
 

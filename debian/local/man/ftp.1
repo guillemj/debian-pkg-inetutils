@@ -55,34 +55,34 @@ by prefixing it followed by an @.
 Options may be specified at the command line, or to the
 command interpreter.
 .Bl -tag -width flag
-.It Fl 4, -ipv4
+.It Fl 4 , -ipv4
 Use IPv4 to connect to hosts.
-.It Fl 6, -ipv6
+.It Fl 6 , -ipv6
 Use IPv6 to connect to hosts.
-.It Fl A, -active
+.It Fl A , -active
 Enable active mode transfer, default for
 .Nm ftp .
-.It Fl p, -passive
+.It Fl p , -passive
 Enable passive mode transfer, default for
 .Nm pftp .
 .It Fl -prompt Op Ar text
 Print a command line prompt (optionally with
 .Ar text  ) ,
 even if not on a tty.
-.It Fl N, -netrc Ar filename
+.It Fl N , -netrc Ar filename
 Select a specific initialization file.
-.It Fl v, -verbose
+.It Fl v , -verbose
 Verbose option forces
 .Nm ftp
 to show all responses from the remote server, as well
 as report on data transfer statistics.
-.It Fl t, -trace
+.It Fl t , -trace
 Enable packet tracing.
-.It Fl d, -debug
+.It Fl d , -debug
 Enables debugging.
-.It Fl e, -no-edit
+.It Fl e , -no-edit
 Disable command line editing.
-.It Fl n, -no-login
+.It Fl n , -no-login
 Restrains
 .Nm ftp
 from attempting \*(Lqauto-login\*(Rq upon initial connection.
@@ -97,15 +97,15 @@ If no entry exists,
 will prompt for the remote machine login name (default is the user
 identity on the local machine), and, if necessary, prompt for a password
 and an account with which to login.
-.It Fl i, -no-prompt
+.It Fl i , -no-prompt
 Turns off interactive prompting during multiple file transfers.
-.It Fl g, -no-glob
+.It Fl g , -no-glob
 Disables file name globbing.
 .It Fl -usage
 Display a short usage message.
-.It Fl ?, -help
+.It Fl ? , -help
 Display a help list.
-.It Fl V, -version
+.It Fl V , -version
 Display program version.
 .El
 .Sh OPERATION
