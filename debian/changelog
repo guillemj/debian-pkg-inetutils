@@ -1,3 +1,9 @@
+inetutils (2:2.5-6) UNRELEASED; urgency=medium
+
+  * Place each command line option in debian/rules on its own line.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 18 Feb 2025 03:13:07 +0100
+
 inetutils (2:2.5-5) unstable; urgency=medium
 
   * Add a Depends on login to inetutils-telnetd, now that login switched from

@@ -62,7 +62,8 @@ override_dh_auto_configure:
 	  --with-path-login=/bin/login \
 	  --with-krb5 \
 	  --with-wrap \
-	  --with-pam
+	  --with-pam \
+	  # EOL
 
 override_dh_auto_install:
 	dh_auto_install -- SUIDMODE=$(SUIDMODE)
@@ -110,7 +111,11 @@ override_dh_installpam:
 
 override_dh_fixperms:
 	# pings and traceroute are setuid
-	dh_fixperms -Xusr/bin/ping -Xusr/bin/ping6 -Xusr/bin/inetutils-traceroute
+	dh_fixperms \
+	  -Xusr/bin/ping \
+	  -Xusr/bin/ping6 \
+	  -Xusr/bin/inetutils-traceroute \
+	  # EOL
 
 override_dh_gencontrol:
 	dh_gencontrol -ptelnet -ptelnetd -- \
