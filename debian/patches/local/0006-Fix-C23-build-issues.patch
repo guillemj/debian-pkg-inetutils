@@ -1,0 +1,153 @@
+From cba23ed0a95db8f0d74b46881a49e46d90c2506b Mon Sep 17 00:00:00 2001
+From: Guillem Jover <guillem@hadrons.org>
+Date: Tue, 18 Feb 2025 03:08:39 +0100
+Subject: [PATCH 6/6] Fix C23 build issues
+
+These are incompatible pointer issues that are now errors with gcc-15.
+
+Warned-by: gcc-15
+Origin: vendor, Debian
+Forwarded: no
+---
+ libtelnet/encrypt.c |  2 +-
+ telnet/commands.c   | 42 +++++++++++++++++++++++-------------------
+ telnet/ring.c       |  2 +-
+ telnet/ring.h       |  2 +-
+ 4 files changed, 26 insertions(+), 22 deletions(-)
+
+diff --git a/libtelnet/encrypt.c b/libtelnet/encrypt.c
+index ef2d8472..3c83bc47 100644
+--- a/libtelnet/encrypt.c
++++ b/libtelnet/encrypt.c
+@@ -203,7 +203,7 @@ static struct key_info
+   int keylen;
+   int dir;
+   int *modep;
+-  Encryptions *(*getcrypt) ();
++  Encryptions *(*getcrypt) (int);
+ } ki[2] = {
+   {{0}, 0, DIR_ENCRYPT, &encrypt_mode, findencryption},
+   {{0}, 0, DIR_DECRYPT, &decrypt_mode, finddecryption},
+diff --git a/telnet/commands.c b/telnet/commands.c
+index 2a133c98..6d14672a 100644
+--- a/telnet/commands.c
++++ b/telnet/commands.c
+@@ -2119,11 +2119,13 @@ env_varval (const char *what, char *d)
+  * The AUTHENTICATE command.
+  */
+ 
++typedef int auth_handler (char *, char *);
++
+ struct authlist
+ {
+   const char *name;
+   char *help;
+-  int (*handler) ();
++  auth_handler *handler;
+   int narg;
+ };
+ 
+@@ -2132,13 +2134,13 @@ static int auth_help (void);
+ 
+ struct authlist AuthList[] = {
+   {"status", "Display current status of authentication information",
+-   auth_status, 0},
++   (auth_handler *) auth_status, 0},
+   {"disable", "Disable an authentication type ('auth disable ?' for more)",
+-   auth_disable, 1},
++   (auth_handler *) auth_disable, 1},
+   {"enable", "Enable an authentication type ('auth enable ?' for more)",
+-   auth_enable, 1},
+-  {"help", 0, auth_help, 0},
+-  {"?", "Print help information", auth_help, 0},
++   (auth_handler *) auth_enable, 1},
++  {"help", 0,(auth_handler *) auth_help, 0},
++  {"?", "Print help information",(auth_handler *) auth_help, 0},
+   {NULL, NULL, NULL, 0},
+ };
+ 
+@@ -2203,11 +2205,13 @@ auth_cmd (int argc, char *argv[])
+  * The ENCRYPT command.
+  */
+ 
++typedef int encrypt_handler(char *, char *, char *);
++
+ struct encryptlist
+ {
+   const char *name;
+   const char *help;
+-  int (*handler) ();
++  encrypt_handler *handler;
+   int needconnect;
+   int minarg;
+   int maxarg;
+@@ -2226,28 +2230,28 @@ static int EncryptHelp (void);
+ 
+ struct encryptlist EncryptList[] = {
+   {"enable", "Enable encryption. ('encrypt enable ?' for more)",
+-   EncryptEnable, 1, 1, 2},
++   (encrypt_handler *) EncryptEnable, 1, 1, 2},
+   {"disable", "Disable encryption. ('encrypt enable ?' for more)",
+-   EncryptDisable, 0, 1, 2},
++   (encrypt_handler *) EncryptDisable, 0, 1, 2},
+   {"type", "Set encryption type. ('encrypt type ?' for more)",
+-   EncryptType, 0, 1, 1},
++   (encrypt_handler *) EncryptType, 0, 1, 1},
+   {"start", "Start encryption. ('encrypt start ?' for more)",
+-   EncryptStart, 1, 0, 1},
++   (encrypt_handler *) EncryptStart, 1, 0, 1},
+   {"stop", "Stop encryption. ('encrypt stop ?' for more)",
+-   EncryptStop, 1, 0, 1},
++   (encrypt_handler *) EncryptStop, 1, 0, 1},
+   {"input", "Start encrypting the input stream",
+-   EncryptStartInput, 1, 0, 0},
++   (encrypt_handler *) EncryptStartInput, 1, 0, 0},
+   {"-input", "Stop encrypting the input stream",
+-   EncryptStopInput, 1, 0, 0},
++   (encrypt_handler *) EncryptStopInput, 1, 0, 0},
+   {"output", "Start encrypting the output stream",
+-   EncryptStartOutput, 1, 0, 0},
++   (encrypt_handler *) EncryptStartOutput, 1, 0, 0},
+   {"-output", "Stop encrypting the output stream",
+-   EncryptStopOutput, 1, 0, 0},
++   (encrypt_handler *) EncryptStopOutput, 1, 0, 0},
+ 
+   {"status", "Display current status of authentication information",
+-   EncryptStatus, 0, 0, 0},
+-  {"help", 0, EncryptHelp, 0, 0, 0},
+-  {"?", "Print help information", EncryptHelp, 0, 0, 0},
++   (encrypt_handler *) EncryptStatus, 0, 0, 0},
++  {"help", 0, (encrypt_handler *) EncryptHelp, 0, 0, 0},
++  {"?", "Print help information", (encrypt_handler *) EncryptHelp, 0, 0, 0},
+   {NULL, NULL, NULL, 0, 0, 0},
+ };
+ 
+diff --git a/telnet/ring.c b/telnet/ring.c
+index f7f98b2a..3b98fe5d 100644
+--- a/telnet/ring.c
++++ b/telnet/ring.c
+@@ -327,7 +327,7 @@ ring_supply_data (Ring *ring, unsigned char *buffer, int count)
+ 
+ #ifdef	ENCRYPTION
+ void
+-ring_encrypt (Ring *ring, void (*encryptor) ())
++ring_encrypt (Ring *ring, void (*encryptor) (unsigned char *, int))
+ {
+   unsigned char *s, *c;
+ 
+diff --git a/telnet/ring.h b/telnet/ring.h
+index a77ce41c..7523fad8 100644
+--- a/telnet/ring.h
++++ b/telnet/ring.h
+@@ -92,7 +92,7 @@ ring_full_count (Ring * ring), ring_full_consecutive (Ring * ring);
+ 
+ #ifdef	ENCRYPTION
+ extern void
+-ring_encrypt (Ring * ring, void (*func) ()), ring_clearto (Ring * ring);
++ring_encrypt (Ring * ring, void (*func) (unsigned char *, int)), ring_clearto (Ring * ring);
+ #endif /* ENCRYPTION */
+ 
+ extern void ring_clear_mark (Ring *);
+-- 
+2.47.2
+

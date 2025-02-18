@@ -1,7 +1,7 @@
 From 5edbdeedd13a8d72d1d468c54874165087accab8 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Tue, 8 Aug 2023 03:45:28 +0200
-Subject: [PATCH 5/5] inetd: Add new --foreground option
+Subject: [PATCH 5/6] inetd: Add new --foreground option
 
 This option avoids daemonizing, like --debug, except that it does not
 imply debugging output. To be used primary by the systemd service.
@@ -66,5 +66,5 @@ index 6930e7bc..bbe0180f 100644
        if (daemon (0, 0) < 0)
  	{
 -- 
-2.43.0
+2.47.2
 

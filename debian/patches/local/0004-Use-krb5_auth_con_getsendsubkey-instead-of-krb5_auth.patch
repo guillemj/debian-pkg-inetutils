@@ -1,7 +1,7 @@
 From f0224e42008535564f0d59ad02e24be3fc8cbf39 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 10 Aug 2022 01:57:24 +0200
-Subject: [PATCH 4/5] Use krb5_auth_con_getsendsubkey() instead of
+Subject: [PATCH 4/6] Use krb5_auth_con_getsendsubkey() instead of
  krb5_auth_con_getlocalsubkey()
 
 The latter is not exposed in the headers anymore.
@@ -26,5 +26,5 @@ index 5df12e77..f77bc412 100644
    /* send size of AP-REQ to the server */
  
 -- 
-2.43.0
+2.47.2
 

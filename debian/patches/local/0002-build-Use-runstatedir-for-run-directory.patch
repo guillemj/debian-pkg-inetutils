@@ -1,7 +1,7 @@
 From e88eb803f34d5572fa5d7640233fd53acb394a8a Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Sun, 5 Sep 2021 05:00:23 +0200
-Subject: [PATCH 2/5] build: Use runstatedir for /run directory
+Subject: [PATCH 2/6] build: Use runstatedir for /run directory
 
 Origin: vendor, Debian
 Forwarded: no
@@ -40,5 +40,5 @@ index 6cdd79d1..84d4c1a2 100644
  PATH_RLOGIN	x $(bindir)/rlogin
  PATH_RSH	x $(bindir)/rsh
 -- 
-2.43.0
+2.47.2
 
