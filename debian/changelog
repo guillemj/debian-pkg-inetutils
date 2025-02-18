@@ -1,4 +1,4 @@
-inetutils (2:2.5-6) UNRELEASED; urgency=medium
+inetutils (2:2.5-6) unstable; urgency=medium
 
   * Place each command line option in debian/rules on its own line.
   * Fix man pages:
@@ -11,7 +11,7 @@ inetutils (2:2.5-6) UNRELEASED; urgency=medium
     - Do not quote SEE ALSO.
   * Fix C23 build issues with gcc-15. (Closes: #1096837)
 
- -- Guillem Jover <guillem@debian.org>  Tue, 18 Feb 2025 03:13:07 +0100
+ -- Guillem Jover <guillem@debian.org>  Tue, 18 Feb 2025 03:18:03 +0100
 
 inetutils (2:2.5-5) unstable; urgency=medium
 
