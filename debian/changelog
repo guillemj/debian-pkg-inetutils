@@ -10,6 +10,7 @@ inetutils (2:2.6-1) UNRELEASED; urgency=medium
     - Remove debian/upstream/bootstrap.conf, now in upstream tarball.
     - Do not copy bootstrap script from gnulib, now in upstream tarball.
     - Stop cleaning bootstrap and bootstrap.conf in debian/clean.
+  * Switch to Standards-Version 4.7.1 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Fri, 21 Feb 2025 23:49:42 +0100
 
