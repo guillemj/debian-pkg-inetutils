@@ -1,22 +1,19 @@
-From f0224e42008535564f0d59ad02e24be3fc8cbf39 Mon Sep 17 00:00:00 2001
+From d48d0d5422eb46a67872fd9d6cbdbd86c5f0efc8 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 10 Aug 2022 01:57:24 +0200
-Subject: [PATCH 4/6] Use krb5_auth_con_getsendsubkey() instead of
+Subject: [PATCH 4/5] Use krb5_auth_con_getsendsubkey() instead of
  krb5_auth_con_getlocalsubkey()
 
 The latter is not exposed in the headers anymore.
 
 Origin: vendor, Debian
 Forwarded: no
----
- libinetutils/kerberos5.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/libinetutils/kerberos5.c b/libinetutils/kerberos5.c
-index 5df12e77..f77bc412 100644
+index 217b64e0..6d993dd3 100644
 --- a/libinetutils/kerberos5.c
 +++ b/libinetutils/kerberos5.c
-@@ -154,7 +154,7 @@ kerberos_auth (krb5_context *ctx, int verbose, char **cname,
+@@ -152,7 +152,7 @@ kerberos_auth (krb5_context *ctx, int verbose, char **cname,
    krb5_data_free (&cksum_data);
  # endif
  

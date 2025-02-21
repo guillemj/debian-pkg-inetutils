@@ -1,3 +1,18 @@
+inetutils (2:2.6-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+    - Update debian/upstream/signing-key.asc.
+    - Update copyright years.
+    - Remove 0006-Fix-C23-build-issues.patch, fixed upstream.
+    - Update 0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
+      to remove makeinfo and help2man dependencies from bootstrap.conf.
+    - Refresh patches.
+    - Remove debian/upstream/bootstrap.conf, now in upstream tarball.
+    - Do not copy bootstrap script from gnulib, now in upstream tarball.
+    - Stop cleaning bootstrap and bootstrap.conf in debian/clean.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 21 Feb 2025 23:49:42 +0100
+
 inetutils (2:2.5-6) unstable; urgency=medium
 
   * Place each command line option in debian/rules on its own line.

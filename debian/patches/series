@@ -4,4 +4,3 @@ local/0002-build-Use-runstatedir-for-run-directory.patch
 local/0003-inetd-Change-protocol-semantics-in-inetd.conf.patch
 local/0004-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
 local/0005-inetd-Add-new-foreground-option.patch
-local/0006-Fix-C23-build-issues.patch
