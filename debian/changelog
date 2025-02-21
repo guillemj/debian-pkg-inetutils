@@ -1,4 +1,4 @@
-inetutils (2:2.6-1) UNRELEASED; urgency=medium
+inetutils (2:2.6-1) unstable; urgency=medium
 
   * New upstream release.
     - Update debian/upstream/signing-key.asc.
@@ -12,7 +12,7 @@ inetutils (2:2.6-1) UNRELEASED; urgency=medium
     - Stop cleaning bootstrap and bootstrap.conf in debian/clean.
   * Switch to Standards-Version 4.7.1 (no changes needed).
 
- -- Guillem Jover <guillem@debian.org>  Fri, 21 Feb 2025 23:49:42 +0100
+ -- Guillem Jover <guillem@debian.org>  Sat, 22 Feb 2025 00:43:32 +0100
 
 inetutils (2:2.5-6) unstable; urgency=medium
 
