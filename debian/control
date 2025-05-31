@@ -23,6 +23,7 @@ Build-Depends:
  libncurses-dev,
  libpam0g-dev,
  libwrap0-dev,
+ libcrypt-dev,
  libkrb5-dev,
 
 Package: inetutils-syslogd
