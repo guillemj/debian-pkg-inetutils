@@ -25,6 +25,7 @@ Build-Depends:
  libpam0g-dev,
  libwrap0-dev,
  libkrb5-dev,
+ libsystemd-dev,
 
 Package: inetutils-syslogd
 Architecture: any

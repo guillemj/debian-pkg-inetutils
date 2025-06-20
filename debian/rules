@@ -61,6 +61,7 @@ override_dh_auto_configure:
 	  --with-krb5 \
 	  --with-wrap \
 	  --with-pam \
+	  --enable-systemd \
 	  # EOL
 
 override_dh_auto_install:
