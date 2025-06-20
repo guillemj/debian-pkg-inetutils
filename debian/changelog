@@ -2,6 +2,8 @@ inetutils (2:2.6-2) UNRELEASED; urgency=medium
 
   * Enable libsystemd support to restore utmp functionality in
     syslogd and talkd, on systems running systemd.
+  * Remove bogus test for unsorted file listing, causing indeterministic
+    build failures on some systems.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 20 Jun 2025 03:31:43 +0200
 
