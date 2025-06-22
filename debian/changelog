@@ -1,8 +1,8 @@
-inetutils (2:2.6-3) UNRELEASED; urgency=medium
+inetutils (2:2.6-3) unstable; urgency=medium
 
   * Make libsystemd-dev support linux-any specific.
 
- -- Guillem Jover <guillem@debian.org>  Sun, 22 Jun 2025 16:35:58 +0200
+ -- Guillem Jover <guillem@debian.org>  Sun, 22 Jun 2025 16:59:29 +0200
 
 inetutils (2:2.6-2) unstable; urgency=medium
 
