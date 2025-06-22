@@ -12,6 +12,7 @@ SUIDMODE = "-m 4755"
 ifeq ($(DEB_HOST_ARCH_OS),linux)
   syslogd_provides = linux-kernel-log-daemon
   confflags += --with-path-procnet-dev=/proc/net/dev
+  confflags += --enable-systemd
 endif
 ifeq ($(DEB_HOST_ARCH_OS),hurd)
   tools_provides = net-tools
@@ -61,7 +62,6 @@ override_dh_auto_configure:
 	  --with-krb5 \
 	  --with-wrap \
 	  --with-pam \
-	  --enable-systemd \
 	  # EOL
 
 override_dh_auto_install:

@@ -20,12 +20,12 @@ Build-Depends:
  automake,
  bison,
  gnulib,
+ libsystemd-dev [linux-any],
  libreadline-dev,
  libncurses-dev,
  libpam0g-dev,
  libwrap0-dev,
  libkrb5-dev,
- libsystemd-dev,
 
 Package: inetutils-syslogd
 Architecture: any
