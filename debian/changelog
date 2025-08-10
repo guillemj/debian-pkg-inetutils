@@ -2,6 +2,7 @@ inetutils (2:2.6-4) UNRELEASED; urgency=medium
 
   * Use URL instead of FSF postal address for GPL in debian/copyright.
   * Remove «Rules-Requires-Root: no», which is the current default.
+  * Remove «Priority: optional» field, which is the current default.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 23 Jun 2025 01:37:41 +0200
 
