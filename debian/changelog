@@ -1,4 +1,4 @@
-inetutils (2:2.6-4) UNRELEASED; urgency=medium
+inetutils (2:2.6-4) unstable; urgency=medium
 
   * Use URL instead of FSF postal address for GPL in debian/copyright.
   * Remove «Rules-Requires-Root: no», which is the current default.
@@ -7,7 +7,7 @@ inetutils (2:2.6-4) UNRELEASED; urgency=medium
   * Add Builde-Depends on libcrypt-dev. (Closes: #1106935)
   * Refresh debian/upstream/signing-key.asc (update expiry dates).
 
- -- Guillem Jover <guillem@debian.org>  Mon, 23 Jun 2025 01:37:41 +0200
+ -- Guillem Jover <guillem@debian.org>  Mon, 11 Aug 2025 00:25:19 +0200
 
 inetutils (2:2.6-3) unstable; urgency=medium
 
