@@ -1,3 +1,9 @@
+inetutils (2:2.6-5) UNRELEASED; urgency=medium
+
+  * Switch to debian/watch version 5.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 05 Sep 2025 00:41:09 +0200
+
 inetutils (2:2.6-4) unstable; urgency=medium
 
   * Use URL instead of FSF postal address for GPL in debian/copyright.
