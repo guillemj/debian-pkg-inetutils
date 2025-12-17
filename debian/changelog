@@ -1,8 +1,10 @@
-inetutils (2:2.6-5) UNRELEASED; urgency=medium
+inetutils (2:2.7-1) UNRELEASED; urgency=medium
 
+  * New upstream release.
+    - Refresh patches.
   * Switch to debian/watch version 5.
 
- -- Guillem Jover <guillem@debian.org>  Fri, 05 Sep 2025 00:41:09 +0200
+ -- Guillem Jover <guillem@debian.org>  Wed, 17 Dec 2025 03:47:45 +0100
 
 inetutils (2:2.6-4) unstable; urgency=medium
 

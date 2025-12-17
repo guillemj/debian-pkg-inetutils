@@ -1,7 +1,7 @@
-From 29a499f1b19eecc79303c3f085be5fd94ea0fa7b Mon Sep 17 00:00:00 2001
+From 1d22086aace85b344e73ce448e431479ac207b46 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
-Subject: [PATCH 3/5] inetd: Change protocol semantics in inetd.conf
+Subject: [PATCH 3/6] inetd: Change protocol semantics in inetd.conf
 
 Readd parts of the original patch that got botched when applied
 upstream.
@@ -12,9 +12,12 @@ and "udp". Change "tcp6" and "udp6" to support IPv4 mapped addresses.
 Fixes: commit a12021ee959a88b48cd16e947c671f8f59e29c9d
 Origin: vendor, Debian
 Forwarded: https://lists.gnu.org/archive/html/bug-inetutils/2018-01/msg00001.html
+---
+ src/inetd.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/src/inetd.c b/src/inetd.c
-index 52453fbd..e0da376d 100644
+index 794b5ca1..60659894 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
 @@ -1102,7 +1102,7 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
@@ -35,5 +38,5 @@ index 52453fbd..e0da376d 100644
  	      if (strcmp (&sep->se_proto[3], "6only") == 0)
  		sep->se_v4mapped = 0;
 -- 
-2.47.2
+2.51.0
 

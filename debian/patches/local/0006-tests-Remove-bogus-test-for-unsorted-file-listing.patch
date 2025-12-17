@@ -1,4 +1,4 @@
-From 44f068d40f5124dd1996fa2442c8370321d14bf5 Mon Sep 17 00:00:00 2001
+From 6e023908d5517f50261d4c7e3a5ab7b6b2e39399 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Fri, 20 Jun 2025 03:18:06 +0200
 Subject: [PATCH 6/6] tests: Remove bogus test for unsorted file listing
@@ -40,5 +40,5 @@ index b1b73f85..69cff572 100755
    { errno=1; echo >&2 'Failed to reverse sorting with "-r".'; }
  
 -- 
-2.50.0
+2.51.0
 

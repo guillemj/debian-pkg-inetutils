@@ -1,13 +1,16 @@
-From 4afe49a0e4a08742b3fe394da6346f7acf70990f Mon Sep 17 00:00:00 2001
+From d28903545542ebfe85e71f079ed8935d1c9cd098 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Sun, 5 Sep 2021 05:00:23 +0200
-Subject: [PATCH 2/5] build: Use runstatedir for /run directory
+Subject: [PATCH 2/6] build: Use runstatedir for /run directory
 
 Origin: vendor, Debian
 Forwarded: no
+---
+ paths | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/paths b/paths
-index ca363661..e56cc52b 100644
+index 705ff383..93ecf7ab 100644
 --- a/paths
 +++ b/paths
 @@ -77,12 +77,12 @@ PATH_FTPLOGINMESG /etc/motd
@@ -37,5 +40,5 @@ index ca363661..e56cc52b 100644
  PATH_RLOGIN	x $(bindir)/rlogin
  PATH_RSH	x $(bindir)/rsh
 -- 
-2.47.2
+2.51.0
 

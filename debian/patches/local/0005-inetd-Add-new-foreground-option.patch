@@ -1,16 +1,19 @@
-From df011a889e907da49083d6dcbcc42c718e3c84b3 Mon Sep 17 00:00:00 2001
+From d1eda1ce79fe6ed6605e1313d9d735b2018c5564 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Tue, 8 Aug 2023 03:45:28 +0200
-Subject: [PATCH 5/5] inetd: Add new --foreground option
+Subject: [PATCH 5/6] inetd: Add new --foreground option
 
 This option avoids daemonizing, like --debug, except that it does not
 imply debugging output. To be used primary by the systemd service.
 
 Origin: vendor, Debian
 Forwarded: no
+---
+ src/inetd.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/src/inetd.c b/src/inetd.c
-index e0da376d..8252d3b9 100644
+index 60659894..3f4d3d87 100644
 --- a/src/inetd.c
 +++ b/src/inetd.c
 @@ -150,6 +150,7 @@
@@ -63,5 +66,5 @@ index e0da376d..8252d3b9 100644
        if (daemon (0, 0) < 0)
  	{
 -- 
-2.47.2
+2.51.0
 
