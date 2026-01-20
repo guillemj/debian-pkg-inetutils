@@ -1,6 +1,8 @@
 # Upstream git
 0001-ping-decode-unreachable-codes-added-in-RFC-4443.patch
 0002-ftpd-rcp-rlogin-rsh-rshd-uucpd-fix-check-set-id-retu.patch
+upstream/0001-Fix-injection-bug-with-bogus-user-names.patch
+upstream/0002-telnetd-Sanitize-all-variable-expansions.patch
 # Local patches
 0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 0002-build-Use-runstatedir-for-run-directory.patch
