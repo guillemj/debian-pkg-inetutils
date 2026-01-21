@@ -1,8 +1,9 @@
-inetutils (2:2.7-2) unstable; urgency=medium
+inetutils (2:2.7-2) unstable; urgency=high
 
   * Fix remote authentication by-pass in telnetd.
     GNU InetUtils Security Advisory:
     <https://lists.gnu.org/archive/html/bug-inetutils/2026-01/msg00004.html>
+    Fixes CVE-2026-24061. (Closes: #1126047)
   * Switch to Standards-Version 4.7.3 (no changes needed).
 
  -- Guillem Jover <guillem@debian.org>  Tue, 20 Jan 2026 15:53:22 +0100
