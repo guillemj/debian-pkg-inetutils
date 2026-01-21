@@ -1,11 +1,11 @@
-inetutils (2:2.6-3+deb13u1) UNRELEASED; urgency=high
+inetutils (2:2.6-3+deb13u1) trixie-security; urgency=high
 
   * Fix remote authentication bypass in telnetd.
     GNU InetUtils Security Advisory:
     <https://lists.gnu.org/archive/html/bug-inetutils/2026-01/msg00004.html>
     Fixes CVE-2026-24061. (Closes: #1126047)
 
- -- Guillem Jover <guillem@debian.org>  Wed, 21 Jan 2026 17:33:26 +0100
+ -- Guillem Jover <guillem@debian.org>  Wed, 21 Jan 2026 17:37:32 +0100
 
 inetutils (2:2.6-3) unstable; urgency=medium
 
