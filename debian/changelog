@@ -1,11 +1,11 @@
-inetutils (2:2.7-3) UNRELEASED; urgency=medium
+inetutils (2:2.7-3) unstable; urgency=high
 
   * Prevent privilege escalation via telnetd abusing systemd service
     credentials support added to the login(1) implementation of util-linux in
     release 2.40. Reported by Ron Ben Yizhak <ron.benyizhak@safebreach.com>.
   * Remove unused lintian override very-long-line-length-in-source-file.
 
- -- Guillem Jover <guillem@debian.org>  Mon, 16 Feb 2026 13:48:30 +0100
+ -- Guillem Jover <guillem@debian.org>  Mon, 16 Feb 2026 13:57:00 +0100
 
 inetutils (2:2.7-2) unstable; urgency=high
 
