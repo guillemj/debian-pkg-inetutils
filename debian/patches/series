@@ -1,6 +1,7 @@
 # Upstream patches
 upstream/0001-Fix-injection-bug-with-bogus-user-names.patch
 upstream/0002-telnetd-Sanitize-all-variable-expansions.patch
+upstream/0001-telnetd-don-t-allow-systemd-service-credentials.patch
 # Local patches
 local/0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 local/0002-build-Use-runstatedir-for-run-directory.patch
