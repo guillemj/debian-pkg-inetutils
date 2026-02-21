@@ -7,7 +7,8 @@ Subject: [PATCH 4/6] Use krb5_auth_con_getsendsubkey() instead of
 The latter is not exposed in the headers anymore.
 
 Origin: vendor, Debian
-Forwarded: no
+Forwarded: https://codeberg.org/inetutils/inetutils/pulls/11
+Applied-Upstream: 2.7+, commit:647975ce5672ff1701038c4e1659b07f4798554f
 ---
  libinetutils/kerberos5.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

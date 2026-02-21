@@ -4,7 +4,8 @@ Date: Sun, 5 Sep 2021 05:00:23 +0200
 Subject: [PATCH 2/6] build: Use runstatedir for /run directory
 
 Origin: vendor, Debian
-Forwarded: no
+Forwarded: https://codeberg.org/inetutils/inetutils/pulls/12
+Applied-Upstream: 2.7+, commit:d401339e2670a659e1016b17c8233c5cd7abdfd5
 ---
  paths | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)

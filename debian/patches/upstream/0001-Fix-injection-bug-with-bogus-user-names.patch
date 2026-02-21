@@ -8,6 +8,7 @@ Problem reported by Kyu Neushwaistein.
 Ignore user names that start with '-' or contain shell metacharacters.
 
 Signed-off-by: Simon Josefsson <simon@josefsson.org>
+Origin: upstream, commit:d47ef23dbdc1fd45c1c989e5bf88911328daa3b2
 ---
  telnetd/utility.c | 9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)

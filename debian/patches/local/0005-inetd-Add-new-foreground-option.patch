@@ -7,7 +7,8 @@ This option avoids daemonizing, like --debug, except that it does not
 imply debugging output. To be used primary by the systemd service.
 
 Origin: vendor, Debian
-Forwarded: no
+Forwarded: https://codeberg.org/inetutils/inetutils/pulls/10
+Applied-Upstream: 2.7+, commit:db70e627cec91542d94d64810e568ce860124b64
 ---
  src/inetd.c | 11 ++++++++++-
  1 file changed, 10 insertions(+), 1 deletion(-)

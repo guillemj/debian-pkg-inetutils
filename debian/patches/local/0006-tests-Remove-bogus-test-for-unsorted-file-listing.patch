@@ -12,7 +12,8 @@ This could be guaranteed with something like disorderfs, but we do not
 bother and simply remove the test case.
 
 Origin: vendor, Debian
-Forwarded: no
+Forwarded: https://codeberg.org/inetutils/inetutils/pulls/9
+Applied-Upstream: 2.7+, commit:556621adc3dcb62dbb28c54905cef15837947115
 ---
  tests/libls.sh | 4 ----
  1 file changed, 4 deletions(-)

@@ -5,6 +5,8 @@ Subject: [PATCH 2/2] telnetd: Sanitize all variable expansions
 
 * telnetd/utility.c (sanitize): New function.
 (_var_short_name): Use it for all variables.
+
+Origin: upstream, commit:ab2e0b1f37c0c011b2cf7d0fd5687b30631a1921
 ---
  telnetd/utility.c | 32 ++++++++++++++++++--------------
  1 file changed, 18 insertions(+), 14 deletions(-)
