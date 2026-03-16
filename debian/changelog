@@ -1,8 +1,17 @@
-inetutils (2:2.7-4) UNRELEASED; urgency=medium
+inetutils (2:2.7-4) unstable; urgency=high
 
   * Update patch metadata.
+  * Add patches from upstream:
+    - Ignore all environment options from clients unless the variable was
+      listed in the new --accept-env telnetd option. This mitigates privilege
+      escalation using environment variables.
+      This is the complete fix for CVE-2026-24061, with its own CVE pending.
+    - Fix stack buffer overlflow processing SLC suboption triplets.
+      Reported by Adiel Sol, Arad Inbar, Erez Cohen, Nir Somech, Ben Grinberg,
+      Daniel Lubel at DREAM Security Research Team.
+      Fixes CVE-2026-32746. (Closes: #1130742)
 
- -- Guillem Jover <guillem@debian.org>  Sat, 21 Feb 2026 02:19:34 +0100
+ -- Guillem Jover <guillem@debian.org>  Mon, 16 Mar 2026 09:22:45 +0100
 
 inetutils (2:2.7-3) unstable; urgency=high
 
