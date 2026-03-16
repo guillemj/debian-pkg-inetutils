@@ -1,4 +1,4 @@
-From d1eda1ce79fe6ed6605e1313d9d735b2018c5564 Mon Sep 17 00:00:00 2001
+From a0a449d8dd13eabfcc35852d26670fce067d4a23 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Tue, 8 Aug 2023 03:45:28 +0200
 Subject: [PATCH 5/6] inetd: Add new --foreground option
@@ -67,5 +67,5 @@ index 60659894..3f4d3d87 100644
        if (daemon (0, 0) < 0)
  	{
 -- 
-2.51.0
+2.53.0
 

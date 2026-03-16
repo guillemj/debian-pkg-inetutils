@@ -1,4 +1,4 @@
-From d28903545542ebfe85e71f079ed8935d1c9cd098 Mon Sep 17 00:00:00 2001
+From 26a0ef357fe443e0244f816e0931400c81af032d Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Sun, 5 Sep 2021 05:00:23 +0200
 Subject: [PATCH 2/6] build: Use runstatedir for /run directory
@@ -41,5 +41,5 @@ index 705ff383..93ecf7ab 100644
  PATH_RLOGIN	x $(bindir)/rlogin
  PATH_RSH	x $(bindir)/rsh
 -- 
-2.51.0
+2.53.0
 

@@ -1,4 +1,4 @@
-From 1d22086aace85b344e73ce448e431479ac207b46 Mon Sep 17 00:00:00 2001
+From 27ce9b66bd3a1a1456e2bfc8cbb424e69e0401c4 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Mon, 6 Sep 2010 10:52:27 +0200
 Subject: [PATCH 3/6] inetd: Change protocol semantics in inetd.conf
@@ -38,5 +38,5 @@ index 794b5ca1..60659894 100644
  	      if (strcmp (&sep->se_proto[3], "6only") == 0)
  		sep->se_v4mapped = 0;
 -- 
-2.51.0
+2.53.0
 

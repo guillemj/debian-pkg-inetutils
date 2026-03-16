@@ -1,12 +1,13 @@
-From ab2e0b1f37c0c011b2cf7d0fd5687b30631a1921 Mon Sep 17 00:00:00 2001
+From d8441226d6f97704aee4c1e95c61a26c9dc09236 Mon Sep 17 00:00:00 2001
 From: Simon Josefsson <simon@josefsson.org>
 Date: Tue, 20 Jan 2026 14:02:39 +0100
-Subject: [PATCH 2/2] telnetd: Sanitize all variable expansions
+Subject: [PATCH 2/5] telnetd: Sanitize all variable expansions
 
 * telnetd/utility.c (sanitize): New function.
 (_var_short_name): Use it for all variables.
 
 Origin: upstream, commit:ab2e0b1f37c0c011b2cf7d0fd5687b30631a1921
+Forwarded: not-needed
 ---
  telnetd/utility.c | 32 ++++++++++++++++++--------------
  1 file changed, 18 insertions(+), 14 deletions(-)
@@ -79,5 +80,5 @@ index 4a56622d..1e7adb08 100644
      default:
        exp->state = EXP_STATE_ERROR;
 -- 
-2.51.0
+2.53.0
 

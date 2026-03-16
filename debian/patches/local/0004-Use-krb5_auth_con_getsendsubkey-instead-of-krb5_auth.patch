@@ -1,4 +1,4 @@
-From c59c2a7eb887d38fad1572f662f835aff6f1343a Mon Sep 17 00:00:00 2001
+From 04e20693fd1aaa69a12aba500785d4f91d181dc1 Mon Sep 17 00:00:00 2001
 From: Guillem Jover <guillem@hadrons.org>
 Date: Wed, 10 Aug 2022 01:57:24 +0200
 Subject: [PATCH 4/6] Use krb5_auth_con_getsendsubkey() instead of
@@ -27,5 +27,5 @@ index 217b64e0..6d993dd3 100644
    /* send size of AP-REQ to the server */
  
 -- 
-2.51.0
+2.53.0
 
