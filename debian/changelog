@@ -5,6 +5,18 @@ inetutils (2:2.4-2+deb12u3) UNRELEASED; urgency=high
       credentials support added to the login(1) implementation of util-linux in
       release 2.40. Reported by Ron Ben Yizhak <ron.benyizhak@safebreach.com>.
       Fixes CVE-2026-28372.
+    - Ignore all environment options from clients unless the variable was
+      listed in the new --accept-env telnetd option. This mitigates privilege
+      escalation using environment variables.
+      This is the complete fix for CVE-2026-24061, with its own CVE pending.
+    - Fix stack buffer overflow processing SLC suboption triplets.
+      Reported by Adiel Sol, Arad Inbar, Erez Cohen, Nir Somech, Ben Grinberg,
+      Daniel Lubel at DREAM Security Research Team.
+      Fixes CVE-2026-32746. (Closes: #1130742)
+  * Add the hashcode-string1 module from forky/sid gnulib adapted to bookworm
+    required by the --accept-env patch, and the gl_hash_set, gl_set, gl_xset
+    and gl_anyhash bookworm gnulib modules required by hashcode-string1.
+    Inject new gnulib modules in lib/Makefile.am.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 30 Mar 2026 16:47:41 +0200
 

@@ -1,0 +1,1118 @@
+Description: Add the required gnulib code from forky/sid or bookworm gnulib
+ The 0004-telnetd-add-the-new-accept-env-option.patch patch, requires these
+ modules which are not available in trixie gnulib and ealier, or not included
+ in the existing upstream package, and we do not automatically refresh the
+ gnulib modules.
+Origin: vendor, Debian
+Forwarded: not-needed
+
+---
+ lib/Makefile.am         |    8 +
+ lib/gl_anyhash1.h       |   31 ++++
+ lib/gl_anyhash2.h       |   82 ++++++++++++
+ lib/gl_anyhash_primes.h |   87 +++++++++++++
+ lib/gl_hash_set.c       |  313 ++++++++++++++++++++++++++++++++++++++++++++++++
+ lib/gl_hash_set.h       |   34 +++++
+ lib/gl_set.c            |   21 +++
+ lib/gl_set.h            |  280 ++++++++++++++++++++++++++++++++++++++++++
+ lib/gl_xset.c           |   21 +++
+ lib/gl_xset.h           |   81 ++++++++++++
+ lib/hashcode-string1.c  |   62 +++++++++
+ lib/hashcode-string1.h  |   33 +++++
+ 12 files changed, 1053 insertions(+)
+
+--- /dev/null
++++ b/lib/hashcode-string1.c
+@@ -0,0 +1,62 @@
++/* hashcode-string1.c -- compute a hash value from a NUL-terminated string.
++
++   Copyright (C) 1998-2004, 2006-2007, 2009-2026 Free Software Foundation, Inc.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU Lesser General Public License as
++   published by the Free Software Foundation; either version 2.1 of the
++   License, or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#include <config.h>
++
++/* Specification.  */
++#include "hashcode-string1.h"
++
++#if USE_DIFF_HASH
++
++# include "bitrotate.h"
++
++/* About hashings, Paul Eggert writes to me (FP), on 1994-01-01: "Please see
++   B. J. McKenzie, R. Harries & T. Bell, Selecting a hashing algorithm,
++   Software--practice & experience 20, 2 (Feb 1990), 209-224.  Good hash
++   algorithms tend to be domain-specific, so what's good for [diffutils'] io.c
++   may not be good for your application."  */
++
++size_t
++hash_string (const char *string, size_t tablesize)
++{
++  size_t value = 0;
++  unsigned char ch;
++
++  for (; (ch = *string); string++)
++    value = ch + rotl_sz (value, 7);
++  return value % tablesize;
++}
++
++#else /* not USE_DIFF_HASH */
++
++/* This one comes from 'recode', and performs a bit better than the above as
++   per a few experiments.  It is inspired from a hashing routine found in the
++   very old Cyber 'snoop', itself written in typical Greg Mansfield style.
++   (By the way, what happened to this excellent man?  Is he still alive?)  */
++
++size_t
++hash_string (const char *string, size_t tablesize)
++{
++  size_t value = 0;
++  unsigned char ch;
++
++  for (; (ch = *string); string++)
++    value = (value * 31 + ch) % tablesize;
++  return value;
++}
++
++#endif /* not USE_DIFF_HASH */
+--- /dev/null
++++ b/lib/hashcode-string1.h
+@@ -0,0 +1,33 @@
++/* hashcode-string1.h -- declaration for a simple hash function
++   Copyright (C) 1998-2004, 2006-2007, 2009-2026 Free Software Foundation, Inc.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU Lesser General Public License as
++   published by the Free Software Foundation; either version 2.1 of the
++   License, or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#include <stddef.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
++/* Compute a hash code for a NUL-terminated string S,
++   and return the hash code modulo TABLESIZE.
++   The result is platform dependent: it depends on the size of the 'size_t'
++   type.  */
++extern size_t hash_string (char const *s, size_t tablesize) _GL_ATTRIBUTE_PURE;
++
++
++#ifdef __cplusplus
++}
++#endif
+--- /dev/null
++++ b/lib/gl_hash_set.c
+@@ -0,0 +1,313 @@
++/* Set data type implemented by a hash table.
++   Copyright (C) 2006, 2008-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2018.
++
++   This program is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation, either version 3 of the License, or
++   (at your option) any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#include <config.h>
++
++/* Specification.  */
++#include "gl_hash_set.h"
++
++#include <stdint.h> /* for uintptr_t, SIZE_MAX */
++#include <stdlib.h>
++
++#include "xsize.h"
++
++/* --------------------------- gl_set_t Data Type --------------------------- */
++
++#include "gl_anyhash1.h"
++
++/* Concrete list node implementation, valid for this file only.  */
++struct gl_list_node_impl
++{
++  struct gl_hash_entry h;           /* hash table entry fields; must be first */
++  const void *value;
++};
++typedef struct gl_list_node_impl * gl_list_node_t;
++
++/* Concrete gl_set_impl type, valid for this file only.  */
++struct gl_set_impl
++{
++  struct gl_set_impl_base base;
++  gl_setelement_hashcode_fn hashcode_fn;
++  /* A hash table: managed as an array of collision lists.  */
++  struct gl_hash_entry **table;
++  size_t table_size;
++  /* Number of hash table entries.  */
++  size_t count;
++};
++
++#define CONTAINER_T gl_set_t
++#define CONTAINER_COUNT(set) (set)->count
++#include "gl_anyhash2.h"
++
++/* --------------------------- gl_set_t Data Type --------------------------- */
++
++static gl_set_t
++gl_hash_nx_create_empty (gl_set_implementation_t implementation,
++                         gl_setelement_equals_fn equals_fn,
++                         gl_setelement_hashcode_fn hashcode_fn,
++                         gl_setelement_dispose_fn dispose_fn)
++{
++  struct gl_set_impl *set =
++    (struct gl_set_impl *) malloc (sizeof (struct gl_set_impl));
++
++  if (set == NULL)
++    return NULL;
++
++  set->base.vtable = implementation;
++  set->base.equals_fn = equals_fn;
++  set->base.dispose_fn = dispose_fn;
++  set->hashcode_fn = hashcode_fn;
++  set->table_size = 11;
++  set->table =
++    (gl_hash_entry_t *) calloc (set->table_size, sizeof (gl_hash_entry_t));
++  if (set->table == NULL)
++    goto fail;
++  set->count = 0;
++
++  return set;
++
++ fail:
++  free (set);
++  return NULL;
++}
++
++static size_t _GL_ATTRIBUTE_PURE
++gl_hash_size (gl_set_t set)
++{
++  return set->count;
++}
++
++static bool _GL_ATTRIBUTE_PURE
++gl_hash_search (gl_set_t set, const void *elt)
++{
++  size_t hashcode =
++    (set->hashcode_fn != NULL
++     ? set->hashcode_fn (elt)
++     : (size_t)(uintptr_t) elt);
++  size_t bucket = hashcode % set->table_size;
++  gl_setelement_equals_fn equals = set->base.equals_fn;
++
++  /* Look for a match in the hash bucket.  */
++  gl_list_node_t node;
++
++  for (node = (gl_list_node_t) set->table[bucket];
++       node != NULL;
++       node = (gl_list_node_t) node->h.hash_next)
++    if (node->h.hashcode == hashcode
++        && (equals != NULL
++            ? equals (elt, node->value)
++            : elt == node->value))
++      return true;
++  return false;
++}
++
++static int
++gl_hash_nx_add (gl_set_t set, const void *elt)
++{
++  size_t hashcode =
++    (set->hashcode_fn != NULL
++     ? set->hashcode_fn (elt)
++     : (size_t)(uintptr_t) elt);
++  size_t bucket = hashcode % set->table_size;
++  gl_setelement_equals_fn equals = set->base.equals_fn;
++
++  /* Look for a match in the hash bucket.  */
++  {
++    gl_list_node_t node;
++
++    for (node = (gl_list_node_t) set->table[bucket];
++         node != NULL;
++         node = (gl_list_node_t) node->h.hash_next)
++      if (node->h.hashcode == hashcode
++          && (equals != NULL
++              ? equals (elt, node->value)
++              : elt == node->value))
++        return 0;
++  }
++
++  /* Allocate a new node.  */
++  gl_list_node_t node =
++    (struct gl_list_node_impl *) malloc (sizeof (struct gl_list_node_impl));
++
++  if (node == NULL)
++    return -1;
++
++  node->value = elt;
++  node->h.hashcode = hashcode;
++
++  /* Add node to the hash table.  */
++  node->h.hash_next = set->table[bucket];
++  set->table[bucket] = &node->h;
++
++  /* Add node to the set.  */
++  set->count++;
++
++  hash_resize_after_add (set);
++
++  return 1;
++}
++
++static bool
++gl_hash_remove (gl_set_t set, const void *elt)
++{
++  size_t hashcode =
++    (set->hashcode_fn != NULL
++     ? set->hashcode_fn (elt)
++     : (size_t)(uintptr_t) elt);
++  size_t bucket = hashcode % set->table_size;
++  gl_setelement_equals_fn equals = set->base.equals_fn;
++
++  /* Look for the first match in the hash bucket.  */
++  gl_list_node_t *nodep;
++
++  for (nodep = (gl_list_node_t *) &set->table[bucket];
++       *nodep != NULL;
++       nodep = (gl_list_node_t *) &(*nodep)->h.hash_next)
++    {
++      gl_list_node_t node = *nodep;
++      if (node->h.hashcode == hashcode
++          && (equals != NULL
++              ? equals (elt, node->value)
++              : elt == node->value))
++        {
++          /* Remove node from the hash table.  */
++          *nodep = (gl_list_node_t) node->h.hash_next;
++
++          /* Remove node from the set.  */
++          set->count--;
++
++          if (set->base.dispose_fn != NULL)
++            set->base.dispose_fn (node->value);
++          free (node);
++          return true;
++        }
++    }
++
++  return false;
++}
++
++static void
++gl_hash_free (gl_set_t set)
++{
++  if (set->count > 0)
++    {
++      gl_setelement_dispose_fn dispose = set->base.dispose_fn;
++      struct gl_hash_entry **table = set->table;
++      size_t i;
++
++      for (i = set->table_size; i > 0; )
++        {
++          gl_hash_entry_t node = table[--i];
++
++          while (node != NULL)
++            {
++              gl_hash_entry_t next = node->hash_next;
++
++              /* Free the entry.  */
++              if (dispose != NULL)
++                dispose (((gl_list_node_t) node)->value);
++              free (node);
++
++              node = next;
++            }
++        }
++    }
++
++  free (set->table);
++  free (set);
++}
++
++/* ---------------------- gl_set_iterator_t Data Type ---------------------- */
++
++/* Here we iterate through the hash buckets.  Therefore the order in which the
++   elements are returned is unpredictable.  */
++
++static gl_set_iterator_t
++gl_hash_iterator (gl_set_t set)
++{
++  gl_set_iterator_t result;
++
++  result.vtable = set->base.vtable;
++  result.set = set;
++  result.p = NULL;         /* runs through the nodes of a bucket */
++  result.i = 0;            /* index of the bucket that p points into + 1 */
++  result.j = set->table_size;
++#if defined GCC_LINT || defined lint
++  result.q = NULL;
++  result.count = 0;
++#endif
++
++  return result;
++}
++
++static bool
++gl_hash_iterator_next (gl_set_iterator_t *iterator, const void **eltp)
++{
++  if (iterator->p != NULL)
++    {
++      /* We're traversing a bucket.  */
++      gl_list_node_t node = (gl_list_node_t) iterator->p;
++      *eltp = node->value;
++      iterator->p = (gl_list_node_t) node->h.hash_next;
++      return true;
++    }
++  else
++    {
++      /* Find the next bucket that is not empty.  */
++      size_t j = iterator->j;
++      size_t i = iterator->i;
++
++      if (i < j)
++        {
++          gl_hash_entry_t *table = iterator->set->table;
++          do
++            {
++              gl_list_node_t node = (gl_list_node_t) table[i++];
++              if (node != NULL)
++                {
++                  *eltp = node->value;
++                  iterator->p = (gl_list_node_t) node->h.hash_next;
++                  iterator->i = i;
++                  return true;
++                }
++            }
++          while (i < j);
++        }
++      /* Here iterator->p is still NULL, and i == j.  */
++      iterator->i = j;
++      return false;
++    }
++}
++
++static void
++gl_hash_iterator_free (gl_set_iterator_t *iterator)
++{
++}
++
++
++const struct gl_set_implementation gl_hash_set_implementation =
++  {
++    gl_hash_nx_create_empty,
++    gl_hash_size,
++    gl_hash_search,
++    gl_hash_nx_add,
++    gl_hash_remove,
++    gl_hash_free,
++    gl_hash_iterator,
++    gl_hash_iterator_next,
++    gl_hash_iterator_free
++  };
+--- /dev/null
++++ b/lib/gl_hash_set.h
+@@ -0,0 +1,34 @@
++/* Set data type implemented by a hash table.
++   Copyright (C) 2006, 2009-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2018.
++
++   This program is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation, either version 3 of the License, or
++   (at your option) any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#ifndef _GL_HASH_SET_H
++#define _GL_HASH_SET_H
++
++#include "gl_set.h"
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++extern const struct gl_set_implementation gl_hash_set_implementation;
++#define GL_HASH_SET &gl_hash_set_implementation
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif /* _GL_HASH_SET_H */
+--- /dev/null
++++ b/lib/gl_set.c
+@@ -0,0 +1,21 @@
++/* Abstract set data type.
++
++   Copyright (C) 2018-2023 Free Software Foundation, Inc.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published
++   by the Free Software Foundation, either version 3 of the License,
++   or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#include <config.h>
++
++#define GL_SET_INLINE _GL_EXTERN_INLINE
++#include "gl_set.h"
+--- /dev/null
++++ b/lib/gl_set.h
+@@ -0,0 +1,280 @@
++/* Abstract set data type.
++   Copyright (C) 2006-2007, 2009-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2018.
++
++   This program is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation, either version 3 of the License, or
++   (at your option) any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#ifndef _GL_SET_H
++#define _GL_SET_H
++
++#include <stddef.h>
++
++#ifndef _GL_INLINE_HEADER_BEGIN
++ #error "Please include config.h first."
++#endif
++_GL_INLINE_HEADER_BEGIN
++#ifndef GL_SET_INLINE
++# define GL_SET_INLINE _GL_INLINE
++#endif
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
++/* gl_set is an abstract set data type.  It can contain any number of objects
++   ('void *' or 'const void *' pointers); the order does not matter.
++   Duplicates (in the sense of the comparator) are forbidden.
++
++   There are several implementations of this set datatype, optimized for
++   different operations or for memory.  You can start using the simplest set
++   implementation, GL_ARRAY_SET, and switch to a different implementation
++   later, when you realize which operations are performed the most frequently.
++   The API of the different implementations is exactly the same; when switching
++   to a different implementation, you only have to change the gl_set_create
++   call.
++
++   The implementations are:
++     GL_ARRAY_SET         a growable array
++     GL_LINKEDHASH_SET    a hash table with a linked list
++     GL_HASH_SET          a hash table
++
++   The memory consumption is asymptotically the same: O(1) for every object
++   in the set.  When looking more closely at the average memory consumed
++   for an object, GL_ARRAY_SET is the most compact representation, then comes
++   GL_HASH_SET, and GL_LINKEDHASH_SET needs the most memory.
++
++   The guaranteed average performance of the operations is, for a set of
++   n elements:
++
++   Operation                  ARRAY   LINKEDHASH
++                                      HASH
++
++   gl_set_size                 O(1)   O(1)
++   gl_set_add                  O(n)   O(1)
++   gl_set_remove               O(n)   O(1)
++   gl_set_search               O(n)   O(1)
++   gl_set_iterator             O(1)   O(1)
++   gl_set_iterator_next        O(1)   O(1)
++ */
++
++/* --------------------------- gl_set_t Data Type --------------------------- */
++
++/* Type of function used to compare two elements.
++   NULL denotes pointer comparison.  */
++typedef bool (*gl_setelement_equals_fn) (const void *elt1, const void *elt2);
++
++/* Type of function used to compute a hash code.
++   NULL denotes a function that depends only on the pointer itself.  */
++typedef size_t (*gl_setelement_hashcode_fn) (const void *elt);
++
++#ifndef _GL_SETELEMENT_DISPOSE_FN_DEFINED
++/* Type of function used to dispose an element once it's removed from a set.
++   NULL denotes a no-op.  */
++typedef void (*gl_setelement_dispose_fn) (const void *elt);
++# define _GL_SETELEMENT_DISPOSE_FN_DEFINED 1
++#endif
++
++struct gl_set_impl;
++/* Type representing an entire set.  */
++typedef struct gl_set_impl * gl_set_t;
++
++struct gl_set_implementation;
++/* Type representing a set datatype implementation.  */
++typedef const struct gl_set_implementation * gl_set_implementation_t;
++
++#if 0 /* Unless otherwise specified, these are defined inline below.  */
++
++/* Creates an empty set.
++   IMPLEMENTATION is one of GL_ARRAY_SET, GL_LINKEDHASH_SET, GL_HASH_SET.
++   EQUALS_FN is an element comparison function or NULL.
++   HASHCODE_FN is an element hash code function or NULL.
++   DISPOSE_FN is an element disposal function or NULL.  */
++/* declared in gl_xset.h */
++extern gl_set_t gl_set_create_empty (gl_set_implementation_t implementation,
++                                     gl_setelement_equals_fn equals_fn,
++                                     gl_setelement_hashcode_fn hashcode_fn,
++                                     gl_setelement_dispose_fn dispose_fn)
++  /*_GL_ATTRIBUTE_DEALLOC (gl_set_free, 1)*/
++  _GL_ATTRIBUTE_RETURNS_NONNULL;
++/* Likewise.  Returns NULL upon out-of-memory.  */
++extern gl_set_t gl_set_nx_create_empty (gl_set_implementation_t implementation,
++                                        gl_setelement_equals_fn equals_fn,
++                                        gl_setelement_hashcode_fn hashcode_fn,
++                                        gl_setelement_dispose_fn dispose_fn)
++  /*_GL_ATTRIBUTE_DEALLOC (gl_set_free, 1)*/;
++
++/* Returns the current number of elements in a set.  */
++extern size_t gl_set_size (gl_set_t set);
++
++/* Searches whether an element is already in the set.
++   Returns true if found, or false if not present in the set.  */
++extern bool gl_set_search (gl_set_t set, const void *elt);
++
++/* Adds an element to a set.
++   Returns true if it was not already in the set and added, false otherwise.  */
++/* declared in gl_xset.h */
++extern bool gl_set_add (gl_set_t set, const void *elt);
++
++/* Likewise.  Returns -1 upon out-of-memory.  */
++_GL_ATTRIBUTE_NODISCARD
++extern int gl_set_nx_add (gl_set_t set, const void *elt);
++
++/* Removes an element from a set.
++   Returns true if it was found and removed.  */
++extern bool gl_set_remove (gl_set_t set, const void *elt);
++
++/* Frees an entire set.
++   (But this call does not free the elements of the set.  It only invokes
++   the DISPOSE_FN on each of the elements of the set.)  */
++extern void gl_set_free (gl_set_t set);
++
++#endif /* End of inline and gl_xset.h-defined functions.  */
++
++/* ---------------------- gl_set_iterator_t Data Type ---------------------- */
++
++/* Functions for iterating through a set.
++   Note: Iterating through a set of type GL_HASH_SET returns the elements in an
++   unpredictable order.  If you need a predictable order, use GL_LINKEDHASH_SET
++   instead of GL_HASH_SET.  */
++
++/* Type of an iterator that traverses a set.
++   This is a fixed-size struct, so that creation of an iterator doesn't need
++   memory allocation on the heap.  */
++typedef struct
++{
++  /* For fast dispatch of gl_set_iterator_next.  */
++  const struct gl_set_implementation *vtable;
++  /* For detecting whether the last returned element was removed.  */
++  gl_set_t set;
++  size_t count;
++  /* Other, implementation-private fields.  */
++  void *p; void *q;
++  size_t i; size_t j;
++} gl_set_iterator_t;
++
++#if 0 /* These are defined inline below.  */
++
++/* Creates an iterator traversing a set.
++   The set's contents must not be modified while the iterator is in use,
++   except for removing the last returned element.  */
++extern gl_set_iterator_t gl_set_iterator (gl_set_t set);
++
++/* If there is a next element, stores the next element in *ELTP, advances the
++   iterator and returns true.  Otherwise, returns false.  */
++extern bool gl_set_iterator_next (gl_set_iterator_t *iterator,
++                                  const void **eltp);
++
++/* Frees an iterator.  */
++extern void gl_set_iterator_free (gl_set_iterator_t *iterator);
++
++#endif /* End of inline functions.  */
++
++/* ------------------------ Implementation Details ------------------------ */
++
++struct gl_set_implementation
++{
++  /* gl_set_t functions.  */
++  gl_set_t (*nx_create_empty) (gl_set_implementation_t implementation,
++                               gl_setelement_equals_fn equals_fn,
++                               gl_setelement_hashcode_fn hashcode_fn,
++                               gl_setelement_dispose_fn dispose_fn);
++  size_t (*size) (gl_set_t set);
++  bool (*search) (gl_set_t set, const void *elt);
++  int (*nx_add) (gl_set_t set, const void *elt);
++  bool (*remove_elt) (gl_set_t set, const void *elt);
++  void (*set_free) (gl_set_t set);
++  /* gl_set_iterator_t functions.  */
++  gl_set_iterator_t (*iterator) (gl_set_t set);
++  bool (*iterator_next) (gl_set_iterator_t *iterator, const void **eltp);
++  void (*iterator_free) (gl_set_iterator_t *iterator);
++};
++
++struct gl_set_impl_base
++{
++  const struct gl_set_implementation *vtable;
++  gl_setelement_equals_fn equals_fn;
++  gl_setelement_dispose_fn dispose_fn;
++};
++
++/* Define all functions of this file as accesses to the
++   struct gl_set_implementation.  */
++
++GL_SET_INLINE
++/*_GL_ATTRIBUTE_DEALLOC (gl_set_free, 1)*/
++gl_set_t
++gl_set_nx_create_empty (gl_set_implementation_t implementation,
++                        gl_setelement_equals_fn equals_fn,
++                        gl_setelement_hashcode_fn hashcode_fn,
++                        gl_setelement_dispose_fn dispose_fn)
++{
++  return implementation->nx_create_empty (implementation, equals_fn,
++                                          hashcode_fn, dispose_fn);
++}
++
++GL_SET_INLINE size_t
++gl_set_size (gl_set_t set)
++{
++  return ((const struct gl_set_impl_base *) set)->vtable->size (set);
++}
++
++GL_SET_INLINE bool
++gl_set_search (gl_set_t set, const void *elt)
++{
++  return ((const struct gl_set_impl_base *) set)->vtable->search (set, elt);
++}
++
++_GL_ATTRIBUTE_NODISCARD GL_SET_INLINE int
++gl_set_nx_add (gl_set_t set, const void *elt)
++{
++  return ((const struct gl_set_impl_base *) set)->vtable->nx_add (set, elt);
++}
++
++GL_SET_INLINE bool
++gl_set_remove (gl_set_t set, const void *elt)
++{
++  return ((const struct gl_set_impl_base *) set)->vtable->remove_elt (set, elt);
++}
++
++GL_SET_INLINE void
++gl_set_free (gl_set_t set)
++{
++  ((const struct gl_set_impl_base *) set)->vtable->set_free (set);
++}
++
++GL_SET_INLINE gl_set_iterator_t
++gl_set_iterator (gl_set_t set)
++{
++  return ((const struct gl_set_impl_base *) set)->vtable->iterator (set);
++}
++
++GL_SET_INLINE bool
++gl_set_iterator_next (gl_set_iterator_t *iterator, const void **eltp)
++{
++  return iterator->vtable->iterator_next (iterator, eltp);
++}
++
++GL_SET_INLINE void
++gl_set_iterator_free (gl_set_iterator_t *iterator)
++{
++  iterator->vtable->iterator_free (iterator);
++}
++
++#ifdef __cplusplus
++}
++#endif
++
++_GL_INLINE_HEADER_END
++
++#endif /* _GL_SET_H */
+--- /dev/null
++++ b/lib/gl_xset.c
+@@ -0,0 +1,21 @@
++/* Abstract set data type, with out-of-memory checking.
++
++   Copyright (C) 2018-2023 Free Software Foundation, Inc.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published
++   by the Free Software Foundation, either version 3 of the License,
++   or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#include <config.h>
++
++#define GL_XSET_INLINE _GL_EXTERN_INLINE
++#include "gl_xset.h"
+--- /dev/null
++++ b/lib/gl_xset.h
+@@ -0,0 +1,81 @@
++/* Abstract set data type, with out-of-memory checking.
++   Copyright (C) 2009-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2009.
++
++   This program is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation, either version 3 of the License, or
++   (at your option) any later version.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++#ifndef _GL_XSET_H
++#define _GL_XSET_H
++
++#include "gl_set.h"
++#include "xalloc.h"
++
++#ifndef _GL_INLINE_HEADER_BEGIN
++ #error "Please include config.h first."
++#endif
++_GL_INLINE_HEADER_BEGIN
++#ifndef GL_XSET_INLINE
++# define GL_XSET_INLINE _GL_INLINE
++#endif
++
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++/* These functions are thin wrappers around the corresponding functions with
++   _nx_ infix from gl_set.h.  Upon out-of-memory, they invoke xalloc_die (),
++   instead of returning an error indicator.  */
++#if 0 /* These are defined inline below.  */
++extern gl_set_t gl_set_create_empty (gl_set_implementation_t implementation,
++                                     gl_setelement_equals_fn equals_fn,
++                                     gl_setelement_hashcode_fn hashcode_fn,
++                                     gl_setelement_dispose_fn dispose_fn)
++  /*_GL_ATTRIBUTE_DEALLOC (gl_set_free, 1)*/
++  _GL_ATTRIBUTE_RETURNS_NONNULL;
++extern bool gl_set_add (gl_set_t set, const void *elt);
++#endif
++
++GL_XSET_INLINE
++/*_GL_ATTRIBUTE_DEALLOC (gl_set_free, 1)*/
++_GL_ATTRIBUTE_RETURNS_NONNULL
++gl_set_t
++gl_set_create_empty (gl_set_implementation_t implementation,
++                     gl_setelement_equals_fn equals_fn,
++                     gl_setelement_hashcode_fn hashcode_fn,
++                     gl_setelement_dispose_fn dispose_fn)
++{
++  gl_set_t result =
++    gl_set_nx_create_empty (implementation, equals_fn, hashcode_fn, dispose_fn);
++  if (result == NULL)
++    xalloc_die ();
++  return result;
++}
++
++GL_XSET_INLINE bool
++gl_set_add (gl_set_t set, const void *elt)
++{
++  int result = gl_set_nx_add (set, elt);
++  if (result < 0)
++    xalloc_die ();
++  return result;
++}
++
++#ifdef __cplusplus
++}
++#endif
++
++_GL_INLINE_HEADER_END
++
++#endif /* _GL_XSET_H */
+--- a/lib/Makefile.am
++++ b/lib/Makefile.am
+@@ -1106,6 +1106,14 @@ EXTRA_DIST += $(top_srcdir)/build-aux/gi
+ 
+ ## end   gnulib module gitlog-to-changelog
+ 
++## Locally added gnulib modules
++
++libgnu_a_SOURCES += \
++	gl_hash_set.c \
++	gl_set.c \
++	gl_xset.c \
++	# EOL
++
+ ## begin gnulib module glob
+ 
+ if GL_COND_OBJ_GLOB
+--- /dev/null
++++ b/lib/gl_anyhash1.h
+@@ -0,0 +1,31 @@
++/* Hash table for sequential list, set, and map data type.
++   Copyright (C) 2006, 2009-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2006.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU Lesser General Public License as
++   published by the Free Software Foundation; either version 2.1 of the
++   License, or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++/* Common code of
++   gl_linkedhash_list.c, gl_avltreehash_list.c, gl_rbtreehash_list.c,
++   gl_linkedhash_set.c, gl_hash_set.c,
++   gl_linkedhash_map.c, gl_hash_map.c.  */
++
++/* Hash table entry.  */
++struct gl_hash_entry
++{
++  struct gl_hash_entry *hash_next;  /* chain of entries in same bucket */
++  size_t hashcode;                  /* cache of the hash code of
++                                       - the key (for map data type) or
++                                       - the value (for list, set data types) */
++};
++typedef struct gl_hash_entry * gl_hash_entry_t;
+--- /dev/null
++++ b/lib/gl_anyhash2.h
+@@ -0,0 +1,82 @@
++/* Hash table for sequential list, set, and map data type.
++   Copyright (C) 2006, 2009-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2006.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU Lesser General Public License as
++   published by the Free Software Foundation; either version 2.1 of the
++   License, or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++/* Common code of
++   gl_linkedhash_list.c, gl_avltreehash_list.c, gl_rbtreehash_list.c,
++   gl_linkedhash_set.c, gl_hash_set.c,
++   gl_linkedhash_map.c, gl_hash_map.c.  */
++
++#include "gl_anyhash_primes.h"
++
++/* Resizes the hash table with a new estimated size.  */
++static void
++hash_resize (CONTAINER_T container, size_t estimate)
++{
++  size_t new_size = next_prime (estimate);
++
++  if (new_size > container->table_size)
++    {
++      gl_hash_entry_t *old_table = container->table;
++      /* Allocate the new table.  */
++      gl_hash_entry_t *new_table;
++      size_t i;
++
++      if (size_overflow_p (xtimes (new_size, sizeof (gl_hash_entry_t))))
++        goto fail;
++      new_table =
++        (gl_hash_entry_t *) calloc (new_size, sizeof (gl_hash_entry_t));
++      if (new_table == NULL)
++        goto fail;
++
++      /* Iterate through the entries of the old table.  */
++      for (i = container->table_size; i > 0; )
++        {
++          gl_hash_entry_t node = old_table[--i];
++
++          while (node != NULL)
++            {
++              gl_hash_entry_t next = node->hash_next;
++              /* Add the entry to the new table.  */
++              size_t bucket = node->hashcode % new_size;
++              node->hash_next = new_table[bucket];
++              new_table[bucket] = node;
++
++              node = next;
++            }
++        }
++
++      container->table = new_table;
++      container->table_size = new_size;
++      free (old_table);
++    }
++  return;
++
++ fail:
++  /* Just continue without resizing the table.  */
++  return;
++}
++
++/* Resizes the hash table if needed, after CONTAINER_COUNT (container) was
++   incremented.  */
++static void
++hash_resize_after_add (CONTAINER_T container)
++{
++  size_t count = CONTAINER_COUNT (container);
++  size_t estimate = xsum (count, count / 2); /* 1.5 * count */
++  if (estimate > container->table_size)
++    hash_resize (container, estimate);
++}
+--- /dev/null
++++ b/lib/gl_anyhash_primes.h
+@@ -0,0 +1,87 @@
++/* Table of primes, for use by hash tables.
++   Copyright (C) 2006, 2009-2023 Free Software Foundation, Inc.
++   Written by Bruno Haible <bruno@clisp.org>, 2006.
++
++   This file is free software: you can redistribute it and/or modify
++   it under the terms of the GNU Lesser General Public License as
++   published by the Free Software Foundation; either version 2.1 of the
++   License, or (at your option) any later version.
++
++   This file is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public License
++   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
++
++/* Array of primes, approximately in steps of factor 1.2.
++   This table was computed by executing the Common Lisp expression
++     (dotimes (i 244) (format t "nextprime(~D)~%" (ceiling (expt 1.2d0 i))))
++   and feeding the result to PARI/gp.  */
++static const size_t primes[] =
++  {
++    11, 13, 17, 19, 23, 29, 37, 41, 47, 59, 67, 83, 97, 127, 139, 167, 199,
++    239, 293, 347, 419, 499, 593, 709, 853, 1021, 1229, 1471, 1777, 2129, 2543,
++    3049, 3659, 4391, 5273, 6323, 7589, 9103, 10937, 13109, 15727, 18899,
++    22651, 27179, 32609, 39133, 46957, 56359, 67619, 81157, 97369, 116849,
++    140221, 168253, 201907, 242309, 290761, 348889, 418667, 502409, 602887,
++    723467, 868151, 1041779, 1250141, 1500181, 1800191, 2160233, 2592277,
++    3110741, 3732887, 4479463, 5375371, 6450413, 7740517, 9288589, 11146307,
++    13375573, 16050689, 19260817, 23112977, 27735583, 33282701, 39939233,
++    47927081, 57512503, 69014987, 82818011, 99381577, 119257891, 143109469,
++    171731387, 206077643, 247293161, 296751781, 356102141, 427322587,
++    512787097, 615344489, 738413383, 886096061, 1063315271, 1275978331,
++    1531174013, 1837408799, 2204890543UL, 2645868653UL, 3175042391UL,
++    3810050851UL,
++#if SIZE_MAX > 4294967295UL
++    4572061027UL, 5486473229UL, 6583767889UL, 7900521449UL, 9480625733UL,
++    11376750877UL, 13652101063UL, 16382521261UL, 19659025513UL, 23590830631UL,
++    28308996763UL, 33970796089UL, 40764955463UL, 48917946377UL, 58701535657UL,
++    70441842749UL, 84530211301UL, 101436253561UL, 121723504277UL,
++    146068205131UL, 175281846149UL, 210338215379UL, 252405858521UL,
++    302887030151UL, 363464436191UL, 436157323417UL, 523388788231UL,
++    628066545713UL, 753679854847UL, 904415825857UL, 1085298991109UL,
++    1302358789181UL, 1562830547009UL, 1875396656429UL, 2250475987709UL,
++    2700571185239UL, 3240685422287UL, 3888822506759UL, 4666587008147UL,
++    5599904409713UL, 6719885291641UL, 8063862349969UL, 9676634819959UL,
++    11611961783951UL, 13934354140769UL, 16721224968907UL, 20065469962669UL,
++    24078563955191UL, 28894276746229UL, 34673132095507UL, 41607758514593UL,
++    49929310217531UL, 59915172260971UL, 71898206713183UL, 86277848055823UL,
++    103533417666967UL, 124240101200359UL, 149088121440451UL, 178905745728529UL,
++    214686894874223UL, 257624273849081UL, 309149128618903UL, 370978954342639UL,
++    445174745211143UL, 534209694253381UL, 641051633104063UL, 769261959724877UL,
++    923114351670013UL, 1107737222003791UL, 1329284666404567UL,
++    1595141599685509UL, 1914169919622551UL, 2297003903547091UL,
++    2756404684256459UL, 3307685621107757UL, 3969222745329323UL,
++    4763067294395177UL, 5715680753274209UL, 6858816903929113UL,
++    8230580284714831UL, 9876696341657791UL, 11852035609989371UL,
++    14222442731987227UL, 17066931278384657UL, 20480317534061597UL,
++    24576381040873903UL, 29491657249048679UL, 35389988698858471UL,
++    42467986438630267UL, 50961583726356109UL, 61153900471627387UL,
++    73384680565952851UL, 88061616679143347UL, 105673940014972061UL,
++    126808728017966413UL, 152170473621559703UL, 182604568345871671UL,
++    219125482015045997UL, 262950578418055169UL, 315540694101666193UL,
++    378648832921999397UL, 454378599506399233UL, 545254319407679131UL,
++    654305183289214771UL, 785166219947057701UL, 942199463936469157UL,
++    1130639356723763129UL, 1356767228068515623UL, 1628120673682218619UL,
++    1953744808418662409UL, 2344493770102394881UL, 2813392524122873857UL,
++    3376071028947448339UL, 4051285234736937517UL, 4861542281684325481UL,
++    5833850738021191727UL, 7000620885625427969UL, 8400745062750513217UL,
++    10080894075300616261UL, 12097072890360739951UL, 14516487468432885797UL,
++    17419784962119465179UL,
++#endif
++    SIZE_MAX /* sentinel, to ensure the search terminates */
++  };
++
++/* Returns a suitable prime >= ESTIMATE.  */
++static size_t
++next_prime (size_t estimate)
++{
++  size_t i;
++
++  for (i = 0; i < sizeof (primes) / sizeof (primes[0]); i++)
++    if (primes[i] >= estimate)
++      return primes[i];
++  return SIZE_MAX; /* not a prime, but better than nothing */
++}

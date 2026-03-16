@@ -4,8 +4,11 @@
 upstream/0001-Fix-injection-bug-with-bogus-user-names.patch
 upstream/0002-telnetd-Sanitize-all-variable-expansions.patch
 upstream/0001-telnetd-don-t-allow-systemd-service-credentials.patch
+upstream/0004-telnetd-add-the-new-accept-env-option.patch
+upstream/0005-telnetd-fix-stack-buffer-overflow-processing-SLC-sub.patch
 # Local patches
 0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 0002-build-Use-runstatedir-for-run-directory.patch
 0003-inetd-Change-protocol-semantics-in-inetd.conf.patch
 0004-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
+local/0007-gnulib-update.patch
