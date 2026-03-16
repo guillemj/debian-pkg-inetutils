@@ -1,3 +1,19 @@
+inetutils (2:2.6-3+deb13u3) UNRELEASED; urgency=medium
+
+  * Add patches from upstream:
+    - Ignore all environment options from clients unless the variable was
+      listed in the new --accept-env telnetd option. This mitigates privilege
+      escalation using environment variables.
+      This is the complete fix for CVE-2026-24061, with its own CVE pending.
+    - Fix stack buffer overflow processing SLC suboption triplets.
+      Reported by Adiel Sol, Arad Inbar, Erez Cohen, Nir Somech, Ben Grinberg,
+      Daniel Lubel at DREAM Security Research Team.
+      Fixes CVE-2026-32746. (Closes: #1130742)
+  * Add the hashcode-string1 module from forky/sid gnulib, required by the
+    --accept-env patch.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 27 Mar 2026 02:42:12 +0100
+
 inetutils (2:2.6-3+deb13u2) trixie-security; urgency=high
 
   * Add patch from upstream:
