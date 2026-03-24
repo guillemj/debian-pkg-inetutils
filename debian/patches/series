@@ -11,3 +11,4 @@ local/0003-inetd-Change-protocol-semantics-in-inetd.conf.patch
 local/0004-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
 local/0005-inetd-Add-new-foreground-option.patch
 local/0006-tests-Remove-bogus-test-for-unsorted-file-listing.patch
+local/0007-telnet-Do-not-leak-environment-variables-not-marked-.patch

@@ -1,3 +1,11 @@
+inetutils (2:2.7-5) UNRELEASED; urgency=medium
+
+  * Adapt netkit-telnet patch to not leak unexported environment variables to
+    telnetd. Reported by Justin Swartz <justin.swartz@risingedge.co.za>.
+    Fixes CVE-2026-32772. (Closes: #1130741)
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 24 Mar 2026 04:01:07 +0100
+
 inetutils (2:2.7-4) unstable; urgency=high
 
   * Update patch metadata.
