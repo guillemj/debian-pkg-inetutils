@@ -13,3 +13,4 @@ upstream/0005-telnetd-fix-stack-buffer-overflow-processing-SLC-sub.patch
 0004-Use-krb5_auth_con_getsendsubkey-instead-of-krb5_auth.patch
 local/0007-gnulib-update.patch
 local/0008-telnet-Do-not-leak-environment-variables-not-marked-.patch
+local/0009-telnetd-Prevent-user-local-privilege-escalation-usin.patch
