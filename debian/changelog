@@ -17,6 +17,9 @@ inetutils (2:2.4-2+deb12u3) UNRELEASED; urgency=high
     required by the --accept-env patch, and the gl_hash_set, gl_set, gl_xset
     and gl_anyhash bookworm gnulib modules required by hashcode-string1.
     Inject new gnulib modules in lib/Makefile.am.
+  * Adapt netkit-telnet patch to not leak unexported environment variables to
+    telnetd. Reported by Justin Swartz <justin.swartz@risingedge.co.za>.
+    Fixes CVE-2026-32772. (Closes: #1130741)
 
  -- Guillem Jover <guillem@debian.org>  Mon, 30 Mar 2026 16:47:41 +0200
 
