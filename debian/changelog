@@ -11,6 +11,9 @@ inetutils (2:2.6-3+deb13u3) UNRELEASED; urgency=medium
       Fixes CVE-2026-32746. (Closes: #1130742)
   * Add the hashcode-string1 module from forky/sid gnulib, required by the
     --accept-env patch.
+  * Adapt netkit-telnet patch to not leak unexported environment variables to
+    telnetd. Reported by Justin Swartz <justin.swartz@risingedge.co.za>.
+    Fixes CVE-2026-32772. (Closes: #1130741)
 
  -- Guillem Jover <guillem@debian.org>  Fri, 27 Mar 2026 02:42:12 +0100
 
