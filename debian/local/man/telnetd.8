@@ -124,10 +124,16 @@ a specific authentication type without having to recompile
 This option may be used for debugging purposes.
 This allows
 .Nm telnetd
-to print out debugging information
-to the connection, allowing the user to see what
+to write out debugging information to a
+.Pa /run/telnet/debug.PID
+file, allowing the user to see what
 .Nm telnetd
 is doing.
+The exact file will be printed by
+.Nm telnetd
+on the
+.Nm telnet
+session.
 There are several possible values for
 .Ar debugmode :
 .Bl -tag -width exercise
