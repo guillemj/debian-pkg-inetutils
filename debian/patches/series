@@ -13,3 +13,4 @@ local/0005-inetd-Add-new-foreground-option.patch
 local/0006-tests-Remove-bogus-test-for-unsorted-file-listing.patch
 local/0007-gnulib-update.patch
 local/0008-telnet-Do-not-leak-environment-variables-not-marked-.patch
+local/0009-telnetd-Prevent-user-local-privilege-escalation-usin.patch

@@ -14,6 +14,13 @@ inetutils (2:2.6-3+deb13u3) UNRELEASED; urgency=medium
   * Adapt netkit-telnet patch to not leak unexported environment variables to
     telnetd. Reported by Justin Swartz <justin.swartz@risingedge.co.za>.
     Fixes CVE-2026-32772. (Closes: #1130741)
+  * Prevent user local privilege escalation using --debug, which was
+    susceptible to symlink attacks, or leaking on-wire credentials to a
+    user that had pre-created the file and kept it open. Fix by switching
+    from /tmp/telnet.debug to /run/telnet/debug.<pid>, and making the
+    setup error checks fatal.
+    Partially reported by Justin Swartz <justin.swartz@risingedge.co.za>.
+  * Update local telnetd man page to match new --debug behavior.
 
  -- Guillem Jover <guillem@debian.org>  Fri, 27 Mar 2026 02:42:12 +0100
 
