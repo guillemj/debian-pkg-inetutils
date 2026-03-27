@@ -1,4 +1,4 @@
-inetutils (2:2.6-3+deb13u3) UNRELEASED; urgency=medium
+inetutils (2:2.6-3+deb13u3) trixie-security; urgency=high
 
   * Add patches from upstream:
     - Ignore all environment options from clients unless the variable was
@@ -22,7 +22,7 @@ inetutils (2:2.6-3+deb13u3) UNRELEASED; urgency=medium
     Partially reported by Justin Swartz <justin.swartz@risingedge.co.za>.
   * Update local telnetd man page to match new --debug behavior.
 
- -- Guillem Jover <guillem@debian.org>  Fri, 27 Mar 2026 02:42:12 +0100
+ -- Guillem Jover <guillem@debian.org>  Mon, 30 Mar 2026 16:44:03 +0200
 
 inetutils (2:2.6-3+deb13u2) trixie-security; urgency=high
 
