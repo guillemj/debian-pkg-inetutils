@@ -6,14 +6,12 @@ Subject: [PATCH 2/2] telnetd: Sanitize all variable expansions
 * telnetd/utility.c (sanitize): New function.
 (_var_short_name): Use it for all variables.
 ---
- telnetd/utility.c | 32 ++++++++++++++++++--------------
+ telnetd/utility.c |   32 ++++++++++++++++++--------------
  1 file changed, 18 insertions(+), 14 deletions(-)
 
-diff --git a/telnetd/utility.c b/telnetd/utility.c
-index 4a56622d..1e7adb08 100644
 --- a/telnetd/utility.c
 +++ b/telnetd/utility.c
-@@ -1684,6 +1684,17 @@ static void _expand_cond (struct line_expander *exp);
+@@ -1685,6 +1685,17 @@ static void _expand_cond (struct line_ex
  static void _skip_block (struct line_expander *exp);
  static void _expand_block (struct line_expander *exp);
  
@@ -31,7 +29,7 @@ index 4a56622d..1e7adb08 100644
  /* Expand a variable referenced by its short one-symbol name.
     Input: exp->cp points to the variable name.
     FIXME: not implemented */
-@@ -1710,13 +1721,13 @@ _var_short_name (struct line_expander *exp)
+@@ -1711,13 +1722,13 @@ _var_short_name (struct line_expander *e
        return xstrdup (timebuf);
  
      case 'h':
@@ -48,7 +46,7 @@ index 4a56622d..1e7adb08 100644
  
      case 't':
        q = strchr (line + 1, '/');
-@@ -1724,23 +1735,16 @@ _var_short_name (struct line_expander *exp)
+@@ -1725,23 +1736,16 @@ _var_short_name (struct line_expander *e
  	q++;
        else
  	q = line;
@@ -76,6 +74,3 @@ index 4a56622d..1e7adb08 100644
  
      default:
        exp->state = EXP_STATE_ERROR;
--- 
-2.51.0
-

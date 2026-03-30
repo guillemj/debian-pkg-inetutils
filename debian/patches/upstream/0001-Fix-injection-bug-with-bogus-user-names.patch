@@ -9,14 +9,12 @@ Ignore user names that start with '-' or contain shell metacharacters.
 
 Signed-off-by: Simon Josefsson <simon@josefsson.org>
 ---
- telnetd/utility.c | 9 ++++++++-
+ telnetd/utility.c |    9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/telnetd/utility.c b/telnetd/utility.c
-index 534d683a..4a56622d 100644
 --- a/telnetd/utility.c
 +++ b/telnetd/utility.c
-@@ -1733,7 +1733,14 @@ _var_short_name (struct line_expander *exp)
+@@ -1734,7 +1734,14 @@ _var_short_name (struct line_expander *e
        return user_name ? xstrdup (user_name) : NULL;
  
      case 'U':
@@ -32,6 +30,3 @@ index 534d683a..4a56622d 100644
  
      default:
        exp->state = EXP_STATE_ERROR;
--- 
-2.51.0
-
