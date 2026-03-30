@@ -1,4 +1,4 @@
-inetutils (2:2.4-2+deb12u3) UNRELEASED; urgency=high
+inetutils (2:2.4-2+deb12u3) bookworm-security; urgency=high
 
   * Add patch from upstream:
     - Prevent privilege escalation via telnetd abusing systemd service
@@ -28,7 +28,7 @@ inetutils (2:2.4-2+deb12u3) UNRELEASED; urgency=high
     Partially reported by Justin Swartz <justin.swartz@risingedge.co.za>.
   * Update local telnetd man page to match new --debug behavior.
 
- -- Guillem Jover <guillem@debian.org>  Mon, 30 Mar 2026 16:47:41 +0200
+ -- Guillem Jover <guillem@debian.org>  Mon, 30 Mar 2026 16:52:10 +0200
 
 inetutils (2:2.4-2+deb12u2) bookworm-security; urgency=high
 
