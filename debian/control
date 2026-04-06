@@ -13,8 +13,6 @@ Build-Depends:
 #  netstat(1)
  net-tools <!nocheck>,
 # Used by the build system:
- autoconf,
- automake,
  bison,
  gnulib,
  libsystemd-dev [linux-any],
