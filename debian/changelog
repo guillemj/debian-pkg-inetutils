@@ -1,3 +1,10 @@
+inetutils (2:2.7-6) UNRELEASED; urgency=medium
+
+  * Remove build dependency on debhelper (>= 13.10) implied by
+    debhelper-compat (= 13) since Debian bookworm.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 06 Apr 2026 18:10:37 +0200
+
 inetutils (2:2.7-5) unstable; urgency=medium
 
   * Adapt netkit-telnet patch to not leak unexported environment variables to

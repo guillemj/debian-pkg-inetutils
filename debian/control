@@ -7,7 +7,6 @@ Homepage: https://www.gnu.org/software/inetutils/
 Standards-Version: 4.7.3
 Build-Depends:
  debhelper-compat (= 13),
- debhelper (>= 13.10),
 # Used by the test suite:
 #  /etc/protocols and /etc/services
  netbase <!nocheck>,
