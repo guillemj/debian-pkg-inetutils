@@ -70,7 +70,7 @@ has been compiled with support for the
 option.
 There are several valid values for
 .Ar authmode :
-.Bl -tag -width debug
+.Bl -tag -width valid
 .It Cm user
 Only allow connections when the remote user
 can provide valid authentication information
@@ -120,42 +120,6 @@ authentication, and
 can be used to temporarily disable
 a specific authentication type without having to recompile
 .Nm telnetd .
-.It Fl D , -debug Op Ar debugmode
-This option may be used for debugging purposes.
-This allows
-.Nm telnetd
-to write out debugging information to a
-.Pa /run/telnet/debug.PID
-file, allowing the user to see what
-.Nm telnetd
-is doing.
-The exact file will be printed by
-.Nm telnetd
-on the
-.Nm telnet
-session.
-There are several possible values for
-.Ar debugmode :
-.Bl -tag -width exercise
-.It Cm options
-Prints information about the negotiation of
-.Tn TELNET
-options.
-.It Cm report
-Prints the
-.Cm options
-information, plus some additional information
-about what processing is going on.
-.It Cm netdata
-Displays the data stream received by
-.Nm telnetd.
-.It Cm ptydata
-Displays data written to the pty.
-.It Cm auth
-Displays authentication information.
-.It Cm encr
-Displays encryption information.
-.El
 .It Fl E , -exec-login Ar string
 Set the program to be executed instead of
 .Pa /bin/login .
