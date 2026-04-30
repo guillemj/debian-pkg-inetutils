@@ -1,4 +1,4 @@
-inetutils (2:2.8-1) UNRELEASED; urgency=medium
+inetutils (2:2.8-1) unstable; urgency=medium
 
   * New upstream release.
     - Remove patches merged upstream.
@@ -18,7 +18,7 @@ inetutils (2:2.8-1) UNRELEASED; urgency=medium
     - Fix grammar for inetutils-talkd.
   * Add a source package Description field.
 
- -- Guillem Jover <guillem@debian.org>  Mon, 06 Apr 2026 18:10:37 +0200
+ -- Guillem Jover <guillem@debian.org>  Thu, 30 Apr 2026 05:23:37 +0200
 
 inetutils (2:2.7-5) unstable; urgency=medium
 
