@@ -12,6 +12,7 @@ inetutils (2:2.7-6) UNRELEASED; urgency=medium
     - Add FTP acronym to the synopsis.
     - Use talk client/server instead of tools to talk/communicate with users.
     - Fix grammar for inetutils-talkd.
+  * Add a source package Description field.
 
  -- Guillem Jover <guillem@debian.org>  Mon, 06 Apr 2026 18:10:37 +0200
 
