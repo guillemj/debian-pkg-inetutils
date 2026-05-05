@@ -8,6 +8,7 @@ inetutils (2:2.8-2) UNRELEASED; urgency=medium
   * Remove /var/log/news/news.* log handling. (Closes: #1135791)
   * Remove /var/log/lpr.log log handling.
   * Remove /var/log/uucp.log log handling.
+  * Enable /var/log/cron.log log handling for cron facility.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 06 May 2026 22:35:38 +0200
 
