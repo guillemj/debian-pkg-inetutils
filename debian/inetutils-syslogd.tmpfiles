@@ -1,1 +1,3 @@
-p /dev/xconsole 0640 root adm
+# Type Path      Mode UID  GID  Age Argument
+L+ /dev/xconsole -    -    -    -   /run/xconsole
+p  /run/xconsole 0640 root adm

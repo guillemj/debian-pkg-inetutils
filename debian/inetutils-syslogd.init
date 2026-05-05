@@ -24,20 +24,14 @@ set -e
 
 test -r $CONFIGFILE && . $CONFIGFILE
 
-# Create a xconsole pipe if it does not exist.
-# On kFreeBSD symlink it into /run as it does not allow pipes on /dev.
-
-case "$(uname -s)" in
-*FreeBSD)
-  XCONSOLE=/run/xconsole
+# Create a xconsole pipe if it does not exist. We create the named pipe
+# under /run, because some systems (such as FreeBSD) do not allow them
+# under /dev.
+XCONSOLE=/run/xconsole
+if [ ! -L /dev/xconsole ]; then
   rm -f /dev/xconsole
   ln -sf $XCONSOLE /dev/xconsole
-  ;;
-*)
-  XCONSOLE=/dev/xconsole
-  ;;
-esac
-
+fi
 if [ ! -p $XCONSOLE ]; then
   rm -f $XCONSOLE
   mkfifo -m 0640 $XCONSOLE
