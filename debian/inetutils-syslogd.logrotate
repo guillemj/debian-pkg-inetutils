@@ -22,7 +22,6 @@
 /var/log/mail.warn
 /var/log/messages
 /var/log/user.log
-/var/log/uucp.log
 {
    rotate 4
    weekly
