@@ -88,15 +88,6 @@
    delaycompress
 }
 
-/var/log/ppp.log {
-   rotate 4
-   weekly
-   missingok
-   notifempty
-   compress
-   delaycompress
-}
-
 /var/log/user.log {
    rotate 4
    weekly
