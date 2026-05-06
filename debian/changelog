@@ -12,6 +12,7 @@ inetutils (2:2.8-2) UNRELEASED; urgency=medium
   * Place /var/log/syslog as the first log file, before /var/log/auth.log.
   * Move commented out tty log handling entry to an example config fragment.
   * Move enabled xconsole log handling entry to an example config fragment.
+  * Fix typos in syslog.conf(5) man page.
 
  -- Guillem Jover <guillem@debian.org>  Wed, 06 May 2026 22:35:38 +0200
 
