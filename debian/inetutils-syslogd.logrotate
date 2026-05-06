@@ -31,4 +31,8 @@
    notifempty
    compress
    delaycompress
+   sharedscripts
+   postrotate
+      service inetutils-syslogd reload >/dev/null
+   endscript
 }
