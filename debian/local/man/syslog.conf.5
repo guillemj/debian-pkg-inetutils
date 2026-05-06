@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)syslog.conf.5	8.1 (Berkeley) 6/9/93
 .\"
-.Dd February 9, 2019
+.Dd May 6, 2026
 .Dt syslog.conf 5 URM
 .Os "GNU Network Utilities"
 .Sh NAME
@@ -240,6 +240,8 @@ uucp,news.crit						/var/log/spoolerr
 The
 .Xr syslogd 8
 configuration file.
+.It Pa /etc/syslog.d/
+The configuration directory.
 .El
 .Sh BUGS
 The effects of multiple selectors are sometimes not intuitive.

@@ -27,7 +27,7 @@
 .\"
 .\"     @(#)syslogd.8	8.1 (Berkeley) 6/6/93
 .\"
-.Dd February 9, 2019
+.Dd May 6, 2026
 .Dt syslogd 8 SMM
 .Os "GNU Network Utilities"
 .Sh NAME
@@ -150,6 +150,8 @@ include file
 .Bl -tag -width /run/syslog.pid -compact
 .It Pa /etc/syslog.conf
 The configuration file.
+.It Pa /etc/syslog.d/
+The coniguration directory.
 .It Pa /run/syslog.pid
 The process id of current
 .Nm syslogd .
