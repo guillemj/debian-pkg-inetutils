@@ -1,3 +1,12 @@
+inetutils (2:2.8-3) UNRELEASED; urgency=medium
+
+  * Fix talkd to no longer overflow a buffer when writing an announcement for
+    a client whose IP address has a reverse DNS name longer than around 200
+    characters. Reported by Tristan Madani <tristan@talencesecurity.com>.
+    Patch taken from upstream.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 26 Jul 2026 03:35:13 +0200
+
 inetutils (2:2.8-2) unstable; urgency=medium
 
   * Remove no longer used spelling-error-in-binary lintian override.

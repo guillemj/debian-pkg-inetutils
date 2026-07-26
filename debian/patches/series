@@ -1,6 +1,5 @@
 # Upstream patches
-# <none>
+upstream/0001-talkd-avoid-a-buffer-overflow-with-large-DNS-names.patch
 # Local patches
 local/0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 local/0002-inetd-Change-protocol-semantics-in-inetd.conf.patch
-
