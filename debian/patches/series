@@ -1,5 +1,6 @@
 # Upstream patches
 upstream/0001-talkd-avoid-a-buffer-overflow-with-large-DNS-names.patch
+upstream/0001-libinetutils-zero-initialize-sigactions-and-sigvecs.patch
 # Local patches
 local/0001-build-Disable-GFDL-info-files-and-useless-man-pages.patch
 local/0002-inetd-Change-protocol-semantics-in-inetd.conf.patch

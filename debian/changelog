@@ -1,3 +1,13 @@
+inetutils (2:2.8-4) UNRELEASED; urgency=medium
+
+  * Fix telnetd to not use uninitialized sigaction structures when setting up
+    signals. This could cause crashes leading to a denial of service, or
+    potentially lead to code execution on architectures where the sa_restorer
+    member is used. Reported privately by Brian Mak <brian.mak@hpe.com>.
+    Patch taken from upstream. Fixes CVE-2026-95510. (Closes: #1149672)
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 03 Oct 2026 14:11:51 +0200
+
 inetutils (2:2.8-3) unstable; urgency=high
 
   * Fix talkd to no longer overflow a buffer when writing an announcement for
